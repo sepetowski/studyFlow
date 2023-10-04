@@ -1,7 +1,15 @@
+import { ThemeSwitcher } from '@/components/switchers/ThemeSwitcher';
+import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 
 const Home = () => {
 	const t = useTranslations('Index');
-	return <h1>{t('title')}</h1>;
+	return (
+		<>
+			<Button>{t('title')}</Button>
+			<ThemeSwitcher />
+			<p>axaxaxa</p>
+		</>
+	);
 };
 export default Home;
