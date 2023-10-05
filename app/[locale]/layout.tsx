@@ -5,6 +5,8 @@ import { ThemeProvider } from '@/providers/ThemeProvider';
 import { NextIntlClientProvider } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { getMessages } from 'next-intl/server';
+import { AuthProvider } from '@/providers/AuthProvider';
+import { Toaster } from '@/components/ui/toaster';
 
 const locales = ['en', 'pl'];
 const inter = Inter({ subsets: ['latin'] });
@@ -29,13 +31,16 @@ const RootLayout = async ({
 		<html lang={locale} suppressHydrationWarning>
 			<body className={inter.className}>
 				<NextIntlClientProvider locale={locale} messages={messages}>
-					<ThemeProvider
-						attribute='class'
-						defaultTheme='system'
-						enableSystem
-						disableTransitionOnChange>
-						{children}
-					</ThemeProvider>
+					<AuthProvider>
+						<ThemeProvider
+							attribute='class'
+							defaultTheme='system'
+							enableSystem
+							disableTransitionOnChange>
+							<Toaster />
+							{children}
+						</ThemeProvider>
+					</AuthProvider>
 				</NextIntlClientProvider>
 			</body>
 		</html>

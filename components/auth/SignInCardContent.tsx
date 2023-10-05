@@ -1,18 +1,27 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { SignInSchema, signInSchema } from '@/schema/signInSchema';
 import { CardContent } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { Button } from '../ui/button';
 import { useTranslations } from 'next-intl';
 import { ProviderSigInBtns } from './ProviderSigInBtns';
+import { useRouter } from 'next-intl/client';
+import { signIn } from 'next-auth/react';
+import { useToast } from '@/components/ui/use-toast';
+import { LoadingState } from '@/components/ui/loadingState';
+import { Button } from '@/components/ui/button';
 
 export const SignInCardContent = () => {
 	const t = useTranslations('AUTH');
+	const m = useTranslations('MESSAGES');
+	const [isLoading, setIsLoading] = useState(false);
+	const { toast } = useToast();
+	const router = useRouter();
+
 	const form = useForm<SignInSchema>({
 		resolver: zodResolver(signInSchema),
 		defaultValues: {
@@ -22,8 +31,40 @@ export const SignInCardContent = () => {
 	});
 
 	const onSubmit = async (data: SignInSchema) => {
-		console.log(data);
-		// reset();
+		setIsLoading(true);
+		try {
+			const account = await signIn('credentials', {
+				email: data.email,
+				password: data.password,
+				redirect: false,
+			});
+			if (!account) throw new Error('ERRORS.DEAFULT');
+
+			if (account.error)
+				toast({
+					title: m(account.error),
+					variant: 'destructive',
+				});
+			else {
+				toast({
+					title: m('SUCCES.SIGN_IN'),
+				});
+				router.push('/');
+				router.refresh();
+			}
+		} catch (err) {
+			let errMsg = m('ERRORS.DEAFULT');
+			if (typeof err === 'string') {
+				errMsg = err;
+			} else if (err instanceof Error) {
+				errMsg = m(err.message);
+			}
+			toast({
+				title: errMsg,
+				variant: 'destructive',
+			});
+		}
+		setIsLoading(false);
 	};
 
 	return (
@@ -59,8 +100,12 @@ export const SignInCardContent = () => {
 						/>
 					</div>
 					<div className='space-y-2'>
-						<Button className='w-full font-bold text-white ' type='submit'>
-							{t('SIGN_IN.SUBMIT_BTN')}
+						<Button disabled={isLoading} className='w-full font-bold text-white ' type='submit'>
+							{isLoading ? (
+								<LoadingState loadingText={m('PENDING.LOADING')} />
+							) : (
+								t('SIGN_IN.SUBMIT_BTN')
+							)}
 						</Button>
 						<p className='text-xs text-center text-muted-foreground'>
 							{t('SIGN_IN.FORGOT_PASSWORD')}

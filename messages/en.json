@@ -39,5 +39,23 @@
 				"GITHUB": "Sign up with Github"
 			}
 		}
+	},
+	"MESSAGES": {
+		"ERRORS": {
+			"DEAFULT": "Oh no.. Something went wrong. Please try again",
+			"TAKEN_USERNAME": "This username is already taken",
+			"TAKEN_EMAIL": "This email is already in use..",
+			"DB_ERROR": "We are currently having problems. Please try again later",
+			"WRONG_DATA":"The data you provided is incorrect. Please provide the correct ones",
+			"NO_USER":"User was not found. Please enter a valid email.",
+			"WRONG_PASSWORD":"The entered password is incorrect. Please enter the correct one."
+		},
+		"SUCCES": {
+			"SIGN_UP": "Account was created!",
+			"SIGN_IN":"You have been log in!"
+		},
+		"PENDING":{
+			"LOADING":"Please wait"
+		}
 	}
 }

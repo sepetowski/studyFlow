@@ -1,49 +1,47 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import bcrypt from 'bcrypt';
+import { signUpSchema } from '@/schema/signUpSchema';
 
 export async function POST(request: Request) {
-	const { name, email, password }: { name: string; email: string; password: string } =
-		await request.json();
+	const body: unknown = await request.json();
+	const result = signUpSchema.safeParse(body);
 
-	if (!name || !email || !password) {
-		return new NextResponse('Missing Fields.', { status: 400 });
+	if (!result.success) {
+		return NextResponse.json('ERRORS.WRONG_DATA', { status: 203 });
 	}
-	const userName = await db.user.findUnique({
-		where: {
-			name: name,
-		},
-	});
 
-	if (userName) return new NextResponse('This username is taken', { status: 202 });
-
-	const existedUser = await db.user.findUnique({
-		where: {
-			email,
-		},
-	});
-
-	if (existedUser) return new NextResponse('Email is already in use.', { status: 201 });
-
-	const hashedPassword = await bcrypt.hash(password, 10);
+	const { email, password, username } = result.data;
 
 	try {
+		const existedUsername = await db.user.findUnique({
+			where: {
+				username,
+			},
+		});
+
+		if (existedUsername) return NextResponse.json('ERRORS.TAKEN_USERNAME', { status: 202 });
+
+		const existedUser = await db.user.findUnique({
+			where: {
+				email,
+			},
+		});
+
+		if (existedUser) return NextResponse.json('ERRORS.TAKEN_EMAIL', { status: 201 });
+
+		const hashedPassword = await bcrypt.hash(password, 10);
+
 		const newUser = await db.user.create({
 			data: {
-				name: name,
+				username,
 				email,
 				hashedPassword,
 			},
 		});
 
 		return NextResponse.json(newUser, { status: 200 });
-	} catch (err) {
-		let errMsg = 'Database Error';
-		if (typeof err === 'string') {
-			errMsg = err;
-		} else if (err instanceof Error) {
-			errMsg = err.message;
-		}
-		return new NextResponse(errMsg, { status: 500, statusText: errMsg });
+	} catch (_) {
+		return NextResponse.json('ERRORS.DB_ERROR', { status: 204 });
 	}
 }
