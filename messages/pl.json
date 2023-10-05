@@ -16,9 +16,9 @@
 				"SECOND": "Utwórz"
 			},
 			"PROVIDERS": {
-				"GOOGLE": "Zaloguj się za pomoca Google",
-				"APPLE": "Zaloguj się za pomoca Apple",
-				"GITHUB": "Zaloguj się za pomoca Github"
+				"GOOGLE": "Zaloguj się z Google",
+				"APPLE": "Zaloguj się z Apple",
+				"GITHUB": "Zaloguj się z Github"
 			}
 		},
 		"SIGN_UP": {
@@ -34,10 +34,28 @@
 				"SECOND": "Zaloguj się"
 			},
 			"PROVIDERS": {
-				"GOOGLE": "Zarejestruj się za pomoca Google",
-				"APPLE": "Zarejestruj się za pomoca Google",
-				"GITHUB": "Zarejestruj się za pomoca Google"
+				"GOOGLE": "Zarejestruj się z Google",
+				"APPLE": "Zarejestruj się z Apple",
+				"GITHUB": "Zarejestruj się z Github"
 			}
+		}
+	},
+	"MESSAGES": {
+		"ERRORS": {
+			"DEAFULT": "O nie.. Coś poszło nie tak.",
+			"TAKEN_USERNAME": "Ta nazwa użytkownika jest już zajęta",
+			"TAKEN_EMAIL": "Ten e-mail jest już w użyciu.",
+			"DB_ERROR": "Obecnie mamy problemy. Prosze sprbować ponownie później",
+			"WRONG_DATA": "Podane dane są nieprawidłowe. Prosimy o podanie poprawnych danych",
+			"NO_USER": "Nie znaleziono użytkownika. Proszę podać poprawny email",
+			"WRONG_PASSWORD": "Podane hasło jest nieprawidłowe. Proszę podać poprawne"
+		},
+		"SUCCES": {
+			"SIGN_UP": "Konto zostało utworzone!",
+			"SIGN_IN": "Zostałeś zalogowany!"
+		},
+		"PENDING": {
+			"LOADING": "Proszę czekać"
 		}
 	}
 }
