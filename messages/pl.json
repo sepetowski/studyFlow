@@ -8,7 +8,7 @@
 		"USERNAME": "Nazwa użytkownika",
 		"SIGN_IN": {
 			"TITLE": "Zaloguj się",
-			"DESC": "Witaj z powrotem w ...",
+			"DESC": "Witaj z powrotem w StudyFlow",
 			"SUBMIT_BTN": "Zaloguj się",
 			"FORGOT_PASSWORD": "Zapomniałeś hasła?",
 			"DONT_HAVE_ACCOUNT": {
@@ -48,7 +48,8 @@
 			"DB_ERROR": "Obecnie mamy problemy. Prosze sprbować ponownie później",
 			"WRONG_DATA": "Podane dane są nieprawidłowe. Prosimy o podanie poprawnych danych",
 			"NO_USER": "Nie znaleziono użytkownika. Proszę podać poprawny email",
-			"WRONG_PASSWORD": "Podane hasło jest nieprawidłowe. Proszę podać poprawne"
+			"WRONG_PASSWORD": "Podane hasło jest nieprawidłowe. Proszę podać poprawne",
+			"ABORDED": "Logowanie przerwane"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -56,6 +57,19 @@
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
+		},
+		"SCHEMA": {
+			"PASSWORD": {
+				"MIN": "Hasło musi mieć przynajmniej 6 znaków",
+				"UPPERCASE": "Hasło musi zawierać przynajmniej jedna wielką literę",
+				"LOWERCASE": "Hasło musi zawierać przynajmniej jedna małą literę",
+				"DIGIT": "Hasło musi zawierać przynajmniej jedna cyfrę"
+			},
+			"EMAIL": "Proszę podać poprawny adres email",
+			"USERNAME": {
+				"SHORT": "Nazwa użytkownika jest zbyt krótka",
+				"SPECIAL_CHARS": "Nazwa użytkownika może składać się tylko z liter i cyfr"
+			}
 		}
 	}
 }

@@ -12,6 +12,7 @@ declare module 'next-auth' {
 		user: User & {
 			id: string;
 			username?: string | null;
+			compledtedOnboarding:boolean
 		};
 	}
 }

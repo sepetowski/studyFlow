@@ -13,17 +13,17 @@ export const AuthCard = ({ signInCard }: Props) => {
 	const t = useTranslations('AUTH');
 	return (
 		<>
-			<Card className='w-full sm:min-w-[28rem] sm:w-auto'>
-				<CardHeader>
+			<Card className='w-full sm:w-[30rem] mt-14 sm:mt-0'>
+				<CardHeader className='pb-0 sm:pb-0'>
 					<Image
 						className='rounded-full object-cover self-center'
 						alt=''
-						width={50}
-						height={50}
-						src='https://github.com/shadcn.png'
+						width={60}
+						height={60}
+						src='/studyFlow.jpg'
 						priority
 					/>
-					<CardTitle className='pt-2'>
+					<CardTitle>
 						{signInCard ? t('SIGN_IN.TITLE') : t('SIGN_UP.TITLE')}
 					</CardTitle>
 					<CardDescription>{signInCard ? t('SIGN_IN.DESC') : t('SIGN_UP.DESC')}</CardDescription>
