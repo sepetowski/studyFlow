@@ -8,7 +8,7 @@
 		"USERNAME": "Username",
 		"SIGN_IN": {
 			"TITLE": "Sign in",
-			"DESC": "Welcome back to ...",
+			"DESC": "Welcome back to StudyFlow",
 			"SUBMIT_BTN": "Sign in",
 			"FORGOT_PASSWORD": "Forgot password?",
 			"DONT_HAVE_ACCOUNT": {
@@ -44,18 +44,32 @@
 		"ERRORS": {
 			"DEAFULT": "Oh no.. Something went wrong. Please try again",
 			"TAKEN_USERNAME": "This username is already taken",
-			"TAKEN_EMAIL": "This email is already in use..",
+			"TAKEN_EMAIL": "This email is already in use",
 			"DB_ERROR": "We are currently having problems. Please try again later",
-			"WRONG_DATA":"The data you provided is incorrect. Please provide the correct ones",
-			"NO_USER":"User was not found. Please enter a valid email.",
-			"WRONG_PASSWORD":"The entered password is incorrect. Please enter the correct one."
+			"WRONG_DATA": "The data you provided is incorrect. Please provide the correct ones",
+			"NO_USER": "User was not found. Please enter a valid email.",
+			"WRONG_PASSWORD": "The entered password is incorrect. Please enter the correct one.",
+			"ABORDED": "Login aborded"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
-			"SIGN_IN":"You have been log in!"
+			"SIGN_IN": "You have been log in!"
 		},
-		"PENDING":{
-			"LOADING":"Please wait"
+		"PENDING": {
+			"LOADING": "Please wait"
+		},
+		"SCHEMA": {
+			"PASSWORD": {
+				"MIN": "Password must have at least 6 characters",
+				"UPPERCASE": "Password must contain at least one uppercase letter",
+				"LOWERCASE": "Password must contain at least one lowercase letter",
+				"DIGIT": "Password must contain at least one digit"
+			},
+			"EMAIL": "Please enter a valid email",
+			"USERNAME": {
+				"SHORT": "Username is too short",
+				"SPECIAL_CHARS": "Username must only contain letters and digits"
+			}
 		}
 	}
 }
