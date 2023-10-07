@@ -8,7 +8,7 @@ import { CardContent } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 import { ProviderSigInBtns } from './ProviderSigInBtns';
 import { LoadingState } from '@/components/ui/loadingState';
@@ -19,6 +19,7 @@ import { useToast } from '@/components/ui/use-toast';
 export const SignUpCardContent = () => {
 	const t = useTranslations('AUTH');
 	const m = useTranslations('MESSAGES');
+	const locale = useLocale();
 	const [isLoading, setIsLoading] = useState(false);
 	const { toast } = useToast();
 	const router = useRouter();
@@ -55,7 +56,8 @@ export const SignUpCardContent = () => {
 					redirect: false,
 				});
 
-				router.push('/');
+				router.push(`/onboarding`);
+				router.refresh();
 			} else throw new Error(signUpInfo);
 		} catch (err) {
 			let errMsg = m('ERRORS.DEAFULT');
@@ -76,7 +78,7 @@ export const SignUpCardContent = () => {
 		<CardContent>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-7'>
-					<ProviderSigInBtns disabled={isLoading} />
+					<ProviderSigInBtns onLoading={setIsLoading} disabled={isLoading} />
 					<div className='space-y-1.5'>
 						<FormField
 							control={form.control}

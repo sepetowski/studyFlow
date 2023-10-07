@@ -7,7 +7,7 @@ import { SignInSchema, signInSchema } from '@/schema/signInSchema';
 import { CardContent } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import { useTranslations } from 'next-intl';
+import {  useTranslations } from 'next-intl';
 import { ProviderSigInBtns } from './ProviderSigInBtns';
 import { useRouter } from 'next-intl/client';
 import { signIn } from 'next-auth/react';
@@ -49,7 +49,7 @@ export const SignInCardContent = () => {
 				toast({
 					title: m('SUCCES.SIGN_IN'),
 				});
-				router.push('/');
+				router.push(`/onboarding`);
 				router.refresh();
 			}
 		} catch (err) {
@@ -71,7 +71,7 @@ export const SignInCardContent = () => {
 		<CardContent>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-7'>
-					<ProviderSigInBtns signInCard />
+					<ProviderSigInBtns signInCard onLoading={setIsLoading} />
 					<div className='space-y-1.5'>
 						<FormField
 							control={form.control}
