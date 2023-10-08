@@ -83,20 +83,13 @@ export const authOptions: NextAuthOptions = {
 			if (token) {
 				session.user.id = token.id;
 				session.user.name = token.name;
+				session.user.surname = token.surname;
 				session.user.email = token.email;
 				session.user.image = token?.picture;
 				session.user.username = token.username;
-				session.user.compledtedOnboarding = false;
+				session.user.completedOnboarding = !!token.completedOnboarding;
 			}
-			const user = await db.user.findUnique({
-				where: {
-					id: token.id,
-				},
-			});
-			if (user) {
-				session.user.image = user.image;
-				session.user.compledtedOnboarding = user.completedOnboarding;
-			}
+
 			return session;
 		},
 		async jwt({ token, user }) {
@@ -113,9 +106,12 @@ export const authOptions: NextAuthOptions = {
 
 			return {
 				id: dbUser.id,
+				name: dbUser.name,
+				surname: dbUser.surname,
 				username: dbUser.username,
 				email: dbUser.email,
 				picture: dbUser.image,
+				completedOnboarding: dbUser.completedOnboarding,
 			};
 		},
 	},

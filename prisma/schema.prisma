@@ -36,17 +36,44 @@ model Session {
 }
 
 model User {
-  id                  String    @id @default(cuid())
+  id                  String         @id @default(cuid())
   name                String?
   surname             String?
-  username            String    @unique
-  email               String?   @unique
+  username            String         @unique
+  email               String?        @unique
   emailVerified       DateTime?
   hashedPassword      String?
   image               String?
-  completedOnboarding Boolean   @default(false)
+  completedOnboarding Boolean        @default(false)
   accounts            Account[]
   sessions            Session[]
+  useCase             UseCase?
+  createdWorkspaces   Workspace[]    @relation("CreatedBy")
+  subscriptions       Subscription[]
+}
+
+model Workspace {
+  id          String         @id @default(cuid())
+  name        String
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+  creatorId   String?
+  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id], onDelete: Cascade)
+  subscribers Subscription[]
+
+  @@index([creatorId])
+}
+
+model Subscription {
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId      String
+  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String
+  userRole    UserPermison @default(READ_ONLY)
+
+  @@id([userId, workspaceId])
+  @@index([workspaceId])
+  @@index([userId])
 }
 
 model VerificationToken {
@@ -55,4 +82,16 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum UseCase {
+  WORK
+  STUDY
+  PERSONAL_USE
+}
+
+enum UserPermison {
+  ADMIN
+  CAN_EDIT
+  READ_ONLY
 }
