@@ -9,6 +9,7 @@ import {
 	Action,
 	ActionType,
 } from '@/types/onBoardingContext';
+import { UseCase } from '@prisma/client';
 
 interface Props {
 	children: React.ReactNode;
@@ -29,12 +30,28 @@ export const OnboardingFormCtx = createContext<OnboardingFormContext | null>(nul
 function onBoardingFormReducer(state: OnboardingFormReducer, action: Action) {
 	const { type, payload } = action;
 	switch (type) {
-		case ActionType.CHNAGE_SITE: {
+		case ActionType.CHNAGE_SITE:
 			return {
 				...state,
-				currentStep: payload as 1 | 2 | 3,
+				currentStep: payload as 1 | 2 | 3 | 4,
 			};
-		}
+
+		case ActionType.NAME:
+			return {
+				...state,
+				name: payload as string,
+			};
+		case ActionType.SURNAME:
+			return {
+				...state,
+				surname: payload as string,
+			};
+		case ActionType.USECASE:
+			return {
+				...state,
+				useCase: payload as UseCase,
+			};
+
 		default:
 			return state;
 	}

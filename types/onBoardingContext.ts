@@ -11,11 +11,11 @@ export enum ActionType {
 
 export interface Action {
 	type: ActionType;
-	payload: string | number | UseCase;
+	payload: string | number | UseCase | undefined;
 }
 
 export interface OnboardingFormReducer {
-	currentStep: 1 | 2 | 3;
+	currentStep: 1 | 2 | 3|4;
 	name?: string | null;
 	surname?: string | null;
 	profileImage?: string | null;
