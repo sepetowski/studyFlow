@@ -69,6 +69,10 @@
 			"USERNAME": {
 				"SHORT": "Username is too short",
 				"SPECIAL_CHARS": "Username must only contain letters and digits"
+			},
+			"IMAGE": {
+				"MAX": "Max image size is 5MB",
+				"SUPPORTED": "Only .jpg, .jpeg, .png and .webp formats are supported."
 			}
 		}
 	}

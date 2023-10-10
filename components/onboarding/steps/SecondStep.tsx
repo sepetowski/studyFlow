@@ -80,7 +80,7 @@ export const SecondStep = () => {
 													}`}>
 													<FormControl
 														onClick={(e) => {
-															const target = e.target as HTMLInputElement;
+															const target = e.target as HTMLButtonElement;
 															dispatch({
 																type: ActionType.USECASE,
 																payload: target.value,
