@@ -1,4 +1,6 @@
 'use client';
+
+
 import React, { useMemo, useRef, useState } from 'react';
 import {
 	Dialog,
@@ -13,17 +15,52 @@ import { UserAvatar } from '@/components/ui/user-avatar';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Input } from '../ui/input';
+import { Input } from '@/components/ui/input';
 import { ImageSchema, imageSchema } from '@/schema/imageSchema';
 import Image from 'next/image';
+import { useUploadThing } from '@/lib/uploadthing';
+import { LoadingState } from '../ui/loading-state';
+import { useSession } from 'next-auth/react';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { useRouter } from 'next-intl/client';
+import { User as UserType } from '@prisma/client';
 
 interface Props {
 	profileImage?: string | null;
 }
 
 export const AddUserImage = ({ profileImage }: Props) => {
+	const [open, setOpen] = useState(false);
 	const inputRef = useRef<null | HTMLInputElement>(null);
 	const [imagePreview, setImagePreview] = useState('');
+	const router = useRouter();
+	const { update } = useSession();
+	const { startUpload, isUploading } = useUploadThing('profilePictureUploader', {
+		onUploadError: (error) => {
+			alert(error);
+		},
+	});
+	const { mutate: updateProfileImage, isLoading } = useMutation({
+		mutationFn: async (profileImage: string) => {
+			console.log(profileImage);
+			const { data } = await axios.post('/api/profile/profileImage', { profileImage });
+			console.log(data);
+			return data as UserType;
+		},
+		onError: (err) => {
+			console.log(err);
+		},
+		onSuccess: async () => {
+			setOpen(false);
+			await update();
+			router.refresh();
+		},
+	});
+
+	const form = useForm<ImageSchema>({
+		resolver: zodResolver(imageSchema),
+	});
 
 	const imageOptions = useMemo(() => {
 		if (!imagePreview && profileImage) {
@@ -49,12 +86,7 @@ export const AddUserImage = ({ profileImage }: Props) => {
 		}
 	}, [imagePreview, profileImage]);
 
-	const form = useForm<ImageSchema>({
-		resolver: zodResolver(imageSchema),
-	});
-
 	const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-		console.log('ok');
 		if (e.target.files && e.target.files[0]) {
 			const selectedFile = e.target.files[0];
 			const result = imageSchema.safeParse({ image: selectedFile });
@@ -74,10 +106,20 @@ export const AddUserImage = ({ profileImage }: Props) => {
 		}
 	};
 
+	const onSubmit = async (data: ImageSchema) => {
+		const image: File = data.image;
+		try {
+			const res = await startUpload([image]);
+			if (!res) throw new Error('sda');
+
+			updateProfileImage(res[0].url);
+		} catch (err) {}
+	};
+
 	return (
 		<div className='w-full flex flex-col justify-center items-center gap-2'>
 			<p className='text-sm text-muted-foreground'>Dodaj zdjęcie</p>
-			<Dialog>
+			<Dialog open={open} onOpenChange={setOpen}>
 				<DialogTrigger asChild>
 					<Button
 						onClick={() => {
@@ -111,7 +153,7 @@ export const AddUserImage = ({ profileImage }: Props) => {
 					)}
 
 					<Form {...form}>
-						<form>
+						<form onSubmit={form.handleSubmit(onSubmit)}>
 							<FormField
 								control={form.control}
 								name='image'
@@ -155,12 +197,12 @@ export const AddUserImage = ({ profileImage }: Props) => {
 								</Button>
 								<Button
 									type='submit'
-									disabled={!imageOptions.canSave}
+									disabled={!imageOptions.canSave || isUploading || isLoading}
 									variant={imageOptions.canSave ? 'default' : 'secondary'}
 									className={`rounded-full w-12 h-12 p-2 ${
 										imageOptions.canSave ? 'text-white' : 'text-muted-foreground'
 									} `}>
-									<Check size={18} />
+									{isUploading || isLoading ? <LoadingState /> : <Check size={18} />}
 								</Button>
 							</div>
 						</form>

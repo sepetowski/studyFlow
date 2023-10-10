@@ -11,7 +11,7 @@ import { Button } from '@/components/ui/button';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 import { ProviderSigInBtns } from './ProviderSigInBtns';
-import { LoadingState } from '@/components/ui/loadingState';
+import { LoadingState } from '@/components/ui/loading-state';
 import { useRouter } from 'next-intl/client';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';

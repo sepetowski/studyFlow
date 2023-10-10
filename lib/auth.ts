@@ -90,6 +90,15 @@ export const authOptions: NextAuthOptions = {
 				session.user.completedOnboarding = !!token.completedOnboarding;
 			}
 
+			const user = await db.user.findUnique({
+				where: {
+					id: token.id,
+				},
+			});
+			if (user) {
+				session.user.image = user.image;
+			}
+
 			return session;
 		},
 		async jwt({ token, user }) {

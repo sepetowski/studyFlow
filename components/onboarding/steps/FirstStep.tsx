@@ -3,7 +3,7 @@
 import { Input } from '@/components/ui/input';
 import { useOnboardingForm } from '@/context/OnboardingForm';
 import { ArrowRight, User } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import { AditionalUserInfoFirstPart, aditionalUserInfoFirstPart } from '@/schema/aditionalUserInfo';
@@ -18,9 +18,11 @@ import {
 import { ActionType } from '@/types/onBoardingContext';
 import { Button } from '@/components/ui/button';
 import { AddUserImage } from '../AddUserImage';
+import { useSession } from 'next-auth/react';
 
 export const FirstStep = () => {
-	const { name, surname, currentStep,profileImage, dispatch } = useOnboardingForm();
+	const session = useSession();
+	const { name, surname, currentStep, profileImage, dispatch } = useOnboardingForm();
 	const form = useForm<AditionalUserInfoFirstPart>({
 		resolver: zodResolver(aditionalUserInfoFirstPart),
 		defaultValues: {
@@ -28,6 +30,10 @@ export const FirstStep = () => {
 			surname: surname ? surname : '',
 		},
 	});
+
+	useEffect(() => {
+		dispatch({ type: ActionType.PROFILEIMAGE, payload: session.data?.user.image as string });
+	}, [session.data?.user.image,dispatch]);
 
 	const onSubmit = (data: AditionalUserInfoFirstPart) => {
 		dispatch({ type: ActionType.NAME, payload: data.name });
@@ -43,7 +49,7 @@ export const FirstStep = () => {
 			</h2>
 
 			<div className='max-w-md w-full space-y-8 '>
-				<AddUserImage profileImage={profileImage}/>
+				<AddUserImage profileImage={profileImage} />
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
 						<div className='space-y-1.5'>
