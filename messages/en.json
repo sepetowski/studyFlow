@@ -60,6 +60,13 @@
 				"SURNAME": "Smith"
 			}
 		},
+		"SECOND_STEP": {
+			"TITLE": "How will you use",
+			"INFO": "We use this information to personalize your experience.",
+			"WORK": "For work",
+			"STUDY": "For study",
+			"PERSONAL": "For personal use"
+		},
 		"NEXT_BTN": "Continue"
 	},
 	"MESSAGES": {

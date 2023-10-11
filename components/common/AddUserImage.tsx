@@ -48,23 +48,6 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 		resolver: zodResolver(imageSchema),
 	});
 
-	const { startUpload, isUploading } = useUploadThing('profilePictureUploader', {
-		onUploadError: () => {
-			toast({
-				title: m('ERRORS.UPLOAD_FAILE'),
-				variant: 'destructive',
-			});
-		},
-		onClientUploadComplete: (data) => {
-			if (data) updateProfileImage(data[0].url);
-			else
-				toast({
-					title: m('ERRORS.IMAGE_PROFILE_UPDATE'),
-					variant: 'destructive',
-				});
-		},
-	});
-
 	const imageOptions = useMemo(() => {
 		if (!imagePreview && profileImage) {
 			return {
@@ -131,6 +114,23 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 			router.refresh();
 		},
 		mutationKey: ['deleteProfileImage'],
+	});
+	
+	const { startUpload, isUploading } = useUploadThing('profilePictureUploader', {
+		onUploadError: () => {
+			toast({
+				title: m('ERRORS.UPLOAD_FAILE'),
+				variant: 'destructive',
+			});
+		},
+		onClientUploadComplete: (data) => {
+			if (data) updateProfileImage(data[0].url);
+			else
+				toast({
+					title: m('ERRORS.IMAGE_PROFILE_UPDATE'),
+					variant: 'destructive',
+				});
+		},
 	});
 
 	const onImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

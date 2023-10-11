@@ -60,6 +60,13 @@
 				"SURNAME": "Kowalski"
 			}
 		},
+		"SECOND_STEP": {
+			"TITLE": "Jak będziesz używać",
+			"INFO": "Używamy tych informacji, aby spersonalizować Twoje doświadczenie.",
+			"WORK": "Do pracy",
+			"STUDY": "Do nauki",
+			"PERSONAL": "Do użytku osobistego"
+		},
 		"NEXT_BTN": "Kontynuj"
 	},
 	"MESSAGES": {

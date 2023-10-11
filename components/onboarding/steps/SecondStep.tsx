@@ -20,24 +20,27 @@ import {
 import { ActionType } from '@/types/onBoardingContext';
 import { Button } from '@/components/ui/button';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useTranslations } from 'next-intl';
 
 const useCases = [
 	{
 		case: 'WORK',
-		title: 'do pracy',
+		title: 'SECOND_STEP.WORK',
 	},
 	{
 		case: 'STUDY',
-		title: 'do nauki',
+		title: 'SECOND_STEP.STUDY',
 	},
 	{
 		case: 'PERSONAL_USE',
-		title: 'do uzytku personalengo',
+		title: 'SECOND_STEP.PERSONAL',
 	},
 ];
 
 export const SecondStep = () => {
 	const { currentStep, dispatch } = useOnboardingForm();
+	const t = useTranslations('ONBOARDING_FORM');
+
 	const form = useForm<AditionalUserInfoSecondPart>({
 		resolver: zodResolver(aditionalUserInfoSecondPart),
 	});
@@ -50,12 +53,11 @@ export const SecondStep = () => {
 	return (
 		<>
 			<div className='flex flex-col justify-center items-center gap-4 w-full mt-10 text-center'>
-				<h2 className='font-bold  text-4xl md:text-5xl flex flex-col items-center  max-w-xs'>
-					Jak będziesz używać StudyFlow?
+				<h2 className='font-bold  text-4xl md:text-5xl max-w-xs'>
+					{t('SECOND_STEP.TITLE')} <span>Study</span>
+					<span className='text-primary font-semibold'>Flow</span>
 				</h2>
-				<p className='max-w-lg  text-muted-foreground'>
-					Używamy tych informacji, aby spersonalizować Twoje doświadczenie.
-				</p>
+				<p className='max-w-lg  text-muted-foreground'>{t('SECOND_STEP.INFO')}</p>
 			</div>
 			<div className='max-w-md w-full space-y-8 mt-14 '>
 				<Form {...form}>
@@ -89,7 +91,7 @@ export const SecondStep = () => {
 														<RadioGroupItem value={useCase.case} />
 													</FormControl>
 													<FormLabel className='font-normal lg:text-lg h-full left-9 flex items-center absolute w-full cursor-pointer'>
-														{useCase.title}
+														{t(useCase.title)}
 													</FormLabel>
 												</FormItem>
 											))}
@@ -104,7 +106,7 @@ export const SecondStep = () => {
 							disabled={!form.formState.isValid}
 							type='submit'
 							className='mt-10 w-full max-w-md dark:text-white font-semibold '>
-							Kontynuj
+							{t('NEXT_BTN')}
 							<ArrowRight className='ml-2' width={18} height={18} />
 						</Button>
 					</form>

@@ -5,11 +5,10 @@ import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboar
 
 const Onboarding = async () => {
 	const session = await checkIfUserCompletedOnboarding('/onboarding');
-	console.log(session);
 
 	return (
 		<OnboardingFormProvider session={session}>
-			<AditionalInfoSection />
+			<AditionalInfoSection profileImage={session.user.image} />
 			<SummarySection />
 		</OnboardingFormProvider>
 	);

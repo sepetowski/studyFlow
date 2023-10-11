@@ -1,7 +1,11 @@
-import React from 'react'
+import React from 'react';
 
 export const ThirdStep = () => {
-  return (
-    <div>ThirdStep</div>
-  )
-}
+	return (
+		<>
+			<div className='flex flex-col justify-center items-center gap-4 w-full my-10 text-center'>
+				<h2 className='font-bold  text-4xl md:text-5xl max-w-md'>Utwórz obszar roboczy</h2>
+			</div>
+		</>
+	);
+};

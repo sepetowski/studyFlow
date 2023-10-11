@@ -18,13 +18,15 @@ import {
 import { ActionType } from '@/types/onBoardingContext';
 import { Button } from '@/components/ui/button';
 import { AddUserImage } from '../../common/AddUserImage';
-import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
-export const FirstStep = () => {
-	const session = useSession();
+interface Props {
+	profileImage?: string | null;
+}
+
+export const FirstStep = ({ profileImage }: Props) => {
 	const t = useTranslations('ONBOARDING_FORM');
-	const { name, surname, currentStep, profileImage, dispatch } = useOnboardingForm();
+	const { name, surname, currentStep, dispatch } = useOnboardingForm();
 
 	const form = useForm<AditionalUserInfoFirstPart>({
 		resolver: zodResolver(aditionalUserInfoFirstPart),
@@ -35,8 +37,8 @@ export const FirstStep = () => {
 	});
 
 	useEffect(() => {
-		dispatch({ type: ActionType.PROFILEIMAGE, payload: session.data?.user.image as string });
-	}, [session.data?.user.image, dispatch]);
+		dispatch({ type: ActionType.PROFILEIMAGE, payload: profileImage as string | null | undefined });
+	}, [profileImage, dispatch]);
 
 	const onSubmit = (data: AditionalUserInfoFirstPart) => {
 		dispatch({ type: ActionType.NAME, payload: data.name });

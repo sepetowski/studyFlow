@@ -54,7 +54,7 @@ function onBoardingFormReducer(state: OnboardingFormReducer, action: Action) {
 		case ActionType.PROFILEIMAGE:
 			return {
 				...state,
-				profileImage: payload as string,
+				profileImage: payload as string | null | undefined,
 			};
 
 		default:
