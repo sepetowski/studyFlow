@@ -17,12 +17,15 @@ import {
 } from '@/components/ui/form';
 import { ActionType } from '@/types/onBoardingContext';
 import { Button } from '@/components/ui/button';
-import { AddUserImage } from '../AddUserImage';
+import { AddUserImage } from '../../common/AddUserImage';
 import { useSession } from 'next-auth/react';
+import { useTranslations } from 'next-intl';
 
 export const FirstStep = () => {
 	const session = useSession();
+	const t = useTranslations('ONBOARDING_FORM');
 	const { name, surname, currentStep, profileImage, dispatch } = useOnboardingForm();
+
 	const form = useForm<AditionalUserInfoFirstPart>({
 		resolver: zodResolver(aditionalUserInfoFirstPart),
 		defaultValues: {
@@ -33,7 +36,7 @@ export const FirstStep = () => {
 
 	useEffect(() => {
 		dispatch({ type: ActionType.PROFILEIMAGE, payload: session.data?.user.image as string });
-	}, [session.data?.user.image,dispatch]);
+	}, [session.data?.user.image, dispatch]);
 
 	const onSubmit = (data: AditionalUserInfoFirstPart) => {
 		dispatch({ type: ActionType.NAME, payload: data.name });
@@ -44,12 +47,15 @@ export const FirstStep = () => {
 	return (
 		<>
 			<h2 className='font-bold  text-4xl md:text-5xl flex flex-col items-center my-10'>
-				<span>Przygotujmy</span>
-				<span>Cię!</span>
+				<span>{t('FIRST_STEP.TITLE.FIRST')}</span>
+				<span>{t('FIRST_STEP.TITLE.SECOND')}</span>
 			</h2>
 
 			<div className='max-w-md w-full space-y-8 '>
-				<AddUserImage profileImage={profileImage} />
+				<div className='w-full flex flex-col justify-center items-center gap-2'>
+					<p className='text-sm text-muted-foreground'>{t('FIRST_STEP.PHOTO')}</p>
+					<AddUserImage profileImage={profileImage} />
+				</div>
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8'>
 						<div className='space-y-1.5'>
@@ -58,12 +64,18 @@ export const FirstStep = () => {
 								name='name'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel className='text-muted-foreground'>Imię</FormLabel>
+										<FormLabel className='text-muted-foreground'>
+											{t('FIRST_STEP.INPUTS.NAME')}
+										</FormLabel>
 										<FormControl
 											onChange={() => {
 												dispatch({ type: ActionType.NAME, payload: form.getValues('name') });
 											}}>
-											<Input className='bg-muted' placeholder={'Jan'} {...field} />
+											<Input
+												className='bg-muted'
+												placeholder={t('FIRST_STEP.PLACEHOLDERS.NAME')}
+												{...field}
+											/>
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -74,12 +86,18 @@ export const FirstStep = () => {
 								name='surname'
 								render={({ field }) => (
 									<FormItem>
-										<FormLabel className='text-muted-foreground'>Nazwisko</FormLabel>
+										<FormLabel className='text-muted-foreground'>
+											{t('FIRST_STEP.INPUTS.SURNAME')}
+										</FormLabel>
 										<FormControl
 											onChange={() => {
 												dispatch({ type: ActionType.SURNAME, payload: form.getValues('surname') });
 											}}>
-											<Input className='bg-muted' placeholder={'Kowalski'} {...field} />
+											<Input
+												className='bg-muted'
+												placeholder={t('FIRST_STEP.PLACEHOLDERS.SURNAME')}
+												{...field}
+											/>
 										</FormControl>
 										<FormMessage />
 									</FormItem>
@@ -87,7 +105,7 @@ export const FirstStep = () => {
 							/>
 						</div>
 						<Button type='submit' className='mt-10 w-full max-w-md dark:text-white font-semibold '>
-							Kontynuj
+							{t('NEXT_BTN')}
 							<ArrowRight className='ml-2' width={18} height={18} />
 						</Button>
 					</form>

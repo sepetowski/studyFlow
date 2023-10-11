@@ -40,6 +40,28 @@
 			}
 		}
 	},
+	"CHANGE_PROFILE_IMAGE": {
+		"TITLE": "Send a photo!",
+		"BUTTON": "Choose a photo"
+	},
+	"ONBOARDING_FORM": {
+		"FIRST_STEP": {
+			"TITLE": {
+				"FIRST": "Let's get you",
+				"SECOND": "ready"
+			},
+			"PHOTO": "Add photo",
+			"INPUTS": {
+				"NAME": "First name",
+				"SURNAME": "Surname"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "John",
+				"SURNAME": "Smith"
+			}
+		},
+		"NEXT_BTN": "Continue"
+	},
 	"MESSAGES": {
 		"ERRORS": {
 			"DEAFULT": "Oh no.. Something went wrong. Please try again",
@@ -47,13 +69,18 @@
 			"TAKEN_EMAIL": "This email is already in use",
 			"DB_ERROR": "We are currently having problems. Please try again later",
 			"WRONG_DATA": "The data you provided is incorrect. Please provide the correct ones",
-			"NO_USER": "User was not found. Please enter a valid email.",
-			"WRONG_PASSWORD": "The entered password is incorrect. Please enter the correct one.",
-			"ABORDED": "Login aborded"
+			"NO_USER": "User was not found. Please enter a valid email",
+			"WRONG_PASSWORD": "The entered password is incorrect. Please enter the correct one",
+			"ABORDED": "Login aborded",
+			"UPLOAD_FAILE": "Failed to upload your file. Please try again",
+			"IMAGE_PROFILE_UPDATE": "Failed to update your profile image. Please try again",
+			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
-			"SIGN_IN": "You have been log in!"
+			"SIGN_IN": "You have been log in!",
+			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
+			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
