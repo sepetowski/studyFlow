@@ -115,7 +115,7 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 		},
 		mutationKey: ['deleteProfileImage'],
 	});
-	
+
 	const { startUpload, isUploading } = useUploadThing('profilePictureUploader', {
 		onUploadError: () => {
 			toast({
@@ -153,9 +153,9 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 		}
 	};
 
-	const onSubmit = (data: ImageSchema) => {
+	const onSubmit = async (data: ImageSchema) => {
 		const image: File = data.image;
-		startUpload([image]);
+		await startUpload([image]);
 	};
 
 	return (
@@ -225,6 +225,7 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 												type='file'
 												id='image'
 												className='hidden'
+												accept='image/*'
 											/>
 										</div>
 									</FormControl>
