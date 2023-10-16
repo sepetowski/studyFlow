@@ -1,105 +1,144 @@
 'use client';
-
-import React from 'react';
-import { OurFileRouter } from '@/app/api/uploadthing/core';
-import { UploadDropzone } from '@/lib/uploadthing';
+import React, { useRef, useState } from 'react';
+import { FormControl, FormMessage, FormItem, FormField } from '@/components/ui/form';
+import { UseFormReturn } from 'react-hook-form';
+import { Input } from '../ui/input';
 import { cn } from '@/lib/utils';
-import { UseMutateFunction } from '@tanstack/react-query';
-import { UploadthingComponentProps } from '@uploadthing/react';
-import { UploadFileResponse } from 'uploadthing/client';
-import { LoadingState } from '../ui/loading-state';
-import { useTranslations } from 'next-intl';
+import { UploadCloud, Trash2 } from 'lucide-react';
+import { z } from 'zod';
+import { Button } from '../ui/button';
 
-type UploadInterface<T, L, K> = {
-	containerStyles?: string;
-	buttonStyles?: string;
-	uploadIconStyles?: string;
-	labelStyles?: string;
-	allowedContentStyles?: string;
-	label: string;
-	allowedContent: string;
-	button: string;
+interface Props<> {
+	form: UseFormReturn;
+	schema: z.ZodObject<any>;
+	getImagePreview?: React.Dispatch<React.SetStateAction<string>>;
 
-	onSuccess?: UseMutateFunction<T, L | unknown, UploadFileResponse[] | undefined, K | unknown>;
-};
+	maxFiles?: number;
+	zodKey: string;
+}
 
-type Props<T, L, K> = UploadInterface<T, L, K> & UploadthingComponentProps<OurFileRouter>;
+export function UploadFile({ form, schema, zodKey, getImagePreview }: Props) {
+	const [dragActive, setDragActive] = useState<boolean>(false);
+	const inputRef = useRef<HTMLInputElement | null>(null);
+	const [file, setFile] = useState<File | null>(null);
 
-export function UploadFile<T, L, K>({
-	endpoint,
-	containerStyles,
-	buttonStyles,
-	uploadIconStyles,
-	labelStyles,
-	allowedContentStyles,
-	label,
-	allowedContent,
-	button,
-	onSuccess,
-}: Props<T, L, K>) {
-	const t = useTranslations('UPLOAD');
+	const oneFileHandler = (file: File) => {
+		const result = schema.safeParse({ image: file });
 
-	const containerStyle = cn(
-		'bg-muted border-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 p-4 sm:p-6 w-72 h-52 cursor-pointer hover:bg-muted/90 duration-200 transition-colors',
-		containerStyles
-	);
-	const buttonStyle = cn(
-		'inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 duration-200 bg-primary text-white hover:bg-primary/90',
-		buttonStyles
-	);
-	const uploadIconStyle = cn('text-muted-foreground', uploadIconStyles);
-	const labelStyle = cn(
-		'text-primary font-semibold hover:text-primary/90 transition-colors duration-200',
-		labelStyles
-	);
-	const allowedContentStyle = cn('text-muted-foreground', allowedContentStyles);
+		if (result.success) {
+			form.clearErrors(zodKey);
+			form.setValue(zodKey, file);
+			setFile(file);
+			if (getImagePreview) getImagePreview(URL.createObjectURL(file));
+		} else {
+			const errors = result.error.flatten().fieldErrors.image;
+			errors?.forEach((error) =>
+				form.setError(zodKey, {
+					message: error,
+				})
+			);
+		}
+	};
+
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const files = e.target.files;
+
+		if (files && files[0]) {
+			oneFileHandler(files[0]);
+		}
+	};
+
+	const handleDrop = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(false);
+		const files = e.dataTransfer.files;
+		if (files && files[0]) {
+			oneFileHandler(files[0]);
+		}
+	};
+
+	const handleDragLeave = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(false);
+	};
+	const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(true);
+	};
+
+	const handleDragEnter = (e: React.DragEvent<HTMLDivElement>) => {
+		e.preventDefault();
+		e.stopPropagation();
+		setDragActive(true);
+	};
+
+	const removeFile = () => {
+		setFile(null);
+		form.setValue(zodKey, null);
+	};
+
 	return (
-		<UploadDropzone
-			appearance={{
-				container({ isDragActive, isUploading, uploadProgress }) {
-					return cn(
-						containerStyle,
-						isDragActive && 'bg-primary/20 border-primary',
-						(isUploading || uploadProgress) && 'pointer-events-none'
-					);
-				},
-				uploadIcon: uploadIconStyle,
-				label: labelStyle,
-				button({ isUploading, uploadProgress }) {
-					return cn(
-						buttonStyle,
-						(isUploading || uploadProgress) && 'bg-primary pointer-events-none after:bg-green-400'
-					);
-				},
-				allowedContent: allowedContentStyle,
-			}}
-			endpoint={endpoint}
-			content={{
-				allowedContent: t(allowedContent),
-				label: t(label),
-				button({ isUploading, uploadProgress, fileTypes }) {
-					if (uploadProgress || isUploading) return <LoadingState className='z-20 relative' />;
-
-					return (
-						<>
-							{fileTypes.length === 1 ? (
-								<span>{button}</span>
-							) : (
-								<span>
-									{t('')} {fileTypes.length} {t('')}
-								</span>
+		<FormField
+			control={form.control}
+			name='image'
+			render={({ field }) => (
+				<FormItem className='flex flex-col justify-center items-center'>
+					<FormControl>
+						<div
+							className={cn(
+								`${
+									dragActive ? 'bg-primary/20' : 'bg-muted'
+								}    focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 p-4 sm:p-6 h-min-0 h-40 cursor-pointer hover:bg-muted/90 duration-200 transition-colors ring-offset-background rounded-md relative  border-muted-foreground border border-dashed text-muted-foreground flex flex-col  items-center w-[15rem] justify-center`
 							)}
-						</>
-					);
-				},
-			}}
-			onClientUploadComplete={(res) => {
-				// onSuccess(res);
-				console.log(res);
-			}}
-			onUploadError={(error: Error) => {
-				// Do something with the error.
-			}}
+							onDragEnter={handleDragEnter}
+							onDrop={handleDrop}
+							onDragLeave={handleDragLeave}
+							onDragOver={handleDragOver}
+							onClick={() => {
+								if (inputRef.current) inputRef?.current.click();
+							}}
+							onKeyDown={(e) => {
+								if (e.key === 'Enter' && inputRef.current) {
+									inputRef.current.click();
+								}
+							}}
+							tabIndex={0}
+							role='presentation'>
+							<Input
+								{...field}
+								placeholder='fileInput'
+								className='sr-only'
+								tabIndex={-1}
+								value={undefined}
+								ref={inputRef}
+								type='file'
+								multiple={true}
+								onChange={handleChange}
+								accept='image/*'
+							/>
+							<UploadCloud size={30} />
+							<p className='text-sm font-semibold uppercase text-primary mt-5'>Upload</p>
+							<p className='text-xs mt-1'>Only .img, .jpg types</p>
+						</div>
+					</FormControl>
+					<FormMessage />
+					{file && (
+						<div className='flex items-center flex-row space-x-5 text-sm mt-4 '>
+							<p>{file.name}</p>
+							<Button
+								className='h-8 w-8 text-destructive hover:text-destructive'
+								variant='ghost'
+								size='icon'
+								onClick={() => removeFile()}>
+								<Trash2 size={18} />
+							</Button>
+						</div>
+					)}
+				</FormItem>
+			)}
 		/>
 	);
 }

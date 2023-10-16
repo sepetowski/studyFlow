@@ -116,7 +116,7 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 		mutationKey: ['deleteProfileImage'],
 	});
 
-	const { startUpload, isUploading } = useUploadThing('profilePictureUploader', {
+	const { startUpload, isUploading } = useUploadThing('imageUploader', {
 		onUploadError: () => {
 			toast({
 				title: m('ERRORS.UPLOAD_FAILE'),
