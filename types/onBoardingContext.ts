@@ -6,7 +6,8 @@ export enum ActionType {
 	SURNAME = 'SURNAME',
 	PROFILEIMAGE = 'PROFILEIMAGE',
 	USECASE = 'USECASE',
-	WORKSPACE = 'WORKSPACE',
+	WORKSPACE_NAME = 'WORKSPACE_NAME',
+	WORKSPACE_IMAGE = 'WORKSPACE_IMAGE',
 }
 
 export interface Action {
@@ -21,6 +22,7 @@ export interface OnboardingFormReducer {
 	profileImage?: string | null;
 	useCase: UseCase | null;
 	workspaceName: string | null;
+	workspaceImage?: string | null;
 }
 
 export interface OnboardingFormContext extends OnboardingFormReducer {

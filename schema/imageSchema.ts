@@ -1,7 +1,13 @@
 import { z } from 'zod';
 
-const MAX_FILE_SIZE = 1000000;
-const ACCEPTED_IMAGE_TYPES = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp'];
+export const MAX_FILE_SIZE = 1000000;
+export const ACCEPTED_IMAGE_TYPES = [
+	'image/jpeg',
+	'image/jpg',
+	'image/png',
+	'image/webp',
+	'image/gif',
+];
 
 export const imageSchema = z.object({
 	image: z

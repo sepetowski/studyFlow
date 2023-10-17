@@ -23,6 +23,7 @@ const initialFormState: OnboardingFormReducer = {
 	profileImage: null,
 	useCase: null,
 	workspaceName: '',
+	workspaceImage: null,
 };
 
 export const OnboardingFormCtx = createContext<OnboardingFormContext | null>(null);
@@ -56,6 +57,18 @@ function onBoardingFormReducer(state: OnboardingFormReducer, action: Action) {
 				...state,
 				profileImage: payload as string | null | undefined,
 			};
+		case ActionType.WORKSPACE_NAME: {
+			return {
+				...state,
+				workspaceName: payload as string,
+			};
+		}
+		case ActionType.WORKSPACE_IMAGE: {
+			return {
+				...state,
+				workspaceImage: payload as string | null | undefined,
+			};
+		}
 
 		default:
 			return state;
