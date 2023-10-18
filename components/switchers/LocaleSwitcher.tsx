@@ -12,9 +12,9 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 
-import { LoadingState } from '@/components/ui/loadingState';
+import { LoadingState } from '@/components/ui/loading-state';
 
-export const LocaleSwitcher=()=> {
+export const LocaleSwitcher = () => {
 	const [isLoading, setIsLoading] = useState(false);
 	const [isPending, startTransition] = useTransition();
 	const locale = useLocale();
@@ -54,4 +54,4 @@ export const LocaleSwitcher=()=> {
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);
-}
+};

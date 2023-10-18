@@ -40,6 +40,55 @@
 			}
 		}
 	},
+	"CHANGE_PROFILE_IMAGE": {
+		"TITLE": "Send a photo!",
+		"BUTTON": "Choose a photo"
+	},
+	"ONBOARDING_FORM": {
+		"FIRST_STEP": {
+			"TITLE": {
+				"FIRST": "Let's get you",
+				"SECOND": "ready"
+			},
+			"PHOTO": "Add photo",
+			"INPUTS": {
+				"NAME": "First name",
+				"SURNAME": "Surname"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "John",
+				"SURNAME": "Smith"
+			}
+		},
+		"SECOND_STEP": {
+			"TITLE": "How will you use",
+			"INFO": "We use this information to personalize your experience.",
+			"WORK": "For work",
+			"STUDY": "For study",
+			"PERSONAL": "For personal use"
+		},
+		"THIRD_STEP": {
+			"TITLE": "Create a workspace",
+			"INPUTS": {
+				"NAME": "Workspace name",
+				"FILE": "Workspace icon (optional)"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "eg. Universe"
+			},
+			"IMAGE": "Only .jpeg, .jpg, .png, .webp, .gif types are supported"
+		},
+		"FINISH": {
+			"TITLE": "That's it!",
+			"DESC_FIRST": "You can already start using",
+			"DESC_SECOND": "by clicking the button below"
+		},
+		"START_BTN": "Start",
+		"NEXT_BTN": "Continue"
+	},
+	"UPLOAD_FILE": {
+		"UPLOAD": "Upload"
+	},
 	"MESSAGES": {
 		"ERRORS": {
 			"DEAFULT": "Oh no.. Something went wrong. Please try again",
@@ -47,13 +96,22 @@
 			"TAKEN_EMAIL": "This email is already in use",
 			"DB_ERROR": "We are currently having problems. Please try again later",
 			"WRONG_DATA": "The data you provided is incorrect. Please provide the correct ones",
-			"NO_USER": "User was not found. Please enter a valid email.",
-			"WRONG_PASSWORD": "The entered password is incorrect. Please enter the correct one.",
-			"ABORDED": "Login aborded"
+			"NO_USER": "User was not found. Please enter a valid email",
+			"WRONG_PASSWORD": "The entered password is incorrect. Please enter the correct one",
+			"ABORDED": "Login aborded",
+			"UPLOAD_FAILE": "Failed to upload your file. Please try again",
+			"IMAGE_PROFILE_UPDATE": "Failed to update your profile image. Please try again",
+			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again",
+			"WORKSPACE_ICON_ADDED": "Failed to add workscape icon. Please try again",
+			"NO_USER_API": "User not Found",
+			"UNAUTHORIZED": "Unauthorized. Please sign in"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
-			"SIGN_IN": "You have been log in!"
+			"SIGN_IN": "You have been log in!",
+			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
+			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!",
+			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -69,6 +127,14 @@
 			"USERNAME": {
 				"SHORT": "Username is too short",
 				"SPECIAL_CHARS": "Username must only contain letters and digits"
+			},
+			"IMAGE": {
+				"MAX": "Max image size is 5MB",
+				"SUPPORTED": "Only .jpg, .jpeg, .png and .webp formats are supported."
+			},
+			"WORKSPACE": {
+				"SHORT": "Workspace name is too short",
+				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
 			}
 		}
 	}

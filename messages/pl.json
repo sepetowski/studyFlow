@@ -40,20 +40,78 @@
 			}
 		}
 	},
+	"CHANGE_PROFILE_IMAGE": {
+		"TITLE": "Wyślij zdjęcie!",
+		"BUTTON": "Wybierz zdjęcie"
+	},
+	"ONBOARDING_FORM": {
+		"FIRST_STEP": {
+			"TITLE": {
+				"FIRST": "Przygotujmy",
+				"SECOND": "Cię"
+			},
+			"PHOTO": "Dodaj zdjęcie",
+			"INPUTS": {
+				"NAME": "Imię",
+				"SURNAME": "Nazwisko"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "Jan",
+				"SURNAME": "Kowalski"
+			}
+		},
+		"SECOND_STEP": {
+			"TITLE": "Jak będziesz używać",
+			"INFO": "Używamy tych informacji, aby spersonalizować Twoje doświadczenie.",
+			"WORK": "Do pracy",
+			"STUDY": "Do nauki",
+			"PERSONAL": "Do użytku osobistego"
+		},
+		"THIRD_STEP": {
+			"TITLE": "Utwórz obszar roboczy",
+			"INPUTS": {
+				"NAME": "Nazwa obszaru roboczego",
+				"FILE": "Ikona obszaru roboczego (opcjonalna)"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "np. Uniwersum"
+			},
+			"IMAGE": "Dozowolne są tylko typy .jpeg, .jpg, .png, .webp, .gif"
+		},
+		"FINISH": {
+			"TITLE": "To już wszytsko!",
+			"DESC_FIRST": "Możesz już zacząć korzystać z",
+			"DESC_SECOND": ", klikając poniższy przycisk"
+		},
+		"START_BTN": "Rozpocznij",
+		"NEXT_BTN": "Kontynuj"
+	},
+	"UPLOAD_FILE": {
+		"UPLOAD": "Prześlij"
+	},
 	"MESSAGES": {
 		"ERRORS": {
-			"DEAFULT": "O nie.. Coś poszło nie tak.",
+			"DEAFULT": "O nie.. Coś poszło nie tak",
 			"TAKEN_USERNAME": "Ta nazwa użytkownika jest już zajęta",
-			"TAKEN_EMAIL": "Ten e-mail jest już w użyciu.",
-			"DB_ERROR": "Obecnie mamy problemy. Prosze sprbować ponownie później",
-			"WRONG_DATA": "Podane dane są nieprawidłowe. Prosimy o podanie poprawnych danych",
+			"TAKEN_EMAIL": "Ten e-mail jest już w użyciu",
+			"DB_ERROR": "Obecnie mamy problemy. Proszę sprbować ponownie później",
+			"WRONG_DATA": "Podane dane są nieprawidłowe. Proszę o podanie poprawnych danych",
 			"NO_USER": "Nie znaleziono użytkownika. Proszę podać poprawny email",
 			"WRONG_PASSWORD": "Podane hasło jest nieprawidłowe. Proszę podać poprawne",
-			"ABORDED": "Logowanie przerwane"
+			"ABORDED": "Logowanie przerwane",
+			"UPLOAD_FAILE": "Nie udało sie wysłać pliku. Proszę spróbować ponownie",
+			"IMAGE_PROFILE_UPDATE": "Nie udało się zaktualizować Twojego zdjęcia profilowego. Proszę sprbować ponownie",
+			"IMAGE_PROFILE_DELETE": "Nie udało się usunać Twojego zdjęcia profilowego. Proszę sprbować ponownie",
+			"WORKSPACE_ICON_ADDED": "Nie udało się dodać ikony obszaru roboczego. Proszę spróbować ponownie",
+			"NO_USER_API": "Nie znaleziono użytkownika",
+			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
-			"SIGN_IN": "Zostałeś zalogowany!"
+			"SIGN_IN": "Zostałeś zalogowany!",
+			"IMAGE_PROFILE_UPDATE": "Twoje zdjęcie profilowe zostało zaktualizowane!",
+			"IMAGE_PROFILE_DELETE": "Twoje zdjęcie profilowe zostało usunięte!",
+			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -69,6 +127,14 @@
 			"USERNAME": {
 				"SHORT": "Nazwa użytkownika jest zbyt krótka",
 				"SPECIAL_CHARS": "Nazwa użytkownika może składać się tylko z liter i cyfr"
+			},
+			"IMAGE": {
+				"MAX": "Max image size is 4MB",
+				"SUPPORTED": "Only .jpg, .jpeg, .png and .webp formats are supported."
+			},
+			"WORKSPACE": {
+				"SHORT": "Nazwa obszaru roboczego jest zbyt krótka",
+				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
 			}
 		}
 	}
