@@ -67,7 +67,21 @@
 			"STUDY": "For study",
 			"PERSONAL": "For personal use"
 		},
+		"THIRD_STEP": {
+			"TITLE": "Create a workspace",
+			"INPUTS": {
+				"NAME": "Workspace name",
+				"FILE": "Workspace icon (optional)"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "eg. Universe"
+			},
+			"IMAGE": "Only .jpeg, .jpg, .png, .webp, .gif types are supported"
+		},
 		"NEXT_BTN": "Continue"
+	},
+	"UPLOAD_FILE": {
+		"UPLOAD": "Upload"
 	},
 	"MESSAGES": {
 		"ERRORS": {
@@ -81,7 +95,8 @@
 			"ABORDED": "Login aborded",
 			"UPLOAD_FAILE": "Failed to upload your file. Please try again",
 			"IMAGE_PROFILE_UPDATE": "Failed to update your profile image. Please try again",
-			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again"
+			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again",
+			"WORKSPACE_ICON_ADDED": "Failed to add workscape icon. Please try again"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -107,6 +122,10 @@
 			"IMAGE": {
 				"MAX": "Max image size is 5MB",
 				"SUPPORTED": "Only .jpg, .jpeg, .png and .webp formats are supported."
+			},
+			"WORKSPACE": {
+				"SHORT": "Workspace name is too short",
+				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
 			}
 		}
 	}

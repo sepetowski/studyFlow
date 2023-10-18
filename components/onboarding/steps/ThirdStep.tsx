@@ -21,62 +21,81 @@ import { useToast } from '@/components/ui/use-toast';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useOnboardingForm } from '@/context/OnboardingForm';
 import { ActionType } from '@/types/onBoardingContext';
+import { useState } from 'react';
 
 export const ThirdStep = () => {
 	const { currentStep, dispatch } = useOnboardingForm();
-	const m = useTranslations('MESSAGES');
-	const { toast } = useToast();
+	const [uplaodError, setUploadError] = useState(false);
 
+	const m = useTranslations('MESSAGES');
+	const t = useTranslations('ONBOARDING_FORM');
+
+	const { toast } = useToast();
+	
 	const form = useForm<WorkspaceSchema>({
 		resolver: zodResolver(workspaceSchema),
 		defaultValues: {
-			name: '',
+			workspaceName: '',
 		},
 	});
 
 	const { startUpload, isUploading } = useUploadThing('imageUploader', {
 		onUploadError: () => {
+			setUploadError(true);
 			toast({
-				title: m('ERRORS.UPLOAD_FAILE'),
+				title: m('ERRORS.WORKSPACE_ICON_ADDED'),
 				variant: 'destructive',
 			});
 		},
 		onClientUploadComplete: (data) => {
 			if (data) {
 				dispatch({ type: ActionType.WORKSPACE_IMAGE, payload: data[0].url });
-			} else
+			} else {
+				setUploadError(true);
 				toast({
-					title: m('ERRORS.IMAGE_PROFILE_UPDATE'),
+					title: m('ERRORS.WORKSPACE_ICON_ADDED'),
 					variant: 'destructive',
 				});
+			}
 		},
 	});
 
 	const onSubmit = async (data: WorkspaceSchema) => {
-		const image: File | undefined | null = data.file;
-		if (image) await startUpload([image]);
+		setUploadError(false);
 
-		dispatch({ type: ActionType.WORKSPACE_NAME, payload: data.name });
+		const image: File | undefined | null = data.file;
+
+		if (image) {
+			await startUpload([image]);
+		}
+		if (uplaodError) return;
+		dispatch({ type: ActionType.WORKSPACE_NAME, payload: data.workspaceName });
 		dispatch({ type: ActionType.CHNAGE_SITE, payload: currentStep + 1 });
 	};
 
 	return (
 		<>
 			<div className='flex flex-col  justify-center items-center gap-4 w-full my-10 text-center'>
-				<h2 className='font-bold  text-4xl md:text-5xl  max-w-md'>Utwórz obszar roboczy</h2>
+				<h2 className='font-bold  text-4xl md:text-5xl  max-w-md'>{t('THIRD_STEP.TITLE')}</h2>
 			</div>
 
 			<Form {...form}>
-				<form className='max-w-md w-full space-y-8 mt-12 ' onSubmit={form.handleSubmit(onSubmit)}>
+				<form className='max-w-md w-full space-y-8 mt-10 ' onSubmit={form.handleSubmit(onSubmit)}>
 					<div className='space-y-1.5'>
 						<FormField
 							control={form.control}
-							name='name'
+							name='workspaceName'
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel className='text-muted-foreground'>Nazwa obszaru roboczego</FormLabel>
+									<FormLabel className='text-muted-foreground'>
+										{t('THIRD_STEP.INPUTS.NAME')}
+									</FormLabel>
 									<FormControl>
-										<Input className='bg-muted' placeholder='np. My space' {...field} />
+										<Input
+											className='bg-muted'
+											placeholder={t('THIRD_STEP.PLACEHOLDERS.NAME')}
+											{...field}
+										/>
 									</FormControl>
 									<FormMessage />
 								</FormItem>
@@ -86,23 +105,21 @@ export const ThirdStep = () => {
 					<UploadFile
 						ContainerClassName='w-full'
 						LabelClassName='text-muted-foreground mb-1.5 self-start'
-						LabelText='Ikona obszaru roboczego'
+						LabelText={t('THIRD_STEP.INPUTS.FILE')}
 						form={form}
 						schema={workspaceSchema}
 						inputAccept='image/*'
-						typesDescription={['.jpeg', '.jpg', '.png', '.webp', '.gif']}
+						typesDescription={t('THIRD_STEP.IMAGE')}
 					/>
 					<Button
-						disabled={isUploading}
+						disabled={!form.formState.isValid || isUploading}
 						type='submit'
 						className='mt-10 w-full max-w-md dark:text-white font-semibold '>
-						{/* {t('NEXT_BTN')} */}
-
 						{isUploading ? (
 							<LoadingState />
 						) : (
 							<>
-								KONTURNUJ
+								{t('NEXT_BTN')}
 								<ArrowRight className='ml-2' width={18} height={18} />
 							</>
 						)}

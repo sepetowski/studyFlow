@@ -67,7 +67,21 @@
 			"STUDY": "Do nauki",
 			"PERSONAL": "Do użytku osobistego"
 		},
+		"THIRD_STEP": {
+			"TITLE": "Utwórz obszar roboczy",
+			"INPUTS": {
+				"NAME": "Nazwa obszaru roboczego",
+				"FILE": "Ikona obszaru roboczego (opcjonalna)"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "np. Uniwersum"
+			},
+			"IMAGE": "Dozowolne są tylko typy .jpeg, .jpg, .png, .webp, .gif"
+		},
 		"NEXT_BTN": "Kontynuj"
+	},
+	"UPLOAD_FILE": {
+		"UPLOAD": "Prześlij"
 	},
 	"MESSAGES": {
 		"ERRORS": {
@@ -81,7 +95,8 @@
 			"ABORDED": "Logowanie przerwane",
 			"UPLOAD_FAILE": "Nie udało sie wysłać pliku. Proszę spróbować ponownie",
 			"IMAGE_PROFILE_UPDATE": "Nie udało się zaktualizować Twojego zdjęcia profilowego. Proszę sprbować ponownie",
-			"IMAGE_PROFILE_DELETE": "Nie udało się usunać Twojego zdjęcia profilowego. Proszę sprbować ponownie"
+			"IMAGE_PROFILE_DELETE": "Nie udało się usunać Twojego zdjęcia profilowego. Proszę sprbować ponownie",
+			"WORKSPACE_ICON_ADDED": "Nie udało się dodać ikony obszaru roboczego. Proszę spróbować ponownie"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -105,8 +120,12 @@
 				"SPECIAL_CHARS": "Nazwa użytkownika może składać się tylko z liter i cyfr"
 			},
 			"IMAGE": {
-				"MAX": "Max image size is 5MB",
+				"MAX": "Max image size is 4MB",
 				"SUPPORTED": "Only .jpg, .jpeg, .png and .webp formats are supported."
+			},
+			"WORKSPACE": {
+				"SHORT": "Nazwa obszaru roboczego jest zbyt krótka",
+				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
 			}
 		}
 	}

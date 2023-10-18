@@ -7,13 +7,14 @@ import { cn } from '@/lib/utils';
 import { UploadCloud, Trash2 } from 'lucide-react';
 import { z } from 'zod';
 import { Button } from '../ui/button';
+import { useTranslations } from 'next-intl';
 
 interface Props<> {
 	form: UseFormReturn<any>;
 	schema: z.ZodObject<any>;
 	getImagePreview?: React.Dispatch<React.SetStateAction<string>>;
 	inputAccept: 'image/*' | 'pdf';
-	typesDescription: string[];
+	typesDescription: string;
 	ContainerClassName?: string;
 	LabelClassName?: string;
 	LabelText?: string;
@@ -29,6 +30,7 @@ export function UploadFile({
 	LabelText,
 	getImagePreview,
 }: Props) {
+	const t = useTranslations('UPLOAD_FILE');
 	const [dragActive, setDragActive] = useState<boolean>(false);
 	const inputRef = useRef<HTMLInputElement | null>(null);
 	const [file, setFile] = useState<File | null>(null);
@@ -44,7 +46,7 @@ export function UploadFile({
 				[x: string]: any;
 			}
 		>;
-		
+
 		if (result.success) {
 			form.clearErrors('file');
 			form.setValue('file', providedFile);
@@ -142,11 +144,8 @@ export function UploadFile({
 								accept={inputAccept}
 							/>
 							<UploadCloud size={30} />
-							<p className='text-sm font-semibold uppercase text-primary mt-5'>Upload</p>
-							<p className='text-xs mt-1 text-center'>
-								Only <span>{typesDescription.join(', ')}</span>{' '}
-								{typesDescription.length > 1 ? 'types supported' : 'type supported'}
-							</p>
+							<p className='text-sm font-semibold uppercase text-primary mt-5'>{t('UPLOAD')}</p>
+							<p className='text-xs mt-1 text-center'>{typesDescription}</p>
 						</div>
 					</FormControl>
 					<FormMessage />
