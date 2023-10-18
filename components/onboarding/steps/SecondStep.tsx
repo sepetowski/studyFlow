@@ -46,7 +46,6 @@ export const SecondStep = () => {
 	});
 
 	const onSubmit = (data: AditionalUserInfoSecondPart) => {
-		console.log(data);
 		dispatch({ type: ActionType.USECASE, payload: data.useCase });
 		dispatch({ type: ActionType.CHNAGE_SITE, payload: currentStep + 1 });
 	};

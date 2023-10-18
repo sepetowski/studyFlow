@@ -21,9 +21,7 @@ export const ProviderSignInBtn = ({ children, providerName, onLoading, ...props 
 		setShowLoggedInfo(true);
 		try {
 			await signIn(providerName, { callbackUrl: `/${locale}/onboarding` });
-		} catch (err) {
-			console.log(err);
-		}
+		} catch (_) {}
 		onLoading(false);
 	};
 
