@@ -5,8 +5,7 @@ import { getAuthSession } from '@/lib/auth';
 export async function POST(request: Request) {
 	const session = await getAuthSession();
 
-	if (!session?.user)
-		return new Response('Unauthorized', { status: 400, statusText: 'Unauthorized User' });
+	if (!session?.user) return new Response('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	try {
 		const user = await db.user.findUnique({
@@ -15,8 +14,7 @@ export async function POST(request: Request) {
 			},
 		});
 
-		if (!user)
-			return new NextResponse('User not Found', { status: 404, statusText: 'User not Found' });
+		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
 
 		const upadtedUser = await db.user.update({
 			where: {

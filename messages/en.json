@@ -78,6 +78,12 @@
 			},
 			"IMAGE": "Only .jpeg, .jpg, .png, .webp, .gif types are supported"
 		},
+		"FINISH": {
+			"TITLE": "That's it!",
+			"DESC_FIRST": "You can already start using",
+			"DESC_SECOND": "by clicking the button below"
+		},
+		"START_BTN": "Start",
 		"NEXT_BTN": "Continue"
 	},
 	"UPLOAD_FILE": {
@@ -96,13 +102,16 @@
 			"UPLOAD_FAILE": "Failed to upload your file. Please try again",
 			"IMAGE_PROFILE_UPDATE": "Failed to update your profile image. Please try again",
 			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again",
-			"WORKSPACE_ICON_ADDED": "Failed to add workscape icon. Please try again"
+			"WORKSPACE_ICON_ADDED": "Failed to add workscape icon. Please try again",
+			"NO_USER_API": "User not Found",
+			"UNAUTHORIZED": "Unauthorized. Please sign in"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
 			"SIGN_IN": "You have been log in!",
 			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
-			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!"
+			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!",
+			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"

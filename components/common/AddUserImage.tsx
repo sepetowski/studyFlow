@@ -26,7 +26,7 @@ import { cn } from '@/lib/utils';
 import { useToast } from '@/components/ui/use-toast';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
-import axios from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface Props {
 	profileImage?: string | null;
@@ -78,9 +78,11 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 
 			return data as UserType;
 		},
-		onError: () => {
+		onError: (err: AxiosError) => {
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+
 			toast({
-				title: m('ERRORS.IMAGE_PROFILE_UPDATE'),
+				title: m(error),
 				variant: 'destructive',
 			});
 		},
@@ -100,9 +102,11 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 			const { data } = await axios.post('/api/profile/delete_profile_image');
 			return data as UserType;
 		},
-		onError: () => {
+		onError: (err: AxiosError) => {
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+
 			toast({
-				title: m('ERRORS.IMAGE_PROFILE_DELETE'),
+				title: m(error),
 				variant: 'destructive',
 			});
 		},

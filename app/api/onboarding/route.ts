@@ -1,7 +1,8 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
-import { z } from 'zod';
 import { getAuthSession } from '@/lib/auth';
+import { onboardingSchema } from '@/schema/onboardingSchema';
+import { UseCase as UseCaseType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -9,17 +10,13 @@ export async function POST(request: Request) {
 	if (!session?.user) return new Response('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
-	const result = z
-		.object({
-			profileImage: z.string(),
-		})
-		.safeParse(body);
+	const result = onboardingSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { profileImage } = result.data;
+	const { useCase, workspaceName, name, surname, workspaceImage } = result.data;
 
 	try {
 		const user = await db.user.findUnique({
@@ -30,16 +27,33 @@ export async function POST(request: Request) {
 
 		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
 
-		const upadtedUser = await db.user.update({
+		await db.user.update({
 			where: {
 				id: session.user.id,
 			},
 			data: {
-				image: profileImage,
+				completedOnboarding: true,
+				name,
+				surname,
+				useCase: useCase as UseCaseType,
+			},
+		});
+		const workspace = await db.workspace.create({
+			data: {
+				creatorId: user.id,
+				name: workspaceName,
+				image: workspaceImage,
 			},
 		});
 
-		return NextResponse.json(upadtedUser, { status: 200 });
+		await db.subscription.create({
+			data: {
+				userId: user.id,
+				workspaceId: workspace.id,
+			},
+		});
+
+		return NextResponse.json('OK', { status: 200 });
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}

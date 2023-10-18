@@ -47,7 +47,7 @@ model User {
   completedOnboarding Boolean        @default(false)
   accounts            Account[]
   sessions            Session[]
-  useCase             UseCase?
+  useCase             UseCase?        
   createdWorkspaces   Workspace[]    @relation("CreatedBy")
   subscriptions       Subscription[]
 }
@@ -60,6 +60,7 @@ model Workspace {
   creatorId   String?
   Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id], onDelete: Cascade)
   subscribers Subscription[]
+  image       String?
 
   @@index([creatorId])
 }
