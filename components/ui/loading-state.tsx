@@ -16,7 +16,10 @@ export const LoadingState = ({
 	return (
 		<>
 			{!hideLoaderIcon && (
-				<Loader2 className={cn('mr-2 h-4 w-4 animate-spin', className)} {...props} />
+				<Loader2
+					className={cn(`h-4 w-4 animate-spin ${loadingText && 'mr-2'}`, className)}
+					{...props}
+				/>
 			)}
 			{loadingText && <p>{loadingText}</p>}
 		</>

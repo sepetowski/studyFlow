@@ -7,12 +7,12 @@ import { SignInSchema, signInSchema } from '@/schema/signInSchema';
 import { CardContent } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
-import {  useTranslations } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import { ProviderSigInBtns } from './ProviderSigInBtns';
 import { useRouter } from 'next-intl/client';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';
-import { LoadingState } from '@/components/ui/loadingState';
+import { LoadingState } from '@/components/ui/loading-state';
 import { Button } from '@/components/ui/button';
 
 export const SignInCardContent = () => {

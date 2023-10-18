@@ -8,18 +8,17 @@ import { CardContent } from '@/components/ui/card';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
 import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
-import { useLocale, useTranslations } from 'next-intl';
-import Link from 'next-intl/link';
+import { useTranslations } from 'next-intl';
 import { ProviderSigInBtns } from './ProviderSigInBtns';
-import { LoadingState } from '@/components/ui/loadingState';
+import { LoadingState } from '@/components/ui/loading-state';
 import { useRouter } from 'next-intl/client';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';
+import Link from 'next-intl/link';
 
 export const SignUpCardContent = () => {
 	const t = useTranslations('AUTH');
 	const m = useTranslations('MESSAGES');
-	const locale = useLocale();
 	const [isLoading, setIsLoading] = useState(false);
 	const { toast } = useToast();
 	const router = useRouter();

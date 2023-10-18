@@ -1,10 +1,12 @@
 import React from 'react';
 import { Card, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
 import { SignUpCardContent } from './SignUpCardContent';
 import { SignInCardContent } from './SignInCardContent';
 import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
+import { AppLogo } from '@/components/ui/app-logo';
+
+
 interface Props {
 	signInCard?: boolean;
 }
@@ -15,17 +17,8 @@ export const AuthCard = ({ signInCard }: Props) => {
 		<>
 			<Card className='w-full sm:w-[30rem] mt-14 sm:mt-0'>
 				<CardHeader className='pb-0 sm:pb-0'>
-					<Image
-						className='rounded-full object-cover self-center'
-						alt=''
-						width={60}
-						height={60}
-						src='/studyFlow.jpg'
-						priority
-					/>
-					<CardTitle>
-						{signInCard ? t('SIGN_IN.TITLE') : t('SIGN_UP.TITLE')}
-					</CardTitle>
+					<AppLogo />
+					<CardTitle>{signInCard ? t('SIGN_IN.TITLE') : t('SIGN_UP.TITLE')}</CardTitle>
 					<CardDescription>{signInCard ? t('SIGN_IN.DESC') : t('SIGN_UP.DESC')}</CardDescription>
 				</CardHeader>
 				{signInCard ? <SignInCardContent /> : <SignUpCardContent />}

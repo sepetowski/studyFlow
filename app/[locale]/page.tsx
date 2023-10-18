@@ -7,7 +7,7 @@ import { useTranslations } from 'next-intl';
 const Home = () => {
 	const t = useTranslations('Index');
 	const session = useSession();
-	console.log(session);
+	
 
 	const logOutHandler = () => {
 		signOut({

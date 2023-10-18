@@ -4,15 +4,16 @@ const nextConfig = {
 		remotePatterns: [
 			{
 				protocol: 'https',
-				hostname: 'github.com',
+				hostname: 'avatars.githubusercontent.com',
+			},
+			{
+				protocol: 'https',
+				hostname: 'utfs.io',
 			},
 		],
 	},
 };
 
-const withNextIntl = require('next-intl/plugin')(
-	// This is the default (also the `src` folder is supported out of the box)
-	'./i18n.ts'
-);
+const withNextIntl = require('next-intl/plugin')('./i18n.ts');
 
 module.exports = withNextIntl(nextConfig);
