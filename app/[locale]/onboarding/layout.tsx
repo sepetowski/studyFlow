@@ -6,8 +6,8 @@ const OnboardingLayout = ({ children }: { children: React.ReactNode }) => {
 		<main className='flex min-h-screen w-full'>
 			<div className='absolute top-0 left-0 w-full flex justify-end'>
 				<div className='flex items-center gap-2 max-w-7xl p-4 md:p-6'>
-					<LocaleSwitcher />
-					<ThemeSwitcher />
+					<LocaleSwitcher alignHover='end' alignDropdown='end' size={'icon'} variant={'outline'} />
+					<ThemeSwitcher alignHover='end' alignDropdown='end' size={'icon'} variant={'outline'} />
 				</div>
 			</div>
 			{children}

@@ -1,7 +1,4 @@
 {
-	"Index": {
-		"title": "Witaj świecie"
-	},
 	"AUTH": {
 		"EMAIL": "Email",
 		"PASSWORD": "Hasło",
@@ -137,5 +134,26 @@
 				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
 			}
 		}
+	},
+	"SIDEBAR": {
+		"MAIN": {
+			"HOME_HOVER": "Strona główna",
+			"LOG_OUT_HOVER": "Wyloguj",
+			"SETTINGS_HOVER": "Ustawienia"
+		},
+		"SETTINGS": {
+			"GENERAL": "Ogólne",
+			"ACCOUNT": "Konto",
+			"SECURITY": "Bezpieczeństwo",
+			"THEME": "Motyw",
+			"WORKSPACE": "Przestrzeń robocza"
+		}
+	},
+	"COMMON": {
+		"LANG_HOVER": "Zmień język",
+		"THEME_HOVER": "Zmień motyw",
+		"DARK": "Ciemny",
+		"LIGHT": "Jasny",
+		"SYSTEM": "System"
 	}
 }

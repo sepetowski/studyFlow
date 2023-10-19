@@ -1,7 +1,4 @@
 {
-	"Index": {
-		"title": "Hello world"
-	},
 	"AUTH": {
 		"EMAIL": "Email",
 		"PASSWORD": "Password",
@@ -137,5 +134,26 @@
 				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
 			}
 		}
+	},
+	"SIDEBAR": {
+		"MAIN": {
+			"HOME_HOVER": "Home",
+			"LOG_OUT_HOVER": "Log out",
+			"SETTINGS_HOVER": "Settings"
+		},
+		"SETTINGS": {
+			"GENERAL": "General",
+			"ACCOUNT": "Account",
+			"SECURITY": "Security",
+			"THEME": "Theme",
+			"WORKSPACE": "Workspace"
+		}
+	},
+	"COMMON": {
+		"LANG_HOVER": "Change language",
+		"THEME_HOVER": "Change theme",
+		"DARK": "Dark",
+		"LIGHT": "Light",
+		"SYSTEM": "System"
 	}
 }

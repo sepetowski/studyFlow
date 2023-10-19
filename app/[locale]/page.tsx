@@ -1,23 +1,9 @@
-'use client';
+import { getAuthSession } from '@/lib/auth';
+import { redirect } from 'next-intl/server';
 
-import { Button } from '@/components/ui/button';
-import { signOut, useSession } from 'next-auth/react';
-import { useTranslations } from 'next-intl';
-
-const Home = () => {
-	const t = useTranslations('Index');
-	const session = useSession();
-	
-
-	const logOutHandler = () => {
-		signOut({
-			callbackUrl: `${window.location.origin}/sign-in`,
-		});
-	};
-	return (
-		<>
-			<Button onClick={logOutHandler}>{t('title')}</Button>
-		</>
-	);
+const Home = async () => {
+	const session = await getAuthSession();
+	if (session) redirect('/dashboard');
+	return <div>home</div>;
 };
 export default Home;
