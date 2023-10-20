@@ -2,8 +2,6 @@
 
 import * as React from 'react';
 import { useLocale, useTranslations } from 'next-intl';
-import { usePathname, useRouter } from 'next-intl/client';
-import { useState, useTransition } from 'react';
 import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
@@ -13,6 +11,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { LoadingState } from '@/components/ui/loading-state';
+import { useChangeLocale } from '@/hooks/useChangeLocale';
 
 interface Props {
 	variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | null;
@@ -29,19 +28,9 @@ export const LocaleSwitcher = ({
 	alignDropdown = 'center',
 	textSize = 'text-base',
 }: Props) => {
-	const [isLoading, setIsLoading] = useState(false);
-	const [isPending, startTransition] = useTransition();
 	const locale = useLocale();
-	const router = useRouter();
-	const pathname = usePathname();
 	const t = useTranslations('COMMON');
-
-	function onSelectChange(nextLocale: 'pl' | 'en') {
-		setIsLoading(true);
-		startTransition(() => {
-			router.replace(pathname, { locale: nextLocale });
-		});
-	}
+	const { isLoading, isPending, onSelectChange } = useChangeLocale();
 
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>

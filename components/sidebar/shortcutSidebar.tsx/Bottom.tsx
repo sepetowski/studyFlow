@@ -19,13 +19,13 @@ export const Bottom = () => {
 
 	return (
 		<div className='flex flex-col gap-4 '>
-			<LocaleSwitcher
+			{/* <LocaleSwitcher
 				textSize='text-lg'
 				alignHover='start'
 				alignDropdown='start'
 				variant={'ghost'}
 				size={'icon'}
-			/>
+			/> */}
 			<HoverCard openDelay={250} closeDelay={250}>
 				<HoverCardTrigger tabIndex={-1}>
 					<Button onClick={logOutHandler} variant={'ghost'} size={'icon'}>
