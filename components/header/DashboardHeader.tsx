@@ -1,10 +1,13 @@
 import React from 'react';
 import { User } from './User';
+import { BreadcrumbNav } from './BreadcrumbNav';
+import { Welcoming } from './Welcoming';
 
 export const DashboardHeader = () => {
 	return (
-		<header className='w-full flex justify-between items-center mb-4'>
-			<div>Lorem, ipsum.</div>
+		<header className='w-full flex justify-between items-center mb-8'>
+			<Welcoming />
+			<BreadcrumbNav />
 			<User />
 		</header>
 	);

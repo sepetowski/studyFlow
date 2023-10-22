@@ -157,5 +157,11 @@
 		"SYSTEM": "System",
 		"LOG_OUT": "Wyloguj się",
 		"SETTINGS": "Ustawienia"
+	},
+	"ROUTES": {
+		"DASHBOARD": "Strona główna",
+		"SETTINGS": "Ustawienia",
+		"SECURITY": "Bezpieczeństwo",
+		"THEME": "Motyw"
 	}
 }
