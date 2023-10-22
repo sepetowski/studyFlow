@@ -154,6 +154,8 @@
 		"THEME_HOVER": "Zmień motyw",
 		"DARK": "Ciemny",
 		"LIGHT": "Jasny",
-		"SYSTEM": "System"
+		"SYSTEM": "System",
+		"LOG_OUT": "Wyloguj się",
+		"SETTINGS": "Ustawienia"
 	}
 }

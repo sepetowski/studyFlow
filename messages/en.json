@@ -154,6 +154,8 @@
 		"THEME_HOVER": "Change theme",
 		"DARK": "Dark",
 		"LIGHT": "Light",
-		"SYSTEM": "System"
+		"SYSTEM": "System",
+		"LOG_OUT": "Log out",
+		"SETTINGS": "Settings"
 	}
 }

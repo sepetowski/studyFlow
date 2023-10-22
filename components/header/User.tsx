@@ -15,8 +15,7 @@ import {
 	DropdownMenuSub,
 } from '@/components/ui/dropdown-menu';
 import { UserAvatar } from '@/components/ui/user-avatar';
-import { Button } from '../ui/button';
-import { Check, SunMoon, Laptop, Moon, Sun, Globe, Settings2, LogOut } from 'lucide-react';
+import { Check, Moon, Sun, Globe, Settings2, LogOut } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
@@ -55,7 +54,7 @@ export const User = () => {
 							<Moon size={16} className='hidden dark:inline-block' />
 							<Sun size={16} className='dark:hidden' />
 
-							<span>Theme</span>
+							<span>{t('THEME_HOVER')}</span>
 						</DropdownMenuSubTrigger>
 						<DropdownMenuPortal>
 							<DropdownMenuSubContent sideOffset={10}>
@@ -64,7 +63,7 @@ export const User = () => {
 										setTheme('dark');
 									}}
 									className='flex justify-between items-center cursor-pointer'>
-									<span>Dark</span>
+									<span>{t('DARK')}</span>
 									{theme === 'dark' && <Check size={14} />}
 								</DropdownMenuItem>
 								<DropdownMenuItem
@@ -72,7 +71,7 @@ export const User = () => {
 										setTheme('light');
 									}}
 									className='flex justify-between items-center cursor-pointer'>
-									<span>Light</span>
+									<span>{t('LIGHT')}</span>
 									{theme === 'light' && <Check size={14} />}
 								</DropdownMenuItem>
 								<DropdownMenuItem
@@ -80,7 +79,7 @@ export const User = () => {
 										setTheme('system');
 									}}
 									className='flex justify-between items-center cursor-pointer'>
-									<span>System</span>
+									<span>{t('SYSTEM')}</span>
 									{theme === 'system' && <Check size={14} />}
 								</DropdownMenuItem>
 							</DropdownMenuSubContent>
@@ -89,7 +88,7 @@ export const User = () => {
 					<DropdownMenuSub>
 						<DropdownMenuSubTrigger className='cursor-pointer gap-2'>
 							<Globe size={16} />
-							<span>Change language</span>
+							<span>{t('LANG_HOVER')}</span>
 						</DropdownMenuSubTrigger>
 						<DropdownMenuPortal>
 							<DropdownMenuSubContent sideOffset={10}>
@@ -115,13 +114,13 @@ export const User = () => {
 
 					<DropdownMenuItem className='cursor-pointer gap-2' asChild>
 						<Link href={'/dashboard/settings'}>
-							<Settings2 size={16} /> Settings
+							<Settings2 size={16} /> {t('SETTINGS')}
 						</Link>
 					</DropdownMenuItem>
 				</DropdownMenuGroup>
 				<DropdownMenuSeparator />
 				<DropdownMenuItem onClick={logOutHandler} className='cursor-pointer gap-2'>
-					<LogOut size={16} /> Log out
+					<LogOut size={16} /> {t('LOG_OUT')}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>
