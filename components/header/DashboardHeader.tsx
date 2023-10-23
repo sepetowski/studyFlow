@@ -5,7 +5,7 @@ import { Welcoming } from './Welcoming';
 
 export const DashboardHeader = () => {
 	return (
-		<header className='w-full flex justify-between items-center mb-8'>
+		<header className='w-full flex justify-between items-center mb-10'>
 			<Welcoming />
 			<BreadcrumbNav />
 			<User />

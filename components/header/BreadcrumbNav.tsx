@@ -19,7 +19,11 @@ export const BreadcrumbNav = () => {
 						<div className='flex items-center gap-0.5' key={i}>
 							{i + 1 < pathNames.length ? (
 								<>
-									<Link href={href}>{t(link.toUpperCase())}</Link>
+									<Link
+										className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background rounded-md px-2'
+										href={href}>
+										{t(link.toUpperCase())}
+									</Link>
 									<ChevronRight className='text-primary' />
 								</>
 							) : (
