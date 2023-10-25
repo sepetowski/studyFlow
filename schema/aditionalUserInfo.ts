@@ -7,7 +7,7 @@ export const aditionalUserInfoFirstPart = z.object({
 
 export const aditionalUserInfoSecondPart = z.object({
 	useCase: z.enum(['WORK', 'STUDY', 'PERSONAL_USE'], {
-		required_error: 'You need to select a notification type.',
+		required_error: 'SCHEMA.CHOOSE_ONE',
 	}),
 });
 

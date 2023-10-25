@@ -39,7 +39,8 @@
 	},
 	"CHANGE_PROFILE_IMAGE": {
 		"TITLE": "Wyślij zdjęcie!",
-		"BUTTON": "Wybierz zdjęcie"
+		"BUTTON": "Wybierz zdjęcie",
+		"HOVER": "Dodaj zdjęcie"
 	},
 	"ONBOARDING_FORM": {
 		"FIRST_STEP": {
@@ -108,7 +109,8 @@
 			"SIGN_IN": "Zostałeś zalogowany!",
 			"IMAGE_PROFILE_UPDATE": "Twoje zdjęcie profilowe zostało zaktualizowane!",
 			"IMAGE_PROFILE_DELETE": "Twoje zdjęcie profilowe zostało usunięte!",
-			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!"
+			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!",
+			"PROFILE_EDITED": "Profil zaostał zaktualizowany"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -132,7 +134,9 @@
 			"WORKSPACE": {
 				"SHORT": "Nazwa obszaru roboczego jest zbyt krótka",
 				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
-			}
+			},
+			"LANGUAGE": "Proszę wybrać język",
+			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji"
 		}
 	},
 	"SIDEBAR": {
@@ -149,6 +153,46 @@
 			"WORKSPACE": "Przestrzeń robocza"
 		}
 	},
+	"SETTINGS": {
+		"THEME": {
+			"TITLE": "Motyw",
+			"DESC": "Wybierz wygląd interfejsu. Wybierz motyw spośród ciemnego, jasnego lub systemowego.",
+			"LIGHT_TITLE": "Jasny",
+			"DARK_TITLE": "Ciemny",
+			"SYSTEM_TITLE": "System",
+			"LIGHT_FOOTER": "Domyślny jasny",
+			"DARK_FOOTER": "Domyślny ciemny",
+			"SYSTEM_FOOTER": "Domyślny system",
+			"ACTIVE": "Wybrany"
+		},
+		"ACCOUNT": {
+			"TITLE": "Konto",
+			"DESC": "Zarządzaj swoim kontem StudyFlow. Wszystkie zmiany na Twoim koncie zostaną zastosowane do wszytskich obszarów roboczych.",
+			"IMAGE": "ZDJĘCIE PROFILOWE",
+			"USERNAME": "NAZWA UŻYTKOWNIKA",
+			"FIRST_NAME": "IMIĘ (OPCJONALNIE)",
+			"SURNAME": "NAZWISKO (OPCJONALNIE)",
+			"USERNAME_PLACEHOLDER": "Nazwa użytkownika",
+			"FIRST_NAME_PLACEHOLDER": "Imię",
+			"SURNAME_PLACEHOLDER": "Nazwisko",
+			"LANG": "JĘZYK",
+			"NO_LANGUAGE": "Nie znaleziono języka.",
+			"SEARCH_LANGUAGE": "Wyszukaj język...",
+			"SELECT_LANGUAGE": "Wybierz język",
+			"UPDATE_BTN": "Aktualizuj",
+			"DELETE_TITLE": "Usuń konto",
+			"DELETE_DESC": "Po usunięciu konta i danych nie ma możliwości ich odzyskania.",
+			"DELETE_LABEL": "USUŃ MOJE KONTO I DANE",
+			"DELETE_PLACEHOLDER": "Potwierdź swój email",
+			"DELETE_BTN": "Usuń",
+			"DIALOG": {
+				"TITLE": "Usuń konto",
+				"DESC": "Utracisz dostęp do wszystkich swoich obszarów roboczych, podobszarów i projektów",
+				"WARNING": "Usunięcie konta jest trwałe i nie można go cofnąć, kliknij „Usuń moje konto”, aby usunąć swoje konto.",
+				"BUTTON": "USUŃ MOJE KONTO"
+			}
+		}
+	},
 	"COMMON": {
 		"LANG_HOVER": "Zmień język",
 		"THEME_HOVER": "Zmień motyw",
@@ -156,7 +200,8 @@
 		"LIGHT": "Jasny",
 		"SYSTEM": "System",
 		"LOG_OUT": "Wyloguj się",
-		"SETTINGS": "Ustawienia"
+		"SETTINGS": "Ustawienia",
+		"WARNING": "OSTRZEŻENIE"
 	},
 	"ROUTES": {
 		"DASHBOARD": "Strona główna",

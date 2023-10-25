@@ -1,9 +1,9 @@
 'use client';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useOnboardingForm } from '@/context/OnboardingForm';
 import { useTranslations } from 'next-intl';
-import React from 'react';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useToast } from '@/components/ui/use-toast';

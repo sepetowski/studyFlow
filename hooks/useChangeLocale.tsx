@@ -1,4 +1,4 @@
-"use client"
+'use client';
 
 import { usePathname, useRouter } from 'next-intl/client';
 import { useState, useTransition } from 'react';

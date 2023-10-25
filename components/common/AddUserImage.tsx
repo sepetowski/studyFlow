@@ -8,7 +8,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { Check, Trash, User } from 'lucide-react';
+import { Camera, Check, Trash, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { Form, FormControl, FormField, FormItem, FormMessage } from '@/components/ui/form';
@@ -30,10 +30,10 @@ import axios, { AxiosError } from 'axios';
 
 interface Props {
 	profileImage?: string | null;
-	classsName?: string;
+	className?: string;
 }
 
-export const AddUserImage = ({ profileImage, classsName }: Props) => {
+export const AddUserImage = ({ profileImage, className }: Props) => {
 	const [open, setOpen] = useState(false);
 	const [imagePreview, setImagePreview] = useState('');
 	const t = useTranslations('CHANGE_PROFILE_IMAGE');
@@ -171,8 +171,8 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 					}}
 					variant={'secondary'}
 					className={cn(
-						'bg-muted w-16 md:h-20 md:w-20 h-16 rounded-full flex justify-center items-center text-muted-foreground relative overflow-hidden',
-						classsName
+						'bg-muted w-16 md:h-20 md:w-20 h-16 rounded-full flex justify-center items-center text-muted-foreground relative overflow-hidden group',
+						className
 					)}>
 					{profileImage ? (
 						<Image
@@ -185,6 +185,10 @@ export const AddUserImage = ({ profileImage, classsName }: Props) => {
 					) : (
 						<User />
 					)}
+					<div className='group-hover:opacity-80 transition-opacity  duration-200 opacity-0 w-full h-full absolute  bg-black flex justify-center items-center flex-col gap-1 text-xs text-white'>
+						<Camera size={20} />
+						<p>{t('HOVER')}</p>
+					</div>
 				</Button>
 			</DialogTrigger>
 			<DialogContent className='sm:max-w-[28rem] flex flex-col justify-center items-center p-8'>

@@ -5,12 +5,10 @@ import { usePathname } from 'next-intl/client';
 import { buttonVariants } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 
-interface Props {
+interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	href: string;
-	className?: String;
 	variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | null;
 	size?: 'default' | 'sm' | 'lg' | 'icon' | null;
-	children?: React.ReactNode;
 	include?: string;
 }
 const ActiveLink = React.forwardRef<HTMLAnchorElement, Props>(

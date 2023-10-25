@@ -21,8 +21,13 @@ import { useLocale, useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 import { signOut } from 'next-auth/react';
 import { useChangeLocale } from '@/hooks/useChangeLocale';
+import Image from 'next/image';
 
-export const User = () => {
+interface Props {
+	profileImage?: string | null;
+}
+
+export const User = ({ profileImage }: Props) => {
 	const { setTheme, theme } = useTheme();
 	const { onSelectChange } = useChangeLocale();
 	const t = useTranslations('COMMON');
@@ -35,11 +40,31 @@ export const User = () => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger className='rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2  ring-offset-background'>
-				<UserAvatar className='w-10 h-10' />
+				{profileImage ? (
+					<Image
+						src={profileImage}
+						alt='profile image'
+						className='w-10 h-10 rounded-full object-cover'
+						width={300}
+						height={300}
+					/>
+				) : (
+					<UserAvatar className='w-10 h-10' />
+				)}
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='' align='end' sideOffset={10}>
 				<div className='flex items-center gap-1 px-2 '>
-					<UserAvatar className='w-8 h-8' />
+					{profileImage ? (
+						<Image
+							src={profileImage}
+							alt='profile image'
+							className='w-8 h-8 rounded-full object-cover'
+							width={300}
+							height={300}
+						/>
+					) : (
+						<UserAvatar className='w-8 h-8' />
+					)}
 					<div>
 						<DropdownMenuLabel className='py-0 pt-1.5'>Bushmeen</DropdownMenuLabel>
 						<DropdownMenuLabel className='py-0  pb-1.5 pt-0.5 text-xs text-muted-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>

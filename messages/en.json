@@ -39,7 +39,8 @@
 	},
 	"CHANGE_PROFILE_IMAGE": {
 		"TITLE": "Send a photo!",
-		"BUTTON": "Choose a photo"
+		"BUTTON": "Choose a photo",
+		"HOVER": "Add photo"
 	},
 	"ONBOARDING_FORM": {
 		"FIRST_STEP": {
@@ -108,7 +109,8 @@
 			"SIGN_IN": "You have been log in!",
 			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
 			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!",
-			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!"
+			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!",
+			"PROFILE_EDITED": "Profile has been updated"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -132,7 +134,9 @@
 			"WORKSPACE": {
 				"SHORT": "Workspace name is too short",
 				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
-			}
+			},
+			"LANGUAGE": "Please select a language",
+			"CHOOSE_ONE": "Please select one of the options"
 		}
 	},
 	"SIDEBAR": {
@@ -149,6 +153,46 @@
 			"WORKSPACE": "Workspace"
 		}
 	},
+	"SETTINGS": {
+		"THEME": {
+			"TITLE": "Theme",
+			"DESC": "Select how you would like your interface to look. Select theme from dark, light or system.",
+			"LIGHT_TITLE": "Light",
+			"DARK_TITLE": "Dark",
+			"SYSTEM_TITLE": "System",
+			"LIGHT_FOOTER": "Deafult light",
+			"DARK_FOOTER": "Deafult dark",
+			"SYSTEM_FOOTER": "Deafult system",
+			"ACTIVE": "Active"
+		},
+		"ACCOUNT": {
+			"TITLE": "Account",
+			"DESC": "Manage your StudyFlow account. All changes to your account will be applied to all workspaces.",
+			"IMAGE": "PROFILE IMAGE",
+			"USERNAME": "USERNAME",
+			"FIRST_NAME": "FIRST NAME (OPTIONAL)",
+			"SURNAME": "SURNAME (OPTIONAL)",
+			"USERNAME_PLACEHOLDER": "Username",
+			"FIRST_NAME_PLACEHOLDER": "First name",
+			"SURNAME_PLACEHOLDER": "Surname",
+			"LANG": "LANGUAGE",
+			"NO_LANGUAGE": "No language found.",
+			"SEARCH_LANGUAGE": "Search language...",
+			"SELECT_LANGUAGE": "Select langauge",
+			"UPDATE_BTN": "Update",
+			"DELETE_TITLE": "Delete account",
+			"DELETE_DESC": "Once the account and data are deleted, there is no way to recover them.",
+			"DELETE_LABEL": "DELETE MY ACCOUNT AND DATA",
+			"DELETE_PLACEHOLDER": "Confirm your email",
+			"DELETE_BTN": "Delete",
+			"DIALOG": {
+				"TITLE": "Delete account",
+				"DESC": "You will lose access to all your workspaces and projects",
+				"WARNING": "Account deletion is permanent and cannot be undone, click „Delete my account” to delete your account.",
+				"BUTTON": "DELETE MY ACCOUNT"
+			}
+		}
+	},
 	"COMMON": {
 		"LANG_HOVER": "Change language",
 		"THEME_HOVER": "Change theme",
@@ -156,7 +200,8 @@
 		"LIGHT": "Light",
 		"SYSTEM": "System",
 		"LOG_OUT": "Log out",
-		"SETTINGS": "Settings"
+		"SETTINGS": "Settings",
+		"WARNING": "WARNING"
 	},
 	"ROUTES": {
 		"DASHBOARD": "Home",
