@@ -102,7 +102,9 @@
 			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again",
 			"WORKSPACE_ICON_ADDED": "Failed to add workscape icon. Please try again",
 			"NO_USER_API": "User not Found",
-			"UNAUTHORIZED": "Unauthorized. Please sign in"
+			"UNAUTHORIZED": "Unauthorized. Please sign in",
+			"NO_PASSWORD": "Unable to update password. Read the warning",
+			"PASSWORD_DISMATCH": "The current password you entered is incorrect"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -110,8 +112,9 @@
 			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
 			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!",
 			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!",
-			"PROFILE_EDITED": "Profile has been updated",
-			"DELETED_INFO": "Your account has beed deleted."
+			"PROFILE_EDITED": "Profile has been updated!",
+			"DELETED_INFO": "Your account has beed deleted",
+			"PASSWORD_CHANGED": "Password has benn changed"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -121,7 +124,9 @@
 				"MIN": "Password must have at least 6 characters",
 				"UPPERCASE": "Password must contain at least one uppercase letter",
 				"LOWERCASE": "Password must contain at least one lowercase letter",
-				"DIGIT": "Password must contain at least one digit"
+				"DIGIT": "Password must contain at least one digit",
+				"NOT_THE_SAME": "Passwords do not match",
+				"THE_SAME":"New password cannot be the same as your current password"
 			},
 			"EMAIL": "Please enter a valid email",
 			"USERNAME": {
@@ -193,6 +198,33 @@
 				"WARNING": "Account deletion is permanent and cannot be undone, click „Delete my account” to delete your account.",
 				"BUTTON": "DELETE MY ACCOUNT",
 				"PENDING_BTN": "Deleting. Please wait"
+			}
+		},
+		"SECURITY": {
+			"TITLE": "Security",
+			"DESC": "You can change your password here. Remember that it should contain at least 6 characters, at least one upper and lower case letter and at least one number.",
+			"WARNING": {
+				"FIRST": "The password can be changed",
+				"SECOND": "only for accounts created through the form on the site",
+				"THIRD": ". If you have created an account via the Google or Github button, ",
+				"FOURTH": "it is not possible to change the password",
+				"FIFTH": "due to another method of account authorization."
+			},
+			"FORM": {
+				"CURRENT": {
+					"LABEL": "CURRENT PASSWORD",
+					"PLACEHOLDER": "Current password"
+				},
+				"NEW": {
+					"LABEL": "NEW PASSWORD",
+					"PLACEHOLDER": "New password"
+				},
+				"REPEAT": {
+					"LABEL": "CONFIRM PASSWORD",
+					"PLACEHOLDER": "Confirm password"
+				},
+				"BTN": "Change password",
+				"BTN_PENDING": "Changing password"
 			}
 		}
 	},

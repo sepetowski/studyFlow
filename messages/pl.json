@@ -102,7 +102,9 @@
 			"IMAGE_PROFILE_DELETE": "Nie udało się usunać Twojego zdjęcia profilowego. Proszę sprbować ponownie",
 			"WORKSPACE_ICON_ADDED": "Nie udało się dodać ikony obszaru roboczego. Proszę spróbować ponownie",
 			"NO_USER_API": "Nie znaleziono użytkownika",
-			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować"
+			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować",
+			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
+			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -110,8 +112,9 @@
 			"IMAGE_PROFILE_UPDATE": "Twoje zdjęcie profilowe zostało zaktualizowane!",
 			"IMAGE_PROFILE_DELETE": "Twoje zdjęcie profilowe zostało usunięte!",
 			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!",
-			"PROFILE_EDITED": "Profil zaostał zaktualizowany",
-			"DELETED_INFO": "Twoje konto zostało usunięte"
+			"PROFILE_EDITED": "Profil zaostał zaktualizowany!",
+			"DELETED_INFO": "Twoje konto zostało usunięte",
+			"PASSWORD_CHANGED": "Hasło zostało zmienione"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -121,7 +124,9 @@
 				"MIN": "Hasło musi mieć przynajmniej 6 znaków",
 				"UPPERCASE": "Hasło musi zawierać przynajmniej jedna wielką literę",
 				"LOWERCASE": "Hasło musi zawierać przynajmniej jedna małą literę",
-				"DIGIT": "Hasło musi zawierać przynajmniej jedna cyfrę"
+				"DIGIT": "Hasło musi zawierać przynajmniej jedna cyfrę",
+				"NOT_THE_SAME": "Hasła nie są takie same",
+				"THE_SAME": "Nowe hasło nie może być takie samo jak obecne hasło."
 			},
 			"EMAIL": "Proszę podać poprawny adres email",
 			"USERNAME": {
@@ -193,6 +198,33 @@
 				"WARNING": "Usunięcie konta jest trwałe i nie można go cofnąć, kliknij „Usuń moje konto”, aby usunąć swoje konto.",
 				"BUTTON": "USUŃ MOJE KONTO",
 				"PENDING_BTN": "Usuwanie. Proszę czekać"
+			}
+		},
+		"SECURITY": {
+			"TITLE": "Bezpieczeństwo",
+			"DESC": "Tutaj możesz zmienić swoje hasło. Pamiętaj aby miało przynajmniej 6 znaków, przynajmniej jedną małą i wielką literę oraz przynajmniej jedną cyfrę.",
+			"WARNING": {
+				"FIRST": "Hasło może być zmienione",
+				"SECOND": "tylko dla kont utworzonych za pośrednictwem formularza na stronie",
+				"THIRD": ". Jeśli utworzyłeś/aś konto za pomocą przycisku Googla lub Githuba",
+				"FOURTH": "nie istnieje możliwość zmiany hasła",
+				"FIFTH": ", z powodu innej metody autoryzacji konta."
+			},
+			"FORM": {
+				"CURRENT": {
+					"LABEL": "OBECNE HASŁO",
+					"PLACEHOLDER": "Obecne hasło"
+				},
+				"NEW": {
+					"LABEL": "Nowe hasło",
+					"PLACEHOLDER": "Nowe hasło"
+				},
+				"REPEAT": {
+					"LABEL": "POTWIERDŹ HASŁO",
+					"PLACEHOLDER": "Potwierdź hasło"
+				},
+				"BTN": "Zmień hasło",
+				"BTN_PENDING": "Zmieniam hasło"
 			}
 		}
 	},

@@ -74,7 +74,7 @@ export const AddUserImage = ({ profileImage, className }: Props) => {
 
 	const { mutate: updateProfileImage, isLoading } = useMutation({
 		mutationFn: async (profileImage: string) => {
-			const { data } = await axios.post('/api/profile/chnage_profile_image', { profileImage });
+			const { data } = await axios.post('/api/profile/change_profile_image', { profileImage });
 
 			return data as UserType;
 		},

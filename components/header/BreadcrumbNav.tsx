@@ -20,14 +20,14 @@ export const BreadcrumbNav = () => {
 							{i + 1 < pathNames.length ? (
 								<>
 									<Link
-										className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background rounded-md px-2'
+										className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background rounded-md py-1 px-2 transition-colors duration-200 hover:bg-accent'
 										href={href}>
 										{t(link.toUpperCase())}
 									</Link>
 									<ChevronRight className='text-primary' />
 								</>
 							) : (
-								<p className='font-bold text-primary'>{t(link.toUpperCase())}</p>
+								<p className='font-bold text-primary px-2'>{t(link.toUpperCase())}</p>
 							)}
 						</div>
 					);
