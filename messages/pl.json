@@ -110,7 +110,8 @@
 			"IMAGE_PROFILE_UPDATE": "Twoje zdjęcie profilowe zostało zaktualizowane!",
 			"IMAGE_PROFILE_DELETE": "Twoje zdjęcie profilowe zostało usunięte!",
 			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!",
-			"PROFILE_EDITED": "Profil zaostał zaktualizowany"
+			"PROFILE_EDITED": "Profil zaostał zaktualizowany",
+			"DELETED_INFO": "Twoje konto zostało usunięte"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -180,6 +181,7 @@
 			"SEARCH_LANGUAGE": "Wyszukaj język...",
 			"SELECT_LANGUAGE": "Wybierz język",
 			"UPDATE_BTN": "Aktualizuj",
+			"PENDING_BTN": "Aktualizacja. Proszę czekać",
 			"DELETE_TITLE": "Usuń konto",
 			"DELETE_DESC": "Po usunięciu konta i danych nie ma możliwości ich odzyskania.",
 			"DELETE_LABEL": "USUŃ MOJE KONTO I DANE",
@@ -189,7 +191,8 @@
 				"TITLE": "Usuń konto",
 				"DESC": "Utracisz dostęp do wszystkich swoich obszarów roboczych, podobszarów i projektów",
 				"WARNING": "Usunięcie konta jest trwałe i nie można go cofnąć, kliknij „Usuń moje konto”, aby usunąć swoje konto.",
-				"BUTTON": "USUŃ MOJE KONTO"
+				"BUTTON": "USUŃ MOJE KONTO",
+				"PENDING_BTN": "Usuwanie. Proszę czekać"
 			}
 		}
 	},

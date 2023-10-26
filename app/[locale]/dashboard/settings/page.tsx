@@ -4,7 +4,6 @@ import { Heading } from '@/components/settings/account/Heading';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { Separator } from '@/components/ui/separator';
 
-
 const Settings = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/settings');
 
@@ -15,7 +14,7 @@ const Settings = async () => {
 			<div className='p-4 sm:p-6'>
 				<Separator />
 			</div>
-			<DeleteAccount />
+			<DeleteAccount userEmail={session.user.email!} />
 		</div>
 	);
 };

@@ -233,7 +233,11 @@ export const AccountInfo = ({
 							</div>
 						</div>
 						<Button disabled={isLoading} className='text-white ' type='submit'>
-							{isLoading ? <LoadingState /> : t('ACCOUNT.UPDATE_BTN')}
+							{isLoading ? (
+								<LoadingState loadingText={t('ACCOUNT.PENDING_BTN')} />
+							) : (
+								t('ACCOUNT.UPDATE_BTN')
+							)}
 						</Button>
 					</form>
 				</Form>

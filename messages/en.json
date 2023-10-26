@@ -110,7 +110,8 @@
 			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
 			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!",
 			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!",
-			"PROFILE_EDITED": "Profile has been updated"
+			"PROFILE_EDITED": "Profile has been updated",
+			"DELETED_INFO": "Your account has beed deleted."
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -180,6 +181,7 @@
 			"SEARCH_LANGUAGE": "Search language...",
 			"SELECT_LANGUAGE": "Select langauge",
 			"UPDATE_BTN": "Update",
+			"PENDING_BTN": "Updating. Please wait",
 			"DELETE_TITLE": "Delete account",
 			"DELETE_DESC": "Once the account and data are deleted, there is no way to recover them.",
 			"DELETE_LABEL": "DELETE MY ACCOUNT AND DATA",
@@ -189,7 +191,8 @@
 				"TITLE": "Delete account",
 				"DESC": "You will lose access to all your workspaces and projects",
 				"WARNING": "Account deletion is permanent and cannot be undone, click „Delete my account” to delete your account.",
-				"BUTTON": "DELETE MY ACCOUNT"
+				"BUTTON": "DELETE MY ACCOUNT",
+				"PENDING_BTN": "Deleting. Please wait"
 			}
 		}
 	},

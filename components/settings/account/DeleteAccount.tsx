@@ -21,13 +21,35 @@ import {
 import { Input } from '@/components/ui/input';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
-import { DeleteAccountSchema, deleteAccountSchema } from '@/schema/deleteAccountSchema';
 import { Button } from '@/components/ui/button';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import Warning from '@/components/ui/warning';
+import { z } from 'zod';
+import axios, { AxiosError, AxiosResponse } from 'axios';
+import { useToast } from '@/components/ui/use-toast';
+import { useMutation } from '@tanstack/react-query';
+import { signOut } from 'next-auth/react';
+import { LoadingState } from '@/components/ui/loading-state';
 
-export const DeleteAccount = () => {
+interface Props {
+	userEmail: string;
+}
+
+export const DeleteAccount = ({ userEmail }: Props) => {
 	const t = useTranslations('SETTINGS.ACCOUNT');
+	const m = useTranslations('MESSAGES');
+
+	const lang = useLocale();
+	const { toast } = useToast();
+
+	const deleteAccountSchema = z.object({
+		email: z
+			.string()
+			.email('SCHEMA.EMAIL')
+			.refine((email) => email === userEmail, 'SCHEMA.EMAIL'),
+	});
+
+	type DeleteAccountSchema = z.infer<typeof deleteAccountSchema>;
 
 	const form = useForm<DeleteAccountSchema>({
 		resolver: zodResolver(deleteAccountSchema),
@@ -36,8 +58,37 @@ export const DeleteAccount = () => {
 		},
 	});
 
+	const { mutate: deleteProfile, isLoading } = useMutation({
+		mutationFn: async (formData: DeleteAccountSchema) => {
+			const { data } = (await axios.post(
+				'/api/profile/delete',
+				formData
+			)) as AxiosResponse<DeleteAccountSchema>;
+
+			return data;
+		},
+		onError: (err: AxiosError) => {
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+
+			toast({
+				title: m(error),
+				variant: 'destructive',
+			});
+		},
+		onSuccess: async () => {
+			toast({
+				title: m('SUCCES.DELETED_INFO'),
+			});
+
+			signOut({
+				callbackUrl: `${window.location.origin}/${lang}`,
+			});
+		},
+		mutationKey: ['deleteProfile'],
+	});
+
 	const onSubmit = (data: DeleteAccountSchema) => {
-		console.log(data);
+		deleteProfile(data);
 	};
 	return (
 		<Card className='bg-background border-none shadow-none max-w-2xl'>
@@ -85,8 +136,16 @@ export const DeleteAccount = () => {
 									<p>{t('DIALOG.WARNING')}</p>
 								</Warning>
 
-								<Button onClick={form.handleSubmit(onSubmit)} size={'lg'} variant={'destructive'}>
-									{t('DIALOG.BUTTON')}
+								<Button
+									disabled={isLoading}
+									onClick={form.handleSubmit(onSubmit)}
+									size={'lg'}
+									variant={'destructive'}>
+									{isLoading ? (
+										<LoadingState loadingText={t('DIALOG.PENDING_BTN')} />
+									) : (
+										t('DIALOG.BUTTON')
+									)}
 								</Button>
 							</DialogContent>
 						</Dialog>
