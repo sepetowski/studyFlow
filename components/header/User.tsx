@@ -44,12 +44,12 @@ export const User = ({ profileImage }: Props) => {
 					<Image
 						src={profileImage}
 						alt='profile image'
-						className='w-10 h-10 rounded-full object-cover'
+						className='w-10 h-10 lg:w-12 lg:h-12 rounded-full object-cover'
 						width={300}
 						height={300}
 					/>
 				) : (
-					<UserAvatar className='w-10 h-10' />
+					<UserAvatar className='w-10 h-10 lg:w-12 lg:h-12' />
 				)}
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='' align='end' sideOffset={10}>

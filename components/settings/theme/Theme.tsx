@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, CardContent, CardDescription, CardHeader, } from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { ThemeCard } from './ThemeCard';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useTheme } from 'next-themes';
@@ -42,7 +42,7 @@ export const Theme = () => {
 				<h1 className='text-2xl font-semibold leading-none tracking-tight'>{t('THEME.TITLE')}</h1>
 				<CardDescription className='text-base'>{t('THEME.DESC')}</CardDescription>
 			</CardHeader>
-			<CardContent className='flex flex-row gap-6 '>
+			<CardContent className='flex flex-wrap justify-center  gap-6 '>
 				{themes.map((theme) => (
 					<ThemeCard
 						key={theme.type}

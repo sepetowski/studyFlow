@@ -32,7 +32,7 @@ export const ThemeCard = ({ theme, activeTheme, themeFooter, themeTitle, onTheme
 				}
 			}}
 			onClick={() => onTheme(theme)}
-			className={`w-80 border   bg-card hover:bg-accent shadow-sm  duration-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
+			className={` w-full max-w-sm sm:max-w-lg sm:w-[calc((100%/2)-1.5rem)] xl:w-[calc((100%/3)-1.5rem)] border   bg-card hover:bg-accent shadow-sm  duration-200 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background ${
 				activeTheme === theme ? 'border-primary/50' : ''
 			}
 		`}>
@@ -46,7 +46,7 @@ export const ThemeCard = ({ theme, activeTheme, themeFooter, themeTitle, onTheme
 				{activeTheme === theme && <Badge variant={'default'}>{t('THEME.ACTIVE')}</Badge>}
 			</CardHeader>
 			<CardContent>
-				<div className='bg-background w-full h-60 rounded-md border shadow-sm'></div>
+				<div className='bg-background w-full h-44 rounded-md border shadow-sm'></div>
 			</CardContent>
 			<CardFooter>
 				<p>{themeFooter}</p>

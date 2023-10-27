@@ -1,4 +1,3 @@
-import { ChnagePassword } from '@/components/settings/security/ChangePassword';
 import { SecurityCrad } from '@/components/settings/security/SecurityCrad';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
