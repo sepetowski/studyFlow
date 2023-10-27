@@ -1,7 +1,4 @@
 {
-	"Index": {
-		"title": "Witaj świecie"
-	},
 	"AUTH": {
 		"EMAIL": "Email",
 		"PASSWORD": "Hasło",
@@ -42,7 +39,8 @@
 	},
 	"CHANGE_PROFILE_IMAGE": {
 		"TITLE": "Wyślij zdjęcie!",
-		"BUTTON": "Wybierz zdjęcie"
+		"BUTTON": "Wybierz zdjęcie",
+		"HOVER": "Dodaj zdjęcie"
 	},
 	"ONBOARDING_FORM": {
 		"FIRST_STEP": {
@@ -104,14 +102,19 @@
 			"IMAGE_PROFILE_DELETE": "Nie udało się usunać Twojego zdjęcia profilowego. Proszę sprbować ponownie",
 			"WORKSPACE_ICON_ADDED": "Nie udało się dodać ikony obszaru roboczego. Proszę spróbować ponownie",
 			"NO_USER_API": "Nie znaleziono użytkownika",
-			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować"
+			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować",
+			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
+			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
 			"SIGN_IN": "Zostałeś zalogowany!",
 			"IMAGE_PROFILE_UPDATE": "Twoje zdjęcie profilowe zostało zaktualizowane!",
 			"IMAGE_PROFILE_DELETE": "Twoje zdjęcie profilowe zostało usunięte!",
-			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!"
+			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!",
+			"PROFILE_EDITED": "Profil zaostał zaktualizowany!",
+			"DELETED_INFO": "Twoje konto zostało usunięte",
+			"PASSWORD_CHANGED": "Hasło zostało zmienione"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -121,7 +124,9 @@
 				"MIN": "Hasło musi mieć przynajmniej 6 znaków",
 				"UPPERCASE": "Hasło musi zawierać przynajmniej jedna wielką literę",
 				"LOWERCASE": "Hasło musi zawierać przynajmniej jedna małą literę",
-				"DIGIT": "Hasło musi zawierać przynajmniej jedna cyfrę"
+				"DIGIT": "Hasło musi zawierać przynajmniej jedna cyfrę",
+				"NOT_THE_SAME": "Hasła nie są takie same",
+				"THE_SAME": "Nowe hasło nie może być takie samo jak obecne hasło."
 			},
 			"EMAIL": "Proszę podać poprawny adres email",
 			"USERNAME": {
@@ -135,7 +140,108 @@
 			"WORKSPACE": {
 				"SHORT": "Nazwa obszaru roboczego jest zbyt krótka",
 				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
+			},
+			"LANGUAGE": "Proszę wybrać język",
+			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji"
+		}
+	},
+	"SIDEBAR": {
+		"MAIN": {
+			"HOME_HOVER": "Strona główna",
+			"LOG_OUT_HOVER": "Wyloguj się",
+			"SETTINGS_HOVER": "Ustawienia"
+		},
+		"SETTINGS": {
+			"GENERAL": "Ogólne",
+			"ACCOUNT": "Konto",
+			"SECURITY": "Bezpieczeństwo",
+			"THEME": "Motyw",
+			"WORKSPACE": "Przestrzeń robocza"
+		}
+	},
+	"SETTINGS": {
+		"THEME": {
+			"TITLE": "Motyw",
+			"DESC": "Wybierz wygląd interfejsu. Wybierz motyw spośród ciemnego, jasnego lub systemowego.",
+			"LIGHT_TITLE": "Jasny",
+			"DARK_TITLE": "Ciemny",
+			"SYSTEM_TITLE": "System",
+			"LIGHT_FOOTER": "Domyślny jasny",
+			"DARK_FOOTER": "Domyślny ciemny",
+			"SYSTEM_FOOTER": "Domyślny system",
+			"ACTIVE": "Wybrany"
+		},
+		"ACCOUNT": {
+			"TITLE": "Konto",
+			"DESC": "Zarządzaj swoim kontem StudyFlow. Wszystkie zmiany na Twoim koncie zostaną zastosowane do wszytskich obszarów roboczych.",
+			"IMAGE": "ZDJĘCIE PROFILOWE",
+			"USERNAME": "NAZWA UŻYTKOWNIKA",
+			"FIRST_NAME": "IMIĘ (OPCJONALNIE)",
+			"SURNAME": "NAZWISKO (OPCJONALNIE)",
+			"USERNAME_PLACEHOLDER": "Nazwa użytkownika",
+			"FIRST_NAME_PLACEHOLDER": "Imię",
+			"SURNAME_PLACEHOLDER": "Nazwisko",
+			"LANG": "JĘZYK",
+			"NO_LANGUAGE": "Nie znaleziono języka.",
+			"SEARCH_LANGUAGE": "Wyszukaj język...",
+			"SELECT_LANGUAGE": "Wybierz język",
+			"UPDATE_BTN": "Aktualizuj",
+			"PENDING_BTN": "Aktualizacja. Proszę czekać",
+			"DELETE_TITLE": "Usuń konto",
+			"DELETE_DESC": "Po usunięciu konta i danych nie ma możliwości ich odzyskania.",
+			"DELETE_LABEL": "USUŃ MOJE KONTO I DANE",
+			"DELETE_PLACEHOLDER": "Potwierdź swój email",
+			"DELETE_BTN": "Usuń",
+			"DIALOG": {
+				"TITLE": "Usuń konto",
+				"DESC": "Utracisz dostęp do wszystkich swoich obszarów roboczych, podobszarów i projektów",
+				"WARNING": "Usunięcie konta jest trwałe i nie można go cofnąć, kliknij „Usuń moje konto”, aby usunąć swoje konto.",
+				"BUTTON": "USUŃ MOJE KONTO",
+				"PENDING_BTN": "Usuwanie. Proszę czekać"
+			}
+		},
+		"SECURITY": {
+			"TITLE": "Bezpieczeństwo",
+			"DESC": "Tutaj możesz zmienić swoje hasło. Pamiętaj aby miało przynajmniej 6 znaków, przynajmniej jedną małą i wielką literę oraz przynajmniej jedną cyfrę.",
+			"WARNING": {
+				"FIRST": "Hasło może być zmienione",
+				"SECOND": "tylko dla kont utworzonych za pośrednictwem formularza na stronie",
+				"THIRD": ". Jeśli utworzyłeś/aś konto za pomocą przycisku Googla lub Githuba",
+				"FOURTH": "nie istnieje możliwość zmiany hasła",
+				"FIFTH": ", z powodu innej metody autoryzacji konta."
+			},
+			"FORM": {
+				"CURRENT": {
+					"LABEL": "OBECNE HASŁO",
+					"PLACEHOLDER": "Obecne hasło"
+				},
+				"NEW": {
+					"LABEL": "Nowe hasło",
+					"PLACEHOLDER": "Nowe hasło"
+				},
+				"REPEAT": {
+					"LABEL": "POTWIERDŹ HASŁO",
+					"PLACEHOLDER": "Potwierdź hasło"
+				},
+				"BTN": "Zmień hasło",
+				"BTN_PENDING": "Zmieniam hasło"
 			}
 		}
+	},
+	"COMMON": {
+		"LANG_HOVER": "Zmień język",
+		"THEME_HOVER": "Zmień motyw",
+		"DARK": "Ciemny",
+		"LIGHT": "Jasny",
+		"SYSTEM": "System",
+		"LOG_OUT": "Wyloguj się",
+		"SETTINGS": "Ustawienia",
+		"WARNING": "OSTRZEŻENIE"
+	},
+	"ROUTES": {
+		"DASHBOARD": "Strona główna",
+		"SETTINGS": "Ustawienia",
+		"SECURITY": "Bezpieczeństwo",
+		"THEME": "Motyw"
 	}
 }

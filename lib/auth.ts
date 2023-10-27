@@ -99,6 +99,8 @@ export const authOptions: NextAuthOptions = {
 				session.user.image = user.image;
 				session.user.completedOnboarding = user.completedOnboarding;
 				session.user.username = user.username;
+				session.user.name = user.name;
+				session.user.surname = user.surname;
 			}
 
 			return session;

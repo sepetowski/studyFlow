@@ -1,3 +1,4 @@
+"use client"
 import { useRouter } from 'next-intl/client';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';

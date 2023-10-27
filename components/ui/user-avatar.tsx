@@ -12,7 +12,7 @@ export const UserAvatar = ({ className, profileImage, size = 16 }: Props) => {
 	return (
 		<div
 			className={cn(
-				'h-16 w-16 bg-muted rounded-full flex justify-center items-center  text-muted-foreground relative overflow-hidden',
+				'h-16 w-16 bg-muted rounded-full flex justify-center items-center  text-muted-foreground relative overflow-hidden ',
 				className
 			)}>
 			{profileImage ? (

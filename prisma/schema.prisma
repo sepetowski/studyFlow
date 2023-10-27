@@ -47,7 +47,7 @@ model User {
   completedOnboarding Boolean        @default(false)
   accounts            Account[]
   sessions            Session[]
-  useCase             UseCase?        
+  useCase             UseCase?
   createdWorkspaces   Workspace[]    @relation("CreatedBy")
   subscriptions       Subscription[]
 }

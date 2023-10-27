@@ -1,7 +1,4 @@
 {
-	"Index": {
-		"title": "Hello world"
-	},
 	"AUTH": {
 		"EMAIL": "Email",
 		"PASSWORD": "Password",
@@ -42,7 +39,8 @@
 	},
 	"CHANGE_PROFILE_IMAGE": {
 		"TITLE": "Send a photo!",
-		"BUTTON": "Choose a photo"
+		"BUTTON": "Choose a photo",
+		"HOVER": "Add photo"
 	},
 	"ONBOARDING_FORM": {
 		"FIRST_STEP": {
@@ -104,14 +102,19 @@
 			"IMAGE_PROFILE_DELETE": "Failed to delete your profile image. Please try again",
 			"WORKSPACE_ICON_ADDED": "Failed to add workscape icon. Please try again",
 			"NO_USER_API": "User not Found",
-			"UNAUTHORIZED": "Unauthorized. Please sign in"
+			"UNAUTHORIZED": "Unauthorized. Please sign in",
+			"NO_PASSWORD": "Unable to update password. Read the warning",
+			"PASSWORD_DISMATCH": "The current password you entered is incorrect"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
 			"SIGN_IN": "You have been log in!",
 			"IMAGE_PROFILE_UPDATE": "Your profile image has been updated!",
 			"IMAGE_PROFILE_DELETE": "Your profile image has been deleted!",
-			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!"
+			"ONBOARDING_COMPLETE": "Welcome in StudyFlow!",
+			"PROFILE_EDITED": "Profile has been updated!",
+			"DELETED_INFO": "Your account has beed deleted",
+			"PASSWORD_CHANGED": "Password has benn changed"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -121,7 +124,9 @@
 				"MIN": "Password must have at least 6 characters",
 				"UPPERCASE": "Password must contain at least one uppercase letter",
 				"LOWERCASE": "Password must contain at least one lowercase letter",
-				"DIGIT": "Password must contain at least one digit"
+				"DIGIT": "Password must contain at least one digit",
+				"NOT_THE_SAME": "Passwords do not match",
+				"THE_SAME":"New password cannot be the same as your current password"
 			},
 			"EMAIL": "Please enter a valid email",
 			"USERNAME": {
@@ -135,7 +140,108 @@
 			"WORKSPACE": {
 				"SHORT": "Workspace name is too short",
 				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
+			},
+			"LANGUAGE": "Please select a language",
+			"CHOOSE_ONE": "Please select one of the options"
+		}
+	},
+	"SIDEBAR": {
+		"MAIN": {
+			"HOME_HOVER": "Home",
+			"LOG_OUT_HOVER": "Log out",
+			"SETTINGS_HOVER": "Settings"
+		},
+		"SETTINGS": {
+			"GENERAL": "General",
+			"ACCOUNT": "Account",
+			"SECURITY": "Security",
+			"THEME": "Theme",
+			"WORKSPACE": "Workspace"
+		}
+	},
+	"SETTINGS": {
+		"THEME": {
+			"TITLE": "Theme",
+			"DESC": "Select how you would like your interface to look. Select theme from dark, light or system.",
+			"LIGHT_TITLE": "Light",
+			"DARK_TITLE": "Dark",
+			"SYSTEM_TITLE": "System",
+			"LIGHT_FOOTER": "Deafult light",
+			"DARK_FOOTER": "Deafult dark",
+			"SYSTEM_FOOTER": "Deafult system",
+			"ACTIVE": "Active"
+		},
+		"ACCOUNT": {
+			"TITLE": "Account",
+			"DESC": "Manage your StudyFlow account. All changes to your account will be applied to all workspaces.",
+			"IMAGE": "PROFILE IMAGE",
+			"USERNAME": "USERNAME",
+			"FIRST_NAME": "FIRST NAME (OPTIONAL)",
+			"SURNAME": "SURNAME (OPTIONAL)",
+			"USERNAME_PLACEHOLDER": "Username",
+			"FIRST_NAME_PLACEHOLDER": "First name",
+			"SURNAME_PLACEHOLDER": "Surname",
+			"LANG": "LANGUAGE",
+			"NO_LANGUAGE": "No language found.",
+			"SEARCH_LANGUAGE": "Search language...",
+			"SELECT_LANGUAGE": "Select langauge",
+			"UPDATE_BTN": "Update",
+			"PENDING_BTN": "Updating. Please wait",
+			"DELETE_TITLE": "Delete account",
+			"DELETE_DESC": "Once the account and data are deleted, there is no way to recover them.",
+			"DELETE_LABEL": "DELETE MY ACCOUNT AND DATA",
+			"DELETE_PLACEHOLDER": "Confirm your email",
+			"DELETE_BTN": "Delete",
+			"DIALOG": {
+				"TITLE": "Delete account",
+				"DESC": "You will lose access to all your workspaces and projects",
+				"WARNING": "Account deletion is permanent and cannot be undone, click „Delete my account” to delete your account.",
+				"BUTTON": "DELETE MY ACCOUNT",
+				"PENDING_BTN": "Deleting. Please wait"
+			}
+		},
+		"SECURITY": {
+			"TITLE": "Security",
+			"DESC": "You can change your password here. Remember that it should contain at least 6 characters, at least one upper and lower case letter and at least one number.",
+			"WARNING": {
+				"FIRST": "The password can be changed",
+				"SECOND": "only for accounts created through the form on the site",
+				"THIRD": ". If you have created an account via the Google or Github button, ",
+				"FOURTH": "it is not possible to change the password",
+				"FIFTH": "due to another method of account authorization."
+			},
+			"FORM": {
+				"CURRENT": {
+					"LABEL": "CURRENT PASSWORD",
+					"PLACEHOLDER": "Current password"
+				},
+				"NEW": {
+					"LABEL": "NEW PASSWORD",
+					"PLACEHOLDER": "New password"
+				},
+				"REPEAT": {
+					"LABEL": "CONFIRM PASSWORD",
+					"PLACEHOLDER": "Confirm password"
+				},
+				"BTN": "Change password",
+				"BTN_PENDING": "Changing password"
 			}
 		}
+	},
+	"COMMON": {
+		"LANG_HOVER": "Change language",
+		"THEME_HOVER": "Change theme",
+		"DARK": "Dark",
+		"LIGHT": "Light",
+		"SYSTEM": "System",
+		"LOG_OUT": "Log out",
+		"SETTINGS": "Settings",
+		"WARNING": "WARNING"
+	},
+	"ROUTES": {
+		"DASHBOARD": "Home",
+		"SETTINGS": "Settings",
+		"SECURITY": "Security",
+		"THEME": "Theme"
 	}
 }
