@@ -6,7 +6,13 @@ const Dashboard = async () => {
 
 	return (
 		<div>
-			<Welcoming hideOnDesktop className='px-4 py-2 ' />
+			<Welcoming
+				hideOnDesktop
+				username={session.user.username!}
+				name={session.user.name}
+				surname={session.user.surname}
+				className='px-4 py-2 '
+			/>
 		</div>
 	);
 };

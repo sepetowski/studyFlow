@@ -37,6 +37,18 @@
 			}
 		}
 	},
+	"NEW_WORKSPACE": {
+		"INPUTS": {
+			"NAME": "Nazwa obszaru roboczego",
+			"FILE": "Ikona obszaru roboczego (opcjonalna)"
+		},
+		"PLACEHOLDERS": {
+			"NAME": "np. Uniwersum"
+		},
+		"IMAGE": "Dozowolne są tylko typy .jpeg, .jpg, .png, .webp, .gif",
+		"BTN_ADD": "Utwórz",
+		"BTN_PENDING": "tworzymy. Proszę czekać"
+	},
 	"CHANGE_PROFILE_IMAGE": {
 		"TITLE": "Wyślij zdjęcie!",
 		"BUTTON": "Wybierz zdjęcie",
@@ -104,7 +116,8 @@
 			"NO_USER_API": "Nie znaleziono użytkownika",
 			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować",
 			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
-			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe"
+			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe",
+			"SAME_NAME_WORKSPACE": "Obszar roboczy o podanej nazwie już istnieje"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -114,7 +127,8 @@
 			"ONBOARDING_COMPLETE": "Witamy w StudyFlow!",
 			"PROFILE_EDITED": "Profil zaostał zaktualizowany!",
 			"DELETED_INFO": "Twoje konto zostało usunięte",
-			"PASSWORD_CHANGED": "Hasło zostało zmienione"
+			"PASSWORD_CHANGED": "Hasło zostało zmienione",
+			"NEW_WORKSAPCE":"Obszar roboczy został utworzony!"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -149,7 +163,10 @@
 		"MAIN": {
 			"HOME_HOVER": "Strona główna",
 			"LOG_OUT_HOVER": "Wyloguj się",
-			"SETTINGS_HOVER": "Ustawienia"
+			"SETTINGS_HOVER": "Ustawienia",
+			"NEW_WORKSAPCE_HOVER": "Nowa przestrzeń robocza",
+			"NEW_WORKSAPCE_DIALOG_TITLE": "Stwórz nowy obszar roboczy",
+			"NEW_WORKSAPCE_DIALOG_DESC": "jakis tekst"
 		},
 		"SETTINGS": {
 			"GENERAL": "Ogólne",
