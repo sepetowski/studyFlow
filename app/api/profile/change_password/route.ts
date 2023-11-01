@@ -7,7 +7,7 @@ import bcrypt from 'bcrypt';
 export async function POST(request: Request) {
 	const session = await getAuthSession();
     
-	if (!session?.user) return new Response('ERRORS.UNAUTHORIZED', { status: 400 });
+	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
     
 	const body: unknown = await request.json();
 	const result = changePasswordSchema.safeParse(body);
@@ -25,12 +25,12 @@ export async function POST(request: Request) {
 			},
 		});
         
-		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
+		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
         
-		if (!user.hashedPassword) return new NextResponse('ERRORS.NO_PASSWORD', { status: 406 });
+		if (!user.hashedPassword) return NextResponse.json('ERRORS.NO_PASSWORD', { status: 406 });
         
 		const passwordMatch = await bcrypt.compare(current_password, user.hashedPassword);
-		if (!passwordMatch) return new NextResponse('ERRORS.PASSWORD_DISMATCH', { status: 402 });
+		if (!passwordMatch) return NextResponse.json('ERRORS.PASSWORD_DISMATCH', { status: 402 });
        
 		const hashedPassword = await bcrypt.hash(new_password, 10);
 

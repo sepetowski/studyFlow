@@ -5,9 +5,13 @@ import { usePathname } from 'next/navigation';
 import Link from 'next-intl/link';
 import { useTranslations } from 'next-intl';
 
+const avaibleRoutesWithTranslation = ['dashboard', 'settings', 'security', 'theme'];
+
 export const BreadcrumbNav = () => {
 	const paths = usePathname();
-	const pathNames = paths.split('/').filter((path) => path !== 'pl' && path.trim() !== '');
+	const pathNames = paths
+		.split('/')
+		.filter((path) => path !== 'pl' && path !== 'workspace' && path.trim() !== '');
 	const t = useTranslations('ROUTES');
 
 	if (pathNames.length > 1)
@@ -27,7 +31,9 @@ export const BreadcrumbNav = () => {
 									<ChevronRight className='text-primary' />
 								</>
 							) : (
-								<p className='font-bold text-primary px-2'>{t(link.toUpperCase())}</p>
+								<p className='font-bold text-primary px-2'>
+									{avaibleRoutesWithTranslation.includes(link) ? t(link.toUpperCase()) : link}
+								</p>
 							)}
 						</div>
 					);

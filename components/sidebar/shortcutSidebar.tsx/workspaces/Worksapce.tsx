@@ -7,7 +7,7 @@ interface Props {
 	workspace: Workspace;
 }
 
-export const Worksapce = ({ workspace: { id, image, name } }: Props) => {
+export const Worksapce = ({ workspace: { image, name } }: Props) => {
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>
 			<HoverCardTrigger asChild>
@@ -15,7 +15,7 @@ export const Worksapce = ({ workspace: { id, image, name } }: Props) => {
 					className='text-white font-bold'
 					variant={image ? 'ghost' : 'default'}
 					size={'icon'}
-					href={`/dashboard/workspace/${id}`}>
+					href={`/dashboard/workspace/${name}`}>
 					{image ? (
 						<Image
 							className='w-full h-full object-cover rounded-md'

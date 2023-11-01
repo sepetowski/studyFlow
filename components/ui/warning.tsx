@@ -25,9 +25,11 @@ const Warning = React.forwardRef<HTMLDivElement, Props>(
 				{...props}>
 				{!hideIcon && (
 					<div
-						className={`flex items-center gap-2 font-semibold  ${
-							yellow ? 'text-yellow-400' : 'text-destructive'
-						} ${blue ? 'text-blue-400' : 'text-destructive'}`}>
+						className={cn(
+							`flex items-center gap-2 font-semibold  ${yellow && 'text-yellow-400'} ${
+								blue && 'text-blue-400'
+							} ${!blue && !yellow && 'text-destructive'}`
+						)}>
 						{blue ? <Info /> : <AlertTriangle />}
 						<p>{blue ? t('NOTICE') : t('WARNING')}</p>
 					</div>
