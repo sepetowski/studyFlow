@@ -9,7 +9,7 @@ export const Top = () => {
 	const t = useTranslations('SIDEBAR');
 
 	return (
-		<div className='flex flex-col items-center gap-4'>
+		<div className='flex flex-col items-center gap-3'>
 			<HoverCard openDelay={250} closeDelay={250}>
 				<HoverCardTrigger asChild>
 					<ActiveLink variant={'ghost'} size={'icon'} href={`/dashboard`}>

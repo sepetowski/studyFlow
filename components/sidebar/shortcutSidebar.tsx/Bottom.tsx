@@ -5,7 +5,6 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { Settings2, LogOutIcon } from 'lucide-react';
 import { signOut } from 'next-auth/react';
 import { useTranslations, useLocale } from 'next-intl';
-import { LocaleSwitcher } from '@/components/switchers/LocaleSwitcher';
 import ActiveLink from '@/components/ui/active-link';
 
 export const Bottom = () => {
@@ -18,14 +17,7 @@ export const Bottom = () => {
 	};
 
 	return (
-		<div className='flex flex-col gap-4 '>
-			{/* <LocaleSwitcher
-				textSize='text-lg'
-				alignHover='start'
-				alignDropdown='start'
-				variant={'ghost'}
-				size={'icon'}
-			/> */}
+		<div className='flex flex-col gap-3'>
 			<HoverCard openDelay={250} closeDelay={250}>
 				<HoverCardTrigger tabIndex={-1}>
 					<Button onClick={logOutHandler} variant={'ghost'} size={'icon'}>

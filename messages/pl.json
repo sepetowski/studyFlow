@@ -117,7 +117,8 @@
 			"UNAUTHORIZED": "Brak dostępu. Proszę się zalogować",
 			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
 			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe",
-			"SAME_NAME_WORKSPACE": "Obszar roboczy o podanej nazwie już istnieje"
+			"SAME_NAME_WORKSPACE": "Obszar roboczy o podanej nazwie już istnieje",
+			"TOO_MANY_WORKSPACES": "Osiągnięto limit aktywnych obszarów roboczych"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -128,7 +129,7 @@
 			"PROFILE_EDITED": "Profil zaostał zaktualizowany!",
 			"DELETED_INFO": "Twoje konto zostało usunięte",
 			"PASSWORD_CHANGED": "Hasło zostało zmienione",
-			"NEW_WORKSAPCE":"Obszar roboczy został utworzony!"
+			"NEW_WORKSAPCE": "Obszar roboczy został utworzony!"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -166,7 +167,7 @@
 			"SETTINGS_HOVER": "Ustawienia",
 			"NEW_WORKSAPCE_HOVER": "Nowa przestrzeń robocza",
 			"NEW_WORKSAPCE_DIALOG_TITLE": "Stwórz nowy obszar roboczy",
-			"NEW_WORKSAPCE_DIALOG_DESC": "jakis tekst"
+			"NEW_WORKSAPCE_DIALOG_DESC": "Pamiętaj, że możesz mieć maksymalnie 5 aktywnych przestrzeni roboczych w tym samym czasie."
 		},
 		"SETTINGS": {
 			"GENERAL": "Ogólne",
@@ -253,7 +254,13 @@
 		"SYSTEM": "System",
 		"LOG_OUT": "Wyloguj się",
 		"SETTINGS": "Ustawienia",
-		"WARNING": "OSTRZEŻENIE"
+		"WARNING": "OSTRZEŻENIE",
+		"NOTICE": "UWAGA",
+		"ACTIVE_WORKSACPES": {
+			"FIRST": "Posiadasz",
+			"SECOND": "na",
+			"THIRD": "aktywnych obszarów roboczych"
+		}
 	},
 	"ROUTES": {
 		"DASHBOARD": "Strona główna",

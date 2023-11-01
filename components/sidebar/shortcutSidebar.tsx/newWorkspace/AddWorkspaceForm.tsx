@@ -21,6 +21,7 @@ import { useTranslations } from 'next-intl';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
+import { useRouter } from 'next-intl/client';
 
 interface Props {
 	onSetOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,8 +30,11 @@ interface Props {
 export const AddWorkspaceForm = ({ onSetOpen }: Props) => {
 	const [uplaodError, setUploadError] = useState(false);
 	const { toast } = useToast();
+
 	const t = useTranslations('NEW_WORKSPACE');
 	const m = useTranslations('MESSAGES');
+
+	const router = useRouter();
 
 	const form = useForm<WorkspaceSchema>({
 		resolver: zodResolver(workspaceSchema),
@@ -76,6 +80,7 @@ export const AddWorkspaceForm = ({ onSetOpen }: Props) => {
 			toast({
 				title: m('SUCCES.NEW_WORKSAPCE'),
 			});
+			router.refresh();
 		},
 		mutationKey: ['newWorkspace'],
 	});
@@ -100,7 +105,7 @@ export const AddWorkspaceForm = ({ onSetOpen }: Props) => {
 
 	return (
 		<Form {...form}>
-			<form className='max-w-md w-full space-y-8 ' onSubmit={form.handleSubmit(onSubmit)}>
+			<form className='w-full space-y-8 ' onSubmit={form.handleSubmit(onSubmit)}>
 				<div className='space-y-1.5'>
 					<FormField
 						control={form.control}
@@ -128,7 +133,7 @@ export const AddWorkspaceForm = ({ onSetOpen }: Props) => {
 				<Button
 					disabled={!form.formState.isValid || isUploading || isLoading}
 					type='submit'
-					className='mt-10 w-full max-w-md dark:text-white font-semibold '>
+					className='mt-10 w-full  dark:text-white font-semibold '>
 					{isUploading || isLoading ? (
 						<LoadingState loadingText={t('BTN_PENDING')} />
 					) : (

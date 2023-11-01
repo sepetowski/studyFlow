@@ -117,7 +117,8 @@
 			"UNAUTHORIZED": "Unauthorized. Please sign in",
 			"NO_PASSWORD": "Unable to update password. Read the warning",
 			"PASSWORD_DISMATCH": "The current password you entered is incorrect",
-			"SAME_NAME_WORKSPACE": "The workspace with the given name already exists"
+			"SAME_NAME_WORKSPACE": "The workspace with the given name already exists",
+			"TOO_MANY_WORKSPACES": "You have reached the limit of active workspaces"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -166,7 +167,7 @@
 			"SETTINGS_HOVER": "Settings",
 			"NEW_WORKSAPCE_HOVER": "New workscape",
 			"NEW_WORKSAPCE_DIALOG_TITLE": "Create new workscape",
-			"NEW_WORKSAPCE_DIALOG_DESC": "some text"
+			"NEW_WORKSAPCE_DIALOG_DESC": "Remember that you can have a maximum of 5 active workspaces at the same time."
 		},
 		"SETTINGS": {
 			"GENERAL": "General",
@@ -253,7 +254,13 @@
 		"SYSTEM": "System",
 		"LOG_OUT": "Log out",
 		"SETTINGS": "Settings",
-		"WARNING": "WARNING"
+		"WARNING": "WARNING",
+		"NOTICE": "NOTICE",
+		"ACTIVE_WORKSACPES": {
+			"FIRST": "You have",
+			"SECOND": "out of",
+			"THIRD": "active workspaces"
+		}
 	},
 	"ROUTES": {
 		"DASHBOARD": "Home",

@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { apiWorkspaceSchema } from '@/schema/workspaceSchema';
+import { MAX_USER_WORKSPACES } from '@/lib/options';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -33,6 +34,10 @@ export async function POST(request: Request) {
 		});
 
 		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
+
+		if (user.createdWorkspaces.length === MAX_USER_WORKSPACES) {
+			return new NextResponse('ERRORS.TOO_MANY_WORKSPACES', { status: 402 });
+		}
 
 		const theSameWorksapceName = user.createdWorkspaces.find(
 			(workspace) => workspace.name.toLowerCase() === workspaceName.toLowerCase()
