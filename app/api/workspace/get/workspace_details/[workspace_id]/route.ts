@@ -1,22 +1,27 @@
 import { db } from '@/lib/db';
+import { subscribe } from 'diagnostics_channel';
 import { NextResponse } from 'next/server';
 
 interface Params {
 	params: {
-		workspace_name: string;
+		workspace_id: string;
 	};
 }
 
-export const GET = async (request: Request, { params: { workspace_name } }: Params) => {
+export const GET = async (request: Request, { params: { workspace_id } }: Params) => {
 	const url = new URL(request.url);
 	const userId = url.searchParams.get('userId');
 
 	if (!userId) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 	try {
-		const workspace = await db.workspace.findFirst({
+		const workspace = await db.workspace.findUnique({
 			where: {
-				name: workspace_name,
-				creatorId: userId,
+				id: workspace_id,
+				subscribers: {
+					some: {
+						userId,
+					},
+				},
 			},
 		});
 

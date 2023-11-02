@@ -11,23 +11,40 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	variant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | null;
 	size?: 'default' | 'sm' | 'lg' | 'icon' | null;
 	include?: string;
+	workspaceIcon?: boolean;
 }
 const ActiveLink = React.forwardRef<HTMLAnchorElement, Props>(
 	(
-		{ href, className, variant = 'default', size = 'default', children, include, ...props }: Props,
+		{
+			href,
+			className,
+			variant = 'default',
+			size = 'default',
+			children,
+			include,
+			workspaceIcon,
+			...props
+		}: Props,
 		ref
 	) => {
-		const {setIsOpen}=useToggleSidebar()
+		const { setIsOpen } = useToggleSidebar();
 		const pathname = usePathname();
 
 		return (
 			<Link
-			onClick={()=>{setIsOpen(false)}}
+				onClick={() => {
+					setIsOpen(false);
+				}}
 				href={href}
 				className={cn(
-					`${buttonVariants({ variant, size })} ${
+					`${buttonVariants({
+						variant,
+						size,
+					})} ${
 						href === pathname || (include && pathname.includes(include))
-							? 'bg-secondary font-semibold'
+							? workspaceIcon
+								? 'font-semibold border-secondary-foreground border-2 '
+								: 'bg-secondary font-semibold'
 							: ''
 					} `,
 					className

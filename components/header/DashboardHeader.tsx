@@ -5,7 +5,12 @@ import { getAuthSession } from '@/lib/auth';
 import { OpenSidebar } from './OpenSidebar';
 import Welcoming from '../common/Welcoming';
 
-export const DashboardHeader = async () => {
+interface Props {
+	addManualRoutes?: string[];
+}
+
+
+export const DashboardHeader = async ({addManualRoutes}:Props) => {
 	const session = await getAuthSession();
 	if (!session) return null;
 	return (
@@ -20,7 +25,7 @@ export const DashboardHeader = async () => {
 					surname={session.user.surname}
 					showOnlyOnPath='/dashboard'
 				/>
-				<BreadcrumbNav />
+				<BreadcrumbNav addManualRoutes={addManualRoutes} />
 			</div>
 			<User profileImage={session?.user.image} />
 		</header>

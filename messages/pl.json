@@ -257,9 +257,9 @@
 		"WARNING": "OSTRZEŻENIE",
 		"NOTICE": "UWAGA",
 		"ACTIVE_WORKSACPES": {
-			"FIRST": "Posiadasz",
-			"SECOND": "na",
-			"THIRD": "aktywnych obszarów roboczych"
+			"FIRST": "Utworzyłeś",
+			"SECOND": "z",
+			"THIRD": "możliwych do utworzenia obszarów roboczych"
 		}
 	},
 	"ROUTES": {

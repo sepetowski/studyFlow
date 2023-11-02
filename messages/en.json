@@ -257,9 +257,9 @@
 		"WARNING": "WARNING",
 		"NOTICE": "NOTICE",
 		"ACTIVE_WORKSACPES": {
-			"FIRST": "You have",
+			"FIRST": "You have created",
 			"SECOND": "out of",
-			"THIRD": "active workspaces"
+			"THIRD": "possible to create workspaces"
 		}
 	},
 	"ROUTES": {

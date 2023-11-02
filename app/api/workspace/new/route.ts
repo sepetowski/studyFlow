@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { apiWorkspaceSchema } from '@/schema/workspaceSchema';
 import { MAX_USER_WORKSPACES } from '@/lib/options';
+import { getRandomWorkspaceColor } from '@/lib/getRandomWorkspaceColor';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -46,11 +47,20 @@ export async function POST(request: Request) {
 		if (theSameWorksapceName)
 			return NextResponse.json('ERRORS.SAME_NAME_WORKSPACE', { status: 403 });
 
+		const color = getRandomWorkspaceColor();
 		const workspace = await db.workspace.create({
 			data: {
 				creatorId: user.id,
 				name: workspaceName,
 				image: file,
+				color
+			},
+		});
+
+		await db.subscription.create({
+			data: {
+				userId: user.id,
+				workspaceId: workspace.id,
 			},
 		});
 

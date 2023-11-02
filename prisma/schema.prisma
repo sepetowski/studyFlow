@@ -53,14 +53,15 @@ model User {
 }
 
 model Workspace {
-  id          String         @id @default(cuid())
+  id          String             @id @default(cuid())
   name        String
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
+  createdAt   DateTime           @default(now())
+  updatedAt   DateTime           @updatedAt
   creatorId   String?
-  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id], onDelete: Cascade)
+  Creator     User?              @relation("CreatedBy", fields: [creatorId], references: [id], onDelete: Cascade)
   subscribers Subscription[]
   image       String?
+  color       WorkspaceIconColor @default(GREEN)
 
   @@index([creatorId])
 }
@@ -83,6 +84,21 @@ model VerificationToken {
   expires    DateTime
 
   @@unique([identifier, token])
+}
+
+enum WorkspaceIconColor {
+  PURPLE
+  RED
+  GREEN
+  BLUE
+  PINK
+  YELLOW
+  ORANGE
+  CYAN
+  FUCHSIA
+  LIME
+  EMERALD
+  INDIGO
 }
 
 enum UseCase {
