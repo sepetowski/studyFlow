@@ -53,7 +53,7 @@ export async function POST(request: Request) {
 				creatorId: user.id,
 				name: workspaceName,
 				image: file,
-				color
+				color,
 			},
 		});
 
@@ -61,6 +61,7 @@ export async function POST(request: Request) {
 			data: {
 				userId: user.id,
 				workspaceId: workspace.id,
+				userRole: 'ADMIN',
 			},
 		});
 

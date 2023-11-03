@@ -118,7 +118,7 @@
 			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
 			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe",
 			"SAME_NAME_WORKSPACE": "Obszar roboczy o podanej nazwie już istnieje",
-			"TOO_MANY_WORKSPACES": "Osiągnięto limit aktywnych obszarów roboczych"
+			"TOO_MANY_WORKSPACES": "Osiągnięto limit możliwej do stworzenia ilości przestrzeni roboczych"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",

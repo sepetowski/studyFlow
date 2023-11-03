@@ -7,5 +7,5 @@ export const Sidebar = async () => {
 	if (!session) return null;
 	const userWorkspaces = await getWorkspaces(session.user.id);
 
-	return <SidebarContener userWorkspaces={userWorkspaces} />;
+	return <SidebarContener userWorkspaces={userWorkspaces} userId={session.user.id} />;
 };

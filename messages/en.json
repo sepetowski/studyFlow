@@ -118,7 +118,7 @@
 			"NO_PASSWORD": "Unable to update password. Read the warning",
 			"PASSWORD_DISMATCH": "The current password you entered is incorrect",
 			"SAME_NAME_WORKSPACE": "The workspace with the given name already exists",
-			"TOO_MANY_WORKSPACES": "You have reached the limit of active workspaces"
+			"TOO_MANY_WORKSPACES": "The limit on the number of workspaces that can be created has been reached"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",

@@ -7,15 +7,16 @@ import { Workspace } from '@prisma/client';
 
 interface Props {
 	userWorkspaces: Workspace[];
+	createdWorkspaces: number;
 }
 
-export const ShortcutSidebar = ({ userWorkspaces }: Props) => {
+export const ShortcutSidebar = ({ userWorkspaces, createdWorkspaces }: Props) => {
 	return (
 		<div className='flex flex-col justify-between items-center h-full p-4 sm:py-6 border-r'>
 			<div className='w-full h-2/3 space-y-3 '>
 				<Top />
 				<Workspaces userWorkspaces={userWorkspaces} />
-				<AddWorkspace activeWorkspaces={userWorkspaces.length} />
+				<AddWorkspace createdWorkspaces={createdWorkspaces} />
 			</div>
 			<Bottom />
 		</div>
