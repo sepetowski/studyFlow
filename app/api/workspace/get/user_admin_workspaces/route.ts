@@ -10,10 +10,10 @@ export const GET = async (request: Request) => {
 		const subscritions = await db.subscription.findMany({
 			where: {
 				userId,
+				userRole: 'ADMIN',
 			},
 			include: {
 				workspace: true,
-				
 			},
 		});
 

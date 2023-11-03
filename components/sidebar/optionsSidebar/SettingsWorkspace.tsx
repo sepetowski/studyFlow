@@ -1,16 +1,15 @@
 'use client';
 import React, { useMemo } from 'react';
 import ActiveLink from '@/components/ui/active-link';
-import Image from 'next/image';
 import { Workspace, WorkspaceIconColor } from '@prisma/client';
-import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import Image from 'next/image';
 
 interface Props {
 	workspace: Workspace;
 	href: string;
 }
 
-export const Worksapce = ({ workspace: { id, image, name, color }, href }: Props) => {
+export const SettingsWorkspace = ({ href, workspace: { color, id, image, name } }: Props) => {
 	const workspaceColor = useMemo(() => {
 		switch (color) {
 			case WorkspaceIconColor.PURPLE:
@@ -54,31 +53,28 @@ export const Worksapce = ({ workspace: { id, image, name, color }, href }: Props
 	}, [color]);
 
 	return (
-		<HoverCard openDelay={250} closeDelay={250}>
-			<HoverCardTrigger asChild>
-				<ActiveLink
-					workspaceIcon
-					className={`text-white font-bold ${!image && workspaceColor}`}
-					variant={image ? 'ghost' : 'default'}
-					size={'icon'}
-					href={`${href}/${id}`}>
-					{image ? (
-						<Image
-							priority
-							className='w-full h-full object-cover rounded-md '
-							src={image}
-							alt='worksace image'
-							height={300}
-							width={300}
-						/>
-					) : (
-						<p>{name[0].toUpperCase()}</p>
-					)}
-				</ActiveLink>
-			</HoverCardTrigger>
-			<HoverCardContent align='start'>
-				<span>{name}</span>
-			</HoverCardContent>
-		</HoverCard>
+		<ActiveLink
+			href={`${href}/${id}`}
+			variant={'ghost'}
+			size={'sm'}
+			className='w-full flex justify-start items-center gap-2 overflow-hidden'>
+			{image ? (
+				<Image
+					priority
+					className='h-7 w-7  object-cover rounded-md'
+					src={image}
+					alt='worksace image'
+					height={300}
+					width={300}
+				/>
+			) : (
+				<div
+					className={`rounded-md text-white font-bold h-7 w-7  flex justify-center items-center ${workspaceColor}`}>
+					<p>{name[0].toUpperCase()}</p>
+				</div>
+			)}
+
+			<p>{name}</p>
+		</ActiveLink>
 	);
 };

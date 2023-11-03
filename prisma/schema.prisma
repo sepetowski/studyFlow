@@ -111,4 +111,5 @@ enum UserPermison {
   ADMIN
   CAN_EDIT
   READ_ONLY
+  OWNER
 }

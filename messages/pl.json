@@ -154,6 +154,7 @@
 			},
 			"WORKSPACE": {
 				"SHORT": "Nazwa obszaru roboczego jest zbyt krótka",
+				"LONG": "Nazwa obszaru roboczego jest za długa",
 				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
 			},
 			"LANGUAGE": "Proszę wybrać język",

@@ -154,6 +154,7 @@
 			},
 			"WORKSPACE": {
 				"SHORT": "Workspace name is too short",
+				"LONG": "Workspace name is too long",
 				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
 			},
 			"LANGUAGE": "Please select a language",

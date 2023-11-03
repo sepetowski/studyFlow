@@ -15,7 +15,7 @@ export const ShortcutSidebar = ({ userWorkspaces, createdWorkspaces }: Props) =>
 		<div className='flex flex-col justify-between items-center h-full p-4 sm:py-6 border-r'>
 			<div className='w-full h-2/3 space-y-3 '>
 				<Top />
-				<Workspaces userWorkspaces={userWorkspaces} />
+				<Workspaces userWorkspaces={userWorkspaces} href='/dashboard/workspace' />
 				<AddWorkspace createdWorkspaces={createdWorkspaces} />
 			</div>
 			<Bottom />

@@ -28,3 +28,14 @@ export const getWorkspaces = async (userId: string) => {
 	}
 	return res.json() as Promise<Workspace[]>;
 };
+
+export const getUserAdminWorkspaces = async (userId: string) => {
+	const res = await fetch(`${domain}/api/workspace/get/user_admin_workspaces?userId=${userId}`, {
+		method: 'GET',
+		cache: 'no-store',
+	});
+	if (!res.ok) {
+		return [];
+	}
+	return res.json() as Promise<Workspace[]>;
+};

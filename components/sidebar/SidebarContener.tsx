@@ -6,12 +6,14 @@ import { useToggleSidebar } from '@/context/ToggleSidebar';
 import { CloseSidebar } from './CloseSidebar';
 import { Workspace } from '@prisma/client';
 
+
 interface Props {
 	userWorkspaces: Workspace[];
+	userAdminWorkspaces: Workspace[];
 	userId: string;
 }
 
-export const SidebarContener = ({ userWorkspaces, userId }: Props) => {
+export const SidebarContener = ({ userWorkspaces, userAdminWorkspaces, userId }: Props) => {
 	const { isOpen, setIsOpen } = useToggleSidebar();
 	const createdWorkspaces = userWorkspaces.filter((workspace) => workspace.creatorId === userId);
 	return (
@@ -24,7 +26,10 @@ export const SidebarContener = ({ userWorkspaces, userId }: Props) => {
 					userWorkspaces={userWorkspaces}
 					createdWorkspaces={createdWorkspaces.length}
 				/>
-				<OptionsSidebar createdWorkspaces={createdWorkspaces.length} />
+				<OptionsSidebar
+					createdWorkspaces={createdWorkspaces.length}
+					userAdminWorkspaces={userAdminWorkspaces}
+				/>
 				<CloseSidebar />
 			</aside>
 			<div

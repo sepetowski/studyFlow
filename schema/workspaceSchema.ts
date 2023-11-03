@@ -1,13 +1,16 @@
 import { z } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from './imageSchema';
 
+const workspaceName = z
+	.string()
+	.min(4, 'SCHEMA.WORKSPACE.SHORT')
+	.max(20, 'SCHEMA.WORKSPACE.LONG')
+	.refine((username) => /^[a-zA-Z0-9 ]+$/.test(username), {
+		message: 'SCHEMA.WORKSPACE.SPECIAL_CHARS',
+	});
+
 export const workspaceSchema = z.object({
-	workspaceName: z
-		.string()
-		.min(4, 'SCHEMA.WORKSPACE.SHORT')
-		.refine((username) => /^[a-zA-Z0-9 ]+$/.test(username), {
-			message: 'SCHEMA.WORKSPACE.SPECIAL_CHARS',
-		}),
+	workspaceName,
 	file: z
 		.any()
 		.refine((file) => file?.size <= MAX_FILE_SIZE, `SCHEMA.IMAGE.MAX`)
@@ -17,12 +20,7 @@ export const workspaceSchema = z.object({
 });
 
 export const apiWorkspaceSchema = z.object({
-	workspaceName: z
-		.string()
-		.min(4, 'SCHEMA.WORKSPACE.SHORT')
-		.refine((username) => /^[a-zA-Z0-9 ]+$/.test(username), {
-			message: 'SCHEMA.WORKSPACE.SPECIAL_CHARS',
-		}),
+	workspaceName,
 	file: z.string().optional().nullable(),
 });
 
