@@ -37,6 +37,25 @@
 			}
 		}
 	},
+	"EDIT_WORKSPACE": {
+		"PICTURE": {
+			"LABEL": "IKONA OBSZARU ROBOCZEGO",
+			"TITLE": "Zmień ikonę",
+			"BTN": "Wybierz zdjęcie"
+		},
+		"DATA": {
+			"INPUTS": {
+				"NAME": "NAZWA OBSZARU ROBOCZEGO",
+				"COLOR": "KOLOR IKONY OBSZARU ROBOCZEGO"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "np. Uniwersum"
+			},
+			"INFO": "Zmiana koloru wpływa tylko na wygląd ikony obszaru tylko wtedy, kiedy nie dodano zdjęcia",
+			"BTN": "Aktualizuj",
+			"BTN_PENDING": "Aktualizuje"
+		}
+	},
 	"NEW_WORKSPACE": {
 		"INPUTS": {
 			"NAME": "Nazwa obszaru roboczego",
@@ -118,7 +137,8 @@
 			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
 			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe",
 			"SAME_NAME_WORKSPACE": "Obszar roboczy o podanej nazwie już istnieje",
-			"TOO_MANY_WORKSPACES": "Osiągnięto limit możliwej do stworzenia ilości przestrzeni roboczych"
+			"TOO_MANY_WORKSPACES": "Osiągnięto limit możliwej do stworzenia ilości przestrzeni roboczych",
+			"NO_PERMISSION": "Nie masz zezwolenia na wykonanie tych akcji"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -129,7 +149,10 @@
 			"PROFILE_EDITED": "Profil zaostał zaktualizowany!",
 			"DELETED_INFO": "Twoje konto zostało usunięte",
 			"PASSWORD_CHANGED": "Hasło zostało zmienione",
-			"NEW_WORKSAPCE": "Obszar roboczy został utworzony!"
+			"NEW_WORKSAPCE": "Obszar roboczy został utworzony!",
+			"WORKSPACE_PICTURE_UPDATED": "Ikona obszaru roboczego została zaktualizowana!",
+			"WORKSPACE_PICTURE_DELETED": "Ikona obszaru roboczego została usunięta",
+			"UPDATED_WORKSAPCE": "Obszar roboczy został zaktualizowany!"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"

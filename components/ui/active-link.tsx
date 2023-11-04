@@ -29,6 +29,7 @@ const ActiveLink = React.forwardRef<HTMLAnchorElement, Props>(
 	) => {
 		const { setIsOpen } = useToggleSidebar();
 		const pathname = usePathname();
+	
 
 		return (
 			<Link

@@ -37,6 +37,25 @@
 			}
 		}
 	},
+	"EDIT_WORKSPACE": {
+		"PICTURE": {
+			"LABEL": "WORKSPACE ICON",
+			"TITLE": "Change icon",
+			"BTN": "Choose image"
+		},
+		"DATA": {
+			"INPUTS": {
+				"NAME": "WORKSPACE NAME",
+				"COLOR": "WORKSPACE COLOR ICON"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "eg. Universe"
+			},
+			"INFO": "Changing the color only affects the appearance of the workspace icon only when no image has been added",
+			"BTN": "Update",
+			"BTN_PENDING": "Updating"
+		}
+	},
 	"NEW_WORKSPACE": {
 		"INPUTS": {
 			"NAME": "Workspace name",
@@ -118,7 +137,8 @@
 			"NO_PASSWORD": "Unable to update password. Read the warning",
 			"PASSWORD_DISMATCH": "The current password you entered is incorrect",
 			"SAME_NAME_WORKSPACE": "The workspace with the given name already exists",
-			"TOO_MANY_WORKSPACES": "The limit on the number of workspaces that can be created has been reached"
+			"TOO_MANY_WORKSPACES": "The limit on the number of workspaces that can be created has been reached",
+			"NO_PERMISSION": "You don't have perrmios for this acction"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -129,7 +149,10 @@
 			"PROFILE_EDITED": "Profile has been updated!",
 			"DELETED_INFO": "Your account has beed deleted",
 			"PASSWORD_CHANGED": "Password has benn changed",
-			"NEW_WORKSAPCE": "The workspace has been created!"
+			"NEW_WORKSAPCE": "The workspace has been created!",
+			"WORKSPACE_PICTURE_UPDATED": "The workspace icon has been updated!",
+			"WORKSPACE_PICTURE_DELETED": "The workspace icon has been removed",
+			"UPDATED_WORKSAPCE": "Workspace has been updated!"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
