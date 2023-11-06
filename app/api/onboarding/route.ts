@@ -3,11 +3,13 @@ import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { onboardingSchema } from '@/schema/onboardingSchema';
 import { UseCase as UseCaseType } from '@prisma/client';
+import { v4 as uuidv4 } from 'uuid';
+import { getRandomWorkspaceColor } from '@/lib/getRandomWorkspaceColor';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
 
-	if (!session?.user) return new Response('ERRORS.UNAUTHORIZED', { status: 400 });
+	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
 	const result = onboardingSchema.safeParse(body);
@@ -25,7 +27,7 @@ export async function POST(request: Request) {
 			},
 		});
 
-		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
+		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
 		await db.user.update({
 			where: {
@@ -43,6 +45,11 @@ export async function POST(request: Request) {
 				creatorId: user.id,
 				name: workspaceName,
 				image: workspaceImage,
+				inviteCode: uuidv4(),
+				adminCode: uuidv4(),
+				canEditCode: uuidv4(),
+				readOnlyCode: uuidv4(),
+				color: getRandomWorkspaceColor(),
 			},
 		});
 
@@ -50,6 +57,7 @@ export async function POST(request: Request) {
 			data: {
 				userId: user.id,
 				workspaceId: workspace.id,
+				userRole: 'OWNER',
 			},
 		});
 

@@ -6,7 +6,7 @@ import { z } from 'zod';
 export async function POST(request: Request) {
 	const session = await getAuthSession();
 
-	if (!session?.user) return new Response('ERRORS.UNAUTHORIZED', { status: 400 });
+	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const { email: userEmail } = session.user;
 
@@ -31,7 +31,7 @@ export async function POST(request: Request) {
 			},
 		});
 
-		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
+		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
 		await db.user.delete({
 			where: {

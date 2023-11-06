@@ -37,6 +37,40 @@
 			}
 		}
 	},
+	"EDIT_WORKSPACE": {
+		"TITLE": "Edit workspace",
+		"DESC": "Here you can change the name of the workspace and its icon.",
+		"PICTURE": {
+			"LABEL": "WORKSPACE ICON",
+			"TITLE": "Change icon",
+			"BTN": "Choose image"
+		},
+		"DATA": {
+			"INPUTS": {
+				"NAME": "WORKSPACE NAME",
+				"COLOR": "WORKSPACE COLOR ICON"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "eg. Universe"
+			},
+			"INFO": "Changing the color only affects the appearance of the workspace icon only when no image has been added",
+			"BTN": "Update",
+			"BTN_PENDING": "Updating"
+		},
+		"DELETE": {
+			"TITLE": "Delete the workspace",
+			"DESC": "Once a workspace and the data belonging to it are deleted, there is no way to recover them.",
+			"LABEL": "CONFIRM WORKSPACE NAME",
+			"BTN": "Delete",
+			"DIALOG": {
+				"TITLE": "Delete the workspace",
+				"DESC": "All data will be permanently deleted, and all users belonging to this workspace will lose access to it",
+				"WARNING": "Deletion of workspace is permanent and cannot be undone, click „Delete workspace” to delete the workspace",
+				"BUTTON": "DELETE WORKSPACE",
+				"PENDING_BTN": "Deleting. Please wait"
+			}
+		}
+	},
 	"NEW_WORKSPACE": {
 		"INPUTS": {
 			"NAME": "Workspace name",
@@ -118,7 +152,10 @@
 			"NO_PASSWORD": "Unable to update password. Read the warning",
 			"PASSWORD_DISMATCH": "The current password you entered is incorrect",
 			"SAME_NAME_WORKSPACE": "The workspace with the given name already exists",
-			"TOO_MANY_WORKSPACES": "You have reached the limit of active workspaces"
+			"TOO_MANY_WORKSPACES": "The limit on the number of workspaces that can be created has been reached",
+			"NO_PERMISSION": "You don't have perrmios for this acction",
+			"NO_WORKSPACE": "Workspace not found",
+			"WRONG_WORKSPACE_NAME": "Please provide the correct name of the workspace"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -129,7 +166,12 @@
 			"PROFILE_EDITED": "Profile has been updated!",
 			"DELETED_INFO": "Your account has beed deleted",
 			"PASSWORD_CHANGED": "Password has benn changed",
-			"NEW_WORKSAPCE": "The workspace has been created!"
+			"NEW_WORKSAPCE": "The workspace has been created!",
+			"WORKSPACE_PICTURE_UPDATED": "The workspace icon has been updated!",
+			"WORKSPACE_PICTURE_DELETED": "The workspace icon has been removed",
+			"UPDATED_WORKSAPCE": "Workspace has been updated!",
+			"DELETED_WORKSPACE_INFO": "Workspace has been deleted",
+			"REGENERATED_LINK": "Link has been updated"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -154,7 +196,9 @@
 			},
 			"WORKSPACE": {
 				"SHORT": "Workspace name is too short",
-				"SPECIAL_CHARS": "Workspace name must only contain letters and digits"
+				"LONG": "Workspace name is too long",
+				"SPECIAL_CHARS": "Workspace name must only contain letters and digits",
+				"WRONG_NAME": "The given name is different from the name of the workspace"
 			},
 			"LANGUAGE": "Please select a language",
 			"CHOOSE_ONE": "Please select one of the options"
@@ -257,9 +301,9 @@
 		"WARNING": "WARNING",
 		"NOTICE": "NOTICE",
 		"ACTIVE_WORKSACPES": {
-			"FIRST": "You have",
+			"FIRST": "You have created",
 			"SECOND": "out of",
-			"THIRD": "active workspaces"
+			"THIRD": "possible to create workspaces"
 		}
 	},
 	"ROUTES": {

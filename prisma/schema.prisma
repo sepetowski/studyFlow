@@ -53,14 +53,19 @@ model User {
 }
 
 model Workspace {
-  id          String         @id @default(cuid())
-  name        String
-  createdAt   DateTime       @default(now())
-  updatedAt   DateTime       @updatedAt
-  creatorId   String?
-  Creator     User?          @relation("CreatedBy", fields: [creatorId], references: [id], onDelete: Cascade)
-  subscribers Subscription[]
-  image       String?
+  id           String             @id @default(cuid())
+  name         String
+  createdAt    DateTime           @default(now())
+  updatedAt    DateTime           @updatedAt
+  creatorId    String?
+  Creator      User?              @relation("CreatedBy", fields: [creatorId], references: [id], onDelete: Cascade)
+  subscribers  Subscription[]
+  image        String?
+  color        WorkspaceIconColor @default(GREEN)
+  inviteCode   String             @unique
+  adminCode    String             @unique
+  canEditCode  String             @unique
+  readOnlyCode String             @unique
 
   @@index([creatorId])
 }
@@ -85,6 +90,21 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+enum WorkspaceIconColor {
+  PURPLE
+  RED
+  GREEN
+  BLUE
+  PINK
+  YELLOW
+  ORANGE
+  CYAN
+  FUCHSIA
+  LIME
+  EMERALD
+  INDIGO
+}
+
 enum UseCase {
   WORK
   STUDY
@@ -95,4 +115,5 @@ enum UserPermison {
   ADMIN
   CAN_EDIT
   READ_ONLY
+  OWNER
 }

@@ -3,11 +3,13 @@ import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { apiWorkspaceSchema } from '@/schema/workspaceSchema';
 import { MAX_USER_WORKSPACES } from '@/lib/options';
+import { getRandomWorkspaceColor } from '@/lib/getRandomWorkspaceColor';
+import { v4 as uuidv4 } from 'uuid';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
 
-	if (!session?.user) return new Response('ERRORS.UNAUTHORIZED', { status: 400 });
+	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
 	const result = apiWorkspaceSchema.safeParse(body);
@@ -33,10 +35,10 @@ export async function POST(request: Request) {
 			},
 		});
 
-		if (!user) return new NextResponse('ERRORS.NO_USER_API', { status: 404 });
+		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
 		if (user.createdWorkspaces.length === MAX_USER_WORKSPACES) {
-			return new NextResponse('ERRORS.TOO_MANY_WORKSPACES', { status: 402 });
+			return NextResponse.json('ERRORS.TOO_MANY_WORKSPACES', { status: 402 });
 		}
 
 		const theSameWorksapceName = user.createdWorkspaces.find(
@@ -44,13 +46,27 @@ export async function POST(request: Request) {
 		);
 
 		if (theSameWorksapceName)
-			return new NextResponse('ERRORS.SAME_NAME_WORKSPACE', { status: 403 });
+			return NextResponse.json('ERRORS.SAME_NAME_WORKSPACE', { status: 403 });
 
+		const color = getRandomWorkspaceColor();
 		const workspace = await db.workspace.create({
 			data: {
 				creatorId: user.id,
 				name: workspaceName,
+				inviteCode: uuidv4(),
+				adminCode: uuidv4(),
+				canEditCode: uuidv4(),
+				readOnlyCode: uuidv4(),
 				image: file,
+				color,
+			},
+		});
+
+		await db.subscription.create({
+			data: {
+				userId: user.id,
+				workspaceId: workspace.id,
+				userRole: 'OWNER',
 			},
 		});
 

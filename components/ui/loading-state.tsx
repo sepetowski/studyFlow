@@ -5,19 +5,22 @@ import { cn } from '@/lib/utils';
 interface Props extends SvgProps {
 	loadingText?: string;
 	hideLoaderIcon?: boolean;
+	size?: number;
 }
 
 export const LoadingState = ({
 	loadingText,
 	hideLoaderIcon = false,
 	className,
+	size,
 	...props
 }: Props) => {
 	return (
 		<>
 			{!hideLoaderIcon && (
 				<Loader2
-					className={cn(`h-4 w-4 animate-spin ${loadingText && 'mr-2'}`, className)}
+					size={size}
+					className={cn(`h-4 w-4 animate-spin ${loadingText ? 'mr-2':""}`, className)}
 					{...props}
 				/>
 			)}

@@ -37,6 +37,40 @@
 			}
 		}
 	},
+	"EDIT_WORKSPACE": {
+		"TITLE": "Edytuj przestrzeń roboczą",
+		"DESC": "Tutaj możesz zmienić nazwę obszaru roboczego oraz jej ikonę.",
+		"PICTURE": {
+			"LABEL": "IKONA OBSZARU ROBOCZEGO",
+			"TITLE": "Zmień ikonę",
+			"BTN": "Wybierz zdjęcie"
+		},
+		"DATA": {
+			"INPUTS": {
+				"NAME": "NAZWA OBSZARU ROBOCZEGO",
+				"COLOR": "KOLOR IKONY OBSZARU ROBOCZEGO"
+			},
+			"PLACEHOLDERS": {
+				"NAME": "np. Uniwersum"
+			},
+			"INFO": "Zmiana koloru wpływa tylko na wygląd ikony obszaru tylko wtedy, kiedy nie dodano zdjęcia",
+			"BTN": "Aktualizuj",
+			"BTN_PENDING": "Aktualizuje"
+		},
+		"DELETE": {
+			"TITLE": "Usuń przestrzeń roboczą",
+			"DESC": "Po usunięciu przestrzeni roboczej i danych do niej należących nie ma możliwości ich odzyskania.",
+			"LABEL": "POTWIERDŹ NAZWE OBSZARU ROBOCZEGO",
+			"BTN": "Usuń",
+			"DIALOG": {
+				"TITLE": "Usuń przestrzeń roboczą",
+				"DESC": "Wszytskie dane zostaną trwale usunięte, a wszyscy użytkownicy należacy do tego obszaru roboczego stracą do niej dostęp",
+				"WARNING": "Usunięcie przestrzeni roboczej jest trwałe i nie można jej cofnąć, kliknij „Usuń przestrzeń roboczą”, aby usunąć tę przestrzeń",
+				"BUTTON": "USUŃ PRZESTRZEŃ ROBOCZĄ",
+				"PENDING_BTN": "Usuwanie. Proszę czekać"
+			}
+		}
+	},
 	"NEW_WORKSPACE": {
 		"INPUTS": {
 			"NAME": "Nazwa obszaru roboczego",
@@ -118,7 +152,10 @@
 			"NO_PASSWORD": "Nie można zaktualizować hasła. Przeczytaj ostrzeżenie",
 			"PASSWORD_DISMATCH": "Wprowadzone hasło jest nieprawidłowe",
 			"SAME_NAME_WORKSPACE": "Obszar roboczy o podanej nazwie już istnieje",
-			"TOO_MANY_WORKSPACES": "Osiągnięto limit aktywnych obszarów roboczych"
+			"TOO_MANY_WORKSPACES": "Osiągnięto limit możliwej do stworzenia ilości przestrzeni roboczych",
+			"NO_PERMISSION": "Nie masz zezwolenia na wykonanie tych akcji",
+			"NO_WORKSPACE": "Nie znaleziono przestrzeni roboczej",
+			"WRONG_WORKSPACE_NAME": "Proszę podać poprawną nazwę obszaru roboczego"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -129,7 +166,12 @@
 			"PROFILE_EDITED": "Profil zaostał zaktualizowany!",
 			"DELETED_INFO": "Twoje konto zostało usunięte",
 			"PASSWORD_CHANGED": "Hasło zostało zmienione",
-			"NEW_WORKSAPCE": "Obszar roboczy został utworzony!"
+			"NEW_WORKSAPCE": "Obszar roboczy został utworzony!",
+			"WORKSPACE_PICTURE_UPDATED": "Ikona obszaru roboczego została zaktualizowana!",
+			"WORKSPACE_PICTURE_DELETED": "Ikona obszaru roboczego została usunięta",
+			"UPDATED_WORKSAPCE": "Obszar roboczy został zaktualizowany!",
+			"DELETED_WORKSPACE_INFO": "Obszar roboczy został usunięty",
+			"REGENERATED_LINK": "Link został zaktualizowany"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -154,7 +196,9 @@
 			},
 			"WORKSPACE": {
 				"SHORT": "Nazwa obszaru roboczego jest zbyt krótka",
-				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr"
+				"LONG": "Nazwa obszaru roboczego jest za długa",
+				"SPECIAL_CHARS": "Nazwa obszaru roboczego może składać się tylko z liter i cyfr",
+				"WRONG_NAME": "Podana nazwa różni się od nazwy obszaru roboczego"
 			},
 			"LANGUAGE": "Proszę wybrać język",
 			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji"
@@ -257,9 +301,9 @@
 		"WARNING": "OSTRZEŻENIE",
 		"NOTICE": "UWAGA",
 		"ACTIVE_WORKSACPES": {
-			"FIRST": "Posiadasz",
-			"SECOND": "na",
-			"THIRD": "aktywnych obszarów roboczych"
+			"FIRST": "Utworzyłeś",
+			"SECOND": "z",
+			"THIRD": "możliwych do utworzenia obszarów roboczych"
 		}
 	},
 	"ROUTES": {

@@ -4,6 +4,13 @@ import React from 'react';
 import ActiveLink from '@/components/ui/active-link';
 import { User2, SunMoon, LockKeyhole } from 'lucide-react';
 import { useTranslations } from 'next-intl';
+import { Workspace } from '@prisma/client';
+import { Workspaces } from '@/components/sidebar/shortcutSidebar.tsx/workspaces/Workspaces';
+import { SettingsWorkspace } from './SettingsWorkspace';
+
+interface Props {
+	userAdminWorkspaces: Workspace[];
+}
 
 const settingsFields = [
 	{
@@ -23,7 +30,7 @@ const settingsFields = [
 	},
 ];
 
-export const Settings = () => {
+export const Settings = ({ userAdminWorkspaces }: Props) => {
 	const t = useTranslations('SIDEBAR');
 	return (
 		<div className='flex flex-col gap-6 w-full'>
@@ -50,8 +57,14 @@ export const Settings = () => {
 				<p className='text-xs sm:text-sm uppercase text-muted-foreground '>
 					{t('SETTINGS.WORKSPACE')}
 				</p>
-				<div className='flex flex-col gap-2 w-full mt-2 h-96 overflow-y-auto'>
-					{/* worksapces_mapping */}
+				<div className='flex flex-col gap-2 w-full mt-2 '>
+					{userAdminWorkspaces.map((workspace) => (
+						<SettingsWorkspace
+							key={workspace.id}
+							href='/dashboard/settings/workspace'
+							workspace={workspace}
+						/>
+					))}
 				</div>
 			</div>
 		</div>
