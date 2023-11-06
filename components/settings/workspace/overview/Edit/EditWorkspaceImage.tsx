@@ -192,7 +192,7 @@ export const EditWorkspaceImage = ({ workspace: { id, color, image, name } }: Pr
 							form.clearErrors('file');
 							setImagePreview('');
 						}}
-						className={cn(` w-16 h-16 text-white font-bold  ${!image && workspaceColor}`)}
+						className={cn(` w-16 h-16 text-white text-2xl font-bold  ${!image && workspaceColor}`)}
 						variant={image ? 'ghost' : 'default'}
 						size={'icon'}>
 						{image ? (
@@ -214,7 +214,7 @@ export const EditWorkspaceImage = ({ workspace: { id, color, image, name } }: Pr
 					<DialogTitle>{t('TITLE')}</DialogTitle>
 				</DialogHeader>
 				<div
-					className={` w-40 h-40 text-4xl text-white font-bold rounded-lg flex justify-center items-center my-5  ${
+					className={` w-40 h-40 text-5xl text-white font-bold rounded-lg flex justify-center items-center my-5  ${
 						!imagePreview && !image && workspaceColor
 					} pointer-events-none`}>
 					{imagePreview ? (

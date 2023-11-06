@@ -1,8 +1,10 @@
 import React from 'react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { EditWorkspaceCard } from './overview/Edit/EditWorkspaceCard';
+import { EditCard } from './overview/Edit/EditCard';
 import { Layers, Users2 } from 'lucide-react';
 import { SettingsWorkspace } from '@/types/extended';
+import { DeleteWorkspace } from './overview/DeleteWorkspace';
+import { Separator } from '@/components/ui/separator';
 
 interface Props {
 	workspace: SettingsWorkspace;
@@ -21,7 +23,11 @@ export const WorkspaceTab = ({ workspace }: Props) => {
 				</TabsTrigger>
 			</TabsList>
 			<TabsContent tabIndex={-1} value='overview'>
-				<EditWorkspaceCard workspace={workspace} />
+				<EditCard workspace={workspace} />
+				<div className='py-4 sm:py-6'>
+					<Separator />
+				</div>
+				<DeleteWorkspace workspace={workspace} />
 			</TabsContent>
 			<TabsContent value='mebmers'>Change your password here.</TabsContent>
 		</Tabs>

@@ -116,9 +116,9 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 	return (
 		<Form {...form}>
 			<form
-				className='w-full max-w-md mt-0 sm:mt-0 space-y-8 '
+				className='w-full max-w-md mt-0 sm:mt-0 space-y-6'
 				onSubmit={form.handleSubmit(onSubmit)}>
-				<div className='space-y-4'>
+				<div className='space-y-2 sm:space-y-4'>
 					<div className='space-y-1.5'>
 						<FormField
 							control={form.control}
@@ -171,7 +171,7 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 				<Button
 					disabled={!form.formState.isValid || isLoading}
 					type='submit'
-					className='mt-10 w-full  dark:text-white font-semibold '>
+					className='mt-10   dark:text-white font-semibold '>
 					{isLoading ? <LoadingState loadingText={t('BTN_PENDING')} /> : t('BTN')}
 				</Button>
 			</form>

@@ -1,6 +1,8 @@
 import { z } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from './imageSchema';
 
+const id = z.string();
+
 const workspaceName = z
 	.string()
 	.min(4, 'SCHEMA.WORKSPACE.SHORT')
@@ -47,7 +49,7 @@ export const workspacePicture = z.object({
 
 export const apiWorkspacePicture = z.object({
 	picture: z.string(),
-	id: z.string(),
+	id,
 });
 
 export const workspaceEditData = z.object({
@@ -56,13 +58,18 @@ export const workspaceEditData = z.object({
 });
 
 export const apiWorkspaceEditData = z.object({
-	id: z.string(),
+	id,
 	workspaceName,
 	color,
 });
 
 export const apiWorkspaceDeletePicture = z.object({
-	id: z.string(),
+	id,
+});
+
+export const apiWorkspaceDelete = z.object({
+	id,
+	workspaceName,
 });
 
 export type ApiWorkspaceSchema = z.infer<typeof apiWorkspaceSchema>;
@@ -75,3 +82,4 @@ export type WorkspaceEditData = z.infer<typeof workspaceEditData>;
 export type ApiWorkspaceEditData = z.infer<typeof apiWorkspaceEditData>;
 
 export type ApiWorkspaceDeletePicture = z.infer<typeof apiWorkspaceDeletePicture>;
+export type ApiWorkspaceDelete = z.infer<typeof apiWorkspaceDelete>;
