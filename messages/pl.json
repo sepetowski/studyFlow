@@ -170,7 +170,8 @@
 			"WORKSPACE_PICTURE_UPDATED": "Ikona obszaru roboczego została zaktualizowana!",
 			"WORKSPACE_PICTURE_DELETED": "Ikona obszaru roboczego została usunięta",
 			"UPDATED_WORKSAPCE": "Obszar roboczy został zaktualizowany!",
-			"DELETED_WORKSPACE_INFO": "Obszar roboczy został usunięty"
+			"DELETED_WORKSPACE_INFO": "Obszar roboczy został usunięty",
+			"REGENERATED_LINK": "Link został zaktualizowany"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"

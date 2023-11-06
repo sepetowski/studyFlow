@@ -170,7 +170,8 @@
 			"WORKSPACE_PICTURE_UPDATED": "The workspace icon has been updated!",
 			"WORKSPACE_PICTURE_DELETED": "The workspace icon has been removed",
 			"UPDATED_WORKSAPCE": "Workspace has been updated!",
-			"DELETED_WORKSPACE_INFO": "Workspace has been deleted"
+			"DELETED_WORKSPACE_INFO": "Workspace has been deleted",
+			"REGENERATED_LINK": "Link has been updated"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
