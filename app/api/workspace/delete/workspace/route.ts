@@ -22,9 +22,25 @@ export async function POST(request: Request) {
 			where: {
 				id: session.user.id,
 			},
+			include: {
+				subscriptions: {
+					where: {
+						workspaceId: id,
+					},
+					select: {
+						userRole: true,
+					},
+				},
+			},
 		});
 
 		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
+
+		if (
+			user.subscriptions[0].userRole === 'CAN_EDIT' ||
+			user.subscriptions[0].userRole === 'READ_ONLY'
+		)
+			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
 
 		const workspace = await db.workspace.findUnique({
 			where: {
