@@ -17,8 +17,7 @@ import { useToast } from '@/components/ui/use-toast';
 import { useLocale, useTranslations } from 'next-intl';
 import { Workspace } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next-intl/client';
+import axios, { AxiosError, AxiosResponse } from 'axios';	
 import { LoadingState } from '@/components/ui/loading-state';
 import { domain } from '@/lib/api';
 
@@ -29,28 +28,29 @@ interface Props {
 export const InviteContent = ({
 	workspace: { id, adminCode, canEditCode, inviteCode, readOnlyCode },
 }: Props) => {
-	const { toast } = useToast();
 	const [selectedRole, setSelectedRole] = useState<'viewer' | 'admin' | 'editor'>('editor');
+	const [codes, setCodes] = useState({ adminCode, canEditCode, inviteCode, readOnlyCode });
+	const { toast } = useToast();
 
 	const lang = useLocale();
 	const m = useTranslations('MESSAGES');
-
-	const router = useRouter();
 
 	const inviteURL = useMemo(() => {
 		const shareCode = () => {
 			switch (selectedRole) {
 				case 'admin':
-					return adminCode;
+					return codes.adminCode;
 				case 'editor':
-					return canEditCode;
+					return codes.canEditCode;
 				case 'viewer':
-					return readOnlyCode;
+					return codes.readOnlyCode;
 			}
 		};
 
-		return `${domain}/${lang}/dashboard/invite/${inviteCode}?role=${selectedRole}&shareCode=${shareCode()}`;
-	}, [inviteCode, adminCode, readOnlyCode, canEditCode, lang, selectedRole]);
+		return `${domain}/${lang}/dashboard/invite/${
+			codes.inviteCode
+		}?role=${selectedRole}&shareCode=${shareCode()}`;
+	}, [codes, lang, selectedRole]);
 
 	const copyHanlder = () => {
 		navigator.clipboard.writeText(inviteURL);
@@ -62,7 +62,16 @@ export const InviteContent = ({
 
 	const { mutate: regenerateLink, isLoading } = useMutation({
 		mutationFn: async () => {
-			await axios.post('/api/workspace/invite/regenerate_link', { id });
+			const { data } = (await axios.post('/api/workspace/invite/regenerate_link', {
+				id,
+			})) as AxiosResponse<Workspace>;
+
+			setCodes({
+				adminCode: data.adminCode,
+				canEditCode: data.canEditCode,
+				inviteCode: data.inviteCode,
+				readOnlyCode: data.readOnlyCode,
+			});
 		},
 		onError: (err: AxiosError) => {
 			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
@@ -76,7 +85,6 @@ export const InviteContent = ({
 			toast({
 				title: m('SUCCES.REGENERATED_LINK'),
 			});
-			router.refresh();
 		},
 		mutationKey: ['regenerateLink'],
 	});
