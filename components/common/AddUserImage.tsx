@@ -196,7 +196,7 @@ export const AddUserImage = ({ profileImage, className }: Props) => {
 					<DialogTitle>{t('TITLE')}</DialogTitle>
 				</DialogHeader>
 				{imagePreview ? (
-					<div className='rounded-full w-52 h-52  relative overflow-hidden my-5'>
+					<div className='rounded-full w-32 h-32 sm:w-52 sm:h-52  relative overflow-hidden my-5'>
 						<Image
 							src={imagePreview}
 							alt='profile image'
@@ -205,7 +205,7 @@ export const AddUserImage = ({ profileImage, className }: Props) => {
 						/>
 					</div>
 				) : (
-					<UserAvatar className='w-52 h-52 my-5' size={52} profileImage={profileImage} />
+					<UserAvatar className=' w-32 h-32 sm:w-52 sm:h-52 my-5' size={52} profileImage={profileImage} />
 				)}
 
 				<Form {...form}>

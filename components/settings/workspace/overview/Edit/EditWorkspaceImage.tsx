@@ -214,12 +214,12 @@ export const EditWorkspaceImage = ({ workspace: { id, color, image, name } }: Pr
 					<DialogTitle>{t('TITLE')}</DialogTitle>
 				</DialogHeader>
 				<div
-					className={` w-40 h-40 text-5xl text-white font-bold rounded-lg flex justify-center items-center my-5  ${
+					className={`w-32 h-32 sm:w-40 sm:h-40 text-5xl text-white font-bold rounded-lg flex justify-center items-center my-5  ${
 						!imagePreview && !image && workspaceColor
 					} pointer-events-none`}>
 					{imagePreview ? (
 						<Image
-							className='w-40 h-40 rounded-md object-cover'
+							className='w-32 h-32 sm:w-40 sm:h-40 rounded-md object-cover'
 							width={450}
 							height={450}
 							alt='workspace image'
@@ -227,7 +227,7 @@ export const EditWorkspaceImage = ({ workspace: { id, color, image, name } }: Pr
 						/>
 					) : image ? (
 						<Image
-							className='w-40 h-40 rounded-md object-cover'
+							className='w-32 h-32 sm:w-40 sm:h-40 rounded-md object-cover'
 							width={450}
 							height={450}
 							alt='workspace image'

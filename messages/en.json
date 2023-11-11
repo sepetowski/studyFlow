@@ -314,6 +314,7 @@
 		}
 	},
 	"COMMON": {
+		"WELCOMEBACK": "Welcomeback",
 		"LANG_HOVER": "Change language",
 		"THEME_HOVER": "Change theme",
 		"DARK": "Dark",

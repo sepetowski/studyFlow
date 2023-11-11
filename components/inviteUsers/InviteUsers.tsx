@@ -20,7 +20,7 @@ interface Props {
 export const InviteUsers = ({ workspace }: Props) => {
 	const t = useTranslations('INVITE');
 	return (
-		<Dialog>
+		<Dialog >
 			<DialogTrigger asChild>
 				<Button
 					size={'icon'}
@@ -30,7 +30,7 @@ export const InviteUsers = ({ workspace }: Props) => {
 					<UserPlus2 className='' size={18} />
 				</Button>
 			</DialogTrigger>
-			<DialogContent>
+			<DialogContent >
 				<DialogHeader>
 					<DialogTitle>
 						<span>{t('TITLE')}</span> <span>{workspace.name}</span>

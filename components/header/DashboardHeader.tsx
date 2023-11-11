@@ -17,7 +17,7 @@ export const DashboardHeader = async ({ addManualRoutes, className, children }: 
 	if (!session) return null;
 	return (
 		<header className={cn('w-full flex justify-between items-center mb-4 py-2 gap-2', className)}>
-			<div className='flex items-center gap-2 max-w-[17rem] sm:max-w-4xl'>
+			<div className='flex items-center gap-2'>
 				<OpenSidebar />
 				<Welcoming
 					hideOnMobile

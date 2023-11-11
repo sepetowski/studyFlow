@@ -22,7 +22,7 @@ export const BreadcrumbNav = ({ addManualRoutes }: Props) => {
 
 	if (pathNames.length > 1)
 		return (
-			<div className='flex flex-wrap  gap-0.5 items-center'>
+			<div className='flex  flex-col items-start  gap-0.5 sm:items-center sm:flex-row'>
 				{pathNames.map((link, i) => {
 					const href = `/${pathNames.slice(0, i + 1).join('/')}`;
 					return (
