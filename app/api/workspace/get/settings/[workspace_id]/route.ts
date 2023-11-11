@@ -35,6 +35,11 @@ export const GET = async (request: Request, { params: { workspace_id } }: Params
 							},
 						},
 					},
+					orderBy: {
+						user: {
+							surname: 'desc',
+						},
+					},
 				},
 			},
 		});

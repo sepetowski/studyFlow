@@ -11,16 +11,59 @@ interface Params {
 	};
 }
 
+interface InviteCodeValidWhere {
+	inviteCode: string;
+	adminCode?: string;
+	readOnlyCode?: string;
+	canEditCode?: string;
+}
+
 const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 	const session = await checkIfUserCompletedOnboarding(`/dashboard/invite/${invite_code}`);
 
 	const role = searchParams.role as 'editor' | 'admin' | 'viewer' | null | undefined;
 	const shareCode = searchParams.shareCode;
+
 	if (!role || !shareCode || !invite_code) redirect('/dashboard/errors?error=no-data');
+
+	if (role !== 'admin' && role !== 'editor' && role !== 'viewer')
+		redirect('/dashboard/errors?error=wrong-role');
+
+	let inviteCodeValidWhere: InviteCodeValidWhere = {
+		inviteCode: invite_code,
+	};
+
+	switch (role) {
+		case 'admin': {
+			inviteCodeValidWhere = {
+				...inviteCodeValidWhere,
+				adminCode: shareCode,
+			};
+			break;
+		}
+
+		case 'editor': {
+			inviteCodeValidWhere = {
+				...inviteCodeValidWhere,
+				canEditCode: shareCode,
+			};
+			break;
+		}
+		case 'viewer': {
+			inviteCodeValidWhere = {
+				...inviteCodeValidWhere,
+				readOnlyCode: shareCode,
+			};
+			break;
+		}
+
+		default:
+			return redirect('/dashboard/errors?error=wrong-role');
+	}
 
 	const inviteCodeValid = await db.workspace.findUnique({
 		where: {
-			inviteCode: invite_code,
+			...inviteCodeValidWhere,
 		},
 	});
 
@@ -39,9 +82,6 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 
 	if (existingWorkspace) redirect(`/dashboard/workspace/${existingWorkspace.id}`);
 
-	if (role !== 'admin' && role !== 'editor' && role !== 'viewer')
-		redirect('/dashboard/errors?error=wrong-role');
-
 	const userRole = () => {
 		switch (role) {
 			case 'admin':
@@ -50,9 +90,8 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 				return 'CAN_EDIT';
 			case 'viewer':
 				return 'READ_ONLY';
-
 			default:
-				return 'READ_ONLY';
+				redirect('/dashboard/errors?error=wrong-role');
 		}
 	};
 
@@ -65,7 +104,5 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 	});
 
 	redirect(`/dashboard/workspace/${inviteCodeValid.id}`);
-
-	return null;
 };
 export default Workspace;

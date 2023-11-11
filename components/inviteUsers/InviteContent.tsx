@@ -1,26 +1,23 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
-import { Input } from '@/components/ui/input';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
-import { Check, ChevronDown, Link, RefreshCcw, UserPlus2 } from 'lucide-react';
+import { Check, ChevronDown, Copy, Link, RefreshCcw, UserPlus2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { useToast } from '@/components/ui/use-toast';
 import { useLocale, useTranslations } from 'next-intl';
 import { Workspace } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next-intl/client';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 import { LoadingState } from '@/components/ui/loading-state';
 import { domain } from '@/lib/api';
+import { useRouter } from 'next-intl/client';
 
 interface Props {
 	workspace: Workspace;
@@ -29,28 +26,32 @@ interface Props {
 export const InviteContent = ({
 	workspace: { id, adminCode, canEditCode, inviteCode, readOnlyCode },
 }: Props) => {
-	const { toast } = useToast();
 	const [selectedRole, setSelectedRole] = useState<'viewer' | 'admin' | 'editor'>('editor');
-
-	const lang = useLocale();
-	const m = useTranslations('MESSAGES');
+	const [codes, setCodes] = useState({ adminCode, canEditCode, inviteCode, readOnlyCode });
+	const { toast } = useToast();
 
 	const router = useRouter();
+	const lang = useLocale();
+
+	const t = useTranslations('PERMISSONS');
+	const m = useTranslations('MESSAGES');
 
 	const inviteURL = useMemo(() => {
 		const shareCode = () => {
 			switch (selectedRole) {
 				case 'admin':
-					return adminCode;
+					return codes.adminCode;
 				case 'editor':
-					return canEditCode;
+					return codes.canEditCode;
 				case 'viewer':
-					return readOnlyCode;
+					return codes.readOnlyCode;
 			}
 		};
 
-		return `${domain}/${lang}/dashboard/invite/${inviteCode}?role=${selectedRole}&shareCode=${shareCode()}`;
-	}, [inviteCode, adminCode, readOnlyCode, canEditCode, lang, selectedRole]);
+		return `${domain}/${lang}/dashboard/invite/${
+			codes.inviteCode
+		}?role=${selectedRole}&shareCode=${shareCode()}`;
+	}, [codes, lang, selectedRole]);
 
 	const copyHanlder = () => {
 		navigator.clipboard.writeText(inviteURL);
@@ -62,7 +63,16 @@ export const InviteContent = ({
 
 	const { mutate: regenerateLink, isLoading } = useMutation({
 		mutationFn: async () => {
-			await axios.post('/api/workspace/invite/regenerate_link', { id });
+			const { data } = (await axios.post('/api/workspace/invite/regenerate_link', {
+				id,
+			})) as AxiosResponse<Workspace>;
+
+			setCodes({
+				adminCode: data.adminCode,
+				canEditCode: data.canEditCode,
+				inviteCode: data.inviteCode,
+				readOnlyCode: data.readOnlyCode,
+			});
 		},
 		onError: (err: AxiosError) => {
 			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
@@ -82,121 +92,120 @@ export const InviteContent = ({
 	});
 
 	return (
-		<div className='space-y-4 my-6'>
-			<div className='h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  flex items-center justify-between'>
-				<div className='flex items-center gap-4'>
-					<Link className='w-5 h-5' size={18} />
-					<HoverCard openDelay={250} closeDelay={250}>
-						<HoverCardTrigger asChild>
-							<p className=' overflow-hidden h-5 max-w-[22rem]'>{inviteURL}</p>
-						</HoverCardTrigger>
-						<HoverCardContent>
-							<p className='break-words'>{inviteURL}</p>
-						</HoverCardContent>
-					</HoverCard>
+		<div>
+			<div className='space-y-4 my-6'>
+				<div className='h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  flex items-center justify-between'>
+					<div className='flex items-center gap-4'>
+						<Link className='w-5 h-5' size={18} />
+						<HoverCard openDelay={250} closeDelay={250}>
+							<HoverCardTrigger asChild>
+								<p className=' overflow-hidden h-5 max-w-[11.5rem] sm:max-w-[22rem]'>{inviteURL}</p>
+							</HoverCardTrigger>
+							<HoverCardContent>
+								<p className='break-words'>{inviteURL}</p>
+							</HoverCardContent>
+						</HoverCard>
+					</div>
+					<Button
+						disabled={isLoading}
+						onClick={() => {
+							regenerateLink();
+						}}
+						className={`px-0 w-5 h-5 hover:bg-background hover:text-muted-foreground `}
+						size={'icon'}
+						variant={'ghost'}>
+						{isLoading ? <LoadingState size={18} /> : <RefreshCcw size={18} />}
+					</Button>
 				</div>
-				<Button
-					disabled={isLoading}
-					onClick={() => {
-						regenerateLink();
-					}}
-					className={`px-0 w-5 h-5 hover:bg-background hover:text-muted-foreground `}
-					size={'icon'}
-					variant={'ghost'}>
-					{isLoading ? <LoadingState size={18} /> : <RefreshCcw size={18} />}
-				</Button>
-			</div>
-			<div className=' h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  flex items-center justify-between'>
-				<div className='flex items-center gap-4'>
-					<UserPlus2 className='w-5 h-5' size={18} />
-					<span>Uprawniena</span>
+				<div className=' h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  flex items-center justify-between'>
+					<div className='flex items-center gap-4'>
+						<UserPlus2 className='w-5 h-5' size={18} />
+						<span>{t('PERMISSONS')}</span>
+					</div>
+					<DropdownMenu>
+						<DropdownMenuTrigger asChild>
+							<Button
+								variant={'ghost'}
+								size={'sm'}
+								className='flex gap-1 items-center px-0 h-fit hover:bg-background hover:text-muted-foreground'>
+								{selectedRole === 'admin' && (
+									<p className='flex gap-1 items-center'>
+										<span>😎</span> <span>{t('ADMIN.TITLE')}</span>
+									</p>
+								)}
+								{selectedRole === 'editor' && (
+									<p className='flex gap-1 items-center'>
+										<span>🫡</span> <span>{t('EDITOR.TITLE')}</span>
+									</p>
+								)}
+								{selectedRole === 'viewer' && (
+									<p className='flex gap-1 items-center'>
+										<span>🥸</span> <span>{t('VIEVER.TITLE')}</span>
+									</p>
+								)}
+
+								<ChevronDown size={16} />
+							</Button>
+						</DropdownMenuTrigger>
+						<DropdownMenuContent sideOffset={15} className='max-w-xs'>
+							<DropdownMenuItem
+								className='cursor-pointer'
+								onClick={() => {
+									setSelectedRole('admin');
+								}}>
+								<div className='flex flex-col gap-1'>
+									<div className='flex items-center gap-2'>
+										<div className='flex items-center gap-1 text-sm sm:text-base'>
+											<span>😎</span>
+											<h3>{t('ADMIN.TITLE')}</h3>
+										</div>
+										{selectedRole === 'admin' && <Check size={18} />}
+									</div>
+									<p className='text-muted-foreground text-xs sm:text-sm '>{t('ADMIN.DESC')}</p>
+								</div>
+							</DropdownMenuItem>
+							<DropdownMenuItem
+								className='cursor-pointer'
+								onClick={() => {
+									setSelectedRole('editor');
+								}}>
+								<div className='flex flex-col gap-1'>
+									<div className='flex items-center gap-2'>
+										<div className='flex items-center gap-1 text-sm sm:text-base'>
+											<span>🫡</span>
+											<h3>{t('EDITOR.TITLE')}</h3>
+										</div>
+										{selectedRole === 'editor' && <Check size={18} />}
+									</div>
+									<p className='text-muted-foreground text-xs sm:text-sm'>{t('EDITOR.DESC')}</p>
+								</div>
+							</DropdownMenuItem>
+							<DropdownMenuItem
+								className='cursor-pointer'
+								onClick={() => {
+									setSelectedRole('viewer');
+								}}>
+								<div className='flex flex-col gap-1'>
+									<div className='flex items-center gap-2'>
+										<div className='flex gap-1 items-center text-sm sm:text-base'>
+											<span>🥸</span>
+											<h3>{t('VIEWER.TITLE')}</h3>
+										</div>
+										{selectedRole === 'viewer' && <Check size={18} />}
+									</div>
+									<p className='text-muted-foreground text-xs sm:text-sm '>{t('VIEWER.DESC')}</p>
+								</div>
+							</DropdownMenuItem>
+						</DropdownMenuContent>
+					</DropdownMenu>
 				</div>
-				<DropdownMenu>
-					<DropdownMenuTrigger asChild>
-						<Button
-							variant={'ghost'}
-							size={'sm'}
-							className='flex gap-1 items-center px-0 h-fit hover:bg-background hover:text-muted-foreground'>
-							{selectedRole === 'admin' && (
-								<p className='flex gap-1 items-center'>
-									<span>😎</span> <span>Admin</span>
-								</p>
-							)}
-							{selectedRole === 'editor' && (
-								<p className='flex gap-1 items-center'>
-									<span>🫡</span> <span>Wykonawca</span>
-								</p>
-							)}
-							{selectedRole === 'viewer' && (
-								<p className='flex gap-1 items-center'>
-									<span>🥸</span> <span>Przeglądający</span>
-								</p>
-							)}
-
-							<ChevronDown size={16} />
-						</Button>
-					</DropdownMenuTrigger>
-					<DropdownMenuContent sideOffset={15} className='max-w-xs'>
-						<DropdownMenuItem
-							onClick={() => {
-								setSelectedRole('admin');
-							}}>
-							<div className='flex flex-col gap-1'>
-								<div className='flex items-center gap-2'>
-									<div className='flex items-center gap-1'>
-										<span>😎</span>
-										<h3>Admin</h3>
-									</div>
-									{selectedRole === 'admin' && <Check size={18} />}
-								</div>
-								<p className='text-muted-foreground '>
-									Posiada wszytskie możliwe prawa, również do zmiany ustawień obszaru roboczego, jak
-									i zarządzaniem innymi użytkownikami.
-								</p>
-							</div>
-						</DropdownMenuItem>
-						<DropdownMenuItem
-							onClick={() => {
-								setSelectedRole('editor');
-							}}>
-							<div className='flex flex-col gap-1'>
-								<div className='flex items-center gap-2'>
-									<div className='flex items-center gap-1'>
-										<span>🫡</span>
-										<h3>Wykonawca</h3>
-									</div>
-									{selectedRole === 'editor' && <Check size={18} />}
-								</div>
-								<p className='text-muted-foreground '>
-									Ma pełen dostęp do przestrzeni roboczej, ma prawa do edycji i usuwania treści w
-									przestrzeni roboczej. Nie ma jednak dostępu do ustawien obszaru.
-								</p>
-							</div>
-						</DropdownMenuItem>
-						<DropdownMenuItem
-							onClick={() => {
-								setSelectedRole('viewer');
-							}}>
-							<div className='flex flex-col gap-1'>
-								<div className='flex items-center gap-2'>
-									<div className='flex gap-1 items-center'>
-										<span>🥸</span>
-										<h3>Przeglądający</h3>
-									</div>
-									{selectedRole === 'viewer' && <Check size={18} />}
-								</div>
-								<p className='text-muted-foreground '>
-									Ma pełen dostęp do przestrzeni roboczej, jednak nie może nic edytować jak i
-									usuwuać. Nie ma również dostępu do ustawien obszaru.
-								</p>
-							</div>
-						</DropdownMenuItem>
-					</DropdownMenuContent>
-				</DropdownMenu>
 			</div>
-
-			<Button disabled={isLoading} onClick={copyHanlder} className='w-full text-white font-bold'>
-				Skopiuj link
+			<Button
+				disabled={isLoading}
+				onClick={copyHanlder}
+				className='w-full text-white font-bold flex items-center gap-2'>
+				<Copy size={18} />
+				{t('COPY')}
 			</Button>
 		</div>
 	);

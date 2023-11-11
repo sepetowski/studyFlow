@@ -71,11 +71,11 @@ model Workspace {
 }
 
 model Subscription {
-  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user        User          @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      String
-  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace   Workspace     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
-  userRole    UserPermison @default(READ_ONLY)
+  userRole    UserPermisson @default(READ_ONLY)
 
   @@id([userId, workspaceId])
   @@index([workspaceId])
@@ -111,7 +111,7 @@ enum UseCase {
   PERSONAL_USE
 }
 
-enum UserPermison {
+enum UserPermisson {
   ADMIN
   CAN_EDIT
   READ_ONLY

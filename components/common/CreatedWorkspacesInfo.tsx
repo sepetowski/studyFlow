@@ -12,7 +12,7 @@ interface Props {
 export const CreatedWorkspacesInfo = ({ className, createdNumber }: Props) => {
 	const t = useTranslations('COMMON');
 	return (
-		<p className={cn('text-muted-foreground text-sm text-center', className)}>
+		<p className={cn('text-muted-foreground text-xs sm:text-sm text-center', className)}>
 			{t('ACTIVE_WORKSACPES.FIRST')}{' '}
 			<span className='font-bold'>
 				{createdNumber} {t('ACTIVE_WORKSACPES.SECOND')} {MAX_USER_WORKSPACES}

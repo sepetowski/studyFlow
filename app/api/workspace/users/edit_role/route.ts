@@ -1,8 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { v4 as uuidv4 } from 'uuid';
-import { z } from 'zod';
+import { editUserRoleSchema } from '@/schema/editUserRoleSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -10,17 +9,13 @@ export async function POST(request: Request) {
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
-	const result = z
-		.object({
-			id: z.string(),
-		})
-		.safeParse(body);
+	const result = editUserRoleSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { id } = result.data;
+	const { userId, newRole, workspaceId } = result.data;
 
 	try {
 		const user = await db.user.findUnique({
@@ -30,7 +25,7 @@ export async function POST(request: Request) {
 			include: {
 				subscriptions: {
 					where: {
-						workspaceId: id,
+						workspaceId,
 					},
 					select: {
 						userRole: true,
@@ -47,19 +42,19 @@ export async function POST(request: Request) {
 		)
 			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
 
-		const workspace = await db.workspace.update({
+		const upadtedUser = await db.subscription.update({
 			where: {
-				id,
+				userId_workspaceId: {
+					userId,
+					workspaceId,
+				},
 			},
 			data: {
-				inviteCode: uuidv4(),
-				adminCode: uuidv4(),
-				canEditCode: uuidv4(),
-				readOnlyCode: uuidv4(),
+				userRole: newRole,
 			},
 		});
 
-		return NextResponse.json(workspace, { status: 200 });
+		return NextResponse.json(upadtedUser.userRole, { status: 200 });
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}

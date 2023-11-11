@@ -69,6 +69,24 @@
 				"BUTTON": "USUŃ PRZESTRZEŃ ROBOCZĄ",
 				"PENDING_BTN": "Usuwanie. Proszę czekać"
 			}
+		},
+		"MEMBERS": {
+			"TITLE": "Członkowie",
+			"DESC": "Tutaj możesz zarządzać członakmi przestrzeni roboczej. Możesz zmieniać ich role jak i usunąć z przestrzeni roboczej.",
+			"TABELE": {
+				"USERNAME": "NAZWA",
+				"PERMISSON_SMALL": "UPRAWNIENIA",
+				"PERMISSON_BIG": "UPRAWNIENIA OBSZARU ROBOCZEGO"
+			},
+			"OPTIONS": {
+				"REMOVE_BTN": "Usuń",
+				"REMOVE": {
+					"TITLE": "Usuń z przestrzeni roboczej",
+					"NOTE": "W każdej chwili możesz ponownie zaprosić tego użytkownika do tej przestrzeni roboczej. Aby potwierdzić kliknji „Usuń z przestrzeni roboczej”",
+					"BTN": "Usuń z przestrzeni roboczej",
+					"BTN_PENDING": "Usuwanie"
+				}
+			}
 		}
 	},
 	"NEW_WORKSPACE": {
@@ -132,6 +150,11 @@
 	},
 	"UPLOAD_FILE": {
 		"UPLOAD": "Prześlij"
+	},
+	"INVITE": {
+		"INVITE": "Zaproś",
+		"TITLE": "Zaproś do",
+		"DESC": "Skopiuj link zaproszenia i wyślij do osób które chcesz zaprsić do tej przestrzeni roboczej. Mozesz ustawić role oraz wygenerować nowy link."
 	},
 	"MESSAGES": {
 		"ERRORS": {
@@ -291,6 +314,7 @@
 		}
 	},
 	"COMMON": {
+		"WELCOMEBACK": "Witaj ponownie",
 		"LANG_HOVER": "Zmień język",
 		"THEME_HOVER": "Zmień motyw",
 		"DARK": "Ciemny",
@@ -304,6 +328,27 @@
 			"FIRST": "Utworzyłeś",
 			"SECOND": "z",
 			"THIRD": "możliwych do utworzenia obszarów roboczych"
+		}
+	},
+
+	"PERMISSONS": {
+		"WAIT": "Proszę czekać",
+		"PERMISSONS": "Uprawnienia",
+		"COPY": "Skopiuj link",
+		"OWNER": {
+			"TITLE": "Właściciel"
+		},
+		"ADMIN": {
+			"TITLE": "Admin",
+			"DESC": "Posiada wszytskie możliwe prawa, również do zmiany ustawień obszaru roboczego, jak i do zarządzania innymi użytkownikami."
+		},
+		"EDITOR": {
+			"TITLE": "Wykonawca",
+			"DESC": "Ma pełen dostęp do przestrzeni roboczej, ma prawa do edycji i usuwania treści w przestrzeni roboczej. Nie ma jednak dostępu do ustawien obszaru."
+		},
+		"VIEWER": {
+			"TITLE": "Przeglądający",
+			"DESC": "Ma pełen dostęp do przestrzeni roboczej, jednak nie może nic edytować jak i usuwuać. Nie ma również dostępu do ustawien obszaru."
 		}
 	},
 	"ROUTES": {

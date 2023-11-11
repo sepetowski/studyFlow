@@ -69,6 +69,24 @@
 				"BUTTON": "DELETE WORKSPACE",
 				"PENDING_BTN": "Deleting. Please wait"
 			}
+		},
+		"MEMBERS": {
+			"TITLE": "Members",
+			"DESC": "Here you can manage the members of the workspace. You can change their roles as well as remove them from the workspace.",
+			"TABELE": {
+				"USERNAME": "USERNAME",
+				"PERMISSON_SMALL": "PERMISSONS",
+				"PERMISSON_BIG": "WORKSPACE PERMISSIONS"
+			},
+			"OPTIONS": {
+				"REMOVE_BTN": "Remove",
+				"REMOVE": {
+					"TITLE": "Remove from workspace",
+					"NOTE": "You can invite this user to this workspace again at any time. To confirm click „Remove from workspace”",
+					"BTN": "Remove from workspace",
+					"BTN_PENDING": "Removing"
+				}
+			}
 		}
 	},
 	"NEW_WORKSPACE": {
@@ -132,6 +150,11 @@
 	},
 	"UPLOAD_FILE": {
 		"UPLOAD": "Upload"
+	},
+	"INVITE": {
+		"INVITE": "Invite",
+		"TITLE": "Invite to",
+		"DESC": "Copy the invitation link and send it to the people you want to invite to this workspace. You can set up roles and generate a new link."
 	},
 	"MESSAGES": {
 		"ERRORS": {
@@ -291,6 +314,7 @@
 		}
 	},
 	"COMMON": {
+		"WELCOMEBACK": "Welcomeback",
 		"LANG_HOVER": "Change language",
 		"THEME_HOVER": "Change theme",
 		"DARK": "Dark",
@@ -304,6 +328,26 @@
 			"FIRST": "You have created",
 			"SECOND": "out of",
 			"THIRD": "possible to create workspaces"
+		}
+	},
+	"PERMISSONS": {
+		"WAIT": "Please wait",
+		"PERMISSONS": "PERMISSONS",
+		"COPY": "Copy link",
+		"OWNER": {
+			"TITLE": "Owner"
+		},
+		"ADMIN": {
+			"TITLE": "Admin",
+			"DESC": "It has all possible rights, including to change the settings of the workspace and to manage other users."
+		},
+		"EDITOR": {
+			"TITLE": "Editor",
+			"DESC": "He has full access to the workspace and has rights to edit and delete content in the workspace. However, he does not have access to the settings of the area."
+		},
+		"VIEWER": {
+			"TITLE": "Viewer",
+			"DESC": "He has full access to the workspace, but cannot edit or delete anything. He also does not have access to the area settings."
 		}
 	},
 	"ROUTES": {

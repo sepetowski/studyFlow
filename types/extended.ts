@@ -1,7 +1,7 @@
-import {  UserPermison, Workspace } from '@prisma/client';
+import { UserPermisson, Workspace } from '@prisma/client';
 
 export interface SubscriptionUser {
-	userRole: UserPermison;
+	userRole: UserPermisson;
 	user: {
 		id: string;
 		image?: string | null;

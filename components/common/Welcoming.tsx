@@ -2,7 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import { usePathname } from 'next-intl/client';
-import { useFormatter } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
 	hideOnMobile?: boolean;
@@ -27,19 +27,12 @@ const Welcoming = React.forwardRef<HTMLDivElement, Props>(
 		}: Props,
 		ref
 	) => {
-		const format = useFormatter();
+		const t = useTranslations('COMMON');
 		const dateTime = new Date();
+		const format = useFormatter();
 
 		const day = format.dateTime(dateTime, {
-			year: 'numeric',
-			month: 'long',
-			day: 'numeric',
-		});
-
-		const time = format.dateTime(dateTime, {
-			hour: 'numeric',
-			minute: 'numeric',
-			hourCycle: 'h24',
+			dateStyle: 'full',
 		});
 
 		const pathname = usePathname();
@@ -55,13 +48,12 @@ const Welcoming = React.forwardRef<HTMLDivElement, Props>(
 						className
 					)}
 					{...props}>
-					<p className='font-bold text-3xl'>
-						Welocmeback,{' '}
+					<p className='font-bold text-2xl sm:text-3xl'>
+						{t('WELCOMEBACK')}{' '}
 						<span>{name ? (name && surname ? `${name} ${surname}` : name) : username}</span> 👋
 					</p>
-					<p className='text-muted-foreground  sm:max-w-xl '>
-						<span>{day}</span>
-						{/* <span className='ml-2'>{time}</span> */}
+					<p className='text-muted-foreground text-sm sm:text-base sm:max-w-xl '>
+						{day[0].toUpperCase() + day.slice(1)}
 					</p>
 				</div>
 			);
