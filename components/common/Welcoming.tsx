@@ -49,7 +49,7 @@ const Welcoming = React.forwardRef<HTMLDivElement, Props>(
 					)}
 					{...props}>
 					<p className='font-bold text-2xl sm:text-3xl'>
-						{t('WELCOMEBACK')}{' '}
+						{t('WELCOME_BACK')}{' '}
 						<span>{name ? (name && surname ? `${name} ${surname}` : name) : username}</span> 👋
 					</p>
 					<p className='text-muted-foreground text-sm sm:text-base sm:max-w-xl '>
