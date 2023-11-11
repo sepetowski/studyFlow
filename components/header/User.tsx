@@ -25,9 +25,11 @@ import Image from 'next/image';
 
 interface Props {
 	profileImage?: string | null;
+	username: string;
+	email: string;
 }
 
-export const User = ({ profileImage }: Props) => {
+export const User = ({ profileImage, email, username }: Props) => {
 	const { setTheme, theme } = useTheme();
 	const { onSelectChange } = useChangeLocale();
 	const t = useTranslations('COMMON');
@@ -66,9 +68,9 @@ export const User = ({ profileImage }: Props) => {
 						<UserAvatar className='w-8 h-8' />
 					)}
 					<div>
-						<DropdownMenuLabel className='py-0 pt-1.5'>Bushmeen</DropdownMenuLabel>
+						<DropdownMenuLabel className='py-0 pt-1.5'>{username}</DropdownMenuLabel>
 						<DropdownMenuLabel className='py-0  pb-1.5 pt-0.5 text-xs text-muted-foreground leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70'>
-							bushmeen@gmial.com
+							{email}
 						</DropdownMenuLabel>
 					</div>
 				</div>

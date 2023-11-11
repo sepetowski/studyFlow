@@ -1,5 +1,5 @@
 import { SettingsWorkspace } from '@/types/extended';
-import { UserPermison, Workspace } from '@prisma/client';
+import { UserPermisson, Workspace } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
 export const domain =
@@ -63,5 +63,5 @@ export const getUserWorkspaceRole = async (workspace_id: string, userId: string)
 	if (!res.ok) {
 		return null;
 	}
-	return res.json() as Promise<UserPermison>;
+	return res.json() as Promise<UserPermisson>;
 };

@@ -31,7 +31,11 @@ export const DashboardHeader = async ({ addManualRoutes, className, children }: 
 			</div>
 			<div className='flex items-center gap-2 sm:gap-4'>
 				{children}
-				<User profileImage={session?.user.image} />
+				<User
+					profileImage={session?.user.image}
+					username={session.user.username!}
+					email={session.user.email!}
+				/>
 			</div>
 		</header>
 	);

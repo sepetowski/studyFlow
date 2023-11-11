@@ -27,7 +27,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 				)}
 			</DashboardHeader>
 			<main className='flex flex-col gap-2'>
-				<WorkspaceTab workspace={workspace} />
+				<WorkspaceTab workspace={workspace} workspaceId={workspace.id} />
 			</main>
 		</>
 	);
