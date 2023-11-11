@@ -314,7 +314,7 @@
 		}
 	},
 	"COMMON": {
-		"WELCOMEBACK": "Witaj ponownie",
+		"WELCOME_BACK": "Witaj ponownie",
 		"LANG_HOVER": "Zmień język",
 		"THEME_HOVER": "Zmień motyw",
 		"DARK": "Ciemny",
