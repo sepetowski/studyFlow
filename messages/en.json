@@ -363,6 +363,7 @@
 		"DASHBOARD": "Home",
 		"SETTINGS": "Settings",
 		"SECURITY": "Security",
-		"THEME": "Theme"
+		"THEME": "Theme",
+		"TASKS": "Tasks"
 	}
 }

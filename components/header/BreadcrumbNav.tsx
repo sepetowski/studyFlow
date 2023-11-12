@@ -5,13 +5,14 @@ import { usePathname } from 'next/navigation';
 import Link from 'next-intl/link';
 import { useTranslations } from 'next-intl';
 
-const avaibleRoutesWithTranslation = ['dashboard', 'settings', 'security', 'theme'];
+const avaibleRoutesWithTranslation = ['dashboard', 'settings', 'security', 'theme', 'tasks'];
 
 interface Props {
 	addManualRoutes?: string[];
+	workspaceHref?: string;
 }
 
-export const BreadcrumbNav = ({ addManualRoutes }: Props) => {
+export const BreadcrumbNav = ({ addManualRoutes, workspaceHref }: Props) => {
 	const paths = usePathname();
 	const pathNames = addManualRoutes
 		? addManualRoutes
@@ -31,8 +32,8 @@ export const BreadcrumbNav = ({ addManualRoutes }: Props) => {
 								<>
 									<Link
 										className='focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 ring-offset-background rounded-md py-1 px-1 sm:px-2 transition-colors duration-200 hover:bg-accent'
-										href={href}>
-										{t(link.toUpperCase())}
+										href={workspaceHref && pathNames.length - 1 ? workspaceHref : href}>
+										{avaibleRoutesWithTranslation.includes(link) ? t(link.toUpperCase()) : link}
 									</Link>
 									<ChevronRight className='text-primary' />
 								</>

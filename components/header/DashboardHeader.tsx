@@ -8,11 +8,17 @@ import { cn } from '@/lib/utils';
 
 interface Props {
 	addManualRoutes?: string[];
+	workspaceHref?: string;
 	className?: string;
 	children?: React.ReactNode;
 }
 
-export const DashboardHeader = async ({ addManualRoutes, className, children }: Props) => {
+export const DashboardHeader = async ({
+	addManualRoutes,
+	className,
+	children,
+	workspaceHref,
+}: Props) => {
 	const session = await getAuthSession();
 	if (!session) return null;
 	return (
@@ -27,7 +33,7 @@ export const DashboardHeader = async ({ addManualRoutes, className, children }: 
 					surname={session.user.surname}
 					showOnlyOnPath='/dashboard'
 				/>
-				<BreadcrumbNav addManualRoutes={addManualRoutes} />
+				<BreadcrumbNav addManualRoutes={addManualRoutes} workspaceHref={workspaceHref} />
 			</div>
 			<div className='flex items-center gap-2 sm:gap-4'>
 				{children}
