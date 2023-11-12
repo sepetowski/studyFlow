@@ -230,6 +230,7 @@
 	"SIDEBAR": {
 		"MAIN": {
 			"HOME_HOVER": "Strona główna",
+			"CALENDAR_HOVER": "Kalendarz",
 			"LOG_OUT_HOVER": "Wyloguj się",
 			"SETTINGS_HOVER": "Ustawienia",
 			"NEW_WORKSAPCE_HOVER": "Nowa przestrzeń robocza",
@@ -242,6 +243,14 @@
 			"SECURITY": "Bezpieczeństwo",
 			"THEME": "Motyw",
 			"WORKSPACE": "Przestrzeń robocza"
+		},
+		"WORKSPACE_OPTIONS": {
+			"SHORTCUTS": "Skróty",
+			"TASKS": "Zadania",
+			"MIND_MAPS": "Mapy myśli",
+			"SCHEDULES": "Plany tygodnia",
+			"STUDY": "Nauka",
+			"FILES": "Pliki"
 		}
 	},
 	"SETTINGS": {

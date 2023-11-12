@@ -230,6 +230,7 @@
 	"SIDEBAR": {
 		"MAIN": {
 			"HOME_HOVER": "Home",
+			"CALENDAR_HOVER": "Calendar",
 			"LOG_OUT_HOVER": "Log out",
 			"SETTINGS_HOVER": "Settings",
 			"NEW_WORKSAPCE_HOVER": "New workscape",
@@ -242,6 +243,14 @@
 			"SECURITY": "Security",
 			"THEME": "Theme",
 			"WORKSPACE": "Workspace"
+		},
+		"WORKSPACE_OPTIONS": {
+			"SHORTCUTS": "Shortcuts",
+			"TASKS": "Tasks",
+			"MIND_MAPS": "Mind maps",
+			"SCHEDULES": "Schedules",
+			"STUDY": "Study",
+			"FILES": "Files"
 		}
 	},
 	"SETTINGS": {
