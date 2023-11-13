@@ -12,7 +12,6 @@ import { useTranslations } from 'next-intl';
 interface Props<> {
 	form: UseFormReturn<any>;
 	schema: z.ZodObject<any>;
-	getImagePreview?: React.Dispatch<React.SetStateAction<string>>;
 	inputAccept: 'image/*' | 'pdf';
 	typesDescription?: string;
 	ContainerClassName?: string;
@@ -21,6 +20,7 @@ interface Props<> {
 	useAsBtn?: boolean;
 	hideFileName?: boolean;
 	btnText?: string;
+	onGetImagePreview?: (image:string)=>void;
 }
 
 export function UploadFile({
@@ -34,7 +34,7 @@ export function UploadFile({
 	useAsBtn,
 	hideFileName,
 	btnText,
-	getImagePreview,
+	onGetImagePreview
 }: Props) {
 	const t = useTranslations('UPLOAD_FILE');
 	const [dragActive, setDragActive] = useState<boolean>(false);
@@ -57,7 +57,7 @@ export function UploadFile({
 			form.clearErrors('file');
 			form.setValue('file', providedFile);
 			setFile(providedFile);
-			if (getImagePreview) getImagePreview(URL.createObjectURL(providedFile));
+			if (onGetImagePreview) onGetImagePreview(URL.createObjectURL(providedFile));
 		} else {
 			const errors = result.error.flatten().fieldErrors.file;
 			errors?.forEach((error) =>

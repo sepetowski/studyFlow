@@ -177,6 +177,9 @@ export const EditWorkspaceImage = ({ workspace: { id, color, image, name } }: Pr
 		mutationKey: ['changeWorkspacePicture'],
 	});
 
+	const onSetImagePreviewHandler = (image: string) => {
+		setImagePreview(image);
+	};
 	const onSubmit = async (data: WorkspacePicture) => {
 		const image: File = data.file;
 		await startUpload([image]);
@@ -241,7 +244,7 @@ export const EditWorkspaceImage = ({ workspace: { id, color, image, name } }: Pr
 				<Form {...form}>
 					<form onSubmit={form.handleSubmit(onSubmit)}>
 						<UploadFile
-							getImagePreview={setImagePreview}
+							onGetImagePreview={onSetImagePreviewHandler}
 							hideFileName
 							useAsBtn
 							btnText={t('BTN')}

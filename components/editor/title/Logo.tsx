@@ -5,8 +5,12 @@ import { EmojiSelector } from '@/components/common/EmojiSelector';
 export const Logo = () => {
 	const [selectedEmoji, setSelectedEmoji] = useState('🧠');
 
+	const selectEmojiHandler = (emoji: string) => {
+		setSelectedEmoji(emoji);
+	};
+
 	return (
-		<EmojiSelector setSelectedEmoji={setSelectedEmoji}>
+		<EmojiSelector onSelectedEmoji={selectEmojiHandler}>
 			<span
 				role='img'
 				aria-label='emoji'

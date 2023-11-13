@@ -24,10 +24,10 @@ interface Props {
 	asChild?: boolean;
 	className?: string;
 	children: React.ReactNode;
-	setSelectedEmoji: React.Dispatch<React.SetStateAction<string>>;
+	onSelectedEmoji: (emoji: string) => void;
 }
 
-export const EmojiSelector = ({ asChild, className, children, setSelectedEmoji }: Props) => {
+export const EmojiSelector = ({ asChild, className, children, onSelectedEmoji }: Props) => {
 	const { theme, systemTheme } = useTheme();
 	const locale = useLocale();
 	const [open, setOpen] = useState(false);
@@ -62,7 +62,7 @@ export const EmojiSelector = ({ asChild, className, children, setSelectedEmoji }
 						locale={locale}
 						data={data}
 						onEmojiSelect={(e: OnSelect) => {
-							setSelectedEmoji(e.native);
+							onSelectedEmoji(e.native);
 							setOpen(false);
 						}}
 					/>
