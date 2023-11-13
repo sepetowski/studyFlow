@@ -23,9 +23,10 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 			{pathname.includes('/dashboard/settings') && (
 				<Settings userAdminWorkspaces={userAdminWorkspaces} />
 			)}
-			{pathname.includes(`/dashboard/workspace/${workspaceId}`) && (
+			{pathname === `/dashboard/workspace/${workspaceId}` && (
 				<WorkspaceOptions workspaceId={workspaceId} />
 			)}
+			{pathname === `/dashboard/workspace/${workspaceId}/tasks` && <p>tasks</p>}
 			<CreatedWorkspacesInfo createdNumber={createdWorkspaces} />
 		</div>
 	);

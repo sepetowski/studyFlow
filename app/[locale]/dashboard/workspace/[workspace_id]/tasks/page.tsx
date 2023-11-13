@@ -1,5 +1,6 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
+import { NewTask } from '@/components/tasks/newTask/NewTask';
 import { getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
@@ -24,8 +25,8 @@ const Tasks = async ({ params: { workspace_id } }: Params) => {
 				addManualRoutes={['dashboard', workspace.name, 'tasks']}>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
-			<main className='flex flex-col gap-2'>
-				{workspace.name} {workspace.id}
+			<main className='flex flex-col gap-2 min-h-[40rem] '>
+				<NewTask />
 			</main>
 		</>
 	);
