@@ -11,10 +11,7 @@ export const Logo = () => {
 
 	return (
 		<EmojiSelector onSelectedEmoji={selectEmojiHandler}>
-			<span
-				role='img'
-				aria-label='emoji'
-				className='w-16 h-16 rounded-lg bg-secondary flex justify-center items-center text-3xl'>
+			<span className='w-16 h-16 rounded-lg bg-secondary flex justify-center items-center text-3xl'>
 				{selectedEmoji}
 			</span>
 		</EmojiSelector>

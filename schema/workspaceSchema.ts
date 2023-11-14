@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from './imageSchema';
+import { color } from '@/lib/utils';
 
 const id = z.string();
 
@@ -18,20 +19,7 @@ const file = z
 	.optional()
 	.nullable();
 
-const color = z.enum([
-	'PURPLE',
-	'RED',
-	'GREEN',
-	'BLUE',
-	'PINK',
-	'YELLOW',
-	'ORANGE',
-	'CYAN',
-	'FUCHSIA',
-	'LIME',
-	'EMERALD',
-	'INDIGO',
-]);
+
 
 export const workspaceSchema = z.object({
 	workspaceName,

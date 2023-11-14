@@ -1,9 +1,11 @@
 'use client';
 
 import React from 'react';
-import { WorkspaceEditData, workspaceEditData } from '@/schema/workspaceSchema';
+import { TagSchema, tagSchema } from '@/schema/TagSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useRouter } from 'next-intl/client';
 import { useForm } from 'react-hook-form';
+import { v4 as uuidv4 } from 'uuid';
 import {
 	Form,
 	FormField,
@@ -17,20 +19,15 @@ import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useTranslations } from 'next-intl';
 import { LoadingState } from '@/components/ui/loading-state';
-import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import { useRouter } from 'next-intl/client';
-import { SettingsWorkspace } from '@/types/extended';
-import Warning from '@/components/ui/warning';
-import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { colors } from '@/lib/getRandomWorkspaceColor';
+import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CustomColors } from '@prisma/client';
 
 interface Props {
-	workspace: SettingsWorkspace;
+	onSetTab: (tab: 'list' | 'newTag' | 'editTag') => void;
 }
 
-export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }: Props) => {
+export const NewTag = ({ onSetTab }: Props) => {
 	const { toast } = useToast();
 
 	const t = useTranslations('EDIT_WORKSPACE.DATA');
@@ -38,15 +35,16 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 
 	const router = useRouter();
 
-	const form = useForm<WorkspaceEditData>({
-		resolver: zodResolver(workspaceEditData),
+	const form = useForm<TagSchema>({
+		resolver: zodResolver(tagSchema),
 		defaultValues: {
-			workspaceName: name,
-			color,
+			tagName: '',
+			color: 'PURPLE',
+			id: uuidv4(),
 		},
 	});
 
-	const workspaceColor = (providedColor: CustomColors) => {
+	const tagColor = (providedColor: CustomColors) => {
 		switch (providedColor) {
 			case CustomColors.PURPLE:
 				return 'bg-purple-600 border-purple-600 hover:bg-purple-500 hover:border-purple-500';
@@ -88,48 +86,21 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 		}
 	};
 
-	const { mutate: editWorkspaceData, isLoading } = useMutation({
-		mutationFn: async (data: WorkspaceEditData) => {
-			await axios.post('/api/workspace/edit/data', { ...data, id });
-		},
-		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
-
-			toast({
-				title: m(error),
-				variant: 'destructive',
-			});
-		},
-		onSuccess: () => {
-			toast({
-				title: m('SUCCES.UPDATED_WORKSAPCE'),
-			});
-			router.refresh();
-			form.reset();
-		},
-		mutationKey: ['editWorkspaceData'],
-	});
-
-	const onSubmit = async (data: WorkspaceEditData) => {
-		editWorkspaceData(data);
-	};
+	const onSubmit = async (data: TagSchema) => {};
 	return (
 		<Form {...form}>
-			<form
-				className='w-full max-w-md mt-0 sm:mt-0 space-y-6'
-				onSubmit={form.handleSubmit(onSubmit)}>
-				<div className='space-y-2 sm:space-y-4'>
+			<form className='w-full max-w-[15rem] p-3  space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
+				<div className='space-y-4 '>
 					<div className='space-y-1.5'>
 						<FormField
 							control={form.control}
-							name='workspaceName'
+							name='tagName'
 							render={({ field }) => (
 								<FormItem>
-									<FormLabel className='text-muted-foreground'>{t('INPUTS.NAME')}</FormLabel>
 									<FormControl>
-										<Input className='bg-muted' placeholder={t('PLACEHOLDERS.NAME')} {...field} />
+										<Input className='bg-muted h-7 py-1.5 text-sm' placeholder='Name' {...field} />
 									</FormControl>
-									<FormMessage />
+									<FormMessage className='text-xs' />
 								</FormItem>
 							)}
 						/>
@@ -140,18 +111,20 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 							name='color'
 							render={({ field }) => (
 								<FormItem className='space-y-1.5'>
-									<FormLabel className='text-muted-foreground'>{t('INPUTS.COLOR')}</FormLabel>
+									<FormLabel className='text-muted-foreground'>Colors</FormLabel>
 									<FormControl>
 										<RadioGroup
 											onValueChange={field.onChange}
 											defaultValue={field.value}
-											className='flex flex-wrap  gap-2 md:gap-3'>
+											className='flex flex-wrap gap-3'>
 											{colors.map((color) => (
-												<FormItem key={color} className='flex items-center space-x-3 space-y-0'>
+												<FormItem
+													key={color}
+													className='flex items-center justify-center space-x-4 space-y-0'>
 													<FormControl>
 														<RadioGroupItem
 															useCheckIcon
-															className={`transition-colors duration-200 ${workspaceColor(color)}`}
+															className={`transition-colors duration-200  ${tagColor(color)}`}
 															value={color}
 														/>
 													</FormControl>
@@ -165,15 +138,22 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 						/>
 					</div>
 				</div>
-				<Warning blue>
-					<p>{t('INFO')}</p>
-				</Warning>
-				<Button
-					disabled={!form.formState.isValid || isLoading}
-					type='submit'
-					className='mt-10   dark:text-white font-semibold '>
-					{isLoading ? <LoadingState loadingText={t('BTN_PENDING')} /> : t('BTN')}
-				</Button>
+
+				<div className='flex gap-2'>
+					<Button
+						onClick={() => {
+							onSetTab('list');
+						}}
+						type='button'
+						className='w-1/2 h-fit py-1.5'
+						variant={'secondary'}
+						size={'sm'}>
+						Cancel
+					</Button>
+					<Button size={'sm'} type='submit' className='w-1/2 h-fit py-1.5 dark:text-white '>
+						Create
+					</Button>
+				</div>
 			</form>
 		</Form>
 	);
