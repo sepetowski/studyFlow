@@ -21,14 +21,18 @@ import { useTranslations } from 'next-intl';
 import { LoadingState } from '@/components/ui/loading-state';
 import { colors } from '@/lib/getRandomWorkspaceColor';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
-import { CustomColors } from '@prisma/client';
+import { CustomColors, Tag } from '@prisma/client';
+import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import axios, { AxiosError, AxiosResponse } from 'axios';
 
 interface Props {
 	onSetTab: (tab: 'list' | 'newTag' | 'editTag') => void;
+	workspaceId: string;
 }
 
-export const NewTag = ({ onSetTab }: Props) => {
+export const NewTag = ({ onSetTab, workspaceId }: Props) => {
 	const { toast } = useToast();
+	const queryClient = useQueryClient();
 
 	const t = useTranslations('EDIT_WORKSPACE.DATA');
 	const m = useTranslations('MESSAGES');
@@ -86,7 +90,54 @@ export const NewTag = ({ onSetTab }: Props) => {
 		}
 	};
 
-	const onSubmit = async (data: TagSchema) => {};
+	const { mutate: editWorkspaceData } = useMutation({
+		mutationFn: async (data: TagSchema) => {
+			await axios.post('/api/tags/new_tag', {
+				...data,
+				workspaceId,
+			});
+		},
+		onMutate: async () => {
+			await queryClient.cancelQueries(['getWorkspaceTags']);
+			const previousTags = queryClient.getQueryData<Tag[]>(['getWorkspaceTags']);
+
+			const checkedPreviousTags = previousTags && previousTags.length > 0 ? previousTags : [];
+
+			const id = form.getValues('id');
+			const name = form.getValues('tagName');
+			const color = form.getValues('color');
+
+			queryClient.setQueryData(
+				['getWorkspaceTags'],
+				[...checkedPreviousTags, { id, name, color, workspaceId }]
+			);
+			onSetTab('list');
+
+			return { checkedPreviousTags };
+		},
+		onError: (err: AxiosError, _, context) => {
+			queryClient.setQueryData(['getWorkspaceTags'], context?.checkedPreviousTags);
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+
+			toast({
+				title: m(error),
+				variant: 'destructive',
+			});
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['getWorkspaceTags']);
+		},
+		onSuccess: () => {
+			toast({
+				title: m('SUCCES.UPDATED_WORKSAPCE'),
+			});
+		},
+		mutationKey: ['newTag'],
+	});
+
+	const onSubmit = async (data: TagSchema) => {
+		editWorkspaceData(data);
+	};
 	return (
 		<Form {...form}>
 			<form className='w-full max-w-[15rem] p-3  space-y-6' onSubmit={form.handleSubmit(onSubmit)}>

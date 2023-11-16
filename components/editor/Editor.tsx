@@ -67,6 +67,8 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 		queryKey: ['getWorkspaceTags'],
 	});
 
+	console.log(tags);
+
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
@@ -109,12 +111,13 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 							<div className='w-full gap-1 flex flex-wrap flex-row'>
 								<TaskCalendar onUpdateForm={onUpdateFormHandler} />
 								<TagSelector
+									workspaceId={workspaceId}
 									tags={tags}
 									currentActiveTags={currentActiveTags}
 									onSelectActiveTag={onSelectActiveTagHandler}
 								/>
 								{currentActiveTags.map((tag) => (
-									<LinkTag key={tag.id} tag={tag} />
+									<LinkTag disabled key={tag.id} tag={tag} />
 								))}
 							</div>
 						</div>

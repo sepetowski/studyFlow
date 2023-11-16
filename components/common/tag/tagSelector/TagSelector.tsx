@@ -16,9 +16,10 @@ interface Props {
 	tags?: Tag[];
 	currentActiveTags: Tag[];
 	onSelectActiveTag: (id: string) => void;
+	workspaceId: string;
 }
 
-export const TagSelector = ({ tags, currentActiveTags, onSelectActiveTag }: Props) => {
+export const TagSelector = ({ tags, currentActiveTags, onSelectActiveTag, workspaceId }: Props) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -34,6 +35,7 @@ export const TagSelector = ({ tags, currentActiveTags, onSelectActiveTag }: Prop
 			<DropdownMenuContent>
 				{tags ? (
 					<CommandContainer
+						workspaceId={workspaceId}
 						tags={tags}
 						currentActiveTags={currentActiveTags}
 						onSelectActiveTag={onSelectActiveTag}

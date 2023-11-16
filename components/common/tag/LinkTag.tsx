@@ -7,9 +7,10 @@ import { CustomColors, Tag as TagType } from '@prisma/client';
 
 interface Props {
 	tag: TagType;
+	disabled: boolean;
 }
 
-export const LinkTag = ({ tag: { color, id, name, workspaceId } }: Props) => {
+export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Props) => {
 	const tagColor = useMemo(() => {
 		switch (color) {
 			case CustomColors.PURPLE:
@@ -55,12 +56,13 @@ export const LinkTag = ({ tag: { color, id, name, workspaceId } }: Props) => {
 
 	return (
 		<Link
+			aria-disabled={disabled}
 			href={'/'}
 			className={cn(
 				` ${buttonVariants({
 					variant: 'outline',
 					size: 'sm',
-				})}  px-2.5 py-0.5  h-fit  text-xs `
+				})}  px-2.5 py-0.5  h-fit  text-xs ${disabled ? 'pointer-events-none' : ''}`
 			)}>
 			<Tag className={`mr-2 w-3 h-3  ${tagColor}`} size={16} />
 			<span>{name}</span>
