@@ -7,15 +7,23 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { Check, Plus, Tag } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { CommandContainer } from './CommandContainer ';
+import { Tag } from '@prisma/client';
+import { LoadingState } from '@/components/ui/loading-state';
 
-export const TagSelector = () => {
+interface Props {
+	tags?: Tag[];
+	currentActiveTags: Tag[];
+	onSelectActiveTag: (id: string) => void;
+}
+
+export const TagSelector = ({ tags, currentActiveTags, onSelectActiveTag }: Props) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					className='w-fit h-fit text-xs justify-start text-left font-normal px-2.5 py-0.5 text-muted-foreground'
+					className='w-fit h-fit text-xs justify-start text-left font-normal px-2.5 py-0.5 '
 					variant={'outline'}
 					size={'sm'}>
 					<Plus size={16} className='mr-1 w-3 h-3' />
@@ -24,7 +32,17 @@ export const TagSelector = () => {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<CommandContainer/>
+				{tags ? (
+					<CommandContainer
+						tags={tags}
+						currentActiveTags={currentActiveTags}
+						onSelectActiveTag={onSelectActiveTag}
+					/>
+				) : (
+					<div className=' p-3  flex justify-center items-center'>
+						<LoadingState />
+					</div>
+				)}
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

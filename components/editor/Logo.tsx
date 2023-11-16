@@ -2,11 +2,16 @@
 import React, { useState } from 'react';
 import { EmojiSelector } from '@/components/common/EmojiSelector';
 
-export const Logo = () => {
+interface Props{
+	onFormSelect:(emoji:string)=>void
+}
+
+export const Logo = ({onFormSelect}:Props) => {
 	const [selectedEmoji, setSelectedEmoji] = useState('🧠');
 
 	const selectEmojiHandler = (emoji: string) => {
 		setSelectedEmoji(emoji);
+		onFormSelect(emoji)
 	};
 
 	return (

@@ -8,13 +8,20 @@ import {
 	CommandList,
 	CommandSeparator,
 } from '@/components/ui/command';
-import { Plus } from 'lucide-react';
+import { NutOffIcon, Plus } from 'lucide-react';
 import { CommandTagItem } from './CommandTagItem';
 import { NewTag } from './NewTag';
 import { EditTag } from './EditTag';
 import { Button } from '@/components/ui/button';
+import { Tag } from '@prisma/client';
 
-export const CommandContainer = () => {
+interface Props {
+	tags: Tag[];
+	currentActiveTags: Tag[];
+	onSelectActiveTag: (id: string) => void;
+}
+
+export const CommandContainer = ({ tags, currentActiveTags, onSelectActiveTag }: Props) => {
 	const [tab, setTab] = useState<'list' | 'newTag' | 'editTag'>('list');
 
 	const onSetTab = (tab: 'list' | 'newTag' | 'editTag') => {
@@ -29,7 +36,14 @@ export const CommandContainer = () => {
 					<CommandList>
 						<CommandEmpty>No results found.</CommandEmpty>
 						<CommandGroup heading='TAGS'>
-							<CommandTagItem />
+							{tags.map((tag) => (
+								<CommandTagItem
+									key={tag.id}
+									tag={tag}
+									currentActiveTags={currentActiveTags}
+									onSelectActiveTag={onSelectActiveTag}
+								/>
+							))}
 						</CommandGroup>
 						<CommandSeparator />
 						<CommandGroup heading='NEW'>
@@ -37,7 +51,7 @@ export const CommandContainer = () => {
 								<Button
 									size={'sm'}
 									variant={'ghost'}
-									className='w-full h-fit justify-start px-2 py-1.5 text-xs '
+									className='w-full h-fit justify-start px-2 py-1.5 text-xs  '
 									onClick={() => {
 										setTab('newTag');
 									}}>

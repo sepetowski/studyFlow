@@ -1,7 +1,7 @@
 'use client';
 
 import React from 'react';
-import { TagSchema, tagSchema } from '@/schema/TagSchema';
+import { TagSchema, tagSchema } from '@/schema/tagSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useRouter } from 'next-intl/client';
 import { useForm } from 'react-hook-form';

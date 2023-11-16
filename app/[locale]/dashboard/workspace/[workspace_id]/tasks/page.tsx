@@ -26,7 +26,7 @@ const Tasks = async ({ params: { workspace_id } }: Params) => {
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 min-h-[40rem] '>
-				<NewTask />
+				<NewTask workspaceId={workspace_id} />
 			</main>
 		</>
 	);
