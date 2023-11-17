@@ -5,7 +5,6 @@ import { apiTagSchema } from '@/schema/tagSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
-	
 
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
@@ -61,20 +60,25 @@ export async function POST(request: Request) {
 
 		if (!workspace) return NextResponse.json('ERRORS.NO_WORKSPACE', { status: 404 });
 
-		const tagExist = workspace.tags.find((tag) => tag.name.toLowerCase() === tagName.toLowerCase());
-
-		if (tagExist) return NextResponse.json('ERRORS.THE_SAME_TAG', { status: 405 });
-
-		const newTag = await db.tag.create({
-			data: {
-				color,
-				name: tagName,
+		const tag = await db.tag.findUnique({
+			where: {
 				id,
-				workspaceId,
 			},
 		});
 
-		return NextResponse.json(newTag, { status: 200 });
+		if (!tag) return NextResponse.json('ERRORS.NO_TAG', { status: 404 });
+
+		const updatedTag = await db.tag.update({
+			where: {
+				id,
+			},
+			data: {
+				color,
+				name: tagName,
+			},
+		});
+
+		return NextResponse.json(updatedTag, { status: 200 });
 	} catch (err) {
 		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

@@ -10,25 +10,33 @@ import {
 } from '@/components/ui/command';
 import { NutOffIcon, Plus } from 'lucide-react';
 import { CommandTagItem } from './CommandTagItem';
-import { NewTag } from './NewTag';
+import { CreateNewTagOrEditTag } from './CreateNewTagOrEditTag';
 import { EditTag } from './EditTag';
 import { Button } from '@/components/ui/button';
-import { Tag } from '@prisma/client';
+import { CustomColors, Tag } from '@prisma/client';
 
 interface Props {
 	tags: Tag[];
 	currentActiveTags: Tag[];
 	workspaceId: string;
 	onSelectActiveTag: (id: string) => void;
+	onUpdateActiveTags: (tagId: string, color: CustomColors, name: string) => void;
 }
 
 export const CommandContainer = ({
 	tags,
 	currentActiveTags,
-	onSelectActiveTag,
 	workspaceId,
+	onSelectActiveTag,
+	onUpdateActiveTags,
 }: Props) => {
 	const [tab, setTab] = useState<'list' | 'newTag' | 'editTag'>('list');
+	const [editedTagInfo, setEditedTagInfo] = useState<null | Tag>(null);
+
+	const onEditTagInfoHandler = (tag: Tag) => {
+		setEditedTagInfo(tag);
+		setTab('editTag');
+	};
 
 	const onSetTab = (tab: 'list' | 'newTag' | 'editTag') => {
 		setTab(tab);
@@ -48,6 +56,7 @@ export const CommandContainer = ({
 									tag={tag}
 									currentActiveTags={currentActiveTags}
 									onSelectActiveTag={onSelectActiveTag}
+									onEditTagInfo={onEditTagInfoHandler}
 								/>
 							))}
 						</CommandGroup>
@@ -69,8 +78,18 @@ export const CommandContainer = ({
 					</CommandList>
 				</>
 			)}
-			{tab === 'newTag' && <NewTag onSetTab={onSetTab} workspaceId={workspaceId} />}
-			{tab === 'editTag' && <EditTag />}
+			{tab === 'newTag' && <CreateNewTagOrEditTag onSetTab={onSetTab} workspaceId={workspaceId} />}
+			{tab === 'editTag' && (
+				<CreateNewTagOrEditTag
+					edit
+					workspaceId={workspaceId}
+					color={editedTagInfo?.color}
+					id={editedTagInfo?.id}
+					tagName={editedTagInfo?.name}
+					onSetTab={onSetTab}
+					onUpdateActiveTags={onUpdateActiveTags}
+				/>
+			)}
 		</Command>
 	);
 };

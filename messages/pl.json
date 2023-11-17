@@ -178,7 +178,9 @@
 			"TOO_MANY_WORKSPACES": "Osiągnięto limit możliwej do stworzenia ilości przestrzeni roboczych",
 			"NO_PERMISSION": "Nie masz zezwolenia na wykonanie tych akcji",
 			"NO_WORKSPACE": "Nie znaleziono przestrzeni roboczej",
-			"WRONG_WORKSPACE_NAME": "Proszę podać poprawną nazwę obszaru roboczego"
+			"WRONG_WORKSPACE_NAME": "Proszę podać poprawną nazwę obszaru roboczego",
+			"THE_SAME_TAG": "Tag o takiej nazwie już istnieje",
+			"NO_TAG": "Nie znaleziono tagu"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",

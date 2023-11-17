@@ -1,6 +1,6 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { CommandItem } from '@/components/ui/command';
-import { Check, Tag } from 'lucide-react';
+import { Check, Pencil, Tag } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { CustomColors, Tag as TagType } from '@prisma/client';
 
@@ -8,18 +8,21 @@ interface Props {
 	tag: TagType;
 	currentActiveTags: TagType[];
 	onSelectActiveTag: (id: string) => void;
+	onEditTagInfo: (tag: TagType) => void;
 }
 
 export const CommandTagItem = ({
 	tag: { color, id, name, workspaceId },
 	currentActiveTags,
 	onSelectActiveTag,
+	onEditTagInfo,
 }: Props) => {
 	const isActive = useMemo(() => {
 		return (
 			currentActiveTags.length > 0 && currentActiveTags.find((activeTag) => activeTag.id === id)
 		);
 	}, [currentActiveTags, id]);
+	const [isHoverd, setIsHoverd] = useState(false);
 
 	const tagColor = useMemo(() => {
 		switch (color) {
@@ -65,7 +68,14 @@ export const CommandTagItem = ({
 	}, [color]);
 
 	return (
-		<CommandItem className='p-0'>
+		<CommandItem
+			onMouseEnter={() => {
+				setIsHoverd(true);
+			}}
+			onMouseLeave={() => {
+				setIsHoverd(false);
+			}}
+			className='p-0 relative'>
 			<Button
 				onClick={() => {
 					onSelectActiveTag(id);
@@ -77,8 +87,25 @@ export const CommandTagItem = ({
 					<Tag className='mr-2' size={16} />
 					<span className='text-secondary-foreground'>{name}</span>
 				</p>
+
 				{isActive && <Check size={16} />}
 			</Button>
+			{isHoverd && (
+				<Button
+					onClick={() => {
+						onEditTagInfo({
+							id,
+							color,
+							name,
+							workspaceId,
+						});
+					}}
+					className='absolute top-1/2 right-6 translate-y-[-50%] h-fit  rounded-none z-20   bg-transparent hover:bg-transparent text-muted-foreground'
+					size={'icon'}
+					variant={'ghost'}>
+					<Pencil size={16} />
+				</Button>
+			)}
 		</CommandItem>
 	);
 };

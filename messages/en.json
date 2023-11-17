@@ -178,7 +178,9 @@
 			"TOO_MANY_WORKSPACES": "The limit on the number of workspaces that can be created has been reached",
 			"NO_PERMISSION": "You don't have perrmios for this acction",
 			"NO_WORKSPACE": "Workspace not found",
-			"WRONG_WORKSPACE_NAME": "Please provide the correct name of the workspace"
+			"WRONG_WORKSPACE_NAME": "Please provide the correct name of the workspace",
+			"THE_SAME_TAG": "A tag with this name already exists",
+			"NO_TAG": "Tag not found"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",

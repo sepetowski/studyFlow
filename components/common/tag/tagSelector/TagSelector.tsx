@@ -9,17 +9,24 @@ import {
 import { Button } from '@/components/ui/button';
 import { Plus } from 'lucide-react';
 import { CommandContainer } from './CommandContainer ';
-import { Tag } from '@prisma/client';
+import { CustomColors, Tag } from '@prisma/client';
 import { LoadingState } from '@/components/ui/loading-state';
 
 interface Props {
 	tags?: Tag[];
 	currentActiveTags: Tag[];
-	onSelectActiveTag: (id: string) => void;
 	workspaceId: string;
+	onSelectActiveTag: (id: string) => void;
+	onUpdateActiveTags: (tagId: string, color: CustomColors, name: string) => void;
 }
 
-export const TagSelector = ({ tags, currentActiveTags, onSelectActiveTag, workspaceId }: Props) => {
+export const TagSelector = ({
+	tags,
+	currentActiveTags,
+	workspaceId,
+	onSelectActiveTag,
+	onUpdateActiveTags,
+}: Props) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -39,6 +46,7 @@ export const TagSelector = ({ tags, currentActiveTags, onSelectActiveTag, worksp
 						tags={tags}
 						currentActiveTags={currentActiveTags}
 						onSelectActiveTag={onSelectActiveTag}
+						onUpdateActiveTags={onUpdateActiveTags}
 					/>
 				) : (
 					<div className=' p-3  flex justify-center items-center'>

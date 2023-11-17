@@ -13,7 +13,7 @@ import { TaskCalendar } from './TaskCalendar';
 import { Logo } from './Logo';
 import { TaskSchema, taskSchema } from '@/schema/taskSchema';
 import { DateRange } from 'react-day-picker';
-import { Tag } from '@prisma/client';
+import { CustomColors, Tag } from '@prisma/client';
 
 interface Props {
 	workspaceId: string;
@@ -41,6 +41,16 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 			}
 
 			return prevActiveTags;
+		});
+	};
+
+	const onUpdateActiveTagsHandler = (tagId: string, color: CustomColors, name: string) => {
+		setCurrentActiveTags((prevActiveTags) => {
+			const updatedTags = prevActiveTags.map((tag) =>
+				tag.id === tagId ? { ...tag, name, color } : tag
+			);
+
+			return updatedTags;
 		});
 	};
 
@@ -115,6 +125,7 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 									tags={tags}
 									currentActiveTags={currentActiveTags}
 									onSelectActiveTag={onSelectActiveTagHandler}
+									onUpdateActiveTags={onUpdateActiveTagsHandler}
 								/>
 								{currentActiveTags.map((tag) => (
 									<LinkTag disabled key={tag.id} tag={tag} />

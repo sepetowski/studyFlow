@@ -26,11 +26,24 @@ import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query'
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 interface Props {
-	onSetTab: (tab: 'list' | 'newTag' | 'editTag') => void;
 	workspaceId: string;
+	edit?: boolean;
+	tagName?: string;
+	color?: CustomColors;
+	id?: string;
+	onSetTab: (tab: 'list' | 'newTag' | 'editTag') => void;
+	onUpdateActiveTags?: (tagId: string, color: CustomColors, name: string) => void;
 }
 
-export const NewTag = ({ onSetTab, workspaceId }: Props) => {
+export const CreateNewTagOrEditTag = ({
+	workspaceId,
+	edit,
+	color,
+	id,
+	tagName,
+	onSetTab,
+	onUpdateActiveTags,
+}: Props) => {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
 
@@ -42,11 +55,13 @@ export const NewTag = ({ onSetTab, workspaceId }: Props) => {
 	const form = useForm<TagSchema>({
 		resolver: zodResolver(tagSchema),
 		defaultValues: {
-			tagName: '',
-			color: 'PURPLE',
-			id: uuidv4(),
+			tagName: edit && tagName ? tagName : '',
+			color: edit && color ? color : 'PURPLE',
+			id: edit && id ? id : uuidv4(),
 		},
 	});
+
+	console.log(form.getValues());
 
 	const tagColor = (providedColor: CustomColors) => {
 		switch (providedColor) {
@@ -90,7 +105,7 @@ export const NewTag = ({ onSetTab, workspaceId }: Props) => {
 		}
 	};
 
-	const { mutate: editWorkspaceData } = useMutation({
+	const { mutate: newTag } = useMutation({
 		mutationFn: async (data: TagSchema) => {
 			await axios.post('/api/tags/new_tag', {
 				...data,
@@ -127,16 +142,57 @@ export const NewTag = ({ onSetTab, workspaceId }: Props) => {
 		onSettled: () => {
 			queryClient.invalidateQueries(['getWorkspaceTags']);
 		},
-		onSuccess: () => {
-			toast({
-				title: m('SUCCES.UPDATED_WORKSAPCE'),
-			});
-		},
+
 		mutationKey: ['newTag'],
 	});
 
+	const { mutate: editTag } = useMutation({
+		mutationFn: async (data: TagSchema) => {
+			await axios.post('/api/tags/edit_tag', {
+				...data,
+				workspaceId,
+			});
+		},
+		onMutate: async () => {
+			await queryClient.cancelQueries(['getWorkspaceTags']);
+			const previousTags = queryClient.getQueryData<Tag[]>(['getWorkspaceTags']);
+
+			const checkedPreviousTags = previousTags && previousTags.length > 0 ? previousTags : [];
+
+			const name = form.getValues('tagName');
+			const color = form.getValues('color');
+
+			const updatedTags = checkedPreviousTags.map((tag) =>
+				tag.id === id ? { ...tag, name, color } : tag
+			);
+
+			queryClient.setQueryData(['getWorkspaceTags'], updatedTags);
+			onUpdateActiveTags && onUpdateActiveTags(id!, color, name);
+			onSetTab('list');
+
+			return { checkedPreviousTags };
+		},
+		onError: (err: AxiosError, _, context) => {
+			const prevTag = context?.checkedPreviousTags.find((tag) => tag.id === id);
+			queryClient.setQueryData(['getWorkspaceTags'], context?.checkedPreviousTags);
+			onUpdateActiveTags && onUpdateActiveTags(id!, prevTag?.color!, prevTag?.name!);
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+
+			toast({
+				title: m(error),
+				variant: 'destructive',
+			});
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['getWorkspaceTags']);
+		},
+
+		mutationKey: ['editTag'],
+	});
+
 	const onSubmit = async (data: TagSchema) => {
-		editWorkspaceData(data);
+		if (edit) editTag(data);
+		else newTag(data);
 	};
 	return (
 		<Form {...form}>
@@ -202,7 +258,7 @@ export const NewTag = ({ onSetTab, workspaceId }: Props) => {
 						Cancel
 					</Button>
 					<Button size={'sm'} type='submit' className='w-1/2 h-fit py-1.5 dark:text-white '>
-						Create
+						{edit ? 'Update' : 'Create'}
 					</Button>
 				</div>
 			</form>
