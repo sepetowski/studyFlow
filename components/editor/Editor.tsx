@@ -54,6 +54,14 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 		});
 	};
 
+	const onDeleteActiveTagHandler = (tagId: string) => {
+		setCurrentActiveTags((prevActiveTags) => {
+			const updatedTags = prevActiveTags.filter((tag) => tag.id !== tagId);
+
+			return updatedTags;
+		});
+	};
+
 	const form = useForm<TaskSchema>({
 		resolver: zodResolver(taskSchema),
 		defaultValues: {
@@ -64,7 +72,7 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 		},
 	});
 
-	const { data: tags } = useQuery({
+	const { data: tags, isLoading } = useQuery({
 		queryFn: async () => {
 			const res = await fetch(`/api/tags/get/get_workspace_tags?workspaceId=${workspaceId}`);
 
@@ -76,8 +84,6 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 		enabled: isMounted,
 		queryKey: ['getWorkspaceTags'],
 	});
-
-	console.log(tags);
 
 	useEffect(() => {
 		setIsMounted(true);
@@ -121,11 +127,13 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 							<div className='w-full gap-1 flex flex-wrap flex-row'>
 								<TaskCalendar onUpdateForm={onUpdateFormHandler} />
 								<TagSelector
+									isLoading={isLoading}
 									workspaceId={workspaceId}
 									tags={tags}
 									currentActiveTags={currentActiveTags}
 									onSelectActiveTag={onSelectActiveTagHandler}
 									onUpdateActiveTags={onUpdateActiveTagsHandler}
+									onDeleteActiveTag={onDeleteActiveTagHandler}
 								/>
 								{currentActiveTags.map((tag) => (
 									<LinkTag disabled key={tag.id} tag={tag} />

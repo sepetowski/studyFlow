@@ -21,6 +21,7 @@ interface Props {
 	workspaceId: string;
 	onSelectActiveTag: (id: string) => void;
 	onUpdateActiveTags: (tagId: string, color: CustomColors, name: string) => void;
+	onDeleteActiveTag: (tagId: string) => void;
 }
 
 export const CommandContainer = ({
@@ -29,6 +30,7 @@ export const CommandContainer = ({
 	workspaceId,
 	onSelectActiveTag,
 	onUpdateActiveTags,
+	onDeleteActiveTag,
 }: Props) => {
 	const [tab, setTab] = useState<'list' | 'newTag' | 'editTag'>('list');
 	const [editedTagInfo, setEditedTagInfo] = useState<null | Tag>(null);
@@ -49,18 +51,22 @@ export const CommandContainer = ({
 					<CommandInput className='text-xs' placeholder='Filter' />
 					<CommandList>
 						<CommandEmpty>No results found.</CommandEmpty>
-						<CommandGroup heading='TAGS'>
-							{tags.map((tag) => (
-								<CommandTagItem
-									key={tag.id}
-									tag={tag}
-									currentActiveTags={currentActiveTags}
-									onSelectActiveTag={onSelectActiveTag}
-									onEditTagInfo={onEditTagInfoHandler}
-								/>
-							))}
-						</CommandGroup>
-						<CommandSeparator />
+						{tags.length > 0 && (
+							<>
+								<CommandGroup heading='TAGS'>
+									{tags.map((tag) => (
+										<CommandTagItem
+											key={tag.id}
+											tag={tag}
+											currentActiveTags={currentActiveTags}
+											onSelectActiveTag={onSelectActiveTag}
+											onEditTagInfo={onEditTagInfoHandler}
+										/>
+									))}
+								</CommandGroup>
+								<CommandSeparator />
+							</>
+						)}
 						<CommandGroup heading='NEW'>
 							<CommandItem className='p-0'>
 								<Button
@@ -82,12 +88,15 @@ export const CommandContainer = ({
 			{tab === 'editTag' && (
 				<CreateNewTagOrEditTag
 					edit
+					currentActiveTags={currentActiveTags}
 					workspaceId={workspaceId}
 					color={editedTagInfo?.color}
 					id={editedTagInfo?.id}
 					tagName={editedTagInfo?.name}
 					onSetTab={onSetTab}
+					onSelectActiveTag={onSelectActiveTag}
 					onUpdateActiveTags={onUpdateActiveTags}
+					onDeleteActiveTag={onDeleteActiveTag}
 				/>
 			)}
 		</Command>

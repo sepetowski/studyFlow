@@ -23,5 +23,11 @@ export const apiTagSchema = z.object({
 	color,
 });
 
+export const apiDeleteTagSchema = z.object({
+	id,
+	workspaceId: id,
+});
+
 export type TagSchema = z.infer<typeof tagSchema>;
 export type ApiTagSchema = z.infer<typeof apiTagSchema>;
+export type ApiDeleteTagSchema = z.infer<typeof apiDeleteTagSchema>;

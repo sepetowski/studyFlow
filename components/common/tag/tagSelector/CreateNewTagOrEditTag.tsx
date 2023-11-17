@@ -30,9 +30,12 @@ interface Props {
 	edit?: boolean;
 	tagName?: string;
 	color?: CustomColors;
+	currentActiveTags?: Tag[];
 	id?: string;
 	onSetTab: (tab: 'list' | 'newTag' | 'editTag') => void;
 	onUpdateActiveTags?: (tagId: string, color: CustomColors, name: string) => void;
+	onDeleteActiveTag?: (tagId: string) => void;
+	onSelectActiveTag?: (id: string) => void;
 }
 
 export const CreateNewTagOrEditTag = ({
@@ -41,8 +44,11 @@ export const CreateNewTagOrEditTag = ({
 	color,
 	id,
 	tagName,
+	currentActiveTags,
 	onSetTab,
 	onUpdateActiveTags,
+	onDeleteActiveTag,
+	onSelectActiveTag,
 }: Props) => {
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
@@ -190,9 +196,52 @@ export const CreateNewTagOrEditTag = ({
 		mutationKey: ['editTag'],
 	});
 
+	const { mutate: deleteTag } = useMutation({
+		mutationFn: async () => {
+			await axios.post('/api/tags/delete_tag', {
+				id,
+				workspaceId,
+			});
+		},
+		onMutate: async () => {
+			await queryClient.cancelQueries(['getWorkspaceTags']);
+			const previousTags = queryClient.getQueryData<Tag[]>(['getWorkspaceTags']);
+
+			const checkedPreviousTags = previousTags && previousTags.length > 0 ? previousTags : [];
+			const prevoiusActiveTags = currentActiveTags ? currentActiveTags : [];
+
+			const updatedTags = checkedPreviousTags.filter((tag) => tag.id !== id);
+
+			queryClient.setQueryData(['getWorkspaceTags'], updatedTags);
+
+			onDeleteActiveTag && onDeleteActiveTag(id!);
+			onSetTab('list');
+
+			return { checkedPreviousTags, prevoiusActiveTags };
+		},
+		onError: (err: AxiosError, _, context) => {
+			const prevActiveTag = context?.prevoiusActiveTags.find((tag) => tag.id === id);
+
+			queryClient.setQueryData(['getWorkspaceTags'], context?.checkedPreviousTags);
+
+			prevActiveTag && onSelectActiveTag && onSelectActiveTag(prevActiveTag.id);
+
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+
+			toast({
+				title: m(error),
+				variant: 'destructive',
+			});
+		},
+		onSettled: () => {
+			queryClient.invalidateQueries(['getWorkspaceTags']);
+		},
+
+		mutationKey: ['deleteTag'],
+	});
+
 	const onSubmit = async (data: TagSchema) => {
-		if (edit) editTag(data);
-		else newTag(data);
+		edit ? editTag(data) : newTag(data);
 	};
 	return (
 		<Form {...form}>
@@ -249,13 +298,13 @@ export const CreateNewTagOrEditTag = ({
 				<div className='flex gap-2'>
 					<Button
 						onClick={() => {
-							onSetTab('list');
+							edit ? deleteTag() : onSetTab('list');
 						}}
 						type='button'
 						className='w-1/2 h-fit py-1.5'
 						variant={'secondary'}
 						size={'sm'}>
-						Cancel
+						{edit ? 'Delete' : 'Cancle'}
 					</Button>
 					<Button size={'sm'} type='submit' className='w-1/2 h-fit py-1.5 dark:text-white '>
 						{edit ? 'Update' : 'Create'}
