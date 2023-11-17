@@ -226,7 +226,8 @@
 				"WRONG_NAME": "The given name is different from the name of the workspace"
 			},
 			"LANGUAGE": "Please select a language",
-			"CHOOSE_ONE": "Please select one of the options"
+			"CHOOSE_ONE": "Please select one of the options",
+			"lINK": "Please provide the correct link"
 		}
 	},
 	"SIDEBAR": {

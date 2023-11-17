@@ -2,11 +2,9 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Contener } from './contener/Contener';
+import { Editor } from '../editor/Editor';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { TagSelector } from '@/components/common/tag/tagSelector/TagSelector';
-import { LinkTag } from '@/components/common/tag/LinkTag';
 import { useQuery } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 import { TaskCalendar } from './TaskCalendar';
@@ -14,13 +12,15 @@ import { Logo } from './Logo';
 import { TaskSchema, taskSchema } from '@/schema/taskSchema';
 import { DateRange } from 'react-day-picker';
 import { CustomColors, Tag } from '@prisma/client';
+import { TagSelector } from '../tag/tagSelector/TagSelector';
+import { LinkTag } from '@/components/common/LinkTag';
 
 interface Props {
 	workspaceId: string;
 	initialActiveTags: Tag[];
 }
 
-export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
+export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
@@ -106,7 +106,7 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 	return (
 		<Card>
 			<form id='task-form' onSubmit={form.handleSubmit(onSubmit)}>
-				<CardContent className='py-4 sm:py-6'>
+				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
 					<div className='w-full flex  items-start gap-2 sm:gap-4'>
 						<Logo onFormSelect={onFormSelectHandler} />
 						<div className='w-full flex flex-col gap-2'>
@@ -141,7 +141,7 @@ export const Editor = ({ workspaceId, initialActiveTags }: Props) => {
 							</div>
 						</div>
 					</div>
-					<Contener />
+					<Editor />
 				</CardContent>
 				<button type='submit'>dasd</button>
 			</form>

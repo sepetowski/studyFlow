@@ -226,7 +226,8 @@
 				"WRONG_NAME": "Podana nazwa różni się od nazwy obszaru roboczego"
 			},
 			"LANGUAGE": "Proszę wybrać język",
-			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji"
+			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji",
+			"lINK": "Proszę podać poprawny link"
 		}
 	},
 	"SIDEBAR": {
