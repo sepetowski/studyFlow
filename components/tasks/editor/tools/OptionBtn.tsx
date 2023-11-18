@@ -2,12 +2,9 @@ import { Button } from '@/components/ui/button';
 import { cn } from '@/lib/utils';
 import React from 'react';
 
-interface Props {
-	onClick?: () => void;
-	icon: React.ReactNode;
-	className?: string;
-}
-export const OptionBtn = ({ onClick, icon, className }: Props) => {
+export interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export const OptionBtn = ({ onClick, children, className, ...props }: Props) => {
 	return (
 		<Button
 			className={cn(
@@ -17,8 +14,9 @@ export const OptionBtn = ({ onClick, icon, className }: Props) => {
 			type='button'
 			size={'icon'}
 			variant={'ghost'}
-			onClick={onClick}>
-			{icon}
+			onClick={onClick}
+			{...props}>
+			{children}
 		</Button>
 	);
 };

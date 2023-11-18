@@ -28,6 +28,6 @@
 		"**/*.tsx",
 		".next/types/**/*.ts",
 		"components/settings/workspace/overview/Edit/WorkspaceInfo.tsx"
-	],
+, "components/tasks/editor/tools/ToolsContainer.tsx"	],
 	"exclude": ["node_modules"]
 }
