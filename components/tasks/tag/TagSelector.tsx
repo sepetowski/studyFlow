@@ -12,6 +12,7 @@ import { CommandContainer } from './CommandContainer ';
 import { CustomColors, Tag } from '@prisma/client';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useRouter } from 'next-intl/client';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	isLoading: boolean;
@@ -34,6 +35,8 @@ export const TagSelector = ({
 }: Props) => {
 	const router = useRouter();
 
+	const t = useTranslations('TASK.HEADER.TAG');
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -42,8 +45,8 @@ export const TagSelector = ({
 					variant={'outline'}
 					size={'sm'}>
 					<Plus size={16} className='mr-1 w-3 h-3' />
-					<span className='hidden sm:inline'>New tag</span>
-					<span className='sm:hidden'>Tag</span>
+					<span className='hidden sm:inline'>{t('NEW_TAG')}</span>
+					<span className='sm:hidden'>{t('TAG')}</span>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
@@ -63,13 +66,13 @@ export const TagSelector = ({
 					/>
 				) : (
 					<div className='p-3 text-sm flex justify-center items-center flex-col gap-4 '>
-						<p>Ups cos poszlo nie tak</p>
+						<p>{t('ERROR')}</p>
 						<Button
 							className='w-full'
 							size={'sm'}
 							variant={'default'}
 							onClick={() => router.refresh()}>
-							Sprobuj ponownie
+							{t('ERROR_BTN')}
 						</Button>
 					</div>
 				)}

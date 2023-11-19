@@ -18,11 +18,10 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { useToast } from '@/components/ui/use-toast';
 import { useTranslations } from 'next-intl';
-import { LoadingState } from '@/components/ui/loading-state';
 import { colors } from '@/lib/getRandomWorkspaceColor';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CustomColors, Tag } from '@prisma/client';
-import { QueryClient, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
 interface Props {
@@ -53,10 +52,8 @@ export const CreateNewTagOrEditTag = ({
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
 
-	const t = useTranslations('EDIT_WORKSPACE.DATA');
+	const t = useTranslations('TASK.HEADER.TAG');
 	const m = useTranslations('MESSAGES');
-
-	const router = useRouter();
 
 	const form = useForm<TagSchema>({
 		resolver: zodResolver(tagSchema),
@@ -66,8 +63,6 @@ export const CreateNewTagOrEditTag = ({
 			id: edit && id ? id : uuidv4(),
 		},
 	});
-
-	console.log(form.getValues());
 
 	const tagColor = (providedColor: CustomColors) => {
 		switch (providedColor) {
@@ -243,6 +238,7 @@ export const CreateNewTagOrEditTag = ({
 	const onSubmit = async (data: TagSchema) => {
 		edit ? editTag(data) : newTag(data);
 	};
+
 	return (
 		<Form {...form}>
 			<form className='w-full max-w-[15rem] p-3  space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
@@ -254,7 +250,11 @@ export const CreateNewTagOrEditTag = ({
 							render={({ field }) => (
 								<FormItem>
 									<FormControl>
-										<Input className='bg-muted h-7 py-1.5 text-sm' placeholder='Name' {...field} />
+										<Input
+											className='bg-muted h-7 py-1.5 text-sm'
+											placeholder={t('TAG_NAME')}
+											{...field}
+										/>
 									</FormControl>
 									<FormMessage className='text-xs' />
 								</FormItem>
@@ -267,7 +267,7 @@ export const CreateNewTagOrEditTag = ({
 							name='color'
 							render={({ field }) => (
 								<FormItem className='space-y-1.5'>
-									<FormLabel className='text-muted-foreground'>Colors</FormLabel>
+									<FormLabel className='text-muted-foreground'>{t('COLORS')}</FormLabel>
 									<FormControl>
 										<RadioGroup
 											onValueChange={field.onChange}
@@ -304,10 +304,10 @@ export const CreateNewTagOrEditTag = ({
 						className='w-1/2 h-fit py-1.5'
 						variant={'secondary'}
 						size={'sm'}>
-						{edit ? 'Delete' : 'Cancle'}
+						{edit ? t('BTNS.DELETE') : t('BTNS.CANCEL')}
 					</Button>
 					<Button size={'sm'} type='submit' className='w-1/2 h-fit py-1.5 dark:text-white '>
-						{edit ? 'Update' : 'Create'}
+						{edit ? t('BTNS.UPDATE') : t('BTNS.CREATE')}
 					</Button>
 				</div>
 			</form>

@@ -8,12 +8,14 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useQuery } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 import { TaskCalendar } from './TaskCalendar';
-import { Logo } from './Logo';
+import { Emoji } from './Emoji';
 import { TaskSchema, taskSchema } from '@/schema/taskSchema';
 import { DateRange } from 'react-day-picker';
 import { CustomColors, Tag } from '@prisma/client';
-import { TagSelector } from '../tag/tagSelector/TagSelector';
+import { TagSelector } from '../tag/TagSelector';
 import { LinkTag } from '@/components/common/LinkTag';
+import { useTranslations } from 'next-intl';
+import { Button } from '@/components/ui/button';
 
 interface Props {
 	workspaceId: string;
@@ -24,6 +26,8 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
+
+	const t = useTranslations('TASK');
 
 	const onSelectActiveTagHandler = (tagId: string) => {
 		setCurrentActiveTags((prevActiveTags) => {
@@ -108,7 +112,7 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 			<form id='task-form' onSubmit={form.handleSubmit(onSubmit)}>
 				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
 					<div className='w-full flex  items-start gap-2 sm:gap-4'>
-						<Logo onFormSelect={onFormSelectHandler} />
+						<Emoji onFormSelect={onFormSelectHandler} />
 						<div className='w-full flex flex-col gap-2'>
 							<TextareaAutosize
 								ref={(e) => {
@@ -120,7 +124,7 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 									if (e.key === 'Enter') e.preventDefault();
 								}}
 								{...rest}
-								placeholder='Zadanie bez tytułu'
+								placeholder={t('HEADER.PLACEHOLDER')}
 								className='w-full resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground text-2xl font-semibold focus:outline-none '
 							/>
 
@@ -143,7 +147,6 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 					</div>
 					<Editor />
 				</CardContent>
-				<button type='submit'>dasd</button>
 			</form>
 		</Card>
 	);

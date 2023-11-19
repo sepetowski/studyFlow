@@ -17,12 +17,13 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { OptionBtn } from './OptionBtn';
+import { OptionBtn } from './btn/OptionBtn';
 import { Link2 } from 'lucide-react';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { linkSchema } from '@/schema/linkSchema';
+import { LinkSchema, linkSchema } from '@/schema/linkSchema';
 import { useForm } from 'react-hook-form';
 import { Editor } from '@tiptap/react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	editor: Editor | null;
@@ -31,7 +32,9 @@ interface Props {
 export const AddLink = ({ editor }: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const form = useForm<linkSchema>({
+	const t = useTranslations('TASK.EDITOR.HOVER');
+
+	const form = useForm<LinkSchema>({
 		resolver: zodResolver(linkSchema),
 		defaultValues: {
 			link: '',
@@ -45,7 +48,7 @@ export const AddLink = ({ editor }: Props) => {
 	}, [editor, form]);
 
 	const saveLink = useCallback(
-		(data: linkSchema) => {
+		(data: LinkSchema) => {
 			const { link } = data;
 			if (editor) editor.chain().focus().extendMarkRange('link').setLink({ href: link }).run();
 			setIsOpen(false);
@@ -61,14 +64,9 @@ export const AddLink = ({ editor }: Props) => {
 	return (
 		<Dialog open={isOpen} onOpenChange={setIsOpen}>
 			<DialogTrigger asChild>
-				<Button
-					onClick={setLink}
-					className='w-7  h-7 flex justify-center items-center rounded-sm text-muted-foreground'
-					type='button'
-					size={'icon'}
-					variant={'ghost'}>
+				<OptionBtn onClick={setLink} hoverText={t('LINK')}>
 					<Link2 size={16} />
-				</Button>
+				</OptionBtn>
 			</DialogTrigger>
 			<DialogContent>
 				<DialogHeader>

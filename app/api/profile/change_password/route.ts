@@ -34,7 +34,7 @@ export async function POST(request: Request) {
        
 		const hashedPassword = await bcrypt.hash(new_password, 10);
 
-		console.log('ok/?');
+
 
 		const updatedUser = await db.user.update({
 			where: {

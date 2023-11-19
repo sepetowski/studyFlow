@@ -8,12 +8,12 @@ import {
 	CommandList,
 	CommandSeparator,
 } from '@/components/ui/command';
-import { NutOffIcon, Plus } from 'lucide-react';
+import { Plus } from 'lucide-react';
 import { CommandTagItem } from './CommandTagItem';
 import { CreateNewTagOrEditTag } from './CreateNewTagOrEditTag';
-import { EditTag } from './EditTag';
 import { Button } from '@/components/ui/button';
 import { CustomColors, Tag } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	tags: Tag[];
@@ -35,6 +35,8 @@ export const CommandContainer = ({
 	const [tab, setTab] = useState<'list' | 'newTag' | 'editTag'>('list');
 	const [editedTagInfo, setEditedTagInfo] = useState<null | Tag>(null);
 
+	const t = useTranslations('TASK.HEADER.TAG');
+
 	const onEditTagInfoHandler = (tag: Tag) => {
 		setEditedTagInfo(tag);
 		setTab('editTag');
@@ -48,12 +50,12 @@ export const CommandContainer = ({
 		<Command className='w-[15rem]'>
 			{tab === 'list' && (
 				<>
-					<CommandInput className='text-xs' placeholder='Filter' />
+					<CommandInput className='text-xs' placeholder={t('FILTER')} />
 					<CommandList>
-						<CommandEmpty>No results found.</CommandEmpty>
+						<CommandEmpty>{t('NOT_FOUND')}</CommandEmpty>
 						{tags.length > 0 && (
 							<>
-								<CommandGroup heading='TAGS'>
+								<CommandGroup heading={t('TAGS_HEADING')}>
 									{tags.map((tag) => (
 										<CommandTagItem
 											key={tag.id}
@@ -67,7 +69,7 @@ export const CommandContainer = ({
 								<CommandSeparator />
 							</>
 						)}
-						<CommandGroup heading='NEW'>
+						<CommandGroup heading={t('NEW_HEADING')}>
 							<CommandItem className='p-0'>
 								<Button
 									size={'sm'}
@@ -77,7 +79,7 @@ export const CommandContainer = ({
 										setTab('newTag');
 									}}>
 									<Plus className='mr-1' size={16} />
-									Add tag
+									{t('ADD_TAG')}
 								</Button>
 							</CommandItem>
 						</CommandGroup>

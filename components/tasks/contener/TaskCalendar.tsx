@@ -1,24 +1,33 @@
 'use client';
 
-import * as React from 'react';
+import React, { useMemo } from 'react';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon } from 'lucide-react';
+import { Calendar as CalendarIcon, Info } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
-import { pl } from 'date-fns/locale';
+import { pl, enGB } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
+import { useLocale, useTranslations } from 'next-intl';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 interface Props {
 	onUpdateForm: (e: DateRange | undefined) => void;
 }
 
-export function TaskCalendar({
+export const TaskCalendar = ({
 	className,
 	onUpdateForm,
-}: React.HTMLAttributes<HTMLDivElement> & Props) {
+}: React.HTMLAttributes<HTMLDivElement> & Props) => {
 	const [date, setDate] = React.useState<DateRange | undefined>(undefined);
+	const t = useTranslations('TASK.HEADER.DATE');
+	const lang = useLocale();
+
+	const currentLocale = useMemo(() => {
+		if (lang === 'pl') return pl;
+		else return enGB;
+	}, [lang]);
 
 	const onSelectedDate = (date: DateRange | undefined) => {
 		setDate(date);
@@ -26,7 +35,13 @@ export function TaskCalendar({
 	};
 
 	return (
-		<div className={cn('grid gap-2', className)}>
+		<div className={cn('flex items-center gap-1', className)}>
+			<HoverCard openDelay={250} closeDelay={250}>
+				<HoverCardTrigger>
+					<Info size={16} className='w-4 h-4 ' />
+				</HoverCardTrigger>
+				<HoverCardContent align='start'>{t('INFO')}</HoverCardContent>
+			</HoverCard>
 			<Popover>
 				<PopoverTrigger asChild>
 					<Button
@@ -39,20 +54,20 @@ export function TaskCalendar({
 							date.to ? (
 								<>
 									{format(date.from, 'dd LLL y', {
-										locale: pl,
+										locale: currentLocale,
 									})}{' '}
 									-{' '}
 									{format(date.to, 'dd LLL y', {
-										locale: pl,
+										locale: currentLocale,
 									})}
 								</>
 							) : (
 								format(date.from, 'dd LLL y', {
-									locale: pl,
+									locale: currentLocale,
 								})
 							)
 						) : (
-							<span>Pick a date</span>
+							<span>{t('PICK')}</span>
 						)}
 					</Button>
 				</PopoverTrigger>
@@ -63,11 +78,11 @@ export function TaskCalendar({
 						defaultMonth={date?.from}
 						selected={date}
 						onSelect={onSelectedDate}
-						locale={pl}
+						locale={currentLocale}
 						numberOfMonths={1}
 					/>
 				</PopoverContent>
 			</Popover>
 		</div>
 	);
-}
+};

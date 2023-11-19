@@ -180,7 +180,9 @@
 			"NO_WORKSPACE": "Nie znaleziono przestrzeni roboczej",
 			"WRONG_WORKSPACE_NAME": "Proszę podać poprawną nazwę obszaru roboczego",
 			"THE_SAME_TAG": "Tag o takiej nazwie już istnieje",
-			"NO_TAG": "Nie znaleziono tagu"
+			"NO_TAG": "Nie znaleziono tagu",
+			"WRONG_IMAGE_LINK": "Proszę podać poprawny link",
+			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -227,7 +229,8 @@
 			},
 			"LANGUAGE": "Proszę wybrać język",
 			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji",
-			"lINK": "Proszę podać poprawny link"
+			"LINK": "Proszę podać poprawny link",
+			"IMAGE_REQUIRED": "Proszę podać zdjęcie"
 		}
 	},
 	"SIDEBAR": {
@@ -361,6 +364,80 @@
 		"VIEWER": {
 			"TITLE": "Przeglądający",
 			"DESC": "Ma pełen dostęp do przestrzeni roboczej, jednak nie może nic edytować jak i usuwuać. Nie ma również dostępu do ustawien obszaru."
+		}
+	},
+	"TASK": {
+		"HEADER": {
+			"PLACEHOLDER": "Zadanie bez tytułu",
+			"DATE": {
+				"PICK": "Wbierz datę",
+				"INFO": "Jeśli wybierzesz date, zadanie zostanie dodane do kalendarza"
+			},
+			"TAG": {
+				"FILTER": "Szukaj",
+				"NEW_TAG": "Nowy tag",
+				"TAG": "Tag",
+				"ERROR": "Ups... Coś poszło nie tak",
+				"ERROR_BTN": "Spróbuj ponownie",
+				"NOT_FOUND": "Nie znaleziono",
+				"TAGS_HEADING": "TAGI",
+				"NEW_HEADING": "NOWY",
+				"ADD_TAG": "Dodaj tag",
+				"COLORS": "Kolory",
+				"TAG_NAME": "Nazwa",
+				"BTNS": {
+					"CREATE": "Utwórz",
+					"CANCEL": "Anuluj",
+					"DELETE": "Usuń",
+					"UPDATE": "Aktualizuj"
+				}
+			}
+		},
+		"EDITOR": {
+			"PLACEHOLDER": "Napisz coś fajnego 📝",
+			"WORDS": "liczba wyrazów:",
+			"CHARS": "znaków",
+			"IMAGE": {
+				"TITLE": "Dodaj zdjęcie",
+				"DESC": "Możesz dodać zdjęcie poprzez podanie linka do niego lub możesz zaimportować je z urządzenia.",
+				"LINK": "Dodaj za pomocą linku",
+				"UPLOAD": "Zaimportuj z urządzenia",
+				"LINK_TAB": {
+					"PLACEHOLDER": "Link do zdjęcia",
+					"BTN_ADD": "Dodaj zdjęcie",
+					"BTN_PENDING": "Sprawdzam link"
+				},
+				"UPLOAD_TAB": {
+					"TYPES": "Dozowolne są tylko typy .jpeg, .jpg, .png, .webp, .gif",
+					"BTN_ADD": "Dodaj zdjęcie",
+					"BTN_PENDING": "Dodaje"
+				}
+			},
+			"HOVER": {
+				"H1": "Tytuł 1",
+				"H2": "Tytuł 2",
+				"H3": "Tytuł 3",
+				"H4": "Tytuł 4",
+				"H5": "Tytuł 5",
+				"H6": "Tytuł 6",
+				"BOLD": "Pogrubienie",
+				"ITALIC": "Kursywa",
+				"STRIKETHROUGH": "Przekreślenie",
+				"UNDERLINE": "Podkreślenie",
+				"CODE": "Kod",
+				"UL": "Lista nieuporządkowana",
+				"OL": "Lista uporządkowana",
+				"LINK": "Dodaj hiperłącze",
+				"IMAGE": "Dodaj zdjęcie",
+				"COLOR": "Wyróżnienie",
+				"COLOR_DEAFULT": "Domyślny kolor",
+				"UNDO": "Cofnij",
+				"REDO": "Wykonaj ponownie",
+				"DELETE": "Usuń"
+			}
+		},
+		"BTN": {
+			"SAVE_TASK": "Dodaj zadanie"
 		}
 	},
 	"ROUTES": {

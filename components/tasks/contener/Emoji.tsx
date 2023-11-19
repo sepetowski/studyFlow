@@ -6,7 +6,7 @@ interface Props{
 	onFormSelect:(emoji:string)=>void
 }
 
-export const Logo = ({onFormSelect}:Props) => {
+export const Emoji = ({onFormSelect}:Props) => {
 	const [selectedEmoji, setSelectedEmoji] = useState('🧠');
 
 	const selectEmojiHandler = (emoji: string) => {
