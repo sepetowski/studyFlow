@@ -11,6 +11,7 @@ interface Props {
 	workspaceHref?: string;
 	className?: string;
 	children?: React.ReactNode;
+	hideBreadCrumb?: boolean;
 }
 
 export const DashboardHeader = async ({
@@ -18,6 +19,7 @@ export const DashboardHeader = async ({
 	className,
 	children,
 	workspaceHref,
+	hideBreadCrumb,
 }: Props) => {
 	const session = await getAuthSession();
 	if (!session) return null;
@@ -33,7 +35,9 @@ export const DashboardHeader = async ({
 					surname={session.user.surname}
 					showOnlyOnPath='/dashboard'
 				/>
-				<BreadcrumbNav addManualRoutes={addManualRoutes} workspaceHref={workspaceHref} />
+				{!hideBreadCrumb && (
+					<BreadcrumbNav addManualRoutes={addManualRoutes} workspaceHref={workspaceHref} />
+				)}
 			</div>
 			<div className='flex items-center gap-2 sm:gap-4'>
 				{children}

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -9,16 +9,20 @@ import TextStyle from '@tiptap/extension-text-style';
 import { BubbleMenu } from '@tiptap/react';
 import { ToolsContainer } from './tools/ToolsContainer';
 import Image from '@tiptap/extension-image';
-import TaskList from '@tiptap/extension-task-list';
 import CharacterCount from '@tiptap/extension-character-count';
 import { FloatingContainer } from './tools/FloatingContainer';
 import Placeholder from '@tiptap/extension-placeholder';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
+import { useDebounce } from 'use-debounce';
+
+interface Props {
+	content?: JSON;
+}
 
 const limit = 600;
 
-export const Editor = () => {
+export const Editor = ({ content }: Props) => {
 	const t = useTranslations('TASK');
 
 	const editor = useEditor({
@@ -31,6 +35,7 @@ export const Editor = () => {
 					'focus:outline-none prose prose-headings:text-secondary-foreground prose-p:text-secondary-foreground prose-strong:text-secondary-foreground prose-a:text-primary prose-a:no-underline prose-a:cursor-pointer   w-full focus-visible:outline-none rounded-md max-w-none prose-code:text-secondary-foreground prose-code:bg-muted  prose-ol:text-secondary-foreground prose-ul:text-secondary-foreground prose-li:marker:text-secondary-foreground prose-li:marker:font-bold prose-h1:text-5xl prose-h2:text-4xl prose-h3:text-3xl prose-h4:text-2xl  prose-h5:text-xl prose-h6:text-lg prose-p:text-base prose-headings:line-clamp-1 prose-headings:mt-0 prose-p:my-2',
 			},
 		},
+
 		extensions: [
 			StarterKit.configure({
 				dropcursor: {
@@ -50,8 +55,16 @@ export const Editor = () => {
 				placeholder: t('EDITOR.PLACEHOLDER'),
 			}),
 		],
-		content: '',
+		content: content ? content : '',
 	});
+
+	const [debouncedEditor] = useDebounce(editor?.state.doc, 2000);
+
+	useEffect(() => {
+		if (debouncedEditor) {
+			const json = debouncedEditor.toJSON();
+		}
+	}, [debouncedEditor]);
 
 	return (
 		<div>

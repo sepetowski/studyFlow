@@ -66,6 +66,7 @@
 		"tailwindcss-animate": "^1.0.7",
 		"unique-username-generator": "^1.2.0",
 		"uploadthing": "^5.7.1",
+		"use-debounce": "^10.0.0",
 		"uuid": "^9.0.1",
 		"zod": "^3.22.2"
 	},

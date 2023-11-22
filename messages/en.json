@@ -181,7 +181,8 @@
 			"WRONG_WORKSPACE_NAME": "Please provide the correct name of the workspace",
 			"THE_SAME_TAG": "A tag with this name already exists",
 			"NO_TAG": "Tag not found",
-			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie"
+			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
+			"NO_TASK_FOUND": "Task not found"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",

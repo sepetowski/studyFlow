@@ -7,11 +7,15 @@ import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboar
 interface Params {
 	params: {
 		workspace_id: string;
+		task_id: string;
 	};
 }
 
-const Tasks = async ({ params: { workspace_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(`/dashboard/workspace/${workspace_id}`);
+const Task = async ({ params: { workspace_id, task_id } }: Params) => {
+	console.log(task_id);
+	const session = await checkIfUserCompletedOnboarding(
+		`/dashboard/workspace/${workspace_id}/tasks/task/${task_id}`
+	);
 
 	const [workspace, userRole] = await Promise.all([
 		getWorkspace(workspace_id, session.user.id),
@@ -20,15 +24,13 @@ const Tasks = async ({ params: { workspace_id } }: Params) => {
 
 	return (
 		<>
-			<DashboardHeader
-				workspaceHref={`/dashboard/workspace/${workspace_id}`}
-				addManualRoutes={['dashboard', workspace.name, 'tasks']}>
+			<DashboardHeader hideBreadCrumb>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 min-h-[40rem] '>
-				<TaskContener workspaceId={workspace_id} initialActiveTags={[]} />
+				<TaskContener taskId={task_id} workspaceId={workspace_id} initialActiveTags={[]} />
 			</main>
 		</>
 	);
 };
-export default Tasks;
+export default Task;

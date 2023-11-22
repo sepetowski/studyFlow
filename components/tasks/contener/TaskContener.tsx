@@ -15,17 +15,33 @@ import { CustomColors, Tag } from '@prisma/client';
 import { TagSelector } from '../tag/TagSelector';
 import { LinkTag } from '@/components/common/LinkTag';
 import { useTranslations } from 'next-intl';
-import { Button } from '@/components/ui/button';
+import { useDebounce } from 'use-debounce';
 
 interface Props {
+	taskId: string;
+	title?: string;
+	content?: JSON;
+	emoji?: string;
+	from?: Date;
+	to?: Date;
 	workspaceId: string;
 	initialActiveTags: Tag[];
 }
 
-export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
+export const TaskContener = ({
+	taskId,
+	workspaceId,
+	initialActiveTags,
+	content,
+	emoji,
+	from,
+	title,
+	to,
+}: Props) => {
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
+	const [debouncedCurrentActiveTags] = useDebounce(currentActiveTags, 2000);
 
 	const t = useTranslations('TASK');
 
@@ -50,6 +66,7 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 
 	const onUpdateActiveTagsHandler = (tagId: string, color: CustomColors, name: string) => {
 		setCurrentActiveTags((prevActiveTags) => {
+			if (prevActiveTags.length === 0) return prevActiveTags;
 			const updatedTags = prevActiveTags.map((tag) =>
 				tag.id === tagId ? { ...tag, name, color } : tag
 			);
@@ -60,6 +77,7 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 
 	const onDeleteActiveTagHandler = (tagId: string) => {
 		setCurrentActiveTags((prevActiveTags) => {
+			if (prevActiveTags.length === 0) return prevActiveTags;
 			const updatedTags = prevActiveTags.filter((tag) => tag.id !== tagId);
 
 			return updatedTags;
@@ -69,10 +87,8 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 	const form = useForm<TaskSchema>({
 		resolver: zodResolver(taskSchema),
 		defaultValues: {
-			icon: '🧠',
-			title: '',
-			content: null,
-			date: null,
+			icon: emoji ? emoji : '🧠',
+			title: title ? title : '',
 		},
 	});
 
@@ -88,12 +104,23 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 		enabled: isMounted,
 		queryKey: ['getWorkspaceTags'],
 	});
+	const { ref: titleRef, ...rest } = form.register('title');
+
+	const [debouncedTitle] = useDebounce(form.watch('title'), 2000);
+
+	useEffect(() => {
+		if (!isMounted) return;
+
+		console.log(debouncedTitle);
+	}, [debouncedTitle, isMounted]);
+	useEffect(() => {
+		if (!isMounted) return;
+		const tagsIds = debouncedCurrentActiveTags.map((tag) => tag.id);
+	}, [debouncedCurrentActiveTags, isMounted]);
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
-
-	const { ref: titleRef, ...rest } = form.register('title');
 
 	const onSubmit = (data: TaskSchema) => {
 		console.log(data);
@@ -113,6 +140,7 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
 					<div className='w-full flex  items-start gap-2 sm:gap-4'>
 						<Emoji onFormSelect={onFormSelectHandler} />
+
 						<div className='w-full flex flex-col gap-2'>
 							<TextareaAutosize
 								ref={(e) => {
@@ -129,7 +157,13 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 							/>
 
 							<div className='w-full gap-1 flex flex-wrap flex-row'>
-								<TaskCalendar onUpdateForm={onUpdateFormHandler} />
+								<TaskCalendar
+									workspaceId={workspaceId}
+									taskId={taskId}
+									from={from}
+									to={to}
+									onUpdateForm={onUpdateFormHandler}
+								/>
 								<TagSelector
 									isLoading={isLoading}
 									workspaceId={workspaceId}
@@ -145,7 +179,7 @@ export const TaskContener = ({ workspaceId, initialActiveTags }: Props) => {
 							</div>
 						</div>
 					</div>
-					<Editor />
+					<Editor content={content} />
 				</CardContent>
 			</form>
 		</Card>

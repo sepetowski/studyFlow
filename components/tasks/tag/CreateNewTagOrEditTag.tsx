@@ -241,7 +241,7 @@ export const CreateNewTagOrEditTag = ({
 
 	return (
 		<Form {...form}>
-			<form className='w-full max-w-[15rem] p-3  space-y-6' onSubmit={form.handleSubmit(onSubmit)}>
+			<form className='w-full max-w-[15rem] p-3  space-y-6'>
 				<div className='space-y-4 '>
 					<div className='space-y-1.5'>
 						<FormField
@@ -306,7 +306,11 @@ export const CreateNewTagOrEditTag = ({
 						size={'sm'}>
 						{edit ? t('BTNS.DELETE') : t('BTNS.CANCEL')}
 					</Button>
-					<Button size={'sm'} type='submit' className='w-1/2 h-fit py-1.5 dark:text-white '>
+					<Button
+						onClick={form.handleSubmit(onSubmit)}
+						size={'sm'}
+						type='button'
+						className='w-1/2 h-fit py-1.5 dark:text-white '>
 						{edit ? t('BTNS.UPDATE') : t('BTNS.CREATE')}
 					</Button>
 				</div>

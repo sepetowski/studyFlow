@@ -14,9 +14,14 @@ interface Props {
 
 export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props) => {
 	const pathname = usePathname();
-	if (pathname === '/dashboard') return null;
 	const urlWorkspaceId: string | undefined = pathname.split('/')[3];
 	const workspaceId = urlWorkspaceId ? urlWorkspaceId : '';
+
+	if (
+		pathname === '/dashboard' ||
+		pathname.includes(`/dashboard/workspace/${workspaceId}/tasks/task`)
+	)
+		return null;
 
 	return (
 		<div className='h-full p-4 sm:py-6 border-r w-48 sm:w-64 flex flex-col justify-between'>
@@ -26,7 +31,7 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 			{pathname === `/dashboard/workspace/${workspaceId}` && (
 				<WorkspaceOptions workspaceId={workspaceId} />
 			)}
-			{pathname === `/dashboard/workspace/${workspaceId}/tasks` && <p>tasks</p>}
+
 			<CreatedWorkspacesInfo createdNumber={createdWorkspaces} />
 		</div>
 	);

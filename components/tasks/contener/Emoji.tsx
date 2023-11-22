@@ -1,17 +1,21 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EmojiSelector } from '@/components/common/EmojiSelector';
+import { useDebounce } from 'use-debounce';
 
-interface Props{
-	onFormSelect:(emoji:string)=>void
+interface Props {
+	onFormSelect: (emoji: string) => void;
 }
 
-export const Emoji = ({onFormSelect}:Props) => {
+export const Emoji = ({ onFormSelect }: Props) => {
 	const [selectedEmoji, setSelectedEmoji] = useState('🧠');
+	const [debouncedEmoji] = useDebounce(selectedEmoji, 2000);
+
+	useEffect(() => {}, [debouncedEmoji]);
 
 	const selectEmojiHandler = (emoji: string) => {
 		setSelectedEmoji(emoji);
-		onFormSelect(emoji)
+		onFormSelect(emoji);
 	};
 
 	return (

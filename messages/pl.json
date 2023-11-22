@@ -182,7 +182,8 @@
 			"THE_SAME_TAG": "Tag o takiej nazwie już istnieje",
 			"NO_TAG": "Nie znaleziono tagu",
 			"WRONG_IMAGE_LINK": "Proszę podać poprawny link",
-			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie"
+			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
+			"NO_TASK_FOUND": "Nie znaleziono zadania"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",

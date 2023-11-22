@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon, Info } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
@@ -11,16 +11,33 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useLocale, useTranslations } from 'next-intl';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { useDebounce } from 'use-debounce';
+import { useMutation } from '@tanstack/react-query';
+import axios, { AxiosError } from 'axios';
+import parseISO from 'date-fns/parseISO';
 
 interface Props {
+	from: Date | undefined;
+	to: Date | undefined;
+	taskId: string;
+	workspaceId: string;
 	onUpdateForm: (e: DateRange | undefined) => void;
 }
 
 export const TaskCalendar = ({
+	from,
+	to,
 	className,
+	workspaceId,
+	taskId,
 	onUpdateForm,
 }: React.HTMLAttributes<HTMLDivElement> & Props) => {
-	const [date, setDate] = React.useState<DateRange | undefined>(undefined);
+	console.log(from);
+	const [date, setDate] = React.useState<DateRange | undefined>({
+		from: from ? new Date(from) : undefined,
+		to: to ? new Date(to) : undefined,
+	});
+	const [debouncedDate] = useDebounce(date, 2000);
 	const t = useTranslations('TASK.HEADER.DATE');
 	const lang = useLocale();
 
@@ -28,6 +45,29 @@ export const TaskCalendar = ({
 		if (lang === 'pl') return pl;
 		else return enGB;
 	}, [lang]);
+
+	const { mutate: updateTaskDate, isLoading } = useMutation({
+		mutationFn: async () => {
+			await axios.post('/api/task/update/date', {
+				workspaceId,
+				debouncedDate,
+				taskId,
+			});
+		},
+
+		onSuccess: () => {
+			console.log('saved');
+		},
+
+		onError: () => {
+			//toggle error
+		},
+	});
+
+	useEffect(() => {
+		console.log('sasvin');
+		updateTaskDate();
+	}, [debouncedDate]);
 
 	const onSelectedDate = (date: DateRange | undefined) => {
 		setDate(date);
