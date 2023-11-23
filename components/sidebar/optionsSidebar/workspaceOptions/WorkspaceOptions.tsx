@@ -72,8 +72,6 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 		[workspaceId, t]
 	);
 
-	console.log(workspaceShortcuts?.tasks);
-
 	return (
 		<div className='w-full flex flex-col gap-6 '>
 			<div>

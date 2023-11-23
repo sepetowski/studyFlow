@@ -1,11 +1,11 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Editor } from '../editor/Editor';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import TextareaAutosize from 'react-textarea-autosize';
 import { TaskCalendar } from './TaskCalendar';
 import { Emoji } from './Emoji';
@@ -15,7 +15,9 @@ import { CustomColors, Tag } from '@prisma/client';
 import { TagSelector } from '../tag/TagSelector';
 import { LinkTag } from '@/components/common/LinkTag';
 import { useTranslations } from 'next-intl';
-import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
+import axios from 'axios';
+import { useSaveTaskState } from '@/context/SaveTaskState';
 
 interface Props {
 	taskId: string;
@@ -41,11 +43,12 @@ export const TaskContener = ({
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
-	const [debouncedCurrentActiveTags] = useDebounce(currentActiveTags, 2000);
 
+	const { onSetStatus, status } = useSaveTaskState();
 	const t = useTranslations('TASK');
 
 	const onSelectActiveTagHandler = (tagId: string) => {
+		if (status !== 'unsaved') onSetStatus('unsaved');
 		setCurrentActiveTags((prevActiveTags) => {
 			const tagIndex = prevActiveTags.findIndex((activeTag) => activeTag.id === tagId);
 
@@ -62,6 +65,7 @@ export const TaskContener = ({
 
 			return prevActiveTags;
 		});
+		debouncedCurrentActiveTags();
 	};
 
 	const onUpdateActiveTagsHandler = (tagId: string, color: CustomColors, name: string) => {
@@ -76,12 +80,14 @@ export const TaskContener = ({
 	};
 
 	const onDeleteActiveTagHandler = (tagId: string) => {
+		if (status !== 'unsaved') onSetStatus('unsaved');
 		setCurrentActiveTags((prevActiveTags) => {
 			if (prevActiveTags.length === 0) return prevActiveTags;
 			const updatedTags = prevActiveTags.filter((tag) => tag.id !== tagId);
 
 			return updatedTags;
 		});
+		debouncedCurrentActiveTags();
 	};
 
 	const form = useForm<TaskSchema>({
@@ -89,6 +95,41 @@ export const TaskContener = ({
 		defaultValues: {
 			icon: emoji ? emoji : '🧠',
 			title: title ? title : '',
+		},
+	});
+
+	const { mutate: updateTaskTitle } = useMutation({
+		mutationFn: async (title: string) => {
+			await axios.post('/api/task/update/title', {
+				workspaceId,
+				title,
+				taskId,
+			});
+		},
+
+		onSuccess: () => {
+			onSetStatus('saved');
+		},
+
+		onError: () => {
+			onSetStatus('unsaved');
+		},
+	});
+	const { mutate: updateTaskActiveTags } = useMutation({
+		mutationFn: async (tagsIds: string[]) => {
+			await axios.post('/api/task/update/active_tags', {
+				workspaceId,
+				tagsIds,
+				taskId,
+			});
+		},
+
+		onSuccess: () => {
+			onSetStatus('saved');
+		},
+
+		onError: () => {
+			onSetStatus('unsaved');
 		},
 	});
 
@@ -106,25 +147,24 @@ export const TaskContener = ({
 	});
 	const { ref: titleRef, ...rest } = form.register('title');
 
-	const [debouncedTitle] = useDebounce(form.watch('title'), 2000);
-
-	useEffect(() => {
-		if (!isMounted) return;
-
-		console.log(debouncedTitle);
-	}, [debouncedTitle, isMounted]);
-	useEffect(() => {
-		if (!isMounted) return;
-		const tagsIds = debouncedCurrentActiveTags.map((tag) => tag.id);
-	}, [debouncedCurrentActiveTags, isMounted]);
-
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
 
-	const onSubmit = (data: TaskSchema) => {
-		console.log(data);
-	};
+	const debouncedCurrentActiveTags = useDebouncedCallback(() => {
+		onSetStatus('pending');
+		const tagsIds = currentActiveTags.map((tag) => tag.id);
+		updateTaskActiveTags(tagsIds);
+	}, 2000);
+
+	const debouncedTitle = useDebouncedCallback(
+		useCallback((value: string) => {
+			onSetStatus('pending');
+			updateTaskTitle(value);
+		}, []),
+		2000
+	);
+
 	const onFormSelectHandler = (emoji: string) => {
 		form.setValue('icon', emoji);
 	};
@@ -136,13 +176,19 @@ export const TaskContener = ({
 
 	return (
 		<Card>
-			<form id='task-form' onSubmit={form.handleSubmit(onSubmit)}>
+			<form id='task-form'>
 				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
 					<div className='w-full flex  items-start gap-2 sm:gap-4'>
-						<Emoji onFormSelect={onFormSelectHandler} />
+						<Emoji
+							emoji={emoji ? emoji : '🧠'}
+							workspaceId={workspaceId}
+							taskId={taskId}
+							onFormSelect={onFormSelectHandler}
+						/>
 
 						<div className='w-full flex flex-col gap-2'>
 							<TextareaAutosize
+								{...rest}
 								ref={(e) => {
 									titleRef(e);
 									// @ts-ignore
@@ -151,7 +197,10 @@ export const TaskContener = ({
 								onKeyDown={(e) => {
 									if (e.key === 'Enter') e.preventDefault();
 								}}
-								{...rest}
+								onChange={(e) => {
+									if (status !== 'unsaved') onSetStatus('unsaved');
+									debouncedTitle(e.target.value);
+								}}
 								placeholder={t('HEADER.PLACEHOLDER')}
 								className='w-full resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground text-2xl font-semibold focus:outline-none '
 							/>
@@ -179,7 +228,7 @@ export const TaskContener = ({
 							</div>
 						</div>
 					</div>
-					<Editor content={content} />
+					<Editor taskId={taskId} workspaceId={workspaceId} content={content} />
 				</CardContent>
 			</form>
 		</Card>

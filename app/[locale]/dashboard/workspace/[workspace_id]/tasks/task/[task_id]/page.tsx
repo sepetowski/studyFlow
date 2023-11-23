@@ -12,7 +12,7 @@ interface Params {
 }
 
 const Task = async ({ params: { workspace_id, task_id } }: Params) => {
-	console.log(task_id);
+	
 	const session = await checkIfUserCompletedOnboarding(
 		`/dashboard/workspace/${workspace_id}/tasks/task/${task_id}`
 	);

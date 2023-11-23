@@ -1,6 +1,7 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { TaskContener } from '@/components/tasks/contener/TaskContener';
+import { SaveTaskStateProvider } from '@/context/SaveTaskState';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
@@ -12,7 +13,7 @@ interface Params {
 }
 
 const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
-	console.log(task_id);
+	
 	const session = await checkIfUserCompletedOnboarding(
 		`/dashboard/workspace/${workspace_id}/tasks/task/${task_id}/edit`
 	);
@@ -23,10 +24,10 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 		getTask(task_id, session.user.id),
 	]);
 
-	console.log(task_id);
+
 	return (
-		<>
-			<DashboardHeader hideBreadCrumb>
+		<SaveTaskStateProvider>
+			<DashboardHeader hideBreadCrumb showSavingStatus>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 min-h-[40rem] '>
@@ -41,7 +42,7 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 					initialActiveTags={task.tags}
 				/>
 			</main>
-		</>
+		</SaveTaskStateProvider>
 	);
 };
 export default EditTask;

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { format } from 'date-fns';
 import { Calendar as CalendarIcon, Info } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
@@ -11,10 +11,10 @@ import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { useLocale, useTranslations } from 'next-intl';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { useDebounce } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import { useMutation } from '@tanstack/react-query';
-import axios, { AxiosError } from 'axios';
-import parseISO from 'date-fns/parseISO';
+import axios from 'axios';
+import { useSaveTaskState } from '@/context/SaveTaskState';
 
 interface Props {
 	from: Date | undefined;
@@ -32,46 +32,49 @@ export const TaskCalendar = ({
 	taskId,
 	onUpdateForm,
 }: React.HTMLAttributes<HTMLDivElement> & Props) => {
-	console.log(from);
 	const [date, setDate] = React.useState<DateRange | undefined>({
 		from: from ? new Date(from) : undefined,
 		to: to ? new Date(to) : undefined,
 	});
-	const [debouncedDate] = useDebounce(date, 2000);
+
 	const t = useTranslations('TASK.HEADER.DATE');
 	const lang = useLocale();
+	const { status, onSetStatus } = useSaveTaskState();
 
 	const currentLocale = useMemo(() => {
 		if (lang === 'pl') return pl;
 		else return enGB;
 	}, [lang]);
 
-	const { mutate: updateTaskDate, isLoading } = useMutation({
+	const { mutate: updateTaskDate } = useMutation({
 		mutationFn: async () => {
+			date;
 			await axios.post('/api/task/update/date', {
 				workspaceId,
-				debouncedDate,
+				date,
 				taskId,
 			});
 		},
 
 		onSuccess: () => {
-			console.log('saved');
+			onSetStatus('saved');
 		},
 
 		onError: () => {
-			//toggle error
+			onSetStatus('unsaved');
 		},
 	});
 
-	useEffect(() => {
-		console.log('sasvin');
+	const debounced = useDebouncedCallback(() => {
+		onSetStatus('pending');
 		updateTaskDate();
-	}, [debouncedDate]);
+	}, 2000);
 
 	const onSelectedDate = (date: DateRange | undefined) => {
+		if (status !== 'unsaved') onSetStatus('unsaved');
 		setDate(date);
 		onUpdateForm(date);
+		debounced();
 	};
 
 	return (
