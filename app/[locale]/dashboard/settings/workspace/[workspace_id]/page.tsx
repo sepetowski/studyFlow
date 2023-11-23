@@ -21,7 +21,21 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 		<>
 			<DashboardHeader
 				className='mb-2 sm:mb-0'
-				addManualRoutes={['dashboard', 'settings', workspace.name]}>
+				addManualRoutes={[
+					{
+						name: 'DASHBOARD',
+						href: '/dashboard',
+						useTranslate: true,
+					},
+					{
+						name: 'settings',
+						href: '/dashboard/settings',
+					},
+					{
+						name: workspace.name,
+						href: '/',
+					},
+				]}>
 				{(user?.userRole === 'ADMIN' || user?.userRole === 'OWNER') && (
 					<InviteUsers workspace={workspace} />
 				)}

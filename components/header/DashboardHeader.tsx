@@ -8,7 +8,11 @@ import { cn } from '@/lib/utils';
 import { SavingStatus } from './SavingStatus';
 
 interface Props {
-	addManualRoutes?: string[];
+	addManualRoutes?: {
+		name: string;
+		href: string;
+		useTranslete?: boolean;
+	}[];
 	workspaceHref?: string;
 	className?: string;
 	children?: React.ReactNode;
@@ -28,7 +32,7 @@ export const DashboardHeader = async ({
 	if (!session) return null;
 	return (
 		<header className={cn('w-full flex justify-between items-center mb-4 py-2 gap-2', className)}>
-			<div className='flex items-center gap-2'>
+			<div className='flex items-center gap-2 '>
 				<OpenSidebar />
 				<Welcoming
 					hideOnMobile

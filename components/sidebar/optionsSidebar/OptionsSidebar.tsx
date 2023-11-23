@@ -15,11 +15,12 @@ interface Props {
 export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props) => {
 	const pathname = usePathname();
 	const urlWorkspaceId: string | undefined = pathname.split('/')[3];
+	const urlTaskId: string | undefined = pathname.split('/')[6];
 	const workspaceId = urlWorkspaceId ? urlWorkspaceId : '';
 
 	if (
 		pathname === '/dashboard' ||
-		pathname.includes(`/dashboard/workspace/${workspaceId}/tasks/task`)
+		(urlTaskId && pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlTaskId}/edit`)
 	)
 		return null;
 
@@ -28,7 +29,8 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 			{pathname.includes('/dashboard/settings') && (
 				<Settings userAdminWorkspaces={userAdminWorkspaces} />
 			)}
-			{pathname === `/dashboard/workspace/${workspaceId}` && (
+			{(pathname === `/dashboard/workspace/${workspaceId}` ||
+				pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlTaskId}`) && (
 				<WorkspaceOptions workspaceId={workspaceId} />
 			)}
 
