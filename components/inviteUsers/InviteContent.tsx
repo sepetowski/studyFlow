@@ -140,7 +140,7 @@ export const InviteContent = ({
 								)}
 								{selectedRole === 'viewer' && (
 									<p className='flex gap-1 items-center'>
-										<span>🥸</span> <span>{t('VIEVER.TITLE')}</span>
+										<span>🥸</span> <span>{t('VIEWER.TITLE')}</span>
 									</p>
 								)}
 

@@ -1,4 +1,4 @@
-import { UserPermisson, Workspace } from '@prisma/client';
+import { Tag, Task, UserPermisson, Workspace, savedTask } from '@prisma/client';
 
 export interface SubscriptionUser {
 	userRole: UserPermisson;
@@ -11,4 +11,24 @@ export interface SubscriptionUser {
 
 export interface SettingsWorkspace extends Workspace {
 	subscribers: SubscriptionUser[];
+}
+
+export interface ShortTask {
+	id: string;
+	emoji: string;
+	title: string;
+}
+
+export interface WorkspaceShortcuts extends Workspace {
+	tasks: ShortTask[];
+}
+
+export interface ExtendedTask extends Task {
+	tags: Tag[];
+	date?: {
+		id: string;
+		from: Date | undefined;
+		to: Date | undefined;
+	};
+	savedTask?: savedTask[];
 }

@@ -6,7 +6,6 @@ import { useToggleSidebar } from '@/context/ToggleSidebar';
 import { CloseSidebar } from './CloseSidebar';
 import { Workspace } from '@prisma/client';
 
-
 interface Props {
 	userWorkspaces: Workspace[];
 	userAdminWorkspaces: Workspace[];

@@ -1,4 +1,3 @@
-import './globals.css';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { ThemeProvider } from '@/providers/ThemeProvider';
@@ -8,6 +7,7 @@ import { getMessages } from 'next-intl/server';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { QueryProvider } from '@/providers/QueryProvider';
+import './globals.css';
 
 const locales = ['en', 'pl'];
 const inter = Inter({ subsets: ['latin'] });

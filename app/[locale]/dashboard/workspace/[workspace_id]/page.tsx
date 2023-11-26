@@ -19,7 +19,18 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 
 	return (
 		<>
-			<DashboardHeader addManualRoutes={['dashboard', workspace.name]}>
+			<DashboardHeader
+				addManualRoutes={[
+					{
+						name: 'DASHBOARD',
+						href: '/dashboard',
+						useTranslate: true,
+					},
+					{
+						name: workspace.name,
+						href: `/dashboard/workspace/${workspace_id}`,
+					},
+				]}>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
 			<main className='flex flex-col gap-2'>

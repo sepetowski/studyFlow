@@ -178,7 +178,11 @@
 			"TOO_MANY_WORKSPACES": "The limit on the number of workspaces that can be created has been reached",
 			"NO_PERMISSION": "You don't have perrmios for this acction",
 			"NO_WORKSPACE": "Workspace not found",
-			"WRONG_WORKSPACE_NAME": "Please provide the correct name of the workspace"
+			"WRONG_WORKSPACE_NAME": "Please provide the correct name of the workspace",
+			"THE_SAME_TAG": "A tag with this name already exists",
+			"NO_TAG": "Tag not found",
+			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
+			"NO_TASK_FOUND": "Task not found"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -194,7 +198,9 @@
 			"WORKSPACE_PICTURE_DELETED": "The workspace icon has been removed",
 			"UPDATED_WORKSAPCE": "Workspace has been updated!",
 			"DELETED_WORKSPACE_INFO": "Workspace has been deleted",
-			"REGENERATED_LINK": "Link has been updated"
+			"REGENERATED_LINK": "Link has been updated",
+			"TASK_ADDED": "Task has been added",
+			"TASK_DELETED": "Task has been deleted"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -224,12 +230,14 @@
 				"WRONG_NAME": "The given name is different from the name of the workspace"
 			},
 			"LANGUAGE": "Please select a language",
-			"CHOOSE_ONE": "Please select one of the options"
+			"CHOOSE_ONE": "Please select one of the options",
+			"LINK": "Please provide the correct link"
 		}
 	},
 	"SIDEBAR": {
 		"MAIN": {
 			"HOME_HOVER": "Home",
+			"CALENDAR_HOVER": "Calendar",
 			"LOG_OUT_HOVER": "Log out",
 			"SETTINGS_HOVER": "Settings",
 			"NEW_WORKSAPCE_HOVER": "New workscape",
@@ -242,6 +250,16 @@
 			"SECURITY": "Security",
 			"THEME": "Theme",
 			"WORKSPACE": "Workspace"
+		},
+		"WORKSPACE_OPTIONS": {
+			"SHORTCUTS": "Shortcuts",
+			"TASKS": "Tasks",
+			"MIND_MAPS": "Mind maps",
+			"SCHEDULES": "Schedules",
+			"STUDY": "Study",
+			"FILES": "Files",
+			"DEAFULT_NAME": "Untitled",
+			"ACTIONS": "Actions"
 		}
 	},
 	"SETTINGS": {
@@ -254,7 +272,9 @@
 			"LIGHT_FOOTER": "Deafult light",
 			"DARK_FOOTER": "Deafult dark",
 			"SYSTEM_FOOTER": "Deafult system",
-			"ACTIVE": "Active"
+			"ACTIVE": "Active",
+			"ADD_TASK": "Add task",
+			"ADD_TASK_PENDING": "Creating task"
 		},
 		"ACCOUNT": {
 			"TITLE": "Account",
@@ -328,6 +348,12 @@
 			"FIRST": "You have created",
 			"SECOND": "out of",
 			"THIRD": "possible to create workspaces"
+		},
+		"BACK_BTN": "Back",
+		"SAVING_STATUS": {
+			"SAVED": "Saved",
+			"SAVING": "Saving",
+			"UNSAVED": "Unsaved"
 		}
 	},
 	"PERMISSONS": {
@@ -350,10 +376,101 @@
 			"DESC": "He has full access to the workspace, but cannot edit or delete anything. He also does not have access to the area settings."
 		}
 	},
+	"TASK": {
+		"HEADER": {
+			"PLACEHOLDER": "Untitled task",
+			"DATE": {
+				"PICK": "Pic a date",
+				"INFO": "If you select a date, the task will be added to your calendar"
+			},
+			"TAG": {
+				"FILTER": "Filter",
+				"NEW_TAG": "New tag",
+				"TAG": "Tag",
+				"ERROR": "Oops... Something went wrong",
+				"ERROR_BTN": "Try again",
+				"NOT_FOUND": "Not found",
+				"TAGS_HEADING": "TAGS",
+				"NEW_HEADING": "NEW",
+				"ADD_TAG": "Add tag",
+				"COLORS": "Colors",
+				"TAG_NAME": "Name",
+				"BTNS": {
+					"CREATE": "Create",
+					"CANCEL": "Cancel",
+					"DELETE": "Delete",
+					"UPDATE": "Update"
+				}
+			}
+		},
+		"EDITOR": {
+			"PLACEHOLDER": "Write something cool 📝",
+			"WORDS": "number of words:",
+			"CHARS": "chars",
+			"IMAGE": {
+				"TITLE": "Add image",
+				"DESC": "You can add a photo by providing a link to it or you can import it from your device.",
+				"LINK": "Add via the link",
+				"UPLOAD": "Import from device",
+				"LINK_TAB": {
+					"PLACEHOLDER": "Photo link",
+					"BTN_ADD": "Add image",
+					"BTN_PENDING": "Checking the link"
+				},
+				"UPLOAD_TAB": {
+					"TYPES": "Only the types .jpeg, .jpg, .png, .webp, .gif are allowed",
+					"BTN_ADD": "Add image",
+					"BTN_PENDING": "Adding"
+				}
+			},
+			"HOVER": {
+				"H1": "Title 1",
+				"H2": "Title 2",
+				"H3": "Title 3",
+				"H4": "Title 4",
+				"H5": "Title 5",
+				"H6": "Title 6",
+				"BOLD": "Bold",
+				"ITALIC": "Italic",
+				"STRIKETHROUGH": "Strikethrough",
+				"UNDERLINE": "Underline",
+				"CODE": "Code",
+				"UL": "Unordered list",
+				"OL": "Ordered list",
+				"LINK": "Add hyperlink",
+				"IMAGE": "Add image",
+				"COLOR": "Highlight",
+				"COLOR_DEAFULT": "Deafult color",
+				"UNDO": "Undo",
+				"REDO": "Redo",
+				"DELETE": "Delete"
+			},
+			"READ_ONLY": {
+				"NO_DATE": "not recorded in the calendar",
+				"NO_TITLE": "Untitled task",
+				"NO_CONTENT": "Task without content",
+				"DELETE": "Delete",
+				"EDIT": "Edit",
+				"ADD_TO_FAV": "Add to favourites",
+				"REMOVE_FROM_FAV": "Remove from favourites",
+				"DIALOG": {
+					"TITLE": "Delete task",
+					"DESC": "Are you sure you want to delete this note? You will lose all the data it contains and the activities associated with it. Deletion is irreversible",
+					"BTN_DELETE": "Delete task",
+					"BTN_PENDING": "Deleting"
+				}
+			}
+		},
+		"BTN": {
+			"SAVE_TASK": "Add task"
+		}
+	},
 	"ROUTES": {
 		"DASHBOARD": "Home",
 		"SETTINGS": "Settings",
 		"SECURITY": "Security",
-		"THEME": "Theme"
+		"THEME": "Theme",
+		"TASKS": "Tasks",
+		"UNTITLED": "Untitled"
 	}
 }

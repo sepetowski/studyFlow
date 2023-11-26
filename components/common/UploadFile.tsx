@@ -12,7 +12,6 @@ import { useTranslations } from 'next-intl';
 interface Props<> {
 	form: UseFormReturn<any>;
 	schema: z.ZodObject<any>;
-	getImagePreview?: React.Dispatch<React.SetStateAction<string>>;
 	inputAccept: 'image/*' | 'pdf';
 	typesDescription?: string;
 	ContainerClassName?: string;
@@ -21,6 +20,9 @@ interface Props<> {
 	useAsBtn?: boolean;
 	hideFileName?: boolean;
 	btnText?: string;
+	btnVariant?: 'default' | 'destructive' | 'outline' | 'secondary' | 'ghost' | 'link' | null;
+	btnSize?: 'default' | 'sm' | 'lg' | 'icon' | null;
+	onGetImagePreview?: (image: string) => void;
 }
 
 export function UploadFile({
@@ -34,7 +36,9 @@ export function UploadFile({
 	useAsBtn,
 	hideFileName,
 	btnText,
-	getImagePreview,
+	btnSize,
+	btnVariant,
+	onGetImagePreview,
 }: Props) {
 	const t = useTranslations('UPLOAD_FILE');
 	const [dragActive, setDragActive] = useState<boolean>(false);
@@ -56,8 +60,10 @@ export function UploadFile({
 		if (result.success) {
 			form.clearErrors('file');
 			form.setValue('file', providedFile);
+
 			setFile(providedFile);
-			if (getImagePreview) getImagePreview(URL.createObjectURL(providedFile));
+
+			if (onGetImagePreview) onGetImagePreview(URL.createObjectURL(providedFile));
 		} else {
 			const errors = result.error.flatten().fieldErrors.file;
 			errors?.forEach((error) =>
@@ -66,6 +72,7 @@ export function UploadFile({
 				})
 			);
 		}
+		form.trigger('file');
 	};
 
 	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -106,6 +113,7 @@ export function UploadFile({
 	const removeFile = () => {
 		setFile(null);
 		form.setValue('file', null);
+		form.trigger('file');
 	};
 
 	return (
@@ -119,11 +127,13 @@ export function UploadFile({
 						{useAsBtn ? (
 							<>
 								<Button
+									size={btnSize}
+									variant={btnVariant}
 									onClick={() => {
 										if (inputRef.current) inputRef?.current.click();
 									}}
 									type='button'
-									className='dark:text-white mb-1'>
+									className='dark:text-white'>
 									{btnText && btnText}
 								</Button>
 								<Input
@@ -174,7 +184,9 @@ export function UploadFile({
 									accept={inputAccept}
 								/>
 								<UploadCloud size={30} />
-								<p className='text-sm font-semibold uppercase text-primary mt-5'>{t('UPLOAD')}</p>
+								<p className='text-sm font-semibold uppercase text-primary mt-5'>
+									{btnText ? btnText : t('UPLOAD')}
+								</p>
 								{typesDescription && <p className='text-xs mt-1 text-center'>{typesDescription}</p>}
 							</div>
 						)}

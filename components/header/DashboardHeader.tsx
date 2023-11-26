@@ -5,19 +5,38 @@ import { getAuthSession } from '@/lib/auth';
 import { OpenSidebar } from './OpenSidebar';
 import Welcoming from '../common/Welcoming';
 import { cn } from '@/lib/utils';
+import { SavingStatus } from './SavingStatus';
+import { BackBtn } from './BackBtn';
 
 interface Props {
-	addManualRoutes?: string[];
+	addManualRoutes?: {
+		name: string;
+		href: string;
+		useTranslate?: boolean;
+		emoji?: string;
+	}[];
+	workspaceHref?: string;
 	className?: string;
 	children?: React.ReactNode;
+	hideBreadCrumb?: boolean;
+	showSavingStatus?: boolean;
+	showBackBtn?: boolean;
 }
 
-export const DashboardHeader = async ({ addManualRoutes, className, children }: Props) => {
+export const DashboardHeader = async ({
+	addManualRoutes,
+	className,
+	children,
+	workspaceHref,
+	showSavingStatus,
+	hideBreadCrumb,
+	showBackBtn,
+}: Props) => {
 	const session = await getAuthSession();
 	if (!session) return null;
 	return (
 		<header className={cn('w-full flex justify-between items-center mb-4 py-2 gap-2', className)}>
-			<div className='flex items-center gap-2'>
+			<div className='flex items-center gap-2 '>
 				<OpenSidebar />
 				<Welcoming
 					hideOnMobile
@@ -27,7 +46,11 @@ export const DashboardHeader = async ({ addManualRoutes, className, children }: 
 					surname={session.user.surname}
 					showOnlyOnPath='/dashboard'
 				/>
-				<BreadcrumbNav addManualRoutes={addManualRoutes} />
+				{showBackBtn && <BackBtn />}
+				{showSavingStatus && <SavingStatus />}
+				{!hideBreadCrumb && (
+					<BreadcrumbNav addManualRoutes={addManualRoutes} workspaceHref={workspaceHref} />
+				)}
 			</div>
 			<div className='flex items-center gap-2 sm:gap-4'>
 				{children}
