@@ -6,18 +6,21 @@ import { OpenSidebar } from './OpenSidebar';
 import Welcoming from '../common/Welcoming';
 import { cn } from '@/lib/utils';
 import { SavingStatus } from './SavingStatus';
+import { BackBtn } from './BackBtn';
 
 interface Props {
 	addManualRoutes?: {
 		name: string;
 		href: string;
-		useTranslete?: boolean;
+		useTranslate?: boolean;
+		emoji?: string;
 	}[];
 	workspaceHref?: string;
 	className?: string;
 	children?: React.ReactNode;
 	hideBreadCrumb?: boolean;
 	showSavingStatus?: boolean;
+	showBackBtn?: boolean;
 }
 
 export const DashboardHeader = async ({
@@ -27,6 +30,7 @@ export const DashboardHeader = async ({
 	workspaceHref,
 	showSavingStatus,
 	hideBreadCrumb,
+	showBackBtn,
 }: Props) => {
 	const session = await getAuthSession();
 	if (!session) return null;
@@ -42,6 +46,7 @@ export const DashboardHeader = async ({
 					surname={session.user.surname}
 					showOnlyOnPath='/dashboard'
 				/>
+				{showBackBtn && <BackBtn />}
 				{showSavingStatus && <SavingStatus />}
 				{!hideBreadCrumb && (
 					<BreadcrumbNav addManualRoutes={addManualRoutes} workspaceHref={workspaceHref} />

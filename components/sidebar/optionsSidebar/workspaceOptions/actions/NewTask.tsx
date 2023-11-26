@@ -16,6 +16,7 @@ interface Props {
 
 export const NewTask = ({ workspaceId }: Props) => {
 	const m = useTranslations('MESSAGES');
+	const t = useTranslations('SIDEBAR.WORKSPACE_OPTIONS');
 
 	const { toast } = useToast();
 	const router = useRouter();
@@ -30,7 +31,7 @@ export const NewTask = ({ workspaceId }: Props) => {
 
 		onSuccess: (data: Task) => {
 			toast({
-				title: 'Zadanie zostało dodane',
+				title: m('SUCCES.TASK_ADDED'),
 			});
 			router.push(`/dashboard/workspace/${workspaceId}/tasks/task/${data.id}/edit`);
 		},
@@ -56,7 +57,7 @@ export const NewTask = ({ workspaceId }: Props) => {
 			variant={'ghost'}
 			size={'sm'}>
 			<Plus size={16} />
-			{isLoading ? <LoadingState /> : 'Add Task'}
+			{isLoading ? <LoadingState loadingText={t('ADD_TASK_PENDING')} /> : t('ADD_TASK')}
 		</Button>
 	);
 };

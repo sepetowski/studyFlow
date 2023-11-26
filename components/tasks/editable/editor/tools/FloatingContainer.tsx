@@ -11,6 +11,8 @@ import {
 	Heading6,
 	List,
 	ListOrdered,
+	Redo2,
+	Undo2,
 } from 'lucide-react';
 import { Separator } from '@/components/ui/separator';
 import { AddImage } from './addImage/AddImage';
@@ -92,6 +94,13 @@ export const FloatingContainer = ({ editor }: Props) => {
 			</OptionBtn>
 			<Separator className='h-6' orientation='vertical' />
 			<AddImage editor={editor} />
+			<Separator className='h-6' orientation='vertical' />
+			<OptionBtn onClick={() => editor.commands.undo()} hoverText={t('UNDO')}>
+				<Undo2 size={16} />
+			</OptionBtn>
+			<OptionBtn onClick={() => editor.commands.redo()} hoverText={t('REDO')}>
+				<Redo2 size={16} />
+			</OptionBtn>
 		</FloatingMenu>
 	);
 };

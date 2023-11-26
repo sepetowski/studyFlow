@@ -1,6 +1,6 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
-import { TaskContener } from '@/components/tasks/contener/TaskContener';
+import { ReadOnlyContent } from '@/components/tasks/readOnly/ReadOnlyContent';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
@@ -22,6 +22,10 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 		getTask(task_id, session.user.id),
 	]);
 
+	console.log('role', userRole);
+	const isSavedByUser =
+		task.savedTask?.find((task) => task.userId === session.user.id) !== undefined;
+
 	return (
 		<>
 			<DashboardHeader
@@ -36,14 +40,16 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 						href: `/dashboard/workspace/${workspace_id}`,
 					},
 					{
-						name: `${task.emoji} ${task.title}`,
+						emoji: task.emoji,
+						name: `${task.title ? task.title : 'UNTITLED'}`,
 						href: '/',
+						useTranslate: task.title ? false : true,
 					},
 				]}>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
-			<main className='flex flex-col gap-2 min-h-[40rem] '>
-				{/* <TaskContener taskId={task_id} workspaceId={workspace_id} initialActiveTags={[]} /> */}
+			<main className='flex flex-col gap-2  '>
+				<ReadOnlyContent task={task} isSavedByUser={isSavedByUser} userRole={userRole} />
 			</main>
 		</>
 	);

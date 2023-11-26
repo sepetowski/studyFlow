@@ -5,13 +5,12 @@ import { usePathname } from 'next/navigation';
 import Link from 'next-intl/link';
 import { useTranslations } from 'next-intl';
 
-const avaibleRoutesWithTranslation = ['dashboard', 'settings', 'security', 'theme', 'tasks'];
-
 interface Props {
 	addManualRoutes?: {
 		name: string;
 		href: string;
 		useTranslate?: boolean;
+		emoji?: string;
 	}[];
 	workspaceHref?: string;
 }
@@ -41,6 +40,7 @@ export const BreadcrumbNav = ({ addManualRoutes, workspaceHref }: Props) => {
 									</>
 								) : (
 									<p className='font-bold text-primary px-1 sm:px-2'>
+										{route.emoji && route.emoji}
 										{route.useTranslate ? t(route.name) : route.name}
 									</p>
 								)}

@@ -199,7 +199,9 @@
 			"WORKSPACE_PICTURE_DELETED": "Ikona obszaru roboczego została usunięta",
 			"UPDATED_WORKSAPCE": "Obszar roboczy został zaktualizowany!",
 			"DELETED_WORKSPACE_INFO": "Obszar roboczy został usunięty",
-			"REGENERATED_LINK": "Link został zaktualizowany"
+			"REGENERATED_LINK": "Link został zaktualizowany",
+			"TASK_ADDED": "Zadanie zostało dodane",
+			"TASK_DELETED": "Zadanie zostało usunięte"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -257,7 +259,11 @@
 			"MIND_MAPS": "Mapy myśli",
 			"SCHEDULES": "Plany tygodnia",
 			"STUDY": "Nauka",
-			"FILES": "Pliki"
+			"FILES": "Pliki",
+			"DEAFULT_NAME": "Bez tytułu",
+			"ACTIONS": "Akcje",
+			"ADD_TASK": "Dodaj zadanie",
+			"ADD_TASK_PENDING": "Tworze zadanie"
 		}
 	},
 	"SETTINGS": {
@@ -344,6 +350,12 @@
 			"FIRST": "Utworzyłeś",
 			"SECOND": "z",
 			"THIRD": "możliwych do utworzenia obszarów roboczych"
+		},
+		"BACK_BTN": "Powrót",
+		"SAVING_STATUS": {
+			"SAVED": "Zapisane",
+			"SAVING": "Zapisywanie",
+			"UNSAVED": "Niezapisane"
 		}
 	},
 
@@ -435,6 +447,21 @@
 				"UNDO": "Cofnij",
 				"REDO": "Wykonaj ponownie",
 				"DELETE": "Usuń"
+			},
+			"READ_ONLY": {
+				"NO_DATE": "nie zapisno w kalendarzu",
+				"NO_TITLE": "Zadanie bez tytułu",
+				"NO_CONTENT": "Zadanie bez treści",
+				"DELETE": "Usuń",
+				"EDIT": "Edytuj",
+				"ADD_TO_FAV": "Dodaj do ulubionych",
+				"REMOVE_FROM_FAV": "Usuń z ulubionych",
+				"DIALOG": {
+					"TITLE": "Usuń zadanie",
+					"DESC": "Jesteś pewien, że chcesz usunąć tę notatkę? Stracisz wszystkie dane w niej zawarte oraz związane z nią czynności. Usunięcie jest nieodwracalne",
+					"BTN_DELETE": "Usuń",
+					"BTN_PENDING": "Usuwanie"
+				}
 			}
 		},
 		"BTN": {
@@ -446,6 +473,7 @@
 		"SETTINGS": "Ustawienia",
 		"SECURITY": "Bezpieczeństwo",
 		"THEME": "Motyw",
-		"TASKS": "Zadania"
+		"TASKS": "Zadania",
+		"UNTITLED": "Bez tytułu"
 	}
 }

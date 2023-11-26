@@ -11,8 +11,6 @@ export const GET = async (request: Request, { params: { task_id } }: Params) => 
 	const url = new URL(request.url);
 	const userId = url.searchParams.get('userId');
 
-
-
 	if (!userId) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 	try {
 		const task = await db.task.findUnique({
@@ -22,8 +20,10 @@ export const GET = async (request: Request, { params: { task_id } }: Params) => 
 			include: {
 				tags: true,
 				date: true,
+				savedTask: true,
 			},
 		});
+		console.log(task);
 
 		if (!task) return NextResponse.json('task not found', { status: 404 });
 

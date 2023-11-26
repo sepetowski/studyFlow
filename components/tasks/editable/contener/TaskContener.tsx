@@ -2,7 +2,6 @@
 
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { Editor } from '../editor/Editor';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation, useQuery } from '@tanstack/react-query';
@@ -18,6 +17,7 @@ import { useTranslations } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce';
 import axios from 'axios';
 import { useSaveTaskState } from '@/context/SaveTaskState';
+import { Editor } from '../editor/Editor';
 
 interface Props {
 	taskId: string;
@@ -158,10 +158,13 @@ export const TaskContener = ({
 	}, 2000);
 
 	const debouncedTitle = useDebouncedCallback(
-		useCallback((value: string) => {
-			onSetStatus('pending');
-			updateTaskTitle(value);
-		}, []),
+		useCallback(
+			(value: string) => {
+				onSetStatus('pending');
+				updateTaskTitle(value);
+			}, // eslint-disable-next-line react-hooks/exhaustive-deps
+			[]
+		),
 		2000
 	);
 
@@ -175,7 +178,7 @@ export const TaskContener = ({
 	if (!isMounted) return null;
 
 	return (
-		<Card>
+		<Card className='mb-6'>
 			<form id='task-form'>
 				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
 					<div className='w-full flex  items-start gap-2 sm:gap-4'>

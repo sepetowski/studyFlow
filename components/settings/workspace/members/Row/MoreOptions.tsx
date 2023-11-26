@@ -99,8 +99,8 @@ export const MoreOptions = ({
 						</DropdownMenuPortal>
 					</DropdownMenu>
 					<DialogPortal>
-						<DialogOverlay className='DialogOverlay' />
-						<DialogContent className='DialogContent'>
+						<DialogOverlay />
+						<DialogContent>
 							<DialogHeader>
 								<DialogTitle>{t('REMOVE.TITLE')}</DialogTitle>
 							</DialogHeader>

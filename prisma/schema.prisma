@@ -51,7 +51,8 @@ model User {
   createdWorkspaces   Workspace[]    @relation("CreatedBy")
   subscriptions       Subscription[]
   createdTasks        Task[]         @relation("TaskCreatedByUser")
-  updaedTasks         Task[]         @relation("TaskUpdatedByUser")
+  updatedTasks        Task[]         @relation("TaskUpdatedByUser")
+  savedTask           savedTask[]
 }
 
 model Workspace {
@@ -75,21 +76,22 @@ model Workspace {
 }
 
 model Task {
-  id            String    @id @default(cuid())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  updatedBy     User?     @relation(name: "TaskUpdatedByUser", fields: [updatedUserId], references: [id])
+  id            String      @id @default(cuid())
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  updatedBy     User?       @relation(name: "TaskUpdatedByUser", fields: [updatedUserId], references: [id])
   updatedUserId String?
-  creator       User      @relation(name: "TaskCreatedByUser", fields: [creatorId], references: [id])
+  creator       User        @relation(name: "TaskCreatedByUser", fields: [creatorId], references: [id])
   creatorId     String
-  Workspace     Workspace @relation(fields: [workspaceId], references: [id])
+  Workspace     Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId   String
   title         String
-  emoji         String    @default("🧠")
+  emoji         String      @default("🧠")
   content       Json?
   tags          Tag[]
-  date          Date?     @relation(fields: [dateId], references: [id])
+  date          Date?       @relation(fields: [dateId], references: [id], onDelete: Cascade)
   dateId        String?
+  savedTask     savedTask[]
 
   @@index([dateId])
   @@index([updatedUserId])
@@ -109,10 +111,21 @@ model Tag {
   name        String
   color       CustomColors
   tasks       Task[]
-  workspace   Workspace    @relation(fields: [workspaceId], references: [id])
+  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
 
   @@index([workspaceId])
+}
+
+model savedTask {
+  id     String @id @default(cuid())
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId String
+  task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId String
+
+  @@index([userId])
+  @@index([taskId])
 }
 
 model Subscription {

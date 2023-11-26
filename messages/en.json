@@ -198,7 +198,9 @@
 			"WORKSPACE_PICTURE_DELETED": "The workspace icon has been removed",
 			"UPDATED_WORKSAPCE": "Workspace has been updated!",
 			"DELETED_WORKSPACE_INFO": "Workspace has been deleted",
-			"REGENERATED_LINK": "Link has been updated"
+			"REGENERATED_LINK": "Link has been updated",
+			"TASK_ADDED": "Task has been added",
+			"TASK_DELETED": "Task has been deleted"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -255,7 +257,9 @@
 			"MIND_MAPS": "Mind maps",
 			"SCHEDULES": "Schedules",
 			"STUDY": "Study",
-			"FILES": "Files"
+			"FILES": "Files",
+			"DEAFULT_NAME": "Untitled",
+			"ACTIONS": "Actions"
 		}
 	},
 	"SETTINGS": {
@@ -268,7 +272,9 @@
 			"LIGHT_FOOTER": "Deafult light",
 			"DARK_FOOTER": "Deafult dark",
 			"SYSTEM_FOOTER": "Deafult system",
-			"ACTIVE": "Active"
+			"ACTIVE": "Active",
+			"ADD_TASK": "Add task",
+			"ADD_TASK_PENDING": "Creating task"
 		},
 		"ACCOUNT": {
 			"TITLE": "Account",
@@ -342,6 +348,12 @@
 			"FIRST": "You have created",
 			"SECOND": "out of",
 			"THIRD": "possible to create workspaces"
+		},
+		"BACK_BTN": "Back",
+		"SAVING_STATUS": {
+			"SAVED": "Saved",
+			"SAVING": "Saving",
+			"UNSAVED": "Unsaved"
 		}
 	},
 	"PERMISSONS": {
@@ -432,6 +444,21 @@
 				"UNDO": "Undo",
 				"REDO": "Redo",
 				"DELETE": "Delete"
+			},
+			"READ_ONLY": {
+				"NO_DATE": "not recorded in the calendar",
+				"NO_TITLE": "Untitled task",
+				"NO_CONTENT": "Task without content",
+				"DELETE": "Delete",
+				"EDIT": "Edit",
+				"ADD_TO_FAV": "Add to favourites",
+				"REMOVE_FROM_FAV": "Remove from favourites",
+				"DIALOG": {
+					"TITLE": "Delete task",
+					"DESC": "Are you sure you want to delete this note? You will lose all the data it contains and the activities associated with it. Deletion is irreversible",
+					"BTN_DELETE": "Delete task",
+					"BTN_PENDING": "Deleting"
+				}
 			}
 		},
 		"BTN": {
@@ -443,6 +470,7 @@
 		"SETTINGS": "Settings",
 		"SECURITY": "Security",
 		"THEME": "Theme",
-		"TASKS": "Tasks"
+		"TASKS": "Tasks",
+		"UNTITLED": "Untitled"
 	}
 }

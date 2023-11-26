@@ -7,4 +7,9 @@ export const taskSchema = z.object({
 	content: z.any(),
 });
 
+export const deleteTaskSchema = z.object({
+	taskId: z.string(),
+	workspaceId: z.string(),
+});
+
 export type TaskSchema = z.infer<typeof taskSchema>;

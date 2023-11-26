@@ -34,20 +34,26 @@ export const WorkspaceOption = ({ children, fields, href, workspaceId, deafultNa
 					className={` transition-all duration-200     ${isOpen ? 'rotate-180 ' : ''}`}
 				/>
 			</Button>
-			<div className='ml-4 text-sm my-1'>
+			<div className='ml-4 text-sm my-1 flex flex-col gap-1'>
 				{fields &&
 					isOpen &&
-					fields.map((filed, i) => (
-						<ActiveLink
-							key={i}
-							href={`/dashboard/workspace/${workspaceId}/${href}/${filed.id}`}
-							variant={'ghost'}
-							size={'sm'}
-							className='w-full flex justify-start items-center gap-2 font-normal '>
-							{filed.emoji && <span>{filed.emoji}</span>}
-							<span>{filed.title ? filed.title : deafultName}</span>
-						</ActiveLink>
-					))}
+					fields.map((filed, i) => {
+						const name =
+							filed.title && filed.title.length > 20
+								? filed.title.substring(0, 19) + '...'
+								: filed.title;
+						return (
+							<ActiveLink
+								key={i}
+								href={`/dashboard/workspace/${workspaceId}/${href}/${filed.id}`}
+								variant={'ghost'}
+								size={'sm'}
+								className='w-full flex justify-start items-center gap-2 font-normal '>
+								{filed.emoji && <span>{filed.emoji}</span>}
+								<span>{filed.title ? name : deafultName}</span>
+							</ActiveLink>
+						);
+					})}
 			</div>
 		</div>
 	);

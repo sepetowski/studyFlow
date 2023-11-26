@@ -7,7 +7,7 @@ import { CustomColors, Tag as TagType } from '@prisma/client';
 
 interface Props {
 	tag: TagType;
-	disabled: boolean;
+	disabled?: boolean;
 }
 
 export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Props) => {
@@ -57,7 +57,7 @@ export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Pro
 	return (
 		<Link
 			aria-disabled={disabled}
-			href={`/dashboard/workspace/${workspaceId}/tasks?tagId=${id}`}
+			href={`/dashboard/workspace/${workspaceId}?tagId=${id}`}
 			className={cn(
 				` ${buttonVariants({
 					variant: 'outline',
