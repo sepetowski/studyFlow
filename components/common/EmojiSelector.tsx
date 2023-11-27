@@ -62,7 +62,7 @@ export const EmojiSelector = ({ asChild, className, children, onSelectedEmoji }:
 						locale={locale}
 						data={data}
 						onEmojiSelect={(e: OnSelect) => {
-							onSelectedEmoji(e.native);
+							onSelectedEmoji(e.unified);
 							setOpen(false);
 						}}
 					/>

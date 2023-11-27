@@ -259,7 +259,9 @@
 			"STUDY": "Study",
 			"FILES": "Files",
 			"DEAFULT_NAME": "Untitled",
-			"ACTIONS": "Actions"
+			"ACTIONS": "Actions",
+			"ADD_TASK": "Add task",
+			"ADD_TASK_PENDING": "Creating task"
 		}
 	},
 	"SETTINGS": {
@@ -272,9 +274,7 @@
 			"LIGHT_FOOTER": "Deafult light",
 			"DARK_FOOTER": "Deafult dark",
 			"SYSTEM_FOOTER": "Deafult system",
-			"ACTIVE": "Active",
-			"ADD_TASK": "Add task",
-			"ADD_TASK_PENDING": "Creating task"
+			"ACTIVE": "Active"
 		},
 		"ACCOUNT": {
 			"TITLE": "Account",

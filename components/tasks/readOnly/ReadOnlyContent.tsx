@@ -28,7 +28,6 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 		setIsSaved((prev) => !prev);
 	};
 
-	console.log(isSaved);
 	return (
 		<Card>
 			<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>

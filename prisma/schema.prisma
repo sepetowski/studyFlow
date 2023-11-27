@@ -86,7 +86,7 @@ model Task {
   Workspace     Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId   String
   title         String
-  emoji         String      @default("🧠")
+  emoji         String      @default("1f9e0")
   content       Json?
   tags          Tag[]
   date          Date?       @relation(fields: [dateId], references: [id], onDelete: Cascade)

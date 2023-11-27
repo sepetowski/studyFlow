@@ -5,8 +5,7 @@ import { deleteTaskSchema } from '@/schema/taskSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
-	console.log('ok');
-
+	
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();

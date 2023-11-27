@@ -1,6 +1,7 @@
 'use client';
 import ActiveLink from '@/components/ui/active-link';
 import { Button } from '@/components/ui/button';
+import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { ChevronDown } from 'lucide-react';
 import React, { useState } from 'react';
 
@@ -49,7 +50,7 @@ export const WorkspaceOption = ({ children, fields, href, workspaceId, deafultNa
 								variant={'ghost'}
 								size={'sm'}
 								className='w-full flex justify-start items-center gap-2 font-normal '>
-								{filed.emoji && <span>{filed.emoji}</span>}
+								{filed.emoji && <span>{changeCodeToEmoji(filed.emoji)}</span>}
 								<span>{filed.title ? name : deafultName}</span>
 							</ActiveLink>
 						);
