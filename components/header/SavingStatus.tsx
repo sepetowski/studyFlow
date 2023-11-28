@@ -24,19 +24,19 @@ export const SavingStatus = () => {
 					{status === 'saved' && (
 						<>
 							<Save size={18} />
-							<p>{t('SAVED')}</p>
+							<p className='hidden sm:inline-block'>{t('SAVED')}</p>
 						</>
 					)}
 					{status === 'pending' && (
 						<>
 							<LoadingState />
-							<p>{t('SAVING')}</p>
+							<p className='hidden sm:inline-block'>{t('SAVING')}</p>
 						</>
 					)}
 					{status === 'unsaved' && (
 						<>
 							<FileWarning size={18} />
-							<p>{t('UNSAVED')}</p>
+							<p className='hidden sm:inline-block'>{t('UNSAVED')}</p>
 						</>
 					)}
 				</div>

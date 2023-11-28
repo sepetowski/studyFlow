@@ -27,7 +27,7 @@ export const FloatingContainer = ({ editor }: Props) => {
 
 	return (
 		<FloatingMenu
-			className='rounded-md  shadow-sm border bg-popover p-1 text-popover-foreground flex items-center gap-1 '
+			className='rounded-md  shadow-sm border bg-popover p-1 text-popover-foreground flex items-center gap-1 max-w-[13rem] flex-wrap sm:max-w-lg  '
 			editor={editor}
 			tippyOptions={{ duration: 100, zIndex: 20, maxWidth: 1000 }}>
 			<OptionBtn

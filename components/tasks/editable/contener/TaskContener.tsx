@@ -182,7 +182,7 @@ export const TaskContener = ({
 		<Card className='mb-6'>
 			<form id='task-form'>
 				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
-					<div className='w-full flex  items-start gap-2 sm:gap-4'>
+					<div className='w-full flex flex-col sm:flex-row items-start gap-2 sm:gap-4'>
 						<Emoji
 							emoji={emoji ? emoji : '1f9e0'}
 							workspaceId={workspaceId}

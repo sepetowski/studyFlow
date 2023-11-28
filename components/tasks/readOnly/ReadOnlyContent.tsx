@@ -30,10 +30,10 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 
 	return (
 		<Card>
-			<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
-				<div className='w-full flex  items-start gap-2 sm:gap-4'>
+			<CardContent className='py-4 sm:py-6 flex flex-col gap-10 relative'>
+				<div className='w-full flex flex-col sm:flex-row  items-start gap-2 sm:gap-4'>
 					<ReadOnlyEmoji selectedEmoji={task?.emoji} />
-					<div className='w-full flex flex-col gap-2'>
+					<div className='w-full flex flex-col  gap-2'>
 						<div className='w-full flex justify-between items-center'>
 							<div className='w-5/6'>
 								<p className='text-2xl font-semibold flex items-center gap-2'>
@@ -41,7 +41,7 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 									{isSaved && <StarSvg />}
 								</p>
 							</div>
-							<div>
+							<div className='absolute top-5 right-5 sm:static'>
 								<TaskOptons
 									onSetIsSaved={onSetIsSaved}
 									isSaved={isSaved}
