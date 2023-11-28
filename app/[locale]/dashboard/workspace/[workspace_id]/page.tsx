@@ -1,5 +1,6 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
+import { MindMap } from '@/components/mindMaps/MindMap';
 import { getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
@@ -33,8 +34,9 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 				]}>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
-			<main className='flex flex-col gap-2'>
+			<main className='flex flex-col gap-2 h-full'>
 				{workspace.name} {workspace.id}
+				<MindMap />
 			</main>
 		</>
 	);

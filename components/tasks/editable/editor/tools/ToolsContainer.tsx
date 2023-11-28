@@ -27,7 +27,7 @@ export const ToolsContainer = ({ editor }: Props) => {
 	const t = useTranslations('TASK.EDITOR.HOVER');
 
 	return (
-		<div className=' rounded-md  shadow-sm border bg-popover p-1 text-popover-foreground flex items-center gap-1 max-w-[13rem] flex-wrap sm:max-w-lg '>
+		<div className=' rounded-md  shadow-sm border bg-popover p-1 text-popover-foreground flex items-center gap-1 max-w-[13rem] flex-wrap sm:max-w-2xl '>
 			<OptionBtn
 				onClick={() => editor.chain().focus().toggleBulletList().run()}
 				className={editor.isActive('bulletList') ? 'bg-accent text-secondary-foreground' : ''}

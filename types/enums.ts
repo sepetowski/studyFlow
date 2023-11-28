@@ -1,0 +1,15 @@
+export enum NodeColors {
+	RED,
+	GREEN,
+	PURPLE,
+	BLUE,
+	CYAN,
+	EMERALD,
+	INDIGO,
+	LIME,
+	ORANGE,
+	FUCHSIA,
+	PINK,
+	YELLOW,
+	DEAFULT,
+}
