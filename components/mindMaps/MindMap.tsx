@@ -1,6 +1,5 @@
 'use client';
-import { CakeSlice, Plus } from 'lucide-react';
-import { useState, useCallback, useMemo, useRef } from 'react';
+import { useState, useCallback } from 'react';
 import ReactFlow, {
 	Controls,
 	Background,
@@ -14,12 +13,26 @@ import ReactFlow, {
 	ControlButton,
 	Node,
 	MiniMap,
+	EdgeTypes,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { TextNode } from './nodes/TextNode';
 import { Button } from '@/components/ui/button';
 import { EdgeOptions } from './EdgeOptions';
-import { Dialog } from '@/components/ui/dialog';
+import { Sheet } from '@/components/ui/sheet';
+import { EdgeOptionsSchema } from '@/schema/edgeOptionsSchema';
+import { CustomStraight } from './labels/CustomStraight';
+import { CustomStepSharp } from './labels/CustomStepSharp';
+import { CustomStepRounded } from './labels/CustomStepRounded';
+import { CustomBezier } from './labels/CustomBezier';
+
+const nodeTypes = { textNode: TextNode };
+const edgeTypes: EdgeTypes = {
+	customBezier: CustomBezier,
+	customStraight: CustomStraight,
+	customStepSharp: CustomStepSharp,
+	customStepRounded: CustomStepRounded,
+};
 
 const initialNodes: Node[] = [
 	{ id: '1', data: { label: 'Node 1' }, position: { x: 5, y: 5 } },
@@ -28,15 +41,22 @@ const initialNodes: Node[] = [
 ];
 
 const initialEdges: Edge[] = [
-	{ id: '1-2', source: '1', target: '2', label: 'to the', type: 'step', animated: true },
+	{
+		id: 'node-1-2',
+		source: 'node-1',
+		target: '2',
+		data: {
+			label: 'to the',
+		},
+		type: 'customStraight',
+	},
 ];
 
 export const MindMap = () => {
-	const [openDialog, setOpenDialog] = useState(false);
+	const [openSheet, setOpenSheet] = useState(false);
 	const [nodes, setNodes] = useState<Node[]>(initialNodes);
 	const [edges, setEdges] = useState<Edge[]>(initialEdges);
 	const [clickedEdge, setClickedEdge] = useState<Edge | null>(null);
-	const nodeTypes = useMemo(() => ({ textNode: TextNode }), []);
 
 	const onAddNode = useCallback(() => {
 		setNodes((prev) => {
@@ -63,7 +83,7 @@ export const MindMap = () => {
 	}, []);
 	const onEdgeClick = useCallback((event: React.MouseEvent, edge: Edge) => {
 		setClickedEdge(edge);
-		setOpenDialog(true);
+		setOpenSheet(true);
 		// if (edge.label)
 		// 	setEdges((eds) => {
 		// 		const newEds = eds.map((ed) => (ed.id === edge.id ? { ...edge, label: null } : ed));
@@ -81,12 +101,27 @@ export const MindMap = () => {
 		// }
 	}, []);
 
+	const onSaveEdge = useCallback((data: EdgeOptionsSchema) => {
+		console.log(data);
+	}, []);
+
+	const onDeleteLabelEdge = useCallback((edgeId: string) => {
+		console.log(edgeId);
+	}, []);
+
 	const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
 	return (
 		<div className='w-full h-full flex flex-col'>
-			<Dialog open={openDialog} onOpenChange={setOpenDialog}>
-				<EdgeOptions clickedEdge={clickedEdge} />
-			</Dialog>
+			{clickedEdge && (
+				<Sheet open={openSheet} onOpenChange={setOpenSheet}>
+					<EdgeOptions
+						clickedEdge={clickedEdge}
+						isOpen={openSheet}
+						onSave={onSaveEdge}
+						onDeleteLabel={onDeleteLabelEdge}
+					/>
+				</Sheet>
+			)}
 			<div className='bg-red-300 w-12 h-12 z-50'>
 				<Button onClick={onAddNode}>sad</Button>
 			</div>
@@ -94,6 +129,7 @@ export const MindMap = () => {
 				<ReactFlow
 					fitView
 					nodes={nodes}
+					edgeTypes={edgeTypes}
 					nodeTypes={nodeTypes}
 					edges={edges}
 					onNodesChange={onNodesChange}
