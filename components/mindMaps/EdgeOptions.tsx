@@ -30,10 +30,10 @@ interface Props {
 	clickedEdge: Edge;
 	isOpen: boolean;
 	onSave: (data: EdgeOptionsSchema) => void;
-	onDeleteLabel: (edgeId: string) => void;
+	onDeleteEdge: (edgeId: string) => void;
 }
 
-export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteLabel, onSave }: Props) => {
+export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props) => {
 	const form = useForm<EdgeOptionsSchema>({
 		resolver: zodResolver(edgeOptionsSchema),
 		defaultValues: {
@@ -48,7 +48,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteLabel, onSave }: Prop
 		if (isOpen)
 			form.reset({
 				edgeId: clickedEdge.id,
-				label: clickedEdge.data.label?.toString() ?? '',
+				label: clickedEdge.data?.label?.toString() ?? '',
 				type:
 					(clickedEdge.type as
 						| 'customBezier'
@@ -106,9 +106,9 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteLabel, onSave }: Prop
 											</FormControl>
 											<SelectContent>
 												<SelectItem value='customBezier'>bezier</SelectItem>
-												<SelectItem value='customStepSharp'>step</SelectItem>
 												<SelectItem value='customStraight'>straight</SelectItem>
-												<SelectItem value='customStepRounded'>smoothstep</SelectItem>
+												<SelectItem value='customStepSharp'>step</SelectItem>
+												<SelectItem value='customStepRounded'>smooth step</SelectItem>
 											</SelectContent>
 										</Select>
 										<FormDescription>You can manage email addresses in your </FormDescription>
@@ -144,13 +144,12 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteLabel, onSave }: Prop
 
 					<Button
 						onClick={() => {
-							onDeleteLabel(form.getValues('edgeId'));
+							onDeleteEdge(form.getValues('edgeId'));
 						}}
-						disabled={!form.getValues('label')}
 						variant={'secondary'}
 						className='text-white w-full'
 						type='button'>
-						Delete label
+						Delete edge
 					</Button>
 				</form>
 			</Form>

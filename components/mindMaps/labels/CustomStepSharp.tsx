@@ -23,13 +23,16 @@ export const CustomStepSharp = ({
 		targetX,
 		targetY,
 		targetPosition,
+		borderRadius: 0,
 	});
+
+	
 
 	return (
 		<>
 			<BaseEdge path={edgePath} id={id} markerEnd={markerEnd} style={style} />
 			<EdgeLabelRenderer>
-				<EdgeLabel labelY={labelY} labelX={labelX} label={data.label} />
+				<EdgeLabel labelY={labelY} labelX={labelX} label={data?.label} />
 			</EdgeLabelRenderer>
 		</>
 	);

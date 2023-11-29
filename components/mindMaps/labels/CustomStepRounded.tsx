@@ -23,14 +23,15 @@ export const CustomStepRounded = ({
 		targetX,
 		targetY,
 		targetPosition,
-		borderRadius: 0,
+		borderRadius: 10,
 	});
+
 
 	return (
 		<>
 			<BaseEdge path={edgePath} id={id} markerEnd={markerEnd} style={style} />
 			<EdgeLabelRenderer>
-				<EdgeLabel labelY={labelY} labelX={labelX} label={data.label} />
+				<EdgeLabel labelY={labelY} labelX={labelX} label={data?.label} />
 			</EdgeLabelRenderer>
 		</>
 	);

@@ -59,54 +59,58 @@ export const MindMap = () => {
 	const [clickedEdge, setClickedEdge] = useState<Edge | null>(null);
 
 	const onAddNode = useCallback(() => {
-		setNodes((prev) => {
-			return [
-				...prev,
-				{
-					id: Math.random().toString(),
-					type: 'textNode',
-					position: { x: 0, y: 0 },
-					data: { label: 'yo' },
-				},
-			];
-		});
+		const newNode = {
+			id: Math.random().toString(),
+			type: 'textNode',
+			position: { x: 0, y: 0 },
+			data: { label: 'yo' },
+		};
+
+		setNodes((nds) => nds.concat(newNode));
 	}, []);
+
 	const onNodesChange: OnNodesChange = useCallback((changes) => {
 		setNodes((nds) => {
 			return applyNodeChanges(changes, nds);
 		});
 	}, []);
+
 	const onEdgesChange: OnEdgesChange = useCallback((changes) => {
 		setEdges((eds) => {
 			return applyEdgeChanges(changes, eds);
 		});
 	}, []);
-	const onEdgeClick = useCallback((event: React.MouseEvent, edge: Edge) => {
+
+	const onEdgeClick = useCallback((e: React.MouseEvent, edge: Edge) => {
 		setClickedEdge(edge);
 		setOpenSheet(true);
-		// if (edge.label)
-		// 	setEdges((eds) => {
-		// 		const newEds = eds.map((ed) => (ed.id === edge.id ? { ...edge, label: null } : ed));
-		// 		return newEds;
-		// 	});
-		// else {
-		// 	const name = prompt('Please enter your name', 'Harry Potter');
-		// 	if (!name) return;
-		// 	setEdges((eds) => {
-		// 		const newEds = eds.map((ed) =>
-		// 			ed.id === edge.id ? { ...edge, label: name, type: 'step' } : ed
-		// 		);
-		// 		return newEds;
-		// 	});
-		// }
 	}, []);
 
 	const onSaveEdge = useCallback((data: EdgeOptionsSchema) => {
-		console.log(data);
+		const { animated, edgeId, label, type } = data;
+		setEdges((prevEdges) => {
+			const edges = prevEdges.map((edge) =>
+				edge.id === edgeId
+					? {
+							...edge,
+							data: label ? { label } : undefined,
+							type,
+							animated,
+					  }
+					: edge
+			);
+
+			return edges;
+		});
+		setOpenSheet(false);
 	}, []);
 
-	const onDeleteLabelEdge = useCallback((edgeId: string) => {
-		console.log(edgeId);
+	const onDeleteEdge = useCallback((edgeId: string) => {
+		setEdges((prevEdges) => {
+			const edges = prevEdges.filter((edge) => edge.id !== edgeId);
+			return edges;
+		});
+		setOpenSheet(false);
 	}, []);
 
 	const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
@@ -118,7 +122,7 @@ export const MindMap = () => {
 						clickedEdge={clickedEdge}
 						isOpen={openSheet}
 						onSave={onSaveEdge}
-						onDeleteLabel={onDeleteLabelEdge}
+						onDeleteEdge={onDeleteEdge}
 					/>
 				</Sheet>
 			)}

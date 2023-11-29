@@ -27,7 +27,7 @@ export const CustomBezier = ({
 		<>
 			<BaseEdge id={id} path={edgePath} />
 			<EdgeLabelRenderer>
-				<EdgeLabel labelY={labelY} labelX={labelX} label={data.label} />
+				<EdgeLabel labelY={labelY} labelX={labelX} label={data?.label} />
 			</EdgeLabelRenderer>
 		</>
 	);

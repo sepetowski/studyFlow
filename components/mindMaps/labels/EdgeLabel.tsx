@@ -8,6 +8,8 @@ interface Props {
 }
 
 export const EdgeLabel = ({ label, labelX, labelY }: Props) => {
+	if (!label) return null;
+
 	return (
 		<EdgeLabelRenderer>
 			<div
@@ -15,7 +17,7 @@ export const EdgeLabel = ({ label, labelX, labelY }: Props) => {
 					position: 'absolute',
 					transform: `translate(-50%, -50%) translate(${labelX}px,${labelY}px)`,
 				}}
-				className='bg-red-400 '>
+				className='bg-indigo-400 text-white text-sm px-3 py-1.5 rounded-sm shadow-sm max-w-[13rem] '>
 				<p>{label}</p>
 			</div>
 		</EdgeLabelRenderer>
