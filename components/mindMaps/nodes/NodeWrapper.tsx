@@ -24,7 +24,7 @@ interface Props {
 	className?: string;
 	color?: MindMapItemColors;
 	isEditing: boolean;
-	onEdit: () => void;
+	onIsEdit: () => void;
 }
 
 const colors = [
@@ -47,7 +47,7 @@ export const NodeWrapper = ({
 	className,
 	color = MindMapItemColors.DEFAULT,
 	isEditing,
-	onEdit,
+	onIsEdit,
 }: Props) => {
 	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
 
@@ -139,7 +139,7 @@ export const NodeWrapper = ({
 					<DropdownMenuContent className='' sideOffset={-10} align='start'>
 						<DropdownMenuItem
 							onClick={() => {
-								onEdit();
+								onIsEdit();
 							}}
 							className='cursor-pointer gap-2'>
 							<Pencil size={16} />

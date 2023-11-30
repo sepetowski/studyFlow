@@ -1,21 +1,22 @@
 'use client';
 import React, { useEffect, useRef, useState } from 'react';
-import {  NodeProps} from 'reactflow';
+import { NodeProps, useReactFlow } from 'reactflow';
 import { NodeWrapper } from './NodeWrapper';
 import TextareaAutosize from 'react-textarea-autosize';
 import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { TextNodeSchema, textNodeSchema } from '@/schema/nodesSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useOnEditNode } from '@/hooks/react_flow/useOnEditNode';
 type NodeData = {
-	value: number;
+	text: string;
 };
 
-export const TextNode = ({ data }: NodeProps<NodeData>) => {
-	console.log(data);
-
+export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const _nodeText = useRef<HTMLTextAreaElement>(null);
+
+	const { onEdit: onEditNode } = useOnEditNode();
 
 	const form = useForm<TextNodeSchema>({
 		resolver: zodResolver(textNodeSchema),
@@ -26,49 +27,60 @@ export const TextNode = ({ data }: NodeProps<NodeData>) => {
 
 	const { ref: nodeText, ...rest } = form.register('text');
 
-	const onEdit = () => {
+	const onIsEdit = () => {
 		setIsEditing((prev) => !prev);
 	};
 	const onSubmit = (data: TextNodeSchema) => {
-		console.log(data);
+		onEditNode(id, data.text);
+		onIsEdit();
 	};
 
 	useEffect(() => {
 		form.reset({
-			text: data.value ? data.value.toString() : 'Add new text',
+			text: data.text ? data.text : 'Add new text',
 		});
-	}, [data.value, form, isEditing]);
+	}, [data.text, form, isEditing]);
 
 	return (
-		<NodeWrapper isEditing={isEditing} onEdit={onEdit}>
+		<NodeWrapper isEditing={isEditing} onIsEdit={onIsEdit}>
 			<div className='w-full py-1.5'>
 				{isEditing ? (
 					<form id='node-text-form' onSubmit={form.handleSubmit(onSubmit)}>
-						<TextareaAutosize
-							{...rest}
-							ref={(e) => {
-								nodeText(e);
-								// @ts-ignore
-								_nodeText.current = e;
-							}}
-							className='w-96 min-h-[4rem] resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground  font-semibold focus:outline-none '
-						/>
+						<div className='space-y-1.5'>
+							<TextareaAutosize
+								{...rest}
+								ref={(e) => {
+									nodeText(e);
+									// @ts-ignore
+									_nodeText.current = e;
+								}}
+								onKeyDown={(e) => {
+									if (e.key === 'Enter') e.preventDefault();
+								}}
+								className='w-96 min-h-[4rem] resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground  focus:outline-none '
+							/>
+						</div>
 						<div className='w-full flex justify-end mt-4  gap-2'>
 							<Button
 								type='button'
-								onClick={onEdit}
-								variant={'outline'}
-								className='text-white py-1.5 sm:py-1.5 h-fit'
+								onClick={onIsEdit}
+								variant={'ghost'}
+								className=' py-1.5 sm:py-1.5 h-fit border'
 								size={'sm'}>
 								Cancel
 							</Button>
-							<Button type='submit' className='text-white py-1.5 sm:py-1.5 h-fit' size={'sm'}>
+							<Button
+								disabled={!form.formState.isValid}
+								variant={'ghost'}
+								type='submit'
+								className=' py-1.5 sm:py-1.5 h-fit border '
+								size={'sm'}>
 								Save changes
 							</Button>
 						</div>
 					</form>
 				) : (
-					<p className='w-full  '>{data.value}</p>
+					<p className='w-full  '>{data.text ? data.text : 'Add new text'}</p>
 				)}
 			</div>
 		</NodeWrapper>

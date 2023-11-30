@@ -65,7 +65,7 @@ export const MindMap = () => {
 			id: Math.random().toString(),
 			type: 'textNode',
 			position: { x: 0, y: 0 },
-			data: { value: 'yo', color: EdgeColor.DEFAULT },
+			data: { text: '', color: EdgeColor.DEFAULT },
 		};
 
 		setNodes((nds) => nds.concat(newNode));
