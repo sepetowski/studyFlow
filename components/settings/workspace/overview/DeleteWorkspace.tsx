@@ -65,7 +65,7 @@ export const DeleteWorkspace = ({ workspace: { id, name } }: Props) => {
 			});
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -118,7 +118,7 @@ export const DeleteWorkspace = ({ workspace: { id, name } }: Props) => {
 									variant={'destructive'}
 									className=''
 									type='button'>
-									{t("BTN")}
+									{t('BTN')}
 								</Button>
 							</DialogTrigger>
 							<DialogContent>

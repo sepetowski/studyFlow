@@ -25,6 +25,7 @@ import { CustomStraight } from './labels/CustomStraight';
 import { CustomStepSharp } from './labels/CustomStepSharp';
 import { CustomStepRounded } from './labels/CustomStepRounded';
 import { CustomBezier } from './labels/CustomBezier';
+import { EdgeColor } from '@/types/enums';
 
 const nodeTypes = { textNode: TextNode };
 const edgeTypes: EdgeTypes = {
@@ -63,7 +64,7 @@ export const MindMap = () => {
 			id: Math.random().toString(),
 			type: 'textNode',
 			position: { x: 0, y: 0 },
-			data: { label: 'yo' },
+			data: { label: 'yo', color: EdgeColor.DEFAULT },
 		};
 
 		setNodes((nds) => nds.concat(newNode));
@@ -87,13 +88,13 @@ export const MindMap = () => {
 	}, []);
 
 	const onSaveEdge = useCallback((data: EdgeOptionsSchema) => {
-		const { animated, edgeId, label, type } = data;
+		const { animated, edgeId, label, color, type } = data;
 		setEdges((prevEdges) => {
 			const edges = prevEdges.map((edge) =>
 				edge.id === edgeId
 					? {
 							...edge,
-							data: label ? { label } : undefined,
+							data: label ? { label, color } : undefined,
 							type,
 							animated,
 					  }

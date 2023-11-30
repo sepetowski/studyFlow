@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 interface Props {
 	workspaceId: string;
 	children: React.ReactNode;
-	deafultName: string;
+	DEFAULTName: string;
 	href: string;
 	fields: {
 		title: string;
@@ -17,7 +17,7 @@ interface Props {
 	}[];
 }
 
-export const WorkspaceOption = ({ children, fields, href, workspaceId, deafultName }: Props) => {
+export const WorkspaceOption = ({ children, fields, href, workspaceId, DEFAULTName }: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	return (
 		<div>
@@ -51,7 +51,7 @@ export const WorkspaceOption = ({ children, fields, href, workspaceId, deafultNa
 								size={'sm'}
 								className='w-full flex justify-start items-center gap-2 font-normal '>
 								{filed.emoji && <span>{changeCodeToEmoji(filed.emoji)}</span>}
-								<span>{filed.title ? name : deafultName}</span>
+								<span>{filed.title ? name : DEFAULTName}</span>
 							</ActiveLink>
 						);
 					})}

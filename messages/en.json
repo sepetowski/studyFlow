@@ -158,7 +158,7 @@
 	},
 	"MESSAGES": {
 		"ERRORS": {
-			"DEAFULT": "Oh no.. Something went wrong. Please try again",
+			"DEFAULT": "Oh no.. Something went wrong. Please try again",
 			"TAKEN_USERNAME": "This username is already taken",
 			"TAKEN_EMAIL": "This email is already in use",
 			"DB_ERROR": "We are currently having problems. Please try again later",
@@ -258,7 +258,7 @@
 			"SCHEDULES": "Schedules",
 			"STUDY": "Study",
 			"FILES": "Files",
-			"DEAFULT_NAME": "Untitled",
+			"DEFAULT_NAME": "Untitled",
 			"ACTIONS": "Actions",
 			"ADD_TASK": "Add task",
 			"ADD_TASK_PENDING": "Creating task"
@@ -271,9 +271,9 @@
 			"LIGHT_TITLE": "Light",
 			"DARK_TITLE": "Dark",
 			"SYSTEM_TITLE": "System",
-			"LIGHT_FOOTER": "Deafult light",
-			"DARK_FOOTER": "Deafult dark",
-			"SYSTEM_FOOTER": "Deafult system",
+			"LIGHT_FOOTER": "DEFAULT light",
+			"DARK_FOOTER": "DEFAULT dark",
+			"SYSTEM_FOOTER": "DEFAULT system",
 			"ACTIVE": "Active"
 		},
 		"ACCOUNT": {
@@ -440,7 +440,7 @@
 				"LINK": "Add hyperlink",
 				"IMAGE": "Add image",
 				"COLOR": "Highlight",
-				"COLOR_DEAFULT": "Deafult color",
+				"COLOR_DEFAULT": "DEFAULT color",
 				"UNDO": "Undo",
 				"REDO": "Redo",
 				"DELETE": "Delete"

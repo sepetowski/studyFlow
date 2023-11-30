@@ -1,4 +1,4 @@
-export enum NodeColors {
+export enum MindMapItemColors {
 	RED,
 	GREEN,
 	PURPLE,
@@ -11,5 +11,21 @@ export enum NodeColors {
 	FUCHSIA,
 	PINK,
 	YELLOW,
-	DEAFULT,
+	DEFAULT,
+}
+
+export enum EdgeColor {
+	DEFAULT = 'DEFAULT',
+	PURPLE = 'PURPLE',
+	RED = 'RED',
+	GREEN = 'GREEN',
+	BLUE = 'BLUE',
+	PINK = 'PINK',
+	YELLOW = 'YELLOW',
+	ORANGE = 'ORANGE',
+	CYAN = 'CYAN',
+	FUCHSIA = 'FUCHSIA',
+	LIME = 'LIME',
+	EMERALD = 'EMERALD',
+	INDIGO = 'INDIGO',
 }

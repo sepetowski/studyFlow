@@ -133,7 +133,7 @@ export const CreateNewTagOrEditTag = ({
 		},
 		onError: (err: AxiosError, _, context) => {
 			queryClient.setQueryData(['getWorkspaceTags'], context?.checkedPreviousTags);
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -177,7 +177,7 @@ export const CreateNewTagOrEditTag = ({
 			const prevTag = context?.checkedPreviousTags.find((tag) => tag.id === id);
 			queryClient.setQueryData(['getWorkspaceTags'], context?.checkedPreviousTags);
 			onUpdateActiveTags && onUpdateActiveTags(id!, prevTag?.color!, prevTag?.name!);
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -221,7 +221,7 @@ export const CreateNewTagOrEditTag = ({
 
 			prevActiveTag && onSelectActiveTag && onSelectActiveTag(prevActiveTag.id);
 
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),

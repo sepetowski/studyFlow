@@ -38,7 +38,7 @@ export const SignInCardContent = () => {
 				password: data.password,
 				redirect: false,
 			});
-			if (!account) throw new Error('ERRORS.DEAFULT');
+			if (!account) throw new Error('ERRORS.DEFAULT');
 
 			if (account.error)
 				toast({
@@ -53,7 +53,7 @@ export const SignInCardContent = () => {
 				router.refresh();
 			}
 		} catch (err) {
-			let errMsg = m('ERRORS.DEAFULT');
+			let errMsg = m('ERRORS.DEFAULT');
 			if (typeof err === 'string') {
 				errMsg = err;
 			} else if (err instanceof Error) {

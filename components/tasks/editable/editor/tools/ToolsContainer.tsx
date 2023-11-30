@@ -136,7 +136,7 @@ export const ToolsContainer = ({ editor }: Props) => {
 			<OptionBtn
 				onClick={() => editor.chain().focus().unsetColor().run()}
 				data-testid='unsetColor'
-				hoverText={t('COLOR_DEAFULT')}>
+				hoverText={t('COLOR_DEFAULT')}>
 				<span className='w-4 h-4 rounded-full bg-secondary-foreground'></span>
 			</OptionBtn>
 			<Separator className='h-6' orientation='vertical' />

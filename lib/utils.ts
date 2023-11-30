@@ -20,3 +20,4 @@ export const color = z.enum([
 	'EMERALD',
 	'INDIGO',
 ]);
+

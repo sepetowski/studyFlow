@@ -79,7 +79,7 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 				{!isLoading && workspaceShortcuts && (
 					<div className='flex flex-col gap-2 w-full mt-2'>
 						<WorkspaceOption
-							deafultName={t('DEAFULT_NAME')}
+							DEFAULTName={t('DEFAULT_NAME')}
 							workspaceId={workspaceId}
 							href={`tasks/task`}
 							fields={workspaceShortcuts.tasks}>

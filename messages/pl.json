@@ -158,7 +158,7 @@
 	},
 	"MESSAGES": {
 		"ERRORS": {
-			"DEAFULT": "O nie.. Coś poszło nie tak",
+			"DEFAULT": "O nie.. Coś poszło nie tak",
 			"TAKEN_USERNAME": "Ta nazwa użytkownika jest już zajęta",
 			"TAKEN_EMAIL": "Ten e-mail jest już w użyciu",
 			"DB_ERROR": "Obecnie mamy problemy. Proszę sprbować ponownie później",
@@ -260,11 +260,10 @@
 			"SCHEDULES": "Plany tygodnia",
 			"STUDY": "Nauka",
 			"FILES": "Pliki",
-			"DEAFULT_NAME": "Bez tytułu",
+			"DEFAULT_NAME": "Bez tytułu",
 			"ACTIONS": "Akcje",
 			"ADD_TASK": "Dodaj zadanie",
 			"ADD_TASK_PENDING": "Tworze zadanie"
-			
 		}
 	},
 	"SETTINGS": {
@@ -444,7 +443,7 @@
 				"LINK": "Dodaj hiperłącze",
 				"IMAGE": "Dodaj zdjęcie",
 				"COLOR": "Wyróżnienie",
-				"COLOR_DEAFULT": "Domyślny kolor",
+				"COLOR_DEFAULT": "Domyślny kolor",
 				"UNDO": "Cofnij",
 				"REDO": "Wykonaj ponownie",
 				"DELETE": "Usuń"

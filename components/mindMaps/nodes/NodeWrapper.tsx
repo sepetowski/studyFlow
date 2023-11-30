@@ -1,7 +1,7 @@
 'use client';
 import React, { useCallback, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
-import { NodeColors } from '@/types/enums';
+import { MindMapItemColors } from '@/types/enums';
 import { Check, MoreHorizontal } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Handle, Position } from 'reactflow';
@@ -22,70 +22,70 @@ import {
 interface Props {
 	children: React.ReactNode;
 	className?: string;
-	color?: NodeColors;
+	color?: MindMapItemColors;
 }
 
 const colors = [
-	NodeColors.DEAFULT,
-	NodeColors.PURPLE,
-	NodeColors.GREEN,
-	NodeColors.BLUE,
-	NodeColors.CYAN,
-	NodeColors.EMERALD,
-	NodeColors.INDIGO,
-	NodeColors.LIME,
-	NodeColors.ORANGE,
-	NodeColors.FUCHSIA,
-	NodeColors.PINK,
-	NodeColors.YELLOW,
+	MindMapItemColors.DEFAULT,
+	MindMapItemColors.PURPLE,
+	MindMapItemColors.GREEN,
+	MindMapItemColors.BLUE,
+	MindMapItemColors.CYAN,
+	MindMapItemColors.EMERALD,
+	MindMapItemColors.INDIGO,
+	MindMapItemColors.LIME,
+	MindMapItemColors.ORANGE,
+	MindMapItemColors.FUCHSIA,
+	MindMapItemColors.PINK,
+	MindMapItemColors.YELLOW,
 ];
 
-export const NodeWrapper = ({ children, className, color = NodeColors.DEAFULT }: Props) => {
-	const [currColor, setCurrColor] = useState<NodeColors | undefined>(color);
+export const NodeWrapper = ({ children, className, color = MindMapItemColors.DEFAULT }: Props) => {
+	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
 
-	const onColorSelect = useCallback((newColor: NodeColors) => {
+	const onColorSelect = useCallback((newColor: MindMapItemColors) => {
 		setCurrColor(newColor);
 	}, []);
 
-	const nodeColor = useCallback((color: NodeColors) => {
+	const nodeColor = useCallback((color: MindMapItemColors) => {
 		switch (color) {
-			case NodeColors.PURPLE:
+			case MindMapItemColors.PURPLE:
 				return '!bg-purple-600 hover:bg-purple-500 text-white';
 
-			case NodeColors.GREEN:
+			case MindMapItemColors.GREEN:
 				return '!bg-green-600 hover:bg-green-500 text-white';
 
-			case NodeColors.RED:
+			case MindMapItemColors.RED:
 				return '!bg-red-600 hover:bg-red-500 text-white';
 
-			case NodeColors.BLUE:
+			case MindMapItemColors.BLUE:
 				return '!bg-blue-600 hover:bg-blue-500 text-white';
 
-			case NodeColors.CYAN:
+			case MindMapItemColors.CYAN:
 				return '!bg-cyan-600 hover:bg-cyan-500 text-white';
 
-			case NodeColors.EMERALD:
+			case MindMapItemColors.EMERALD:
 				return '!bg-emerald-600 hover:bg-emerald-500 text-white';
 
-			case NodeColors.INDIGO:
+			case MindMapItemColors.INDIGO:
 				return '!bg-indigo-600 hover:bg-indigo-500 text-white';
 
-			case NodeColors.LIME:
+			case MindMapItemColors.LIME:
 				return '!bg-lime-600 hover:bg-lime-500 text-white';
 
-			case NodeColors.ORANGE:
+			case MindMapItemColors.ORANGE:
 				return '!bg-orange-600 hover:bg-orange-500 text-white';
-			case NodeColors.FUCHSIA:
+			case MindMapItemColors.FUCHSIA:
 				return '!bg-fuchsia-600 hover:bg-fuchsia-500 text-white';
 
-			case NodeColors.PINK:
+			case MindMapItemColors.PINK:
 				return '!bg-pink-600 hover:bg-pink-500 text-white';
 
-			case NodeColors.YELLOW:
+			case MindMapItemColors.YELLOW:
 				return '!bg-yellow-600 hover:bg-yellow-500 text-white';
 
 			default:
-				return '!bg-secondary hover:bg-secondary-500 ';
+				return '!bg-secondary ';
 		}
 	}, []);
 
@@ -120,7 +120,7 @@ export const NodeWrapper = ({ children, className, color = NodeColors.DEAFULT }:
 				<DropdownMenuTrigger asChild>
 					<Button
 						className={`w-6 h-6 hover:bg-transparent ${
-							currColor === NodeColors.DEAFULT ? '' : 'text-white hover:text-white'
+							currColor === MindMapItemColors.DEFAULT ? '' : 'text-white hover:text-white'
 						}  `}
 						variant={'ghost'}
 						size={'icon'}>
@@ -147,7 +147,7 @@ export const NodeWrapper = ({ children, className, color = NodeColors.DEAFULT }:
 												variant={'ghost'}>
 												{color === currColor && (
 													<Check
-														className={`${color !== NodeColors.DEAFULT ? 'text-white' : ''}`}
+														className={`${color !== MindMapItemColors.DEFAULT ? 'text-white' : ''}`}
 														size={16}
 													/>
 												)}

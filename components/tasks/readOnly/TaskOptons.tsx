@@ -56,7 +56,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 			});
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -87,7 +87,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 			onSetIsSaved();
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			onSetIsSaved();
 

@@ -60,7 +60,7 @@ export const MoreOptions = ({
 			});
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
