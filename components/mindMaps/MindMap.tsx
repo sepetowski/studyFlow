@@ -14,6 +14,7 @@ import ReactFlow, {
 	Node,
 	MiniMap,
 	EdgeTypes,
+	Panel,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { TextNode } from './nodes/TextNode';
@@ -35,28 +36,28 @@ const edgeTypes: EdgeTypes = {
 	customStepRounded: CustomStepRounded,
 };
 
-const initialNodes: Node[] = [
-	{ id: '1', data: { label: 'Node 1' }, position: { x: 5, y: 5 } },
-	{ id: '2', data: { label: 'Node 2' }, position: { x: 5, y: 100 } },
-	{ id: 'node-1', type: 'textNode', position: { x: 0, y: 0 }, data: { value: 123 } },
-];
+// const initialNodes: Node[] = [
+// 	{ id: '1', data: { label: 'Node 1' }, position: { x: 5, y: 5 } },
+// 	{ id: '2', data: { label: 'Node 2' }, position: { x: 5, y: 100 } },
+// 	{ id: 'node-1', type: 'textNode', position: { x: 0, y: 0 }, data: { value: 123 } },
+// ];
 
-const initialEdges: Edge[] = [
-	{
-		id: 'node-1-2',
-		source: 'node-1',
-		target: '2',
-		data: {
-			label: 'to the',
-		},
-		type: 'customStraight',
-	},
-];
+// const initialEdges: Edge[] = [
+// 	{
+// 		id: 'node-1-2',
+// 		source: 'node-1',
+// 		target: '2',
+// 		data: {
+// 			label: 'to the',
+// 		},
+// 		type: 'customStraight',
+// 	},
+// ];
 
 export const MindMap = () => {
 	const [openSheet, setOpenSheet] = useState(false);
-	const [nodes, setNodes] = useState<Node[]>(initialNodes);
-	const [edges, setEdges] = useState<Edge[]>(initialEdges);
+	const [nodes, setNodes] = useState<Node[]>([]);
+	const [edges, setEdges] = useState<Edge[]>([]);
 	const [clickedEdge, setClickedEdge] = useState<Edge | null>(null);
 
 	const onAddNode = useCallback(() => {
@@ -64,7 +65,7 @@ export const MindMap = () => {
 			id: Math.random().toString(),
 			type: 'textNode',
 			position: { x: 0, y: 0 },
-			data: { label: 'yo', color: EdgeColor.DEFAULT },
+			data: { value: 'yo', color: EdgeColor.DEFAULT },
 		};
 
 		setNodes((nds) => nds.concat(newNode));
@@ -127,9 +128,7 @@ export const MindMap = () => {
 					/>
 				</Sheet>
 			)}
-			<div className='bg-red-300 w-12 h-12 z-50'>
-				<Button onClick={onAddNode}>sad</Button>
-			</div>
+
 			<div className=' h-full'>
 				<ReactFlow
 					fitView
@@ -141,6 +140,9 @@ export const MindMap = () => {
 					onEdgesChange={onEdgesChange}
 					onConnect={onConnect}
 					onEdgeClick={onEdgeClick}>
+					<Panel position='top-left' className='bg-red-300 w-1/2  z-50'>
+						<Button onClick={onAddNode}>sad</Button>
+					</Panel>
 					<Background />
 
 					{/* <MiniMap />

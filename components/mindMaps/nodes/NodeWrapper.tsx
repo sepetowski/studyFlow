@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { MindMapItemColors } from '@/types/enums';
-import { Check, MoreHorizontal } from 'lucide-react';
+import { Check, MoreHorizontal, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Handle, Position } from 'reactflow';
 import {
@@ -23,6 +23,8 @@ interface Props {
 	children: React.ReactNode;
 	className?: string;
 	color?: MindMapItemColors;
+	isEditing: boolean;
+	onEdit: () => void;
 }
 
 const colors = [
@@ -40,7 +42,13 @@ const colors = [
 	MindMapItemColors.YELLOW,
 ];
 
-export const NodeWrapper = ({ children, className, color = MindMapItemColors.DEFAULT }: Props) => {
+export const NodeWrapper = ({
+	children,
+	className,
+	color = MindMapItemColors.DEFAULT,
+	isEditing,
+	onEdit,
+}: Props) => {
 	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
 
 	const onColorSelect = useCallback((newColor: MindMapItemColors) => {
@@ -92,12 +100,12 @@ export const NodeWrapper = ({ children, className, color = MindMapItemColors.DEF
 	return (
 		<div
 			className={cn(
-				`max-w-md text-xs px-3 py-1.5    rounded-sm shadow-sm flex items-start justify-between transition-colors duration-200 gap-2 ${nodeColor(
+				`min-w-[10rem] max-w-md text-xs px-3 py-1.5  rounded-sm shadow-sm flex items-start justify-between transition-colors duration-200 gap-4 ${nodeColor(
 					currColor!
 				)}`,
 				className
 			)}>
-			<div className='w-full'>
+			<div className='w-full text-lg'>
 				{children}
 				<>
 					<Handle
@@ -116,55 +124,66 @@ export const NodeWrapper = ({ children, className, color = MindMapItemColors.DEF
 					/>
 				</>
 			</div>
-			<DropdownMenu>
-				<DropdownMenuTrigger asChild>
-					<Button
-						className={`w-6 h-6 hover:bg-transparent ${
-							currColor === MindMapItemColors.DEFAULT ? '' : 'text-white hover:text-white'
-						}  `}
-						variant={'ghost'}
-						size={'icon'}>
-						<MoreHorizontal size={16} />
-					</Button>
-				</DropdownMenuTrigger>
-				<DropdownMenuContent className='' sideOffset={-10} align='start'>
-					<DropdownMenuGroup>
-						<DropdownMenuSub>
-							<DropdownMenuSubTrigger className='cursor-pointer'>
-								<span>kolor</span>
-							</DropdownMenuSubTrigger>
-							<DropdownMenuPortal>
-								<DropdownMenuSubContent className='hover:bg-popover' sideOffset={10}>
-									<DropdownMenuItem className='grid grid-cols-4 gap-2 focus:bg-popover  '>
-										{colors.map((color, i) => (
-											<Button
-												onClick={() => {
-													onColorSelect(color);
-												}}
-												key={i}
-												className={`w-5 h-5 p-1  rounded-full ${nodeColor(color)} `}
-												size={'icon'}
-												variant={'ghost'}>
-												{color === currColor && (
-													<Check
-														className={`${color !== MindMapItemColors.DEFAULT ? 'text-white' : ''}`}
-														size={16}
-													/>
-												)}
-											</Button>
-										))}
-									</DropdownMenuItem>
-								</DropdownMenuSubContent>
-							</DropdownMenuPortal>
-						</DropdownMenuSub>
-					</DropdownMenuGroup>
-					<DropdownMenuSeparator />
-					<DropdownMenuItem className='cursor-pointer gap-2'>
-						{/* <LogOut size={16} /> {t('LOG_OUT')} */}
-						usun
-					</DropdownMenuItem>
-				</DropdownMenuContent>
-			</DropdownMenu>
+			{!isEditing && (
+				<DropdownMenu>
+					<DropdownMenuTrigger asChild>
+						<Button
+							className={`w-6 h-6 hover:bg-transparent ${
+								currColor === MindMapItemColors.DEFAULT ? '' : 'text-white hover:text-white'
+							}  `}
+							variant={'ghost'}
+							size={'icon'}>
+							<MoreHorizontal size={16} />
+						</Button>
+					</DropdownMenuTrigger>
+					<DropdownMenuContent className='' sideOffset={-10} align='start'>
+						<DropdownMenuItem
+							onClick={() => {
+								onEdit();
+							}}
+							className='cursor-pointer gap-2'>
+							<Pencil size={16} />
+							<span>Edytuj</span>
+						</DropdownMenuItem>
+						<DropdownMenuGroup>
+							<DropdownMenuSub>
+								<DropdownMenuSubTrigger className='cursor-pointer'>
+									<span>kolor</span>
+								</DropdownMenuSubTrigger>
+								<DropdownMenuPortal>
+									<DropdownMenuSubContent className='hover:bg-popover' sideOffset={10}>
+										<DropdownMenuItem className='grid grid-cols-4 gap-2 focus:bg-popover  '>
+											{colors.map((color, i) => (
+												<Button
+													onClick={() => {
+														onColorSelect(color);
+													}}
+													key={i}
+													className={`w-5 h-5 p-1  rounded-full ${nodeColor(color)} `}
+													size={'icon'}
+													variant={'ghost'}>
+													{color === currColor && (
+														<Check
+															className={`${
+																color !== MindMapItemColors.DEFAULT ? 'text-white' : ''
+															}`}
+															size={16}
+														/>
+													)}
+												</Button>
+											))}
+										</DropdownMenuItem>
+									</DropdownMenuSubContent>
+								</DropdownMenuPortal>
+							</DropdownMenuSub>
+						</DropdownMenuGroup>
+						<DropdownMenuItem className='cursor-pointer gap-2'>
+							{/* <LogOut size={16} /> {t('LOG_OUT')} */}
+							usun
+						</DropdownMenuItem>
+					</DropdownMenuContent>
+				</DropdownMenu>
+			)}
 		</div>
 	);
 };
