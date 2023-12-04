@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { apiDeletetagSchema } from '@/schema/tagSchema';
+import { mindMapSchema } from '@/schema/mindMapSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -9,13 +9,13 @@ export async function POST(request: Request) {
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
-	const result = apiDeletetagSchema.safeParse(body);
+	const result = mindMapSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { id, workspaceId } = result.data;
+	const { content, mindMapId, workspaceId } = result.data;
 
 	try {
 		const user = await db.user.findUnique({
@@ -42,40 +42,24 @@ export async function POST(request: Request) {
 		)
 			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
 
-		const workspace = await db.workspace.findUnique({
+		const mindMap = await db.mindMap.findUnique({
 			where: {
-				id: workspaceId,
-			},
-			include: {
-				tags: {
-					where: {
-						workspaceId,
-					},
-					select: {
-						name: true,
-					},
-				},
+				id: mindMapId,
 			},
 		});
+		if (!mindMap) return NextResponse.json('ERRORS.NO_MIND_MAP_FOUND', { status: 404 });
 
-		if (!workspace) return NextResponse.json('ERRORS.NO_WORKSPACE', { status: 404 });
-
-		const tag = await db.tag.findUnique({
+		const updatedmindMap = await db.mindMap.update({
 			where: {
-				id,
+				id: mindMap.id,
+			},
+			data: {
+				updatedUserId: session.user.id,
+				content,
 			},
 		});
-
-		if (!tag) return NextResponse.json('ERRORS.NO_TAG', { status: 404 });
-
-		const deletedTag = await db.tag.delete({
-			where: {
-				id,
-			},
-		});
-
-		return NextResponse.json(deletedTag, { status: 200 });
-	} catch (err) {
+		return NextResponse.json(updatedmindMap, { status: 200 });
+	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

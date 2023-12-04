@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { NodeProps, useReactFlow } from 'reactflow';
 import { NodeWrapper } from './NodeWrapper';
 import TextareaAutosize from 'react-textarea-autosize';
@@ -7,16 +7,31 @@ import { Button } from '@/components/ui/button';
 import { useForm } from 'react-hook-form';
 import { TextNodeSchema, textNodeSchema } from '@/schema/nodesSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useOnEditNode } from '@/hooks/react_flow/useOnEditNode';
+import { MindMapItemColors } from '@/types/enums';
+
 type NodeData = {
 	text: string;
+	color: MindMapItemColors;
 };
 
 export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 	const [isEditing, setIsEditing] = useState(false);
 	const _nodeText = useRef<HTMLTextAreaElement>(null);
+	const { setNodes } = useReactFlow();
 
-	const { onEdit: onEditNode } = useOnEditNode();
+	console.log(data);
+
+	const onSaveNode = useCallback(
+		(nodeId: string, nodeText: string) => {
+			setNodes((prevNodes) => {
+				const nodes = prevNodes.map((node) =>
+					node.id === nodeId ? { ...node, data: { ...node.data, text: nodeText } } : node
+				);
+				return nodes;
+			});
+		},
+		[setNodes]
+	);
 
 	const form = useForm<TextNodeSchema>({
 		resolver: zodResolver(textNodeSchema),
@@ -31,7 +46,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 		setIsEditing((prev) => !prev);
 	};
 	const onSubmit = (data: TextNodeSchema) => {
-		onEditNode(id, data.text);
+		onSaveNode(id, data.text);
 		onIsEdit();
 	};
 
@@ -42,7 +57,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 	}, [data.text, form, isEditing]);
 
 	return (
-		<NodeWrapper isEditing={isEditing} onIsEdit={onIsEdit}>
+		<NodeWrapper nodeId={id} color={data.color} isEditing={isEditing} onIsEdit={onIsEdit}>
 			<div className='w-full py-1.5'>
 				{isEditing ? (
 					<form id='node-text-form' onSubmit={form.handleSubmit(onSubmit)}>
@@ -57,7 +72,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 								onKeyDown={(e) => {
 									if (e.key === 'Enter') e.preventDefault();
 								}}
-								className='w-96 min-h-[4rem] resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground  focus:outline-none '
+								className='w-[26.5rem] min-h-[4rem] resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground  focus:outline-none '
 							/>
 						</div>
 						<div className='w-full flex justify-end mt-4  gap-2'>
@@ -80,7 +95,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 						</div>
 					</form>
 				) : (
-					<p className='w-full  '>{data.text ? data.text : 'Add new text'}</p>
+					<p className='w-full break-words  '>{data.text ? data.text : 'Add new text'}</p>
 				)}
 			</div>
 		</NodeWrapper>

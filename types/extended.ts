@@ -18,9 +18,14 @@ export interface ShortTask {
 	emoji: string;
 	title: string;
 }
+export interface ShortMindMap {
+	id: string;
+	title: string;
+}
 
 export interface WorkspaceShortcuts extends Workspace {
 	tasks: ShortTask[];
+	mindMaps: ShortMindMap[];
 }
 
 export interface ExtendedTask extends Task {

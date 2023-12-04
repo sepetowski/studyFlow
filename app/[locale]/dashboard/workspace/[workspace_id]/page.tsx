@@ -36,7 +36,6 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 h-full'>
 				{workspace.name} {workspace.id}
-				<MindMap />
 			</main>
 		</>
 	);

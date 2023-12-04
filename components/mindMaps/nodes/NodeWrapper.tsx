@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 import { MindMapItemColors } from '@/types/enums';
 import { Check, MoreHorizontal, Pencil } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { Handle, Position } from 'reactflow';
+import { Handle, Position, useReactFlow } from 'reactflow';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -20,6 +20,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 
 interface Props {
+	nodeId: string;
 	children: React.ReactNode;
 	className?: string;
 	color?: MindMapItemColors;
@@ -43,6 +44,7 @@ const colors = [
 ];
 
 export const NodeWrapper = ({
+	nodeId,
 	children,
 	className,
 	color = MindMapItemColors.DEFAULT,
@@ -50,9 +52,20 @@ export const NodeWrapper = ({
 	onIsEdit,
 }: Props) => {
 	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
+	const { setNodes } = useReactFlow();
+
+	const onSaveNode = useCallback((color: MindMapItemColors) => {
+		setNodes((prevNodes) => {
+			const nodes = prevNodes.map((node) =>
+				node.id === nodeId ? { ...node, data: { ...node.data, color } } : node
+			);
+			return nodes;
+		});
+	}, []);
 
 	const onColorSelect = useCallback((newColor: MindMapItemColors) => {
 		setCurrColor(newColor);
+		onSaveNode(newColor);
 	}, []);
 
 	const nodeColor = useCallback((color: MindMapItemColors) => {
@@ -105,7 +118,7 @@ export const NodeWrapper = ({
 				)}`,
 				className
 			)}>
-			<div className='w-full text-lg'>
+			<div className={` ${isEditing ? 'w-full' : 'w-[90%]'}  text-lg`}>
 				{children}
 				<>
 					<Handle
@@ -128,7 +141,7 @@ export const NodeWrapper = ({
 				<DropdownMenu>
 					<DropdownMenuTrigger asChild>
 						<Button
-							className={`w-6 h-6 hover:bg-transparent ${
+							className={`w-6 h-6 hover:bg-transparent  ${
 								currColor === MindMapItemColors.DEFAULT ? '' : 'text-white hover:text-white'
 							}  `}
 							variant={'ghost'}
