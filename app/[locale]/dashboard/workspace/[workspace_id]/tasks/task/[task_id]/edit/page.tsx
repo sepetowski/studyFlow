@@ -4,6 +4,7 @@ import { TaskContener } from '@/components/tasks/editable/contener/TaskContener'
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { redirect } from 'next-intl/server';
 
 interface Params {
 	params: {
@@ -23,10 +24,14 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 		getTask(task_id, session.user.id),
 	]);
 
+	const candEdit = userRole === 'ADMIN' || userRole === 'OWNER' ? true : false;
+
+	if (!candEdit) redirect(`/dashboard/workspace/${workspace_id}/tasks/task/${task_id}`);
+
 	return (
 		<AutosaveIndicatorProvider>
 			<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
-				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
+				<InviteUsers workspace={workspace} />
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 '>
 				<TaskContener

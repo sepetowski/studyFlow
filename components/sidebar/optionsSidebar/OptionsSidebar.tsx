@@ -23,7 +23,7 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 		(urlAditionalId &&
 			pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}/edit`) ||
 		(urlAditionalId &&
-			pathname === `/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}`)
+			pathname === `/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}/edit`)
 	)
 		return null;
 
@@ -33,7 +33,9 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 				<Settings userAdminWorkspaces={userAdminWorkspaces} />
 			)}
 			{(pathname === `/dashboard/workspace/${workspaceId}` ||
-				pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}`) && (
+				pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}` ||
+				pathname ===
+					`/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}`) && (
 				<WorkspaceOptions workspaceId={workspaceId} />
 			)}
 
