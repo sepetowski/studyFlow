@@ -14,7 +14,7 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { useDebouncedCallback } from 'use-debounce';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 
 interface Props {
 	from: Date | undefined;
@@ -39,7 +39,7 @@ export const TaskCalendar = ({
 
 	const t = useTranslations('TASK.HEADER.DATE');
 	const lang = useLocale();
-	const { status, onSetStatus } = useSaveTaskState();
+	const { status, onSetStatus } = useAutosaveIndicator();
 
 	const currentLocale = useMemo(() => {
 		if (lang === 'pl') return pl;

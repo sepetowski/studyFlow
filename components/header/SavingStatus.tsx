@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { FileWarning, Save } from 'lucide-react';
 import { LoadingState } from '@/components/ui/loading-state';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 export const SavingStatus = () => {
 	const t = useTranslations('COMMON.SAVING_STATUS');
 
-	const { status } = useSaveTaskState();
+	const { status } = useAutosaveIndicator();
 
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>

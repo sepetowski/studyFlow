@@ -15,7 +15,7 @@ import Placeholder from '@tiptap/extension-placeholder';
 import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
 import { useDebounce, useDebouncedCallback } from 'use-debounce';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 
@@ -29,7 +29,7 @@ const limit = 600;
 
 export const Editor = ({ content, taskId, workspaceId }: Props) => {
 	const t = useTranslations('TASK');
-	const { onSetStatus, status } = useSaveTaskState();
+	const { onSetStatus, status } = useAutosaveIndicator();
 
 	const editor = useEditor({
 		editorProps: {

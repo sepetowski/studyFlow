@@ -8,6 +8,9 @@ import { useForm } from 'react-hook-form';
 import { TextNodeSchema, textNodeSchema } from '@/schema/nodesSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { MindMapItemColors } from '@/types/enums';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
+import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
+import { useDebouncedCallback } from 'use-debounce';
 
 type NodeData = {
 	text: string;
@@ -19,7 +22,13 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 	const _nodeText = useRef<HTMLTextAreaElement>(null);
 	const { setNodes } = useReactFlow();
 
-	console.log(data);
+	const { onSetStatus } = useAutosaveIndicator();
+	const { onSave } = useAutoSaveMindMap();
+
+	const debouncedMindMapInfo = useDebouncedCallback(() => {
+		onSetStatus('pending');
+		onSave();
+	}, 3000);
 
 	const onSaveNode = useCallback(
 		(nodeId: string, nodeText: string) => {
@@ -29,8 +38,11 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 				);
 				return nodes;
 			});
+
+			onSetStatus('unsaved');
+			debouncedMindMapInfo();
 		},
-		[setNodes]
+		[setNodes, debouncedMindMapInfo, onSetStatus]
 	);
 
 	const form = useForm<TextNodeSchema>({

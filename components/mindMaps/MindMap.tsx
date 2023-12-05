@@ -1,7 +1,6 @@
 'use client';
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useRef } from 'react';
 import ReactFlow, {
-	Controls,
 	Background,
 	applyNodeChanges,
 	applyEdgeChanges,
@@ -10,14 +9,9 @@ import ReactFlow, {
 	OnNodesChange,
 	OnEdgesChange,
 	OnConnect,
-	ControlButton,
 	Node,
-	MiniMap,
 	EdgeTypes,
 	Panel,
-	OnInit,
-	ReactFlowInstance,
-	useReactFlow,
 	ReactFlowJsonObject,
 } from 'reactflow';
 import 'reactflow/dist/style.css';
@@ -30,16 +24,15 @@ import { CustomStraight } from './labels/CustomStraight';
 import { CustomStepSharp } from './labels/CustomStepSharp';
 import { CustomStepRounded } from './labels/CustomStepRounded';
 import { CustomBezier } from './labels/CustomBezier';
-import { EdgeColor } from '@/types/enums';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { PlusSquare, Save, Trash } from 'lucide-react';
-
 import { DeleteAllNodes } from './DeleteAllNodes';
 import { MindMap as MindMapType } from '@prisma/client';
-import { useMutation } from '@tanstack/react-query';
-import axios from 'axios';
 import { LoadingScreen } from '../common/LoadingScreen';
 import { useDebouncedCallback } from 'use-debounce';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
+
+import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
 
 const nodeTypes = { textNode: TextNode };
 const edgeTypes: EdgeTypes = {
@@ -52,46 +45,24 @@ const edgeTypes: EdgeTypes = {
 interface Props {
 	initialInfo: MindMapType;
 	workspaceId: string;
+	candEdit: boolean;
 }
 
-export const MindMap = ({ initialInfo, workspaceId }: Props) => {
+export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
 	const [openSheet, setOpenSheet] = useState(false);
 	const [nodes, setNodes] = useState<Node[]>([]);
 	const [edges, setEdges] = useState<Edge[]>([]);
 	const [clickedEdge, setClickedEdge] = useState<Edge | null>(null);
-	const [rfInstance, setRfInstance] = useState<null | ReactFlowInstance>(null);
 	const [isMounted, setIsMounted] = useState(false);
+	const [editable, setEditable] = useState(candEdit);
 
-	const debouncedCurrentActiveTags = useDebouncedCallback(() => {
-		// updateMindMap()
-		console.log('ok');
-	}, 2000);
+	const { onSetStatus, status } = useAutosaveIndicator();
+	const { setRfInstance, onSave, onSetIds } = useAutoSaveMindMap();
 
-	const { mutate: updateMindMap } = useMutation({
-		mutationFn: async (flow: ReactFlowJsonObject) => {
-			await axios.post('/api/mind_maps/update', {
-				content: flow,
-				mindMapId: initialInfo.id,
-				workspaceId,
-			});
-		},
-
-		onSuccess: () => {
-			console.log('ok');
-		},
-
-		onError: () => {
-			console.log('nie ok');
-		},
-	});
-
-	const onSave = useCallback(() => {
-		if (rfInstance) {
-			const flow = rfInstance.toObject();
-			updateMindMap(flow);
-			console.log(flow);
-		}
-	}, [rfInstance, updateMindMap]);
+	const debouncedMindMapInfo = useDebouncedCallback(() => {
+		onSetStatus('pending');
+		onSave();
+	}, 3000);
 
 	useEffect(() => {
 		setIsMounted(true);
@@ -104,7 +75,8 @@ export const MindMap = ({ initialInfo, workspaceId }: Props) => {
 			setNodes(nodes);
 			setEdges(edges);
 		}
-	}, [initialInfo]);
+		onSetIds(initialInfo.id, workspaceId);
+	}, [initialInfo, initialInfo.id, workspaceId, onSetIds]);
 
 	const onAddNode = useCallback(() => {
 		const newNode = {
@@ -115,18 +87,23 @@ export const MindMap = ({ initialInfo, workspaceId }: Props) => {
 		};
 
 		setNodes((nds) => nds.concat(newNode));
-	}, []);
+		onSetStatus('unsaved');
+		debouncedMindMapInfo();
+	}, [debouncedMindMapInfo, onSetStatus]);
 
 	const onNodesChange: OnNodesChange = useCallback(
 		(changes) => {
 			setNodes((nds) => {
 				return applyNodeChanges(changes, nds);
 			});
-
-			debouncedCurrentActiveTags();
 		},
-		[debouncedCurrentActiveTags]
+
+		[]
 	);
+
+	useEffect(() => {
+		setEditable(candEdit);
+	}, [candEdit]);
 
 	const onEdgesChange: OnEdgesChange = useCallback((changes) => {
 		setEdges((eds) => {
@@ -134,39 +111,71 @@ export const MindMap = ({ initialInfo, workspaceId }: Props) => {
 		});
 	}, []);
 
-	const onEdgeClick = useCallback((e: React.MouseEvent, edge: Edge) => {
-		setClickedEdge(edge);
-		setOpenSheet(true);
-	}, []);
+	const onEdgeClick = useCallback(
+		(e: React.MouseEvent, edge: Edge) => {
+			if (!editable) return;
+			setClickedEdge(edge);
+			setOpenSheet(true);
+		},
+		[editable]
+	);
 
-	const onSaveEdge = useCallback((data: EdgeOptionsSchema) => {
-		const { animated, edgeId, label, color, type } = data;
-		setEdges((prevEdges) => {
-			const edges = prevEdges.map((edge) =>
-				edge.id === edgeId
-					? {
-							...edge,
-							data: label ? { label, color } : undefined,
-							type,
-							animated,
-					  }
-					: edge
-			);
+	const onSaveEdge = useCallback(
+		(data: EdgeOptionsSchema) => {
+			const { animated, edgeId, label, color, type } = data;
+			setEdges((prevEdges) => {
+				const edges = prevEdges.map((edge) =>
+					edge.id === edgeId
+						? {
+								...edge,
+								data: label ? { label, color } : undefined,
+								type,
+								animated,
+						  }
+						: edge
+				);
 
-			return edges;
-		});
-		setOpenSheet(false);
-	}, []);
+				return edges;
+			});
 
-	const onDeleteEdge = useCallback((edgeId: string) => {
-		setEdges((prevEdges) => {
-			const edges = prevEdges.filter((edge) => edge.id !== edgeId);
-			return edges;
-		});
-		setOpenSheet(false);
-	}, []);
+			setOpenSheet(false);
+			onSetStatus('unsaved');
+			debouncedMindMapInfo();
+		},
+		[debouncedMindMapInfo, onSetStatus]
+	);
 
-	const onConnect: OnConnect = useCallback((params) => setEdges((eds) => addEdge(params, eds)), []);
+	const onDeleteEdge = useCallback(
+		(edgeId: string) => {
+			setEdges((prevEdges) => {
+				const edges = prevEdges.filter((edge) => edge.id !== edgeId);
+				return edges;
+			});
+			setOpenSheet(false);
+			onSetStatus('unsaved');
+			debouncedMindMapInfo();
+		},
+		[debouncedMindMapInfo, onSetStatus]
+	);
+
+	const onNodeDrag = useCallback(() => {
+		onSetStatus('unsaved');
+		debouncedMindMapInfo();
+	}, [debouncedMindMapInfo, onSetStatus]);
+
+	const onNodesDelete = useCallback(() => {
+		onSetStatus('unsaved');
+		debouncedMindMapInfo();
+	}, [debouncedMindMapInfo, onSetStatus]);
+
+	const onConnect: OnConnect = useCallback(
+		(params) => {
+			setEdges((eds) => addEdge(params, eds));
+			onSetStatus('unsaved');
+			debouncedMindMapInfo();
+		},
+		[debouncedMindMapInfo, onSetStatus]
+	);
 
 	if (!isMounted) return <LoadingScreen />;
 
@@ -186,40 +195,59 @@ export const MindMap = ({ initialInfo, workspaceId }: Props) => {
 			<div className=' h-full'>
 				<ReactFlow
 					fitView
-					onInit={setRfInstance}
 					nodes={nodes}
 					edgeTypes={edgeTypes}
 					nodeTypes={nodeTypes}
 					edges={edges}
+					onInit={setRfInstance}
+					onNodeDrag={onNodeDrag}
 					onNodesChange={onNodesChange}
 					onEdgesChange={onEdgesChange}
 					onConnect={onConnect}
-					onEdgeClick={onEdgeClick}>
-					<Panel
-						position='top-left'
-						className='bg-background  z-50 shadow-sm border rounded-sm py-0.5 px-3'>
-						<div className=' flex gap-2 w-full'>
-							<HoverCard openDelay={250} closeDelay={250}>
-								<HoverCardTrigger asChild>
-									<Button variant={'ghost'} size={'icon'} onClick={onAddNode}>
-										<PlusSquare size={22} />
-									</Button>
-								</HoverCardTrigger>
-								<HoverCardContent align='start'>Dodaj kafelk</HoverCardContent>
-							</HoverCard>
+					onEdgeClick={onEdgeClick}
+					onNodesDelete={onNodesDelete}
+					connectOnClick={editable}
+					edgesUpdatable={editable}
+					edgesFocusable={editable}
+					nodesDraggable={editable}
+					nodesConnectable={editable}
+					nodesFocusable={editable}
+					elementsSelectable={editable}>
+					{editable && (
+						<Panel
+							position='top-left'
+							className='bg-background  z-50 shadow-sm border rounded-sm py-0.5 px-3'>
+							<div className=' flex gap-2 w-full'>
+								<HoverCard openDelay={250} closeDelay={250}>
+									<HoverCardTrigger asChild>
+										<Button variant={'ghost'} size={'icon'} onClick={onAddNode}>
+											<PlusSquare size={22} />
+										</Button>
+									</HoverCardTrigger>
+									<HoverCardContent align='start'>Dodaj kafelk</HoverCardContent>
+								</HoverCard>
 
-							<HoverCard openDelay={250} closeDelay={250}>
-								<HoverCardTrigger asChild>
-									<Button variant={'ghost'} size={'icon'} onClick={onSave}>
-										<Save size={22} />
-									</Button>
-								</HoverCardTrigger>
-								<HoverCardContent align='start'>Zapisz</HoverCardContent>
-							</HoverCard>
+								<HoverCard openDelay={250} closeDelay={250}>
+									<HoverCardTrigger asChild>
+										<Button
+											disabled={status === 'pending' || status === 'saved'}
+											variant={'ghost'}
+											size={'icon'}
+											onClick={() => {
+												onSetStatus('pending');
+												onSave();
+											}}>
+											<Save size={22} />
+										</Button>
+									</HoverCardTrigger>
+									<HoverCardContent align='start'>Zapisz</HoverCardContent>
+								</HoverCard>
 
-							<DeleteAllNodes />
-						</div>
-					</Panel>
+								<DeleteAllNodes />
+							</div>
+						</Panel>
+					)}
+
 					<Background />
 				</ReactFlow>
 			</div>

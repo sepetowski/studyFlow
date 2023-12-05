@@ -1,7 +1,7 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { TaskContener } from '@/components/tasks/editable/contener/TaskContener';
-import { SaveTaskStateProvider } from '@/context/SaveTaskState';
+import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
@@ -24,7 +24,7 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 	]);
 
 	return (
-		<SaveTaskStateProvider>
+		<AutosaveIndicatorProvider>
 			<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 			</DashboardHeader>
@@ -40,7 +40,7 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 					initialActiveTags={task.tags}
 				/>
 			</main>
-		</SaveTaskStateProvider>
+		</AutosaveIndicatorProvider>
 	);
 };
 export default EditTask;

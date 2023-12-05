@@ -18,6 +18,9 @@ import {
 	DropdownMenuSubTrigger,
 	DropdownMenuSub,
 } from '@/components/ui/dropdown-menu';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
+import { useDebouncedCallback } from 'use-debounce';
+import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
 
 interface Props {
 	nodeId: string;
@@ -53,20 +56,36 @@ export const NodeWrapper = ({
 }: Props) => {
 	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
 	const { setNodes } = useReactFlow();
+	const { onSetStatus } = useAutosaveIndicator();
+	const { onSave } = useAutoSaveMindMap();
 
-	const onSaveNode = useCallback((color: MindMapItemColors) => {
-		setNodes((prevNodes) => {
-			const nodes = prevNodes.map((node) =>
-				node.id === nodeId ? { ...node, data: { ...node.data, color } } : node
-			);
-			return nodes;
-		});
-	}, []);
+	const debouncedMindMapInfo = useDebouncedCallback(() => {
+		onSetStatus('pending');
+		onSave();
+	}, 3000);
 
-	const onColorSelect = useCallback((newColor: MindMapItemColors) => {
-		setCurrColor(newColor);
-		onSaveNode(newColor);
-	}, []);
+	const onSaveNode = useCallback(
+		(color: MindMapItemColors) => {
+			setNodes((prevNodes) => {
+				const nodes = prevNodes.map((node) =>
+					node.id === nodeId ? { ...node, data: { ...node.data, color } } : node
+				);
+				return nodes;
+			});
+
+			onSetStatus('unsaved');
+			debouncedMindMapInfo();
+		},
+		[setNodes, nodeId, debouncedMindMapInfo, onSetStatus]
+	);
+
+	const onColorSelect = useCallback(
+		(newColor: MindMapItemColors) => {
+			setCurrColor(newColor);
+			onSaveNode(newColor);
+		},
+		[onSaveNode]
+	);
 
 	const nodeColor = useCallback((color: MindMapItemColors) => {
 		switch (color) {

@@ -16,7 +16,7 @@ import { LinkTag } from '@/components/common/LinkTag';
 import { useTranslations } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce';
 import axios from 'axios';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { Editor } from '../editor/Editor';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 
@@ -45,7 +45,7 @@ export const TaskContener = ({
 	const [isMounted, setIsMounted] = useState(false);
 	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
 
-	const { onSetStatus, status } = useSaveTaskState();
+	const { onSetStatus, status } = useAutosaveIndicator();
 	const t = useTranslations('TASK');
 
 	const onSelectActiveTagHandler = (tagId: string) => {

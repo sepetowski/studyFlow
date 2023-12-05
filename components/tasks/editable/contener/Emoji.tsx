@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { EmojiSelector } from '@/components/common/EmojiSelector';
 import { useDebouncedCallback } from 'use-debounce';
 import { useMutation } from '@tanstack/react-query';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import axios from 'axios';
 import { useChangeCodeToEmoji } from '@/hooks/useChangeCodeToEmoji';
 
@@ -16,7 +16,7 @@ interface Props {
 
 export const Emoji = ({ onFormSelect, taskId, workspaceId, emoji }: Props) => {
 	const [selectedEmoji, setSelectedEmoji] = useState(emoji);
-	const { onSetStatus, status } = useSaveTaskState();
+	const { onSetStatus, status } = useAutosaveIndicator();
 	const renderedEmoji = useChangeCodeToEmoji(selectedEmoji);
 
 	const { mutate: updateTaskEmoji } = useMutation({

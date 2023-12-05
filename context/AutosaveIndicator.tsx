@@ -6,14 +6,14 @@ import { createContext } from 'react';
 interface Props {
 	children: React.ReactNode;
 }
-interface SaveTaskStateContex {
+interface AutosaveIndicatorContex {
 	status: 'unsaved' | 'saved' | 'pending';
 	onSetStatus: (status: 'unsaved' | 'saved' | 'pending') => void;
 }
 
-export const SaveTaskStateCtx = createContext<SaveTaskStateContex | null>(null);
+export const AutosaveIndicatorCtx = createContext<AutosaveIndicatorContex | null>(null);
 
-export const SaveTaskStateProvider = ({ children }: Props) => {
+export const AutosaveIndicatorProvider = ({ children }: Props) => {
 	const [status, setStatus] = useState<'unsaved' | 'saved' | 'pending'>('saved');
 
 	const onSetStatus = (status: 'unsaved' | 'saved' | 'pending') => {
@@ -21,14 +21,14 @@ export const SaveTaskStateProvider = ({ children }: Props) => {
 	};
 
 	return (
-		<SaveTaskStateCtx.Provider value={{ status, onSetStatus }}>
+		<AutosaveIndicatorCtx.Provider value={{ status, onSetStatus }}>
 			{children}
-		</SaveTaskStateCtx.Provider>
+		</AutosaveIndicatorCtx.Provider>
 	);
 };
 
-export const useSaveTaskState = () => {
-	const ctx = useContext(SaveTaskStateCtx);
+export const useAutosaveIndicator = () => {
+	const ctx = useContext(AutosaveIndicatorCtx);
 	if (!ctx) throw new Error('invalid use');
 
 	return ctx;
