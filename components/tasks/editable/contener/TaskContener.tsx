@@ -10,8 +10,7 @@ import { TaskCalendar } from './TaskCalendar';
 import { Emoji } from './Emoji';
 import { TaskSchema, taskSchema } from '@/schema/taskSchema';
 import { DateRange } from 'react-day-picker';
-import { CustomColors, Tag } from '@prisma/client';
-import { TagSelector } from '../tag/TagSelector';
+import { Tag } from '@prisma/client';
 import { LinkTag } from '@/components/common/LinkTag';
 import { useTranslations } from 'next-intl';
 import { useDebouncedCallback } from 'use-debounce';
@@ -19,6 +18,8 @@ import axios from 'axios';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { Editor } from '../editor/Editor';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
+import { useTags } from '@/hooks/useTags';
+import { TagSelector } from '@/components/common/tag/TagSelector';
 
 interface Props {
 	taskId: string;
@@ -43,53 +44,24 @@ export const TaskContener = ({
 }: Props) => {
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
-	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
 
 	const { onSetStatus, status } = useAutosaveIndicator();
 	const t = useTranslations('TASK');
 
-	const onSelectActiveTagHandler = (tagId: string) => {
-		if (status !== 'unsaved') onSetStatus('unsaved');
-		setCurrentActiveTags((prevActiveTags) => {
-			const tagIndex = prevActiveTags.findIndex((activeTag) => activeTag.id === tagId);
+	const debouncedCurrentActiveTags = useDebouncedCallback(() => {
+		onSetStatus('pending');
+		const tagsIds = currentActiveTags.map((tag) => tag.id);
+		updateTaskActiveTags(tagsIds);
+	}, 2000);
 
-			if (tagIndex !== -1) {
-				const updatedActiveTags = [...prevActiveTags];
-				updatedActiveTags.splice(tagIndex, 1);
-				return updatedActiveTags;
-			} else {
-				const selectedTag = tags!.find((tag) => tag.id === tagId);
-				if (selectedTag) {
-					return [...prevActiveTags, selectedTag];
-				}
-			}
-
-			return prevActiveTags;
-		});
-		debouncedCurrentActiveTags();
-	};
-
-	const onUpdateActiveTagsHandler = (tagId: string, color: CustomColors, name: string) => {
-		setCurrentActiveTags((prevActiveTags) => {
-			if (prevActiveTags.length === 0) return prevActiveTags;
-			const updatedTags = prevActiveTags.map((tag) =>
-				tag.id === tagId ? { ...tag, name, color } : tag
-			);
-
-			return updatedTags;
-		});
-	};
-
-	const onDeleteActiveTagHandler = (tagId: string) => {
-		if (status !== 'unsaved') onSetStatus('unsaved');
-		setCurrentActiveTags((prevActiveTags) => {
-			if (prevActiveTags.length === 0) return prevActiveTags;
-			const updatedTags = prevActiveTags.filter((tag) => tag.id !== tagId);
-
-			return updatedTags;
-		});
-		debouncedCurrentActiveTags();
-	};
+	const {
+		currentActiveTags,
+		tags,
+		isLodingTags,
+		onDeleteActiveTagHandler,
+		onSelectActiveTagHandler,
+		onUpdateActiveTagsHandler,
+	} = useTags(workspaceId, isMounted, initialActiveTags, debouncedCurrentActiveTags);
 
 	const form = useForm<TaskSchema>({
 		resolver: zodResolver(taskSchema),
@@ -134,29 +106,11 @@ export const TaskContener = ({
 		},
 	});
 
-	const { data: tags, isLoading } = useQuery({
-		queryFn: async () => {
-			const res = await fetch(`/api/tags/get/get_workspace_tags?workspaceId=${workspaceId}`);
-
-			if (!res.ok) return [];
-
-			const data = await res.json();
-			return data as Tag[];
-		},
-		enabled: isMounted,
-		queryKey: ['getWorkspaceTags'],
-	});
 	const { ref: titleRef, ...rest } = form.register('title');
 
 	useEffect(() => {
 		setIsMounted(true);
 	}, []);
-
-	const debouncedCurrentActiveTags = useDebouncedCallback(() => {
-		onSetStatus('pending');
-		const tagsIds = currentActiveTags.map((tag) => tag.id);
-		updateTaskActiveTags(tagsIds);
-	}, 2000);
 
 	const debouncedTitle = useDebouncedCallback(
 		useCallback(
@@ -218,7 +172,7 @@ export const TaskContener = ({
 									onUpdateForm={onUpdateFormHandler}
 								/>
 								<TagSelector
-									isLoading={isLoading}
+									isLoading={isLodingTags}
 									workspaceId={workspaceId}
 									tags={tags}
 									currentActiveTags={currentActiveTags}

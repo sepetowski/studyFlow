@@ -1,4 +1,4 @@
-import { Tag, Task, UserPermisson, Workspace, savedTask } from '@prisma/client';
+import { MindMap, Tag, Task, UserPermisson, Workspace, savedTask } from '@prisma/client';
 
 export interface SubscriptionUser {
 	userRole: UserPermisson;
@@ -36,4 +36,7 @@ export interface ExtendedTask extends Task {
 		to: Date | undefined;
 	};
 	savedTask?: savedTask[];
+}
+export interface ExtendedMindMap extends MindMap {
+	tags: Tag[];
 }

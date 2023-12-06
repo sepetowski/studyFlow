@@ -25,14 +25,15 @@ import { CustomStepSharp } from './labels/CustomStepSharp';
 import { CustomStepRounded } from './labels/CustomStepRounded';
 import { CustomBezier } from './labels/CustomBezier';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { PlusSquare, Save, Trash } from 'lucide-react';
+import { PlusSquare, Save } from 'lucide-react';
 import { DeleteAllNodes } from './DeleteAllNodes';
-import { MindMap as MindMapType } from '@prisma/client';
+import { MindMap as MindMapType, Tag } from '@prisma/client';
 import { LoadingScreen } from '../common/LoadingScreen';
 import { useDebouncedCallback } from 'use-debounce';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
-
 import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
+import { MindMapTagsSelector } from './MindMapTagsSelector';
+import { Separator } from '../ui/separator';
 
 const nodeTypes = { textNode: TextNode };
 const edgeTypes: EdgeTypes = {
@@ -46,9 +47,10 @@ interface Props {
 	initialInfo: MindMapType;
 	workspaceId: string;
 	candEdit: boolean;
+	initialActiveTags: Tag[];
 }
 
-export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
+export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags }: Props) => {
 	const [openSheet, setOpenSheet] = useState(false);
 	const [nodes, setNodes] = useState<Node[]>([]);
 	const [edges, setEdges] = useState<Edge[]>([]);
@@ -59,14 +61,14 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
 	const { onSetStatus, status } = useAutosaveIndicator();
 	const { setRfInstance, onSave, onSetIds } = useAutoSaveMindMap();
 
+	useEffect(() => {
+		setIsMounted(true);
+	}, []);
+
 	const debouncedMindMapInfo = useDebouncedCallback(() => {
 		onSetStatus('pending');
 		onSave();
 	}, 3000);
-
-	useEffect(() => {
-		setIsMounted(true);
-	}, []);
 
 	useEffect(() => {
 		const { content } = initialInfo;
@@ -77,19 +79,6 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
 		}
 		onSetIds(initialInfo.id, workspaceId);
 	}, [initialInfo, initialInfo.id, workspaceId, onSetIds]);
-
-	const onAddNode = useCallback(() => {
-		const newNode = {
-			id: Math.random().toString(),
-			type: 'textNode',
-			position: { x: 0, y: 0 },
-			data: { text: '', color: 12 },
-		};
-
-		setNodes((nds) => nds.concat(newNode));
-		onSetStatus('unsaved');
-		debouncedMindMapInfo();
-	}, [debouncedMindMapInfo, onSetStatus]);
 
 	const onNodesChange: OnNodesChange = useCallback(
 		(changes) => {
@@ -177,6 +166,19 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
 		[debouncedMindMapInfo, onSetStatus]
 	);
 
+	const onAddNode = useCallback(() => {
+		const newNode = {
+			id: Math.random().toString(),
+			type: 'textNode',
+			position: { x: 0, y: 0 },
+			data: { text: '', color: 12, onDelete: onNodesDelete },
+		};
+
+		setNodes((nds) => nds.concat(newNode));
+		onSetStatus('unsaved');
+		debouncedMindMapInfo();
+	}, [debouncedMindMapInfo, onSetStatus, onNodesDelete]);
+
 	if (!isMounted) return <LoadingScreen />;
 
 	return (
@@ -217,14 +219,16 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
 						<Panel
 							position='top-left'
 							className='bg-background  z-50 shadow-sm border rounded-sm py-0.5 px-3'>
-							<div className=' flex gap-2 w-full'>
+							<div className=' flex gap-2 w-full items-center '>
 								<HoverCard openDelay={250} closeDelay={250}>
 									<HoverCardTrigger asChild>
 										<Button variant={'ghost'} size={'icon'} onClick={onAddNode}>
 											<PlusSquare size={22} />
 										</Button>
 									</HoverCardTrigger>
-									<HoverCardContent align='start'>Dodaj kafelk</HoverCardContent>
+									<HoverCardContent align='start' sideOffset={8}>
+										Dodaj kafelk
+									</HoverCardContent>
 								</HoverCard>
 
 								<HoverCard openDelay={250} closeDelay={250}>
@@ -240,10 +244,21 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit }: Props) => {
 											<Save size={22} />
 										</Button>
 									</HoverCardTrigger>
-									<HoverCardContent align='start'>Zapisz</HoverCardContent>
+									<HoverCardContent align='start' sideOffset={8}>
+										Zapisz
+									</HoverCardContent>
 								</HoverCard>
 
-								<DeleteAllNodes />
+								<DeleteAllNodes mindMapId={initialInfo.id} workspaceId={workspaceId} />
+								<div className='h-8'>
+									<Separator orientation='vertical' />
+								</div>
+								<MindMapTagsSelector
+									initialActiveTags={initialActiveTags}
+									mindMapId={initialInfo.id}
+									isMounted={isMounted}
+									workspaceId={workspaceId}
+								/>
 							</div>
 						</Panel>
 					)}

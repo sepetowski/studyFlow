@@ -17,6 +17,9 @@ export const GET = async (request: Request, { params: { mind_map_id } }: Params)
 			where: {
 				id: mind_map_id,
 			},
+			include: {
+				tags: true,
+			},
 		});
 
 		if (!mindMap) return NextResponse.json('mind map not found', { status: 404 });

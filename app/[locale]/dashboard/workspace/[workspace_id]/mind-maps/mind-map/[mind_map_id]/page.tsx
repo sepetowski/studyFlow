@@ -40,7 +40,6 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 							href: `/dashboard/workspace/${workspace_id}`,
 						},
 						{
-						
 							name: `${mindMap.title ? mindMap.title : 'UNTITLED'}`,
 							href: '/',
 							useTranslate: mindMap.title ? false : true,
@@ -49,7 +48,12 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
-					<MindMap initialInfo={mindMap} workspaceId={workspace.id} candEdit={false} />
+					<MindMap
+						initialActiveTags={mindMap.tags}
+						initialInfo={mindMap}
+						workspaceId={workspace.id}
+						candEdit={false}
+					/>
 				</main>
 			</AutoSaveMindMapProvider>
 		</AutosaveIndicatorProvider>

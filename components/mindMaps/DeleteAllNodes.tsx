@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import {
 	Dialog,
 	DialogContent,
@@ -12,28 +12,87 @@ import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/h
 import { Button } from '@/components/ui/button';
 import { Trash } from 'lucide-react';
 import Warning from '@/components/ui/warning';
+import { LoadingState } from '@/components/ui/loading-state';
+import { useMutation } from '@tanstack/react-query';
+import axios from 'axios';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
+import { useToast } from '@/components/ui/use-toast';
+import { useReactFlow } from 'reactflow';
 
-export const DeleteAllNodes = () => {
+interface Props {
+	mindMapId: string;
+	workspaceId: string;
+}
+
+export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 	const [open, setOpen] = useState(false);
+	const { setNodes, getNodes } = useReactFlow();
+
+	const { onSetStatus, status } = useAutosaveIndicator();
+	const { toast } = useToast();
+
+	const { mutate: updateMindMap, isLoading } = useMutation({
+		mutationFn: async () => {
+			onSetStatus('pending');
+			await axios.post('/api/mind_maps/update', {
+				content: null,
+				mindMapId,
+				workspaceId,
+			});
+		},
+
+		onSuccess: () => {
+			onSetStatus('saved');
+			setNodes([]);
+			toast({
+				title: 'Zresetowano satn',
+			});
+			setOpen(false);
+		},
+
+		onError: () => {
+			onSetStatus('unsaved');
+			toast({
+				title: 'blad zapisywania',
+				variant: 'destructive',
+			});
+		},
+	});
+
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
 			<HoverCard openDelay={250} closeDelay={250}>
 				<DialogTrigger asChild>
 					<HoverCardTrigger>
-						<Button onClick={() => setOpen(true)} variant={'ghost'} size={'icon'}>
+						<Button
+							disabled={!getNodes().length || status !== 'saved'}
+							onClick={() => setOpen(true)}
+							variant={'ghost'}
+							size={'icon'}>
 							<Trash size={22} />
 						</Button>
 					</HoverCardTrigger>
 				</DialogTrigger>
-				<HoverCardContent align='start'>usun wsyztsko</HoverCardContent>
+				<HoverCardContent sideOffset={8} align='start'>Usuń wszytskie kafelki</HoverCardContent>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>usun</DialogTitle>
-						<DialogDescription>Lorem, ipsum.</DialogDescription>
+						<DialogTitle>Usuń wszytskie kafelki</DialogTitle>
+						<DialogDescription>Zresetuj układ mapy mysli do początkowego stanu</DialogDescription>
 					</DialogHeader>
 					<Warning>
-						<p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure, accusamus?</p>
+						<p>
+							Przywrócenie stanu początkowego, usunie wszytskie obecne kafelki i połączenia. Kliknij
+							„Zresetuj stan”, aby usunąć wszytskie kafelki i połączenia.
+						</p>
 					</Warning>
+
+					<Button
+						disabled={isLoading}
+						onClick={() => updateMindMap()}
+						size={'lg'}
+						variant={'destructive'}>
+						{isLoading ? <LoadingState loadingText={'resetowanie'} /> : 'Zresetuj stan'}
+					</Button>
 				</DialogContent>
 			</HoverCard>
 		</Dialog>

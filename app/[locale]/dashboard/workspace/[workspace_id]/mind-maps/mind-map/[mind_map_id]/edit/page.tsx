@@ -36,7 +36,12 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 					<InviteUsers workspace={workspace} />
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
-					<MindMap initialInfo={mindMap} workspaceId={workspace.id} candEdit={candEdit} />
+					<MindMap
+						initialActiveTags={mindMap.tags}
+						initialInfo={mindMap}
+						workspaceId={workspace.id}
+						candEdit={candEdit}
+					/>
 				</main>
 			</AutoSaveMindMapProvider>
 		</AutosaveIndicatorProvider>

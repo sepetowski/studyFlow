@@ -27,7 +27,7 @@ export const AutoSaveMindMapProvider = ({ children }: Props) => {
 
 	const { mutate: updateMindMap } = useMutation({
 		mutationFn: async (flow: ReactFlowJsonObject) => {
-			await axios.post('/api/mind_maps/update', {
+			await axios.post('/api/mind_maps/update/mind_map', {
 				content: flow,
 				mindMapId: ids?.mindMapId,
 				workspaceId: ids?.workspaceId,

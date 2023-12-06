@@ -15,6 +15,7 @@ import { useDebouncedCallback } from 'use-debounce';
 type NodeData = {
 	text: string;
 	color: MindMapItemColors;
+	onDelete: () => void;
 };
 
 export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
@@ -69,7 +70,12 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 	}, [data.text, form, isEditing]);
 
 	return (
-		<NodeWrapper nodeId={id} color={data.color} isEditing={isEditing} onIsEdit={onIsEdit}>
+		<NodeWrapper
+			nodeId={id}
+			color={data.color}
+			isEditing={isEditing}
+			onIsEdit={onIsEdit}
+			onDelete={data.onDelete}>
 			<div className='w-full py-1.5'>
 				{isEditing ? (
 					<form id='node-text-form' onSubmit={form.handleSubmit(onSubmit)}>

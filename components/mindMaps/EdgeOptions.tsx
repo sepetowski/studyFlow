@@ -27,6 +27,7 @@ import {
 import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { EdgeColor } from '@/types/enums';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface Props {
 	clickedEdge: Edge;
@@ -125,127 +126,138 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 	};
 
 	return (
-		<SheetContent className=' md:w-[26rem] md:max-w-md'>
-			<SheetHeader>
-				<SheetTitle>Edge settings</SheetTitle>
-				<SheetDescription>
-					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Sequi, fugiat.
-				</SheetDescription>
-			</SheetHeader>
+		<SheetContent className=' md:w-[26rem] md:max-w-md px-0  '>
+			<ScrollArea className=' h-full px-6 '>
+				<SheetHeader className='px-1'>
+					<SheetTitle>Ustawienia łączeń</SheetTitle>
+					<SheetDescription>
+						Personalizuj jak mają wyglądać Twoje połączenia. Dodaj teskt, ustaw typ połączenia,
+						zmień kolor i wybierz czy chcesz je animować!
+					</SheetDescription>
+				</SheetHeader>
 
-			<Form {...form}>
-				<form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-6 mt-6 '>
-					<div className='space-y-2 sm:space-y-4'>
-						<div className='space-y-1.5'>
-							<FormField
-								control={form.control}
-								name='label'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Label</FormLabel>
-										<FormControl>
-											<Input className='bg-muted' placeholder='Add label' {...field} />
-										</FormControl>
-										<FormDescription>This is your public display name.</FormDescription>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</div>
-						<div className='space-y-1.5'>
-							<FormField
-								control={form.control}
-								name='type'
-								render={({ field }) => (
-									<FormItem>
-										<FormLabel>Edge type</FormLabel>
-										<Select onValueChange={field.onChange} defaultValue={field.value}>
+				<Form {...form}>
+					<form onSubmit={form.handleSubmit(onSubmit)} className='w-full space-y-6 mt-6 px-1 '>
+						<div className='space-y-2 sm:space-y-4'>
+							<div className='space-y-1.5'>
+								<FormField
+									control={form.control}
+									name='label'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Etykieta</FormLabel>
 											<FormControl>
-												<SelectTrigger>
-													<SelectValue placeholder='Select a verified email to display' />
-												</SelectTrigger>
+												<Input className='bg-muted' placeholder='Add label' {...field} />
 											</FormControl>
-											<SelectContent>
-												<SelectItem value='customBezier'>bezier</SelectItem>
-												<SelectItem value='customStraight'>straight</SelectItem>
-												<SelectItem value='customStepSharp'>step</SelectItem>
-												<SelectItem value='customStepRounded'>smooth step</SelectItem>
-											</SelectContent>
-										</Select>
-										<FormDescription>You can manage email addresses in your </FormDescription>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
+											<FormDescription>
+												Dodanie tekstu sprawi, że pokaże się etykieta. Pozostaw puste pole, i zapisz
+												zmiany aby ją usunać
+											</FormDescription>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
+							<div className='space-y-1.5'>
+								<FormField
+									control={form.control}
+									name='type'
+									render={({ field }) => (
+										<FormItem>
+											<FormLabel>Typ łączenia</FormLabel>
+											<Select onValueChange={field.onChange} defaultValue={field.value}>
+												<FormControl>
+													<SelectTrigger>
+														<SelectValue placeholder='Select a verified email to display' />
+													</SelectTrigger>
+												</FormControl>
+												<SelectContent>
+													<SelectItem value='customBezier'>domyślny</SelectItem>
+													<SelectItem value='customStraight'>po prostej</SelectItem>
+													<SelectItem value='customStepSharp'>po kroku</SelectItem>
+													<SelectItem value='customStepRounded'>
+														po kroku (zaokrąglone rogi)
+													</SelectItem>
+												</SelectContent>
+											</Select>
+											<FormDescription>
+												Wybierz sposób w jaki zachowuje się łączenie
+											</FormDescription>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
+							<div className='space-y-1.5'>
+								<FormField
+									control={form.control}
+									name='color'
+									render={({ field }) => (
+										<FormItem className='space-y-1.5'>
+											<FormLabel>Kolory</FormLabel>
+											<FormControl>
+												<RadioGroup
+													onValueChange={field.onChange}
+													defaultValue={field.value}
+													className='grid grid-cols-10 grid-rows-2'>
+													{colors.map((color) => (
+														<FormItem key={color} className='flex items-center space-x-3 space-y-0'>
+															<FormControl>
+																<RadioGroupItem
+																	useCheckIcon
+																	className={`transition-colors duration-200 ${workspaceColor(
+																		color
+																	)}`}
+																	value={color}
+																/>
+															</FormControl>
+														</FormItem>
+													))}
+												</RadioGroup>
+											</FormControl>
+											<FormDescription>Wybór koloru wpływa tylko na etykietę</FormDescription>
+											<FormMessage />
+										</FormItem>
+									)}
+								/>
+							</div>
+							<div className='space-y-1.5'>
+								<FormField
+									control={form.control}
+									name='animated'
+									render={({ field }) => (
+										<FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
+											<FormControl>
+												<Checkbox
+													className='text-white'
+													checked={field.value}
+													onCheckedChange={field.onChange}
+												/>
+											</FormControl>
+											<div className='leading-none'>
+												<FormLabel>Animuj łączenie</FormLabel>
+											</div>
+										</FormItem>
+									)}
+								/>
+							</div>
 						</div>
-						<div className='space-y-1.5'>
-							<FormField
-								control={form.control}
-								name='color'
-								render={({ field }) => (
-									<FormItem className='space-y-1.5'>
-										<FormLabel>Colors</FormLabel>
-										<FormControl>
-											<RadioGroup
-												onValueChange={field.onChange}
-												defaultValue={field.value}
-												className='grid grid-cols-10 grid-rows-2'>
-												{colors.map((color) => (
-													<FormItem key={color} className='flex items-center space-x-3 space-y-0'>
-														<FormControl>
-															<RadioGroupItem
-																useCheckIcon
-																className={`transition-colors duration-200 ${workspaceColor(
-																	color
-																)}`}
-																value={color}
-															/>
-														</FormControl>
-													</FormItem>
-												))}
-											</RadioGroup>
-										</FormControl>
-										<FormMessage />
-									</FormItem>
-								)}
-							/>
-						</div>
-						<div className='space-y-1.5'>
-							<FormField
-								control={form.control}
-								name='animated'
-								render={({ field }) => (
-									<FormItem className='flex flex-row items-start space-x-3 space-y-0 rounded-md border p-4'>
-										<FormControl>
-											<Checkbox
-												className='text-white'
-												checked={field.value}
-												onCheckedChange={field.onChange}
-											/>
-										</FormControl>
-										<div className='leading-none'>
-											<FormLabel>Animate edge</FormLabel>
-										</div>
-									</FormItem>
-								)}
-							/>
-						</div>
-					</div>
-					<Button className='text-white w-full' type='submit'>
-						Save
-					</Button>
+						<Button className='text-white w-full' type='submit'>
+							Zapisz
+						</Button>
 
-					<Button
-						onClick={() => {
-							onDeleteEdge(form.getValues('edgeId'));
-						}}
-						variant={'secondary'}
-						className='text-white w-full'
-						type='button'>
-						Delete edge
-					</Button>
-				</form>
-			</Form>
+						<Button
+							onClick={() => {
+								onDeleteEdge(form.getValues('edgeId'));
+							}}
+							variant={'secondary'}
+							className='text-white w-full'
+							type='button'>
+							Usuń połączenie
+						</Button>
+					</form>
+				</Form>
+			</ScrollArea>
 		</SheetContent>
 	);
 };

@@ -2,7 +2,7 @@
 import React, { useCallback, useMemo, useState } from 'react';
 import { cn } from '@/lib/utils';
 import { MindMapItemColors } from '@/types/enums';
-import { Check, MoreHorizontal, Pencil } from 'lucide-react';
+import { Check, MoreHorizontal, Palette, Pencil, Trash } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Handle, Position, useReactFlow } from 'reactflow';
 import {
@@ -10,8 +10,6 @@ import {
 	DropdownMenuContent,
 	DropdownMenuGroup,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 	DropdownMenuSubContent,
 	DropdownMenuPortal,
@@ -29,6 +27,7 @@ interface Props {
 	color?: MindMapItemColors;
 	isEditing: boolean;
 	onIsEdit: () => void;
+	onDelete: () => void;
 }
 
 const colors = [
@@ -53,6 +52,7 @@ export const NodeWrapper = ({
 	color = MindMapItemColors.DEFAULT,
 	isEditing,
 	onIsEdit,
+	onDelete,
 }: Props) => {
 	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
 	const { setNodes } = useReactFlow();
@@ -60,6 +60,7 @@ export const NodeWrapper = ({
 	const { onSave } = useAutoSaveMindMap();
 
 	const debouncedMindMapInfo = useDebouncedCallback(() => {
+		console.log('aha');
 		onSetStatus('pending');
 		onSave();
 	}, 3000);
@@ -78,6 +79,15 @@ export const NodeWrapper = ({
 		},
 		[setNodes, nodeId, debouncedMindMapInfo, onSetStatus]
 	);
+
+	const onDeleteNode = useCallback(() => {
+		setNodes((prevNodes) => {
+			const nodes = prevNodes.filter((node) => node.id !== nodeId);
+
+			return nodes;
+		});
+		onDelete();
+	}, [setNodes, nodeId, onDelete]);
 
 	const onColorSelect = useCallback(
 		(newColor: MindMapItemColors) => {
@@ -179,8 +189,9 @@ export const NodeWrapper = ({
 						</DropdownMenuItem>
 						<DropdownMenuGroup>
 							<DropdownMenuSub>
-								<DropdownMenuSubTrigger className='cursor-pointer'>
-									<span>kolor</span>
+								<DropdownMenuSubTrigger className='cursor-pointer gap-2'>
+									<Palette size={16} />
+									<span>Kolor</span>
 								</DropdownMenuSubTrigger>
 								<DropdownMenuPortal>
 									<DropdownMenuSubContent className='hover:bg-popover' sideOffset={10}>
@@ -209,9 +220,13 @@ export const NodeWrapper = ({
 								</DropdownMenuPortal>
 							</DropdownMenuSub>
 						</DropdownMenuGroup>
-						<DropdownMenuItem className='cursor-pointer gap-2'>
-							{/* <LogOut size={16} /> {t('LOG_OUT')} */}
-							usun
+						<DropdownMenuItem
+							onClick={() => {
+								onDeleteNode();
+							}}
+							className='cursor-pointer gap-2'>
+							<Trash size={16} />
+							Usun
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>
