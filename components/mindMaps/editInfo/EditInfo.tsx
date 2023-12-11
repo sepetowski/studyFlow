@@ -21,6 +21,7 @@ import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
 import { useToast } from '@/components/ui/use-toast';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	workspaceId: string;
@@ -32,8 +33,11 @@ interface Props {
 export const EditInfo = ({ mapId, workspaceId, emoji, title }: Props) => {
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [open, setOpen] = useState(false);
-	const { onSetStatus, status } = useAutosaveIndicator();
+
+	const { onSetStatus } = useAutosaveIndicator();
 	const { toast } = useToast();
+
+	const t = useTranslations('MIND_MAP.EDIT_TILT_AND_EMOJI');
 
 	const { mutate: updateMindMap } = useMutation({
 		mutationFn: async ({ icon, title }: { icon: string; title?: string }) => {
@@ -52,7 +56,7 @@ export const EditInfo = ({ mapId, workspaceId, emoji, title }: Props) => {
 		onError: () => {
 			onSetStatus('unsaved');
 			toast({
-				title: 'blad zapisywania',
+				title: t('ERROR'),
 				variant: 'destructive',
 			});
 		},
@@ -91,12 +95,12 @@ export const EditInfo = ({ mapId, workspaceId, emoji, title }: Props) => {
 					</HoverCardTrigger>
 				</SheetTrigger>
 				<HoverCardContent sideOffset={8} align='start'>
-					Edytuj infiomracje
+					{t('HOVER')}
 				</HoverCardContent>
 				<SheetContent className=' md:w-[26rem] md:max-w-md  '>
 					<SheetHeader>
-						<SheetTitle>Edytuj infiomracje</SheetTitle>
-						<SheetDescription>Zmien nazwe swojej mapy i ustaw jej ikone</SheetDescription>
+						<SheetTitle>{t('TITLE')}</SheetTitle>
+						<SheetDescription>{t('DESC')}</SheetDescription>
 					</SheetHeader>
 
 					<form id='mind-map-info' className='mt-8 w-full flex flex-col gap-8'>
@@ -114,7 +118,7 @@ export const EditInfo = ({ mapId, workspaceId, emoji, title }: Props) => {
 								onKeyDown={(e) => {
 									if (e.key === 'Enter') e.preventDefault();
 								}}
-								placeholder='Mapa mysli bez tytułu'
+								placeholder={t('PLACEHOLDER')}
 								className='w-full resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground text-2xl font-semibold focus:outline-none '
 							/>
 						</div>
@@ -126,7 +130,7 @@ export const EditInfo = ({ mapId, workspaceId, emoji, title }: Props) => {
 								type='button'
 								variant={'secondary'}
 								className='w-full md:w-1/2 '>
-								Anuluj
+								{t('CANCEL')}
 							</Button>
 							<Button
 								onClick={() => {
@@ -134,7 +138,7 @@ export const EditInfo = ({ mapId, workspaceId, emoji, title }: Props) => {
 								}}
 								type='button'
 								className='w-full md:w-1/2 text-white'>
-								Zapisz
+								{t('SAVE')}
 							</Button>
 						</div>
 					</form>

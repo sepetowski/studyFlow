@@ -183,7 +183,8 @@
 			"NO_TAG": "Nie znaleziono tagu",
 			"WRONG_IMAGE_LINK": "Proszę podać poprawny link",
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
-			"NO_TASK_FOUND": "Nie znaleziono zadania"
+			"NO_TASK_FOUND": "Nie znaleziono zadania",
+			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -356,6 +357,25 @@
 			"SAVED": "Zapisane",
 			"SAVING": "Zapisywanie",
 			"UNSAVED": "Niezapisane"
+		},
+		"TAG": {
+			"FILTER": "Szukaj",
+			"NEW_TAG": "Nowy tag",
+			"TAG": "Tag",
+			"ERROR": "Ups... Coś poszło nie tak",
+			"ERROR_BTN": "Spróbuj ponownie",
+			"NOT_FOUND": "Nie znaleziono",
+			"TAGS_HEADING": "TAGI",
+			"NEW_HEADING": "NOWY",
+			"ADD_TAG": "Dodaj tag",
+			"COLORS": "Kolory",
+			"TAG_NAME": "Nazwa",
+			"BTNS": {
+				"CREATE": "Utwórz",
+				"CANCEL": "Anuluj",
+				"DELETE": "Usuń",
+				"UPDATE": "Aktualizuj"
+			}
 		}
 	},
 
@@ -385,25 +405,6 @@
 			"DATE": {
 				"PICK": "Wbierz datę",
 				"INFO": "Jeśli wybierzesz date, zadanie zostanie dodane do kalendarza"
-			},
-			"TAG": {
-				"FILTER": "Szukaj",
-				"NEW_TAG": "Nowy tag",
-				"TAG": "Tag",
-				"ERROR": "Ups... Coś poszło nie tak",
-				"ERROR_BTN": "Spróbuj ponownie",
-				"NOT_FOUND": "Nie znaleziono",
-				"TAGS_HEADING": "TAGI",
-				"NEW_HEADING": "NOWY",
-				"ADD_TAG": "Dodaj tag",
-				"COLORS": "Kolory",
-				"TAG_NAME": "Nazwa",
-				"BTNS": {
-					"CREATE": "Utwórz",
-					"CANCEL": "Anuluj",
-					"DELETE": "Usuń",
-					"UPDATE": "Aktualizuj"
-				}
 			}
 		},
 		"EDITOR": {
@@ -466,6 +467,72 @@
 		},
 		"BTN": {
 			"SAVE_TASK": "Dodaj zadanie"
+		}
+	},
+	"MIND_MAP": {
+		"HOVER_TIP": {
+			"ADD_TILE": "Dodaj nowy kafelek",
+			"SAVE": "Zapisz mapę myśli"
+		},
+		"TAG": "Dodaj tag do mapy myśli",
+		"DELETE": {
+			"MESSAGE": {
+				"SUCCES": "Zresetowano stan",
+				"ERROR": "Nie udało sie zapisać zmian."
+			},
+			"HOVER": "Usuń wszytskie kafelki",
+			"DIALOG": {
+				"TITLE": "Usuń wszytskie kafelki",
+				"DESC": "Zresetuj układ mapy myŚli do początkowego stanu",
+				"WARNING": "Przywrócenie stanu początkowego, usunie wszytskie obecne kafelki i połączenia. Kliknij „Zresetuj stan”, aby usunąć wszytskie kafelki i połączenia.",
+				"BTN_RESET": "Zresetuj stan",
+				"BTN_PENDING": "Resetowanie"
+			}
+		},
+		"EDGE_OPTIONS": {
+			"TITLE": "Ustawienia łączeń",
+			"DESC": "Personalizuj jak mają wyglądać Twoje połączenia. Dodaj teskt, ustaw typ połączenia, zmień kolor i wybierz czy chcesz je animować!",
+			"FORM": {
+				"LABEL": {
+					"LABEL": "Etykieta",
+					"DESC": "Dodanie tekstu sprawi, że pokaże się etykieta. Pozostaw puste pole, i zapisz zmiany aby ją usunać",
+					"PLACEHOLDER": "Dodaj etykietę"
+				},
+				"TYPE": {
+					"LABEL": "Typ łączenia",
+					"DEFAULT": "Domyślny",
+					"STRAIGHT": "Po prostej",
+					"STEP_SHARP": "Po kroku",
+					"STEP_ROUNDED": "Po kroku (zaokrąglone rogi)",
+					"DESC": "Wybierz sposób w jaki zachowuje się łączenie"
+				},
+				"COLOR": {
+					"LABEL": "Kolor",
+					"DESC": "Wybór koloru wpływa tylko na etykietę"
+				},
+				"ANIMATED": {
+					"LABEL": "Animuj łączenie"
+				},
+				"BTN_SAVE": "Zapisz",
+				"BTN_DELETE_EDGE": "Usuń połączenie"
+			}
+		},
+		"NODE": {
+			"EDIT": "Edytuj",
+			"COLOR": "Kolor",
+			"DELETE": "Usuń",
+			"SAVE": "Zapisz zmiany",
+			"CANCEL": "Anuluj",
+			"PLACEHOLDER": "Dodaj nowy opis"
+		},
+		"EDIT_TILT_AND_EMOJI": {
+			"ERROR": "Nie udało sie zapisać zmian.",
+			"HOVER": "Edytuj informacje",
+			"TITLE": "Edytuj informacje",
+			"DESC": "Zmień nazwę swojej mapy myśli i ustaw jej ikonę",
+			"PLACEHOLDER": "Mapa myśli bez tytułu",
+			"SAVE": "Zapisz",
+			"CANCEL": "Anuluj"
 		}
 	},
 	"ROUTES": {

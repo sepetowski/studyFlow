@@ -36,6 +36,7 @@ import { MindMapTagsSelector } from './MindMapTagsSelector';
 import { Separator } from '../ui/separator';
 import { EditInfo } from './editInfo/EditInfo';
 import { ExtendedMindMap } from '@/types/extended';
+import { useTranslations } from 'next-intl';
 
 const nodeTypes = { textNode: TextNode };
 const edgeTypes: EdgeTypes = {
@@ -54,14 +55,19 @@ interface Props {
 
 export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags }: Props) => {
 	const [openSheet, setOpenSheet] = useState(false);
+
 	const [nodes, setNodes] = useState<Node[]>([]);
 	const [edges, setEdges] = useState<Edge[]>([]);
+
 	const [clickedEdge, setClickedEdge] = useState<Edge | null>(null);
+
 	const [isMounted, setIsMounted] = useState(false);
 	const [editable, setEditable] = useState(candEdit);
 
 	const { onSetStatus, status } = useAutosaveIndicator();
 	const { setRfInstance, onSave, onSetIds } = useAutoSaveMindMap();
+
+	const t = useTranslations('MIND_MAP');
 
 	useEffect(() => {
 		setIsMounted(true);
@@ -216,7 +222,10 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags 
 					nodesDraggable={editable}
 					nodesConnectable={editable}
 					nodesFocusable={editable}
-					elementsSelectable={editable}>
+					elementsSelectable={editable}
+					proOptions={{
+						hideAttribution: true,
+					}}>
 					{editable && (
 						<Panel
 							position='top-left'
@@ -229,7 +238,7 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags 
 										</Button>
 									</HoverCardTrigger>
 									<HoverCardContent align='start' sideOffset={8}>
-										Dodaj kafelk
+										{t('HOVER_TIP.ADD_TILE')}
 									</HoverCardContent>
 								</HoverCard>
 								<EditInfo
@@ -253,7 +262,7 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags 
 										</Button>
 									</HoverCardTrigger>
 									<HoverCardContent align='start' sideOffset={8}>
-										Zapisz
+										{t('HOVER_TIP.SAVE')}
 									</HoverCardContent>
 								</HoverCard>
 

@@ -18,6 +18,7 @@ import axios from 'axios';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useToast } from '@/components/ui/use-toast';
 import { useReactFlow } from 'reactflow';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	mindMapId: string;
@@ -31,10 +32,14 @@ export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 	const { onSetStatus, status } = useAutosaveIndicator();
 	const { toast } = useToast();
 
+	
+
+	const t = useTranslations('MIND_MAP.DELETE');
+
 	const { mutate: updateMindMap, isLoading } = useMutation({
 		mutationFn: async () => {
 			onSetStatus('pending');
-			await axios.post('/api/mind_maps/update', {
+			await axios.post('/api/mind_maps/update/mind_map', {
 				content: null,
 				mindMapId,
 				workspaceId,
@@ -45,7 +50,7 @@ export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 			onSetStatus('saved');
 			setNodes([]);
 			toast({
-				title: 'Zresetowano satn',
+				title: t('MESSAGE.SUCCES'),
 			});
 			setOpen(false);
 		},
@@ -53,7 +58,7 @@ export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 		onError: () => {
 			onSetStatus('unsaved');
 			toast({
-				title: 'blad zapisywania',
+				title: t('MESSAGE.ERROR'),
 				variant: 'destructive',
 			});
 		},
@@ -74,18 +79,15 @@ export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 					</HoverCardTrigger>
 				</DialogTrigger>
 				<HoverCardContent sideOffset={8} align='start'>
-					Usuń wszytskie kafelki
+					{t('HOVER')}
 				</HoverCardContent>
 				<DialogContent>
 					<DialogHeader>
-						<DialogTitle>Usuń wszytskie kafelki</DialogTitle>
-						<DialogDescription>Zresetuj układ mapy mysli do początkowego stanu</DialogDescription>
+						<DialogTitle>{t('DIALOG.TITLE')}</DialogTitle>
+						<DialogDescription>{t('DIALOG.DESC')}</DialogDescription>
 					</DialogHeader>
 					<Warning>
-						<p>
-							Przywrócenie stanu początkowego, usunie wszytskie obecne kafelki i połączenia. Kliknij
-							„Zresetuj stan”, aby usunąć wszytskie kafelki i połączenia.
-						</p>
+						<p>{t('DIALOG.WARNING')}</p>
 					</Warning>
 
 					<Button
@@ -93,7 +95,11 @@ export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 						onClick={() => updateMindMap()}
 						size={'lg'}
 						variant={'destructive'}>
-						{isLoading ? <LoadingState loadingText={'resetowanie'} /> : 'Zresetuj stan'}
+						{isLoading ? (
+							<LoadingState loadingText={t('DIALOG.BTN_PENDING')} />
+						) : (
+							t('DIALOG.BTN_RESET')
+						)}
 					</Button>
 				</DialogContent>
 			</HoverCard>

@@ -11,6 +11,7 @@ import { MindMapItemColors } from '@/types/enums';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
 import { useDebouncedCallback } from 'use-debounce';
+import { useTranslations } from 'next-intl';
 
 type NodeData = {
 	text: string;
@@ -25,6 +26,8 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 
 	const { onSetStatus } = useAutosaveIndicator();
 	const { onSave } = useAutoSaveMindMap();
+
+	const t = useTranslations('MIND_MAP.NODE');
 
 	const debouncedMindMapInfo = useDebouncedCallback(() => {
 		onSetStatus('pending');
@@ -49,7 +52,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 	const form = useForm<TextNodeSchema>({
 		resolver: zodResolver(textNodeSchema),
 		defaultValues: {
-			text: 'Add new text',
+			text: t('PLACEHOLDER'),
 		},
 	});
 
@@ -65,9 +68,9 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 
 	useEffect(() => {
 		form.reset({
-			text: data.text ? data.text : 'Add new text',
+			text: data.text ? data.text : t('PLACEHOLDER'),
 		});
-	}, [data.text, form, isEditing]);
+	}, [data.text, form, isEditing, t]);
 
 	return (
 		<NodeWrapper
@@ -81,6 +84,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 					<form id='node-text-form' onSubmit={form.handleSubmit(onSubmit)}>
 						<div className='space-y-1.5'>
 							<TextareaAutosize
+								placeholder={t('PLACEHOLDER')}
 								{...rest}
 								ref={(e) => {
 									nodeText(e);
@@ -100,7 +104,7 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 								variant={'ghost'}
 								className=' py-1.5 sm:py-1.5 h-fit border'
 								size={'sm'}>
-								Cancel
+								{t('CANCEL')}
 							</Button>
 							<Button
 								disabled={!form.formState.isValid}
@@ -108,12 +112,12 @@ export const TextNode = ({ data, id }: NodeProps<NodeData>) => {
 								type='submit'
 								className=' py-1.5 sm:py-1.5 h-fit border '
 								size={'sm'}>
-								Save changes
+								{t('SAVE')}
 							</Button>
 						</div>
 					</form>
 				) : (
-					<p className='w-full break-words  '>{data.text ? data.text : 'Add new text'}</p>
+					<p className='w-full break-words  '>{data.text ? data.text : t('PLACEHOLDER')}</p>
 				)}
 			</div>
 		</NodeWrapper>

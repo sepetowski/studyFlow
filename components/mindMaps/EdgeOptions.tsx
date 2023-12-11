@@ -28,6 +28,7 @@ import { Checkbox } from '@/components/ui/checkbox';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { EdgeColor } from '@/types/enums';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	clickedEdge: Edge;
@@ -52,6 +53,8 @@ const colors: EdgeColor[] = [
 ];
 
 export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props) => {
+	const t = useTranslations('MIND_MAP.EDGE_OPTIONS');
+
 	const form = useForm<EdgeOptionsSchema>({
 		resolver: zodResolver(edgeOptionsSchema),
 		defaultValues: {
@@ -129,11 +132,8 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 		<SheetContent className=' md:w-[26rem] md:max-w-md px-0  '>
 			<ScrollArea className=' h-full px-6 '>
 				<SheetHeader className='px-1'>
-					<SheetTitle>Ustawienia łączeń</SheetTitle>
-					<SheetDescription>
-						Personalizuj jak mają wyglądać Twoje połączenia. Dodaj teskt, ustaw typ połączenia,
-						zmień kolor i wybierz czy chcesz je animować!
-					</SheetDescription>
+					<SheetTitle>{t('TITLE')}</SheetTitle>
+					<SheetDescription>{t('DESC')}</SheetDescription>
 				</SheetHeader>
 
 				<Form {...form}>
@@ -145,14 +145,15 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 									name='label'
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Etykieta</FormLabel>
+											<FormLabel>{t('FORM.LABEL.LABEL')}</FormLabel>
 											<FormControl>
-												<Input className='bg-muted' placeholder='Add label' {...field} />
+												<Input
+													className='bg-muted'
+													placeholder={t('FORM.LABEL.PLACEHOLDER')}
+													{...field}
+												/>
 											</FormControl>
-											<FormDescription>
-												Dodanie tekstu sprawi, że pokaże się etykieta. Pozostaw puste pole, i zapisz
-												zmiany aby ją usunać
-											</FormDescription>
+											<FormDescription>{t('FORM.LABEL.DESC')}</FormDescription>
 											<FormMessage />
 										</FormItem>
 									)}
@@ -164,7 +165,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 									name='type'
 									render={({ field }) => (
 										<FormItem>
-											<FormLabel>Typ łączenia</FormLabel>
+											<FormLabel>{t('FORM.TYPE.LABEL')}</FormLabel>
 											<Select onValueChange={field.onChange} defaultValue={field.value}>
 												<FormControl>
 													<SelectTrigger>
@@ -172,17 +173,17 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 													</SelectTrigger>
 												</FormControl>
 												<SelectContent>
-													<SelectItem value='customBezier'>domyślny</SelectItem>
-													<SelectItem value='customStraight'>po prostej</SelectItem>
-													<SelectItem value='customStepSharp'>po kroku</SelectItem>
+													<SelectItem value='customBezier'>{t('FORM.TYPE.DEFAULT')}</SelectItem>
+													<SelectItem value='customStraight'>{t('FORM.TYPE.STRAIGHT')}</SelectItem>
+													<SelectItem value='customStepSharp'>
+														{t('FORM.TYPE.STEP_SHARP')}
+													</SelectItem>
 													<SelectItem value='customStepRounded'>
-														po kroku (zaokrąglone rogi)
+														{t('FORM.TYPE.STEP_ROUNDED')}
 													</SelectItem>
 												</SelectContent>
 											</Select>
-											<FormDescription>
-												Wybierz sposób w jaki zachowuje się łączenie
-											</FormDescription>
+											<FormDescription>{t('FORM.TYPE.DESC')}</FormDescription>
 											<FormMessage />
 										</FormItem>
 									)}
@@ -194,7 +195,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 									name='color'
 									render={({ field }) => (
 										<FormItem className='space-y-1.5'>
-											<FormLabel>Kolory</FormLabel>
+											<FormLabel>{t('FORM.COLOR.LABEL')}</FormLabel>
 											<FormControl>
 												<RadioGroup
 													onValueChange={field.onChange}
@@ -215,7 +216,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 													))}
 												</RadioGroup>
 											</FormControl>
-											<FormDescription>Wybór koloru wpływa tylko na etykietę</FormDescription>
+											<FormDescription>{t('FORM.COLOR.DESC')}</FormDescription>
 											<FormMessage />
 										</FormItem>
 									)}
@@ -235,7 +236,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 												/>
 											</FormControl>
 											<div className='leading-none'>
-												<FormLabel>Animuj łączenie</FormLabel>
+												<FormLabel>{t('FORM.ANIMATED.LABEL')}</FormLabel>
 											</div>
 										</FormItem>
 									)}
@@ -243,7 +244,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 							</div>
 						</div>
 						<Button className='text-white w-full' type='submit'>
-							Zapisz
+							{t('FORM.BTN_SAVE')}
 						</Button>
 
 						<Button
@@ -253,7 +254,7 @@ export const EdgeOptions = ({ clickedEdge, isOpen, onDeleteEdge, onSave }: Props
 							variant={'secondary'}
 							className='text-white w-full'
 							type='button'>
-							Usuń połączenie
+							{t('FORM.BTN_DELETE_EDGE')}
 						</Button>
 					</form>
 				</Form>

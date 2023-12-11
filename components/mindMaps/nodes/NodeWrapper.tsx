@@ -19,6 +19,7 @@ import {
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useDebouncedCallback } from 'use-debounce';
 import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	nodeId: string;
@@ -56,11 +57,13 @@ export const NodeWrapper = ({
 }: Props) => {
 	const [currColor, setCurrColor] = useState<MindMapItemColors | undefined>(color);
 	const { setNodes } = useReactFlow();
+
 	const { onSetStatus } = useAutosaveIndicator();
 	const { onSave } = useAutoSaveMindMap();
 
+	const t = useTranslations('MIND_MAP.NODE');
+
 	const debouncedMindMapInfo = useDebouncedCallback(() => {
-		console.log('aha');
 		onSetStatus('pending');
 		onSave();
 	}, 3000);
@@ -185,13 +188,13 @@ export const NodeWrapper = ({
 							}}
 							className='cursor-pointer gap-2'>
 							<Pencil size={16} />
-							<span>Edytuj</span>
+							<span>{t('EDIT')}</span>
 						</DropdownMenuItem>
 						<DropdownMenuGroup>
 							<DropdownMenuSub>
 								<DropdownMenuSubTrigger className='cursor-pointer gap-2'>
 									<Palette size={16} />
-									<span>Kolor</span>
+									<span>{t('COLOR')}</span>
 								</DropdownMenuSubTrigger>
 								<DropdownMenuPortal>
 									<DropdownMenuSubContent className='hover:bg-popover' sideOffset={10}>
@@ -226,7 +229,7 @@ export const NodeWrapper = ({
 							}}
 							className='cursor-pointer gap-2'>
 							<Trash size={16} />
-							Usun
+							{t('DELETE')}
 						</DropdownMenuItem>
 					</DropdownMenuContent>
 				</DropdownMenu>

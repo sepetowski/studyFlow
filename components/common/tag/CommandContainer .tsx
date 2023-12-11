@@ -35,7 +35,7 @@ export const CommandContainer = ({
 	const [tab, setTab] = useState<'list' | 'newTag' | 'editTag'>('list');
 	const [editedTagInfo, setEditedTagInfo] = useState<null | Tag>(null);
 
-	const t = useTranslations('TASK.HEADER.TAG');
+	const t = useTranslations('COMMON.TAG');
 
 	const onEditTagInfoHandler = (tag: Tag) => {
 		setEditedTagInfo(tag);

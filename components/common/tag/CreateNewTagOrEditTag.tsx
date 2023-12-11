@@ -52,7 +52,7 @@ export const CreateNewTagOrEditTag = ({
 	const { toast } = useToast();
 	const queryClient = useQueryClient();
 
-	const t = useTranslations('TASK.HEADER.TAG');
+	const t = useTranslations('COMMON.TAG');
 	const m = useTranslations('MESSAGES');
 
 	const form = useForm<TagSchema>({

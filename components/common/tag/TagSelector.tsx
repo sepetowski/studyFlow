@@ -42,7 +42,7 @@ export const TagSelector = ({
 }: Props) => {
 	const router = useRouter();
 
-	const t = useTranslations('TASK.HEADER.TAG');
+	const t = useTranslations('COMMON.TAG');
 
 	return (
 		<DropdownMenu>

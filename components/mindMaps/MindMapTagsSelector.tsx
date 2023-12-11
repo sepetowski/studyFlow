@@ -10,6 +10,7 @@ import axios from 'axios';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useDebouncedCallback } from 'use-debounce';
 import { Tag } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	mindMapId: string;
@@ -24,7 +25,9 @@ export const MindMapTagsSelector = ({
 	mindMapId,
 	initialActiveTags,
 }: Props) => {
-	const { onSetStatus, status } = useAutosaveIndicator();
+	const { onSetStatus } = useAutosaveIndicator();
+
+	const t = useTranslations('MIND_MAP');
 
 	const { mutate: updateMindMapActiveTags } = useMutation({
 		mutationFn: async (tagsIds: string[]) => {
@@ -77,7 +80,7 @@ export const MindMapTagsSelector = ({
 					/>
 				</HoverCardTrigger>
 				<HoverCardContent sideOffset={10} align='start'>
-					Dodaj tag do mapy myśli
+					{t('TAG')}
 				</HoverCardContent>
 			</HoverCard>
 			{currentActiveTags.length > 0 && (
