@@ -27,13 +27,15 @@ import { CustomBezier } from './labels/CustomBezier';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { PlusSquare, Save } from 'lucide-react';
 import { DeleteAllNodes } from './DeleteAllNodes';
-import { MindMap as MindMapType, Tag } from '@prisma/client';
+import { Tag } from '@prisma/client';
 import { LoadingScreen } from '../common/LoadingScreen';
 import { useDebouncedCallback } from 'use-debounce';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useAutoSaveMindMap } from '@/context/AutoSaveMindMap';
 import { MindMapTagsSelector } from './MindMapTagsSelector';
 import { Separator } from '../ui/separator';
+import { EditInfo } from './editInfo/EditInfo';
+import { ExtendedMindMap } from '@/types/extended';
 
 const nodeTypes = { textNode: TextNode };
 const edgeTypes: EdgeTypes = {
@@ -44,7 +46,7 @@ const edgeTypes: EdgeTypes = {
 };
 
 interface Props {
-	initialInfo: MindMapType;
+	initialInfo: ExtendedMindMap;
 	workspaceId: string;
 	candEdit: boolean;
 	initialActiveTags: Tag[];
@@ -223,13 +225,19 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags 
 								<HoverCard openDelay={250} closeDelay={250}>
 									<HoverCardTrigger asChild>
 										<Button variant={'ghost'} size={'icon'} onClick={onAddNode}>
-											<PlusSquare size={22} />
+											<PlusSquare size={20} />
 										</Button>
 									</HoverCardTrigger>
 									<HoverCardContent align='start' sideOffset={8}>
 										Dodaj kafelk
 									</HoverCardContent>
 								</HoverCard>
+								<EditInfo
+									emoji={initialInfo.emoji}
+									title={initialInfo.title}
+									mapId={initialInfo.id}
+									workspaceId={workspaceId}
+								/>
 
 								<HoverCard openDelay={250} closeDelay={250}>
 									<HoverCardTrigger asChild>
@@ -241,7 +249,7 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags 
 												onSetStatus('pending');
 												onSave();
 											}}>
-											<Save size={22} />
+											<Save size={20} />
 										</Button>
 									</HoverCardTrigger>
 									<HoverCardContent align='start' sideOffset={8}>

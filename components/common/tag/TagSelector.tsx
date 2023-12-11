@@ -25,6 +25,7 @@ interface Props {
 	onDeleteActiveTag: (tagId: string) => void;
 	className?: string;
 	plusIconSize?: number;
+	dropDownSizeOffset?: number;
 }
 
 export const TagSelector = ({
@@ -34,6 +35,7 @@ export const TagSelector = ({
 	workspaceId,
 	className,
 	plusIconSize = 16,
+	dropDownSizeOffset,
 	onSelectActiveTag,
 	onUpdateActiveTags,
 	onDeleteActiveTag,
@@ -57,7 +59,7 @@ export const TagSelector = ({
 					<span className='sm:hidden'>{t('TAG')}</span>
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent sideOffset={dropDownSizeOffset && dropDownSizeOffset}>
 				{isLoading && (
 					<div className=' p-3  flex justify-center items-center'>
 						<LoadingState />

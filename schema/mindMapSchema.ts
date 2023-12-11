@@ -12,5 +12,19 @@ export const updateMindMaPActiveTagsSchema = z.object({
 	tagsIds: z.array(z.string()),
 });
 
+export const titleAndEmojiSchema = z.object({
+	icon: z.string(),
+	title: z.string().optional(),
+});
+
+export const updateTitleAndEmojiSchema = z.object({
+	workspaceId: z.string(),
+	mapId: z.string(),
+	icon: z.string(),
+	title: z.string().optional(),
+});
+
 export type MindMapSchema = z.infer<typeof mindMapSchema>;
 export type UpdateMindMaPActiveTagsSchema = z.infer<typeof updateMindMaPActiveTagsSchema>;
+export type TitleAndEmojiSchema = z.infer<typeof titleAndEmojiSchema>;
+export type UpdateTitleAndEmojiSchema = z.infer<typeof updateTitleAndEmojiSchema>;

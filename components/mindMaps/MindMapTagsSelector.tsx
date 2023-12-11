@@ -64,7 +64,8 @@ export const MindMapTagsSelector = ({
 			<HoverCard openDelay={250} closeDelay={250}>
 				<HoverCardTrigger>
 					<TagSelector
-						plusIconSize={22}
+						plusIconSize={20}
+						dropDownSizeOffset={10}
 						className='border-none h-9 px-2.5 py-0 text-base'
 						isLoading={isLodingTags}
 						workspaceId={workspaceId}
@@ -75,7 +76,7 @@ export const MindMapTagsSelector = ({
 						onDeleteActiveTag={onDeleteActiveTagHandler}
 					/>
 				</HoverCardTrigger>
-				<HoverCardContent sideOffset={8} align='start'>
+				<HoverCardContent sideOffset={10} align='start'>
 					Dodaj tag do mapy myśli
 				</HoverCardContent>
 			</HoverCard>

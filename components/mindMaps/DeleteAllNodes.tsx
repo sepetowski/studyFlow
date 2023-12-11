@@ -69,11 +69,13 @@ export const DeleteAllNodes = ({ mindMapId, workspaceId }: Props) => {
 							onClick={() => setOpen(true)}
 							variant={'ghost'}
 							size={'icon'}>
-							<Trash size={22} />
+							<Trash size={20} />
 						</Button>
 					</HoverCardTrigger>
 				</DialogTrigger>
-				<HoverCardContent sideOffset={8} align='start'>Usuń wszytskie kafelki</HoverCardContent>
+				<HoverCardContent sideOffset={8} align='start'>
+					Usuń wszytskie kafelki
+				</HoverCardContent>
 				<DialogContent>
 					<DialogHeader>
 						<DialogTitle>Usuń wszytskie kafelki</DialogTitle>

@@ -17,7 +17,6 @@ import { useDebouncedCallback } from 'use-debounce';
 import axios from 'axios';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { Editor } from '../editor/Editor';
-import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { useTags } from '@/hooks/useTags';
 import { TagSelector } from '@/components/common/tag/TagSelector';
 
@@ -25,7 +24,7 @@ interface Props {
 	taskId: string;
 	title?: string;
 	content?: JSON;
-	emoji?: string;
+	emoji: string;
 	from?: Date;
 	to?: Date;
 	workspaceId: string;
@@ -66,7 +65,7 @@ export const TaskContener = ({
 	const form = useForm<TaskSchema>({
 		resolver: zodResolver(taskSchema),
 		defaultValues: {
-			icon: emoji ? changeCodeToEmoji(emoji) : changeCodeToEmoji('1f9e0'),
+			icon: emoji,
 			title: title ? title : '',
 		},
 	});
@@ -138,7 +137,7 @@ export const TaskContener = ({
 				<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
 					<div className='w-full flex flex-col sm:flex-row items-start gap-2 sm:gap-4'>
 						<Emoji
-							emoji={emoji ? emoji : '1f9e0'}
+							emoji={form.getValues('icon')}
 							workspaceId={workspaceId}
 							taskId={taskId}
 							onFormSelect={onFormSelectHandler}
