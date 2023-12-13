@@ -1,10 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { apiWorkspaceSchema } from '@/schema/workspaceSchema';
-import { MAX_USER_WORKSPACES } from '@/lib/options';
-import { getRandomWorkspaceColor } from '@/lib/getRandomWorkspaceColor';
-import { v4 as uuidv4 } from 'uuid';
+
 import { z } from 'zod';
 
 export async function POST(request: Request) {

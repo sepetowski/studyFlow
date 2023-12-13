@@ -79,7 +79,7 @@ export const AddUserImage = ({ profileImage, className }: Props) => {
 			return data as UserType;
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -103,7 +103,7 @@ export const AddUserImage = ({ profileImage, className }: Props) => {
 			return data as UserType;
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -205,7 +205,11 @@ export const AddUserImage = ({ profileImage, className }: Props) => {
 						/>
 					</div>
 				) : (
-					<UserAvatar className=' w-32 h-32 sm:w-52 sm:h-52 my-5' size={52} profileImage={profileImage} />
+					<UserAvatar
+						className=' w-32 h-32 sm:w-52 sm:h-52 my-5'
+						size={52}
+						profileImage={profileImage}
+					/>
 				)}
 
 				<Form {...form}>

@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { FileWarning, Save } from 'lucide-react';
 import { LoadingState } from '@/components/ui/loading-state';
 import { cn } from '@/lib/utils';
@@ -10,7 +10,7 @@ import { useTranslations } from 'next-intl';
 export const SavingStatus = () => {
 	const t = useTranslations('COMMON.SAVING_STATUS');
 
-	const { status } = useSaveTaskState();
+	const { status } = useAutosaveIndicator();
 
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>
@@ -24,19 +24,19 @@ export const SavingStatus = () => {
 					{status === 'saved' && (
 						<>
 							<Save size={18} />
-							<p>{t('SAVED')}</p>
+							<p className='hidden sm:inline-block'>{t('SAVED')}</p>
 						</>
 					)}
 					{status === 'pending' && (
 						<>
 							<LoadingState />
-							<p>{t('SAVING')}</p>
+							<p className='hidden sm:inline-block'>{t('SAVING')}</p>
 						</>
 					)}
 					{status === 'unsaved' && (
 						<>
 							<FileWarning size={18} />
-							<p>{t('UNSAVED')}</p>
+							<p className='hidden sm:inline-block'>{t('UNSAVED')}</p>
 						</>
 					)}
 				</div>

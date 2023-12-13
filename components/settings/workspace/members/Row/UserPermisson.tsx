@@ -16,6 +16,7 @@ import { useTranslations } from 'next-intl';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useRouter } from 'next-intl/client';
 import { SubscriptionUser } from '@/types/extended';
+import { useChangeCodeToEmoji } from '@/hooks/useChangeCodeToEmoji';
 
 interface Props {
 	userRole: UserPermissonType;
@@ -38,6 +39,8 @@ export const UserPermisson = ({
 	const m = useTranslations('MESSAGES');
 	const { toast } = useToast();
 
+	const userRoleEmojis = useChangeCodeToEmoji('1f432', '1f60e', '1f920', '1f913');
+
 	const router = useRouter();
 
 	const { mutate: editUserRole, isLoading } = useMutation({
@@ -50,7 +53,7 @@ export const UserPermisson = ({
 			return data;
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -84,7 +87,8 @@ export const UserPermisson = ({
 				<>
 					{userRole === 'OWNER' ? (
 						<div className='flex gap-1 h-9 items-center px-3 text-sm font-medium '>
-							<span className='hidden sm:inline'>🐲</span> <span>{t('OWNER.TITLE')}</span>
+							<span className='hidden sm:inline'>{userRoleEmojis[0]}</span>{' '}
+							<span>{t('OWNER.TITLE')}</span>
 						</div>
 					) : (
 						<DropdownMenu modal={false}>
@@ -92,17 +96,20 @@ export const UserPermisson = ({
 								<Button variant={'ghost'} size={'sm'} className='flex gap-1 items-center'>
 									{userRole === 'ADMIN' && (
 										<p className='flex gap-1 items-center'>
-											<span className='hidden sm:inline'>😎</span> <span>{t('ADMIN.TITLE')}</span>
+											<span className='hidden sm:inline'>{userRoleEmojis[1]}</span>{' '}
+											<span>{t('ADMIN.TITLE')}</span>
 										</p>
 									)}
 									{userRole === 'CAN_EDIT' && (
 										<p className='flex gap-1 items-center'>
-											<span className='hidden sm:inline'>🫡</span> <span>{t('EDITOR.TITLE')}</span>
+											<span className='hidden sm:inline'>{userRoleEmojis[2]}</span>{' '}
+											<span>{t('EDITOR.TITLE')}</span>
 										</p>
 									)}
 									{userRole === 'READ_ONLY' && (
 										<p className='flex gap-1 items-center'>
-											<span className='hidden sm:inline'>🥸</span> <span>{t('VIEWER.TITLE')}</span>
+											<span className='hidden sm:inline'>{userRoleEmojis[3]}</span>{' '}
+											<span>{t('VIEWER.TITLE')}</span>
 										</p>
 									)}
 
@@ -118,7 +125,7 @@ export const UserPermisson = ({
 									<div className='flex flex-col gap-1'>
 										<div className='flex items-center gap-2'>
 											<div className='flex items-center gap-1'>
-												<span>😎</span>
+												<span>{userRoleEmojis[1]}</span>
 												<h3>{t('ADMIN.TITLE')}</h3>
 											</div>
 											{userRole === 'ADMIN' && <Check size={18} />}
@@ -134,7 +141,7 @@ export const UserPermisson = ({
 									<div className='flex flex-col gap-1'>
 										<div className='flex items-center gap-2'>
 											<div className='flex items-center gap-1'>
-												<span>🫡</span>
+												<span>{userRoleEmojis[2]}</span>
 												<h3>{t('EDITOR.TITLE')}</h3>
 											</div>
 											{userRole === 'CAN_EDIT' && <Check size={18} />}
@@ -150,7 +157,7 @@ export const UserPermisson = ({
 									<div className='flex flex-col gap-1'>
 										<div className='flex items-center gap-2'>
 											<div className='flex gap-1 items-center'>
-												<span>🥸</span>
+												<span>{userRoleEmojis[3]}</span>
 												<h3>{t('VIEWER.TITLE')}</h3>
 											</div>
 											{userRole === 'READ_ONLY' && <Check size={18} />}

@@ -1,4 +1,4 @@
-"use client"
+'use client';
 import { useRouter } from 'next-intl/client';
 import { useSearchParams } from 'next/navigation';
 import { useToast } from '@/components/ui/use-toast';
@@ -6,7 +6,7 @@ import { useEffect } from 'react';
 import { useSession } from 'next-auth/react';
 import { useTranslations } from 'next-intl';
 
-export const useProviderLoginError = (showLoggedInfo:boolean) => {
+export const useProviderLoginError = (showLoggedInfo: boolean) => {
 	const m = useTranslations('MESSAGES');
 	const params = useSearchParams();
 	const router = useRouter();
@@ -38,7 +38,7 @@ export const useProviderLoginError = (showLoggedInfo:boolean) => {
 
 				default:
 					toast({
-						title: m('ERRORS.DEAFULT'),
+						title: m('ERRORS.DEFAULT'),
 						variant: 'destructive',
 					});
 			}
@@ -55,5 +55,5 @@ export const useProviderLoginError = (showLoggedInfo:boolean) => {
 				title: m('SUCCES.SIGN_IN'),
 			});
 		}
-	}, [params, toast, session, router, m,showLoggedInfo]);
+	}, [params, toast, session, router, m, showLoggedInfo]);
 };

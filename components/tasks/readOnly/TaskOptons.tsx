@@ -56,7 +56,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 			});
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),
@@ -79,7 +79,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 
 	const { mutate: toogleSaveTask } = useMutation({
 		mutationFn: async () => {
-			await axios.post('/api/saved/tasks/task', {
+			await axios.post('/api/saved/tasks/toggle_task', {
 				taskId,
 			});
 		},
@@ -87,7 +87,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 			onSetIsSaved();
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			onSetIsSaved();
 

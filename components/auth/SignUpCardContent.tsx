@@ -43,7 +43,7 @@ export const SignUpCardContent = () => {
 				},
 			});
 
-			if (!res.ok) throw new Error('ERRORS.DEAFULT');
+			if (!res.ok) throw new Error('ERRORS.DEFAULT');
 			const signUpInfo = await res.json();
 			if (res.status === 200) {
 				toast({
@@ -59,7 +59,7 @@ export const SignUpCardContent = () => {
 				router.refresh();
 			} else throw new Error(signUpInfo);
 		} catch (err) {
-			let errMsg = m('ERRORS.DEAFULT');
+			let errMsg = m('ERRORS.DEFAULT');
 			if (typeof err === 'string') {
 				errMsg = err;
 			} else if (err instanceof Error) {

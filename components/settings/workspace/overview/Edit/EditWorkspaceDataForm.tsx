@@ -93,7 +93,7 @@ export const EditWorkspaceDataForm = ({ workspace: { id, name, image, color } }:
 			await axios.post('/api/workspace/edit/data', { ...data, id });
 		},
 		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.DEAFULT';
+			const error = err?.response?.data ? err.response.data : 'ERRORS.DEFAULT';
 
 			toast({
 				title: m(error),

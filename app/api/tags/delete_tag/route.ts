@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { apiDeleteTagSchema } from '@/schema/tagSchema';
+import { apiDeletetagSchema } from '@/schema/tagSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -9,7 +9,7 @@ export async function POST(request: Request) {
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
-	const result = apiDeleteTagSchema.safeParse(body);
+	const result = apiDeletetagSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
@@ -76,7 +76,6 @@ export async function POST(request: Request) {
 
 		return NextResponse.json(deletedTag, { status: 200 });
 	} catch (err) {
-		
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

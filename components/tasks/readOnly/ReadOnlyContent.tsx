@@ -1,15 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ReadOnlyEmoji } from './ReadOnlyEmoji';
+import { ReadOnlyEmoji } from '../../common/ReadOnlyEmoji';
 import { ExtendedTask } from '@/types/extended';
-import { Badge } from '@/components/ui/badge';
 import { ReadOnlyCallendar } from './ReadOnlyCallendar';
 import { LinkTag } from '@/components/common/LinkTag';
-import { Editor } from '../editable/editor/Editor';
 import { ReadOnlyEditor } from './ReadOnlyEditor';
 import { TaskOptons } from './TaskOptons';
-import { Star } from 'lucide-react';
 import { StarSvg } from '@/components/common/StarSvg';
 import { UserPermisson } from '@prisma/client';
 import { useTranslations } from 'next-intl';
@@ -28,13 +25,12 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 		setIsSaved((prev) => !prev);
 	};
 
-	console.log(isSaved);
 	return (
 		<Card>
-			<CardContent className='py-4 sm:py-6 flex flex-col gap-10'>
-				<div className='w-full flex  items-start gap-2 sm:gap-4'>
+			<CardContent className='py-4 sm:py-6 flex flex-col gap-10 relative'>
+				<div className='w-full flex flex-col sm:flex-row  items-start gap-2 sm:gap-4'>
 					<ReadOnlyEmoji selectedEmoji={task?.emoji} />
-					<div className='w-full flex flex-col gap-2'>
+					<div className='w-full flex flex-col  gap-2'>
 						<div className='w-full flex justify-between items-center'>
 							<div className='w-5/6'>
 								<p className='text-2xl font-semibold flex items-center gap-2'>
@@ -42,7 +38,7 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 									{isSaved && <StarSvg />}
 								</p>
 							</div>
-							<div>
+							<div className='absolute top-5 right-5 sm:static'>
 								<TaskOptons
 									onSetIsSaved={onSetIsSaved}
 									isSaved={isSaved}

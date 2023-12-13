@@ -13,6 +13,7 @@ import { CustomColors, Tag } from '@prisma/client';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useRouter } from 'next-intl/client';
 import { useTranslations } from 'next-intl';
+import { cn } from '@/lib/utils';
 
 interface Props {
 	isLoading: boolean;
@@ -22,6 +23,9 @@ interface Props {
 	onSelectActiveTag: (id: string) => void;
 	onUpdateActiveTags: (tagId: string, color: CustomColors, name: string) => void;
 	onDeleteActiveTag: (tagId: string) => void;
+	className?: string;
+	plusIconSize?: number;
+	dropDownSizeOffset?: number;
 }
 
 export const TagSelector = ({
@@ -29,27 +33,33 @@ export const TagSelector = ({
 	currentActiveTags,
 	isLoading,
 	workspaceId,
+	className,
+	plusIconSize = 16,
+	dropDownSizeOffset,
 	onSelectActiveTag,
 	onUpdateActiveTags,
 	onDeleteActiveTag,
 }: Props) => {
 	const router = useRouter();
 
-	const t = useTranslations('TASK.HEADER.TAG');
+	const t = useTranslations('COMMON.TAG');
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button
-					className='w-fit h-fit text-xs justify-start text-left font-normal px-2.5 py-0.5 '
+					className={cn(
+						`w-fit h-fit text-xs justify-start text-left font-normal px-2.5 py-0.5 `,
+						className
+					)}
 					variant={'outline'}
 					size={'sm'}>
-					<Plus size={16} className='mr-1 w-3 h-3' />
+					<Plus size={plusIconSize} className='mr-1 ' />
 					<span className='hidden sm:inline'>{t('NEW_TAG')}</span>
 					<span className='sm:hidden'>{t('TAG')}</span>
 				</Button>
 			</DropdownMenuTrigger>
-			<DropdownMenuContent>
+			<DropdownMenuContent sideOffset={dropDownSizeOffset && dropDownSizeOffset}>
 				{isLoading && (
 					<div className=' p-3  flex justify-center items-center'>
 						<LoadingState />

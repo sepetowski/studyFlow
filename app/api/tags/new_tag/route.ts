@@ -1,16 +1,15 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { apiTagSchema } from '@/schema/tagSchema';
+import { apitagSchema } from '@/schema/tagSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
-	
 
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
-	const result = apiTagSchema.safeParse(body);
+	const result = apitagSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
@@ -76,7 +75,6 @@ export async function POST(request: Request) {
 
 		return NextResponse.json(newTag, { status: 200 });
 	} catch (err) {
-	
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

@@ -1,10 +1,11 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { EmojiSelector } from '@/components/common/EmojiSelector';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import { useMutation } from '@tanstack/react-query';
-import { useSaveTaskState } from '@/context/SaveTaskState';
+import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import axios from 'axios';
+import { useChangeCodeToEmoji } from '@/hooks/useChangeCodeToEmoji';
 
 interface Props {
 	emoji: string;
@@ -15,7 +16,8 @@ interface Props {
 
 export const Emoji = ({ onFormSelect, taskId, workspaceId, emoji }: Props) => {
 	const [selectedEmoji, setSelectedEmoji] = useState(emoji);
-	const { onSetStatus, status } = useSaveTaskState();
+	const { onSetStatus, status } = useAutosaveIndicator();
+	const renderedEmoji = useChangeCodeToEmoji(selectedEmoji);
 
 	const { mutate: updateTaskEmoji } = useMutation({
 		mutationFn: async () => {
@@ -50,7 +52,7 @@ export const Emoji = ({ onFormSelect, taskId, workspaceId, emoji }: Props) => {
 	return (
 		<EmojiSelector onSelectedEmoji={selectEmojiHandler}>
 			<span className='w-16 h-16 rounded-lg bg-secondary flex justify-center items-center text-3xl'>
-				{selectedEmoji}
+				{renderedEmoji}
 			</span>
 		</EmojiSelector>
 	);

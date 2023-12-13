@@ -2,6 +2,7 @@ import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { ReadOnlyContent } from '@/components/tasks/readOnly/ReadOnlyContent';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
+import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
 interface Params {
@@ -22,7 +23,7 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 		getTask(task_id, session.user.id),
 	]);
 
-	console.log('role', userRole);
+	
 	const isSavedByUser =
 		task.savedTask?.find((task) => task.userId === session.user.id) !== undefined;
 
@@ -40,7 +41,7 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 						href: `/dashboard/workspace/${workspace_id}`,
 					},
 					{
-						emoji: task.emoji,
+						emoji: changeCodeToEmoji(task.emoji),
 						name: `${task.title ? task.title : 'UNTITLED'}`,
 						href: '/',
 						useTranslate: task.title ? false : true,

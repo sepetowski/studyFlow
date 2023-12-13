@@ -19,7 +19,7 @@ export const BackBtn = () => {
 			variant={'secondary'}
 			size={'sm'}>
 			<ChevronLeftIcon />
-			<span>{t('BACK_BTN')}</span>
+			<span className='hidden sm:inline-block'>{t('BACK_BTN')}</span>
 		</Button>
 	);
 };

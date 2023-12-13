@@ -158,7 +158,7 @@
 	},
 	"MESSAGES": {
 		"ERRORS": {
-			"DEAFULT": "Oh no.. Something went wrong. Please try again",
+			"DEFAULT": "Oh no.. Something went wrong. Please try again",
 			"TAKEN_USERNAME": "This username is already taken",
 			"TAKEN_EMAIL": "This email is already in use",
 			"DB_ERROR": "We are currently having problems. Please try again later",
@@ -182,7 +182,8 @@
 			"THE_SAME_TAG": "A tag with this name already exists",
 			"NO_TAG": "Tag not found",
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
-			"NO_TASK_FOUND": "Task not found"
+			"NO_TASK_FOUND": "Task not found",
+			"NO_MIND_MAP_FOUND": "Mind map not found"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -200,7 +201,9 @@
 			"DELETED_WORKSPACE_INFO": "Workspace has been deleted",
 			"REGENERATED_LINK": "Link has been updated",
 			"TASK_ADDED": "Task has been added",
-			"TASK_DELETED": "Task has been deleted"
+			"TASK_DELETED": "Task has been deleted",
+			"MIND_MAP_ADDED": "Mind map has been added",
+			"MIND_MAP_DELETED": "Mind map has been deleted"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -258,8 +261,12 @@
 			"SCHEDULES": "Schedules",
 			"STUDY": "Study",
 			"FILES": "Files",
-			"DEAFULT_NAME": "Untitled",
-			"ACTIONS": "Actions"
+			"DEFAULT_NAME": "Untitled",
+			"ACTIONS": "Actions",
+			"ADD_TASK": "Add task",
+			"ADD_TASK_PENDING": "Creating task",
+			"ADD_MIND_MAP": "Add mind map",
+			"ADD_MIND_MAP_PENDING": "Creating mind map"
 		}
 	},
 	"SETTINGS": {
@@ -269,12 +276,10 @@
 			"LIGHT_TITLE": "Light",
 			"DARK_TITLE": "Dark",
 			"SYSTEM_TITLE": "System",
-			"LIGHT_FOOTER": "Deafult light",
-			"DARK_FOOTER": "Deafult dark",
-			"SYSTEM_FOOTER": "Deafult system",
-			"ACTIVE": "Active",
-			"ADD_TASK": "Add task",
-			"ADD_TASK_PENDING": "Creating task"
+			"LIGHT_FOOTER": "DEFAULT light",
+			"DARK_FOOTER": "DEFAULT dark",
+			"SYSTEM_FOOTER": "DEFAULT system",
+			"ACTIVE": "Active"
 		},
 		"ACCOUNT": {
 			"TITLE": "Account",
@@ -354,6 +359,25 @@
 			"SAVED": "Saved",
 			"SAVING": "Saving",
 			"UNSAVED": "Unsaved"
+		},
+		"TAG": {
+			"FILTER": "Filter",
+			"NEW_TAG": "New tag",
+			"TAG": "Tag",
+			"ERROR": "Oops... Something went wrong",
+			"ERROR_BTN": "Try again",
+			"NOT_FOUND": "Not found",
+			"TAGS_HEADING": "TAGS",
+			"NEW_HEADING": "NEW",
+			"ADD_TAG": "Add tag",
+			"COLORS": "Colors",
+			"TAG_NAME": "Name",
+			"BTNS": {
+				"CREATE": "Create",
+				"CANCEL": "Cancel",
+				"DELETE": "Delete",
+				"UPDATE": "Update"
+			}
 		}
 	},
 	"PERMISSONS": {
@@ -382,25 +406,6 @@
 			"DATE": {
 				"PICK": "Pic a date",
 				"INFO": "If you select a date, the task will be added to your calendar"
-			},
-			"TAG": {
-				"FILTER": "Filter",
-				"NEW_TAG": "New tag",
-				"TAG": "Tag",
-				"ERROR": "Oops... Something went wrong",
-				"ERROR_BTN": "Try again",
-				"NOT_FOUND": "Not found",
-				"TAGS_HEADING": "TAGS",
-				"NEW_HEADING": "NEW",
-				"ADD_TAG": "Add tag",
-				"COLORS": "Colors",
-				"TAG_NAME": "Name",
-				"BTNS": {
-					"CREATE": "Create",
-					"CANCEL": "Cancel",
-					"DELETE": "Delete",
-					"UPDATE": "Update"
-				}
 			}
 		},
 		"EDITOR": {
@@ -440,7 +445,7 @@
 				"LINK": "Add hyperlink",
 				"IMAGE": "Add image",
 				"COLOR": "Highlight",
-				"COLOR_DEAFULT": "Deafult color",
+				"COLOR_DEFAULT": "DEFAULT color",
 				"UNDO": "Undo",
 				"REDO": "Redo",
 				"DELETE": "Delete"
@@ -465,6 +470,87 @@
 			"SAVE_TASK": "Add task"
 		}
 	},
+	"MIND_MAP": {
+		"HOVER_TIP": {
+			"ADD_TILE": "Add a new tile",
+			"SAVE": "Save mind map"
+		},
+		"TAG": "Add a tag to the mind map",
+		"DELETE": {
+			"MESSAGE": {
+				"SUCCES": "Reset successful",
+				"ERROR": "Failed to save changes."
+			},
+			"HOVER": "Delete all tiles",
+			"DIALOG": {
+				"TITLE": "Delete all tiles",
+				"DESC": "Reset the mind map layout to its initial state",
+				"WARNING": "Restoring the initial state will delete all current tiles and connections. Click 'Reset State' to remove all tiles and connections.",
+				"BTN_RESET": "Reset State",
+				"BTN_PENDING": "Resetting"
+			}
+		},
+		"EDGE_OPTIONS": {
+			"TITLE": "Connection Settings",
+			"DESC": "Customize how your connections look. Add text, set connection type, change color, and choose whether to animate them!",
+			"FORM": {
+				"LABEL": {
+					"LABEL": "Label",
+					"DESC": "Adding text will display a label. Leave the field empty and save changes to remove it.",
+					"PLACEHOLDER": "Add label"
+				},
+				"TYPE": {
+					"LABEL": "Connection Type",
+					"DEFAULT": "Default",
+					"STRAIGHT": "Straight",
+					"STEP_SHARP": "Step",
+					"STEP_ROUNDED": "Step (rounded corners)",
+					"DESC": "Choose how the connection behaves"
+				},
+				"COLOR": {
+					"LABEL": "Color",
+					"DESC": "Color choice affects only the label"
+				},
+				"ANIMATED": {
+					"LABEL": "Animate Connection"
+				},
+				"BTN_SAVE": "Save",
+				"BTN_DELETE_EDGE": "Delete Connection"
+			}
+		},
+		"NODE": {
+			"EDIT": "Edit",
+			"COLOR": "Color",
+			"DELETE": "Delete",
+			"SAVE": "Save Changes",
+			"CANCEL": "Cancel",
+			"PLACEHOLDER": "Add a new description"
+		},
+		"EDIT_TILT_AND_EMOJI": {
+			"ERROR": "Failed to save changes.",
+			"HOVER": "Edit information",
+			"TITLE": "Edit information",
+			"DESC": "Change the name of your mind map and set its icon",
+			"PLACEHOLDER": "Untitled mind map",
+			"SAVE": "Save",
+			"CANCEL": "Cancel"
+		},
+		"PREVIEW": {
+			"INFO": "This is the preview page. You can navigate the map space, but to edit it, go to the editing page (if you have the necessary permissions).",
+			"NO_TITLE": "Untitled mind map",
+			"DELETE": "Delete",
+			"EDIT": "Edit",
+			"ADD_TO_FAV": "Add to Favorites",
+			"REMOVE_FROM_FAV": "Remove from Favorites",
+			"DIALOG": {
+				"TITLE": "Delete mind map",
+				"DESC": "Are you sure you want to delete the mind map? You will lose all the data and associated actions. Deletion is irreversible.",
+				"BTN_DELETE": "Delete",
+				"BTN_PENDING": "Deleting"
+			}
+		}
+	},
+
 	"ROUTES": {
 		"DASHBOARD": "Home",
 		"SETTINGS": "Settings",
