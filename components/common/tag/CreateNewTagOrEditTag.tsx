@@ -3,7 +3,6 @@
 import React from 'react';
 import { tagSchema, TagSchema } from '@/schema/tagSchema';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useRouter } from 'next-intl/client';
 import { useForm } from 'react-hook-form';
 import { v4 as uuidv4 } from 'uuid';
 import {
@@ -22,7 +21,7 @@ import { colors } from '@/lib/getRandomWorkspaceColor';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { CustomColors, Tag } from '@prisma/client';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import axios, { AxiosError, AxiosResponse } from 'axios';
+import axios, { AxiosError } from 'axios';
 
 interface Props {
 	workspaceId: string;
