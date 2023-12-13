@@ -1,15 +1,12 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent } from '@/components/ui/card';
-import { ReadOnlyEmoji } from './ReadOnlyEmoji';
+import { ReadOnlyEmoji } from '../../common/ReadOnlyEmoji';
 import { ExtendedTask } from '@/types/extended';
-import { Badge } from '@/components/ui/badge';
 import { ReadOnlyCallendar } from './ReadOnlyCallendar';
 import { LinkTag } from '@/components/common/LinkTag';
-import { Editor } from '../editable/editor/Editor';
 import { ReadOnlyEditor } from './ReadOnlyEditor';
 import { TaskOptons } from './TaskOptons';
-import { Star } from 'lucide-react';
 import { StarSvg } from '@/components/common/StarSvg';
 import { UserPermisson } from '@prisma/client';
 import { useTranslations } from 'next-intl';

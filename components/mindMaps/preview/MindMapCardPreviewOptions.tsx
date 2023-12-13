@@ -33,25 +33,31 @@ import { UserPermisson } from '@prisma/client';
 
 interface Props {
 	isSaved: boolean;
-	taskId: string;
 	workspaceId: string;
+	mindMapId: string;
 	userRole: UserPermisson | null;
 	onSetIsSaved: () => void;
 }
 
-export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSaved }: Props) => {
+export const MindMapCardPreviewOptions = ({
+	isSaved,
+	workspaceId,
+	mindMapId,
+	userRole,
+	onSetIsSaved,
+}: Props) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const m = useTranslations('MESSAGES');
-	const t = useTranslations('TASK.EDITOR.READ_ONLY');
+	const t = useTranslations('MIND_MAP.PREVIEW');
 
 	const queryClient = useQueryClient();
 	const { toast } = useToast();
 	const router = useRouter();
 
-	const { mutate: deleteTask, isLoading } = useMutation({
+	const { mutate: deleteMindMap, isLoading } = useMutation({
 		mutationFn: async () => {
-			await axios.post('/api/task/delete', {
-				taskId,
+			await axios.post('/api/mind_maps/delete', {
+				mindMapId,
 				workspaceId,
 			});
 		},
@@ -65,7 +71,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 		},
 		onSuccess: () => {
 			toast({
-				title: m('SUCCES.TASK_DELETED'),
+				title: m('SUCCES.MIND_MAP_DELETED'),
 			});
 
 			queryClient.invalidateQueries(['getWorkspaceShortcuts']);
@@ -77,10 +83,10 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 		mutationKey: ['deleteTask'],
 	});
 
-	const { mutate: toogleSaveTask } = useMutation({
+	const { mutate: toogleSaveMindMap } = useMutation({
 		mutationFn: async () => {
-			await axios.post('/api/saved/tasks/toggle_task', {
-				taskId,
+			await axios.post('/api/saved/mind_maps/toggle_mind_map', {
+				mindMapId,
 			});
 		},
 		onMutate: () => {
@@ -97,7 +103,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 			});
 		},
 
-		mutationKey: ['toogleSaveTask'],
+		mutationKey: ['toogleSaveMindMap'],
 	});
 
 	return (
@@ -112,7 +118,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 					<DropdownMenuContent align='end' sideOffset={-8}>
 						<DropdownMenuItem
 							onClick={() => {
-								toogleSaveTask();
+								toogleSaveMindMap();
 							}}
 							className='cursor-pointer'>
 							{isSaved ? (
@@ -130,7 +136,8 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 						{userRole && userRole !== 'READ_ONLY' && (
 							<>
 								<DropdownMenuItem className='cursor-pointer' asChild>
-									<Link href={`/dashboard/workspace/${workspaceId}/tasks/task/${taskId}/edit`}>
+									<Link
+										href={`/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${mindMapId}/edit`}>
 										<Pencil size={16} className='mr-2' /> {t('EDIT')}
 									</Link>
 								</DropdownMenuItem>
@@ -158,7 +165,7 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 
 					<Button
 						onClick={() => {
-							deleteTask();
+							deleteMindMap();
 						}}
 						size={'lg'}
 						variant={'destructive'}>

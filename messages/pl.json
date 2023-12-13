@@ -202,7 +202,9 @@
 			"DELETED_WORKSPACE_INFO": "Obszar roboczy został usunięty",
 			"REGENERATED_LINK": "Link został zaktualizowany",
 			"TASK_ADDED": "Zadanie zostało dodane",
-			"TASK_DELETED": "Zadanie zostało usunięte"
+			"TASK_DELETED": "Zadanie zostało usunięte",
+			"MIND_MAP_ADDED": "Mapa myśli została dodana",
+			"MIND_MAP_DELETED": "Mapa myśli została usunięta"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -264,7 +266,9 @@
 			"DEFAULT_NAME": "Bez tytułu",
 			"ACTIONS": "Akcje",
 			"ADD_TASK": "Dodaj zadanie",
-			"ADD_TASK_PENDING": "Tworze zadanie"
+			"ADD_TASK_PENDING": "Tworze zadanie",
+			"ADD_MIND_MAP": "Dodaj mapę myśli",
+			"ADD_MIND_MAP_PENDING": "Tworze mapę myśli"
 		}
 	},
 	"SETTINGS": {
@@ -533,6 +537,20 @@
 			"PLACEHOLDER": "Mapa myśli bez tytułu",
 			"SAVE": "Zapisz",
 			"CANCEL": "Anuluj"
+		},
+		"PREVIEW": {
+			"INFO":"Jest to storna podglądu, możesz poruszać przestrzenią mapy, jednak aby ja edytować przejdz do strony edycji (jeśli posiadasz takie prawa)",
+			"NO_TITLE": "Mapa myśli bez tytułu",
+			"DELETE": "Usuń",
+			"EDIT": "Edytuj",
+			"ADD_TO_FAV": "Dodaj do ulubionych",
+			"REMOVE_FROM_FAV": "Usuń z ulubionych",
+			"DIALOG": {
+				"TITLE": "Usuń mapę myśli",
+				"DESC": "Jesteś pewien, że chcesz usunąć mapę myśli? Stracisz wszystkie dane w niej zawarte oraz związane z nią czynności. Usunięcie jest nieodwracalne",
+				"BTN_DELETE": "Usuń",
+				"BTN_PENDING": "Usuwanie"
+			}
 		}
 	},
 	"ROUTES": {

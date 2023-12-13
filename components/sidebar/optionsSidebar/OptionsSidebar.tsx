@@ -28,7 +28,7 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 		return null;
 
 	return (
-		<div className='h-full p-4 sm:py-6 border-r w-48 sm:w-64 flex flex-col justify-between'>
+		<div className='h-full p-4 sm:py-6 border-r w-52 sm:w-64 flex flex-col justify-between'>
 			{pathname.includes('/dashboard/settings') && (
 				<Settings userAdminWorkspaces={userAdminWorkspaces} />
 			)}

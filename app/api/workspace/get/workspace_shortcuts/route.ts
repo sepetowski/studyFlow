@@ -24,6 +24,7 @@ export const GET = async (request: Request) => {
 					select: {
 						id: true,
 						title: true,
+						emoji: true,
 					},
 				},
 			},

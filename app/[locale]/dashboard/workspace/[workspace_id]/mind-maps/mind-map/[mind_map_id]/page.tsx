@@ -1,10 +1,12 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { MindMap } from '@/components/mindMaps/MindMap';
+import { MindMapPreviewCardWrapper } from '@/components/mindMaps/preview/MindMapPreviewCardWrapper';
 import { TaskContener } from '@/components/tasks/editable/contener/TaskContener';
 import { AutoSaveMindMapProvider } from '@/context/AutoSaveMindMap';
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getMindMap, getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
+import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
 interface Params {
@@ -25,6 +27,9 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		getMindMap(mind_map_id, session.user.id),
 	]);
 
+	const isSavedByUser =
+		mindMap.savedMindMaps?.find((mindMap) => mindMap.userId === session.user.id) !== undefined;
+
 	return (
 		<AutosaveIndicatorProvider>
 			<AutoSaveMindMapProvider>
@@ -40,6 +45,7 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 							href: `/dashboard/workspace/${workspace_id}`,
 						},
 						{
+							emoji: changeCodeToEmoji(mindMap.emoji),
 							name: `${mindMap.title ? mindMap.title : 'UNTITLED'}`,
 							href: '/',
 							useTranslate: mindMap.title ? false : true,
@@ -48,12 +54,17 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
-					<MindMap
-						initialActiveTags={mindMap.tags}
-						initialInfo={mindMap}
-						workspaceId={workspace.id}
-						candEdit={false}
-					/>
+					<MindMapPreviewCardWrapper
+						mindMap={mindMap}
+						userRole={userRole}
+						isSavedByUser={isSavedByUser}>
+						<MindMap
+							initialActiveTags={mindMap.tags}
+							initialInfo={mindMap}
+							workspaceId={workspace.id}
+							candEdit={false}
+						/>
+					</MindMapPreviewCardWrapper>
 				</main>
 			</AutoSaveMindMapProvider>
 		</AutosaveIndicatorProvider>

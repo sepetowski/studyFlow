@@ -36,25 +36,26 @@ model Session {
 }
 
 model User {
-  id                  String         @id @default(cuid())
+  id                  String          @id @default(cuid())
   name                String?
   surname             String?
-  username            String         @unique
-  email               String?        @unique
+  username            String          @unique
+  email               String?         @unique
   emailVerified       DateTime?
   hashedPassword      String?
   image               String?
-  completedOnboarding Boolean        @default(false)
+  completedOnboarding Boolean         @default(false)
   accounts            Account[]
   sessions            Session[]
   useCase             UseCase?
-  createdWorkspaces   Workspace[]    @relation("CreatedBy")
+  createdWorkspaces   Workspace[]     @relation("CreatedBy")
   subscriptions       Subscription[]
-  createdTasks        Task[]         @relation("TaskCreatedByUser")
-  updatedTasks        Task[]         @relation("TaskUpdatedByUser")
+  createdTasks        Task[]          @relation("TaskCreatedByUser")
+  updatedTasks        Task[]          @relation("TaskUpdatedByUser")
   savedTask           savedTask[]
-  createdMindMaps     MindMap[]      @relation("MindMapCreatedByUser")
-  updatedMindMaps     MindMap[]      @relation("MindMapUpdatedByUser")
+  createdMindMaps     MindMap[]       @relation("MindMapCreatedByUser")
+  updatedMindMaps     MindMap[]       @relation("MindMapUpdatedByUser")
+  savedMindMaps       savedMindMaps[]
 }
 
 model Workspace {
@@ -82,9 +83,9 @@ model Task {
   id            String      @id @default(cuid())
   createdAt     DateTime    @default(now())
   updatedAt     DateTime    @updatedAt
-  updatedBy     User?       @relation(name: "TaskUpdatedByUser", fields: [updatedUserId], references: [id])
+  updatedBy     User?       @relation(name: "TaskUpdatedByUser", fields: [updatedUserId], references: [id], onDelete: Cascade)
   updatedUserId String?
-  creator       User        @relation(name: "TaskCreatedByUser", fields: [creatorId], references: [id])
+  creator       User        @relation(name: "TaskCreatedByUser", fields: [creatorId], references: [id], onDelete: Cascade)
   creatorId     String
   workspace     Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId   String
@@ -103,19 +104,20 @@ model Task {
 }
 
 model MindMap {
-  id            String    @id @default(cuid())
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  updatedBy     User?     @relation(name: "MindMapUpdatedByUser", fields: [updatedUserId], references: [id])
-  creator       User      @relation(name: "MindMapCreatedByUser", fields: [creatorId], references: [id])
+  id            String          @id @default(cuid())
+  createdAt     DateTime        @default(now())
+  updatedAt     DateTime        @updatedAt
+  updatedBy     User?           @relation(name: "MindMapUpdatedByUser", fields: [updatedUserId], references: [id], onDelete: Cascade)
+  creator       User            @relation(name: "MindMapCreatedByUser", fields: [creatorId], references: [id], onDelete: Cascade)
   creatorId     String
   updatedUserId String?
-  workspace     Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace     Workspace       @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId   String
   content       Json?
   title         String
-  emoji         String      @default("1f9e0")
+  emoji         String          @default("1f9e0")
   tags          Tag[]
+  savedMindMaps savedMindMaps[]
 
   @@index([workspaceId])
   @@index([updatedUserId])
@@ -147,6 +149,17 @@ model savedTask {
   userId String
   task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId String
+
+  @@index([userId])
+  @@index([taskId])
+}
+
+model savedMindMaps {
+  id      String  @id @default(cuid())
+  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId  String
+  mindMap MindMap @relation(fields: [taskId], references: [id], onDelete: Cascade)
+  taskId  String
 
   @@index([userId])
   @@index([taskId])

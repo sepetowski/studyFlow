@@ -88,7 +88,7 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 							{t('TASKS')}
 						</WorkspaceOption>
 						<WorkspaceOption
-							defaultName={'mapa mysli'}
+							defaultName={t('DEFAULT_NAME')}
 							workspaceId={workspaceId}
 							href={`mind-maps/mind-map`}
 							fields={workspaceShortcuts.mindMaps}>

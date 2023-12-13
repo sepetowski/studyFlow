@@ -24,7 +24,16 @@ export const updateTitleAndEmojiSchema = z.object({
 	title: z.string().optional(),
 });
 
+
+export const deleteMindMapSchema = z.object({
+	mindMapId: z.string(),
+	workspaceId: z.string(),
+});
+
+
+
 export type MindMapSchema = z.infer<typeof mindMapSchema>;
 export type UpdateMindMaPActiveTagsSchema = z.infer<typeof updateMindMaPActiveTagsSchema>;
 export type TitleAndEmojiSchema = z.infer<typeof titleAndEmojiSchema>;
 export type UpdateTitleAndEmojiSchema = z.infer<typeof updateTitleAndEmojiSchema>;
+export type DeleteMindMapSchema = z.infer<typeof deleteMindMapSchema>;

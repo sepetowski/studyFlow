@@ -102,9 +102,9 @@ export const InviteContent = ({
 						<Link className='w-5 h-5' size={18} />
 						<HoverCard openDelay={250} closeDelay={250}>
 							<HoverCardTrigger asChild>
-								<p className=' overflow-hidden h-5 max-w-[11.5rem] sm:max-w-[22rem]'>{inviteURL}</p>
+								<p className=' overflow-hidden h-5 w-full'>{inviteURL}</p>
 							</HoverCardTrigger>
-							<HoverCardContent>
+							<HoverCardContent className='max-w-xs sm:max-w-sm md:max-w-md lg:max-w-4xl'>
 								<p className='break-words'>{inviteURL}</p>
 							</HoverCardContent>
 						</HoverCard>

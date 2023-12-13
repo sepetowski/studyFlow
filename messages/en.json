@@ -201,7 +201,9 @@
 			"DELETED_WORKSPACE_INFO": "Workspace has been deleted",
 			"REGENERATED_LINK": "Link has been updated",
 			"TASK_ADDED": "Task has been added",
-			"TASK_DELETED": "Task has been deleted"
+			"TASK_DELETED": "Task has been deleted",
+			"MIND_MAP_ADDED": "Mind map has been added",
+			"MIND_MAP_DELETED": "Mind map has been deleted"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -262,7 +264,9 @@
 			"DEFAULT_NAME": "Untitled",
 			"ACTIONS": "Actions",
 			"ADD_TASK": "Add task",
-			"ADD_TASK_PENDING": "Creating task"
+			"ADD_TASK_PENDING": "Creating task",
+			"ADD_MIND_MAP": "Add mind map",
+			"ADD_MIND_MAP_PENDING": "Creating mind map"
 		}
 	},
 	"SETTINGS": {
@@ -527,9 +531,23 @@
 			"HOVER": "Edit information",
 			"TITLE": "Edit information",
 			"DESC": "Change the name of your mind map and set its icon",
-			"PLACEHOLDER": "Untitled Mind Map",
+			"PLACEHOLDER": "Untitled mind map",
 			"SAVE": "Save",
 			"CANCEL": "Cancel"
+		},
+		"PREVIEW": {
+			"INFO": "This is the preview page. You can navigate the map space, but to edit it, go to the editing page (if you have the necessary permissions).",
+			"NO_TITLE": "Untitled mind map",
+			"DELETE": "Delete",
+			"EDIT": "Edit",
+			"ADD_TO_FAV": "Add to Favorites",
+			"REMOVE_FROM_FAV": "Remove from Favorites",
+			"DIALOG": {
+				"TITLE": "Delete mind map",
+				"DESC": "Are you sure you want to delete the mind map? You will lose all the data and associated actions. Deletion is irreversible.",
+				"BTN_DELETE": "Delete",
+				"BTN_PENDING": "Deleting"
+			}
 		}
 	},
 

@@ -13,3 +13,4 @@ export const deleteTaskSchema = z.object({
 });
 
 export type TaskSchema = z.infer<typeof taskSchema>;
+export type DeleteTaskSchema = z.infer<typeof  deleteTaskSchema>;
