@@ -5,7 +5,7 @@ import { deleteTaskSchema } from '@/schema/taskSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
-	
+
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 				id: taskId,
 			},
 			include: {
-				date: true,
+				taskDate: true,
 			},
 		});
 

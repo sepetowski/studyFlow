@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
-import { ExtendedMindMap, ExtendedTask } from '@/types/extended';
+import { ExtendedMindMap } from '@/types/extended';
 import { LinkTag } from '@/components/common/LinkTag';
 import { StarSvg } from '@/components/common/StarSvg';
 import { UserPermisson } from '@prisma/client';
@@ -28,7 +28,7 @@ export const MindMapPreviewCardWrapper = ({
 }: Props) => {
 	const [isSaved, setIsSaved] = useState(isSavedByUser);
 	const t = useTranslations('MIND_MAP.PREVIEW');
-
+	const [updater] = useState(mindMap.updatedBy);
 	const format = useFormatter();
 	const dateTime = new Date(mindMap.updatedAt);
 	const now = new Date();
@@ -81,13 +81,13 @@ export const MindMapPreviewCardWrapper = ({
 			</CardContent>
 			<CardFooter className='w-full flex flex-col sm:flex-row  items-center justify-center gap-2 text-xs mt-4 sm:mt-0'>
 				<div className='flex items-center'>
-					<p>Utworozne przez</p>
-					<UserHoverInfoCard user={mindMap.updatedBy} />
+					<p>{t('CREATOR_INFO')}</p>
+					<UserHoverInfoCard user={updater} />
 				</div>
 				<Separator className='hidden h-4 sm:block' orientation='vertical' />
 				<div className='flex items-center'>
-					<p>Edytowane przez</p>
-					<UserHoverInfoCard user={mindMap.updatedBy} />
+					<p>{t('EDITOR_INFO')}</p>
+					<UserHoverInfoCard user={updater} />
 					<p>{format.relativeTime(dateTime, now)}</p>
 				</div>
 			</CardFooter>

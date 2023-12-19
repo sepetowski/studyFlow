@@ -463,7 +463,9 @@
 					"DESC": "Are you sure you want to delete this note? You will lose all the data it contains and the activities associated with it. Deletion is irreversible",
 					"BTN_DELETE": "Delete task",
 					"BTN_PENDING": "Deleting"
-				}
+				},
+				"CREATOR_INFO": "Created by",
+				"EDITOR_INFO": "Edited by"
 			}
 		},
 		"BTN": {
@@ -547,7 +549,9 @@
 				"DESC": "Are you sure you want to delete the mind map? You will lose all the data and associated actions. Deletion is irreversible.",
 				"BTN_DELETE": "Delete",
 				"BTN_PENDING": "Deleting"
-			}
+			},
+			"CREATOR_INFO": "Created by",
+			"EDITOR_INFO": "Edited by"
 		}
 	},
 

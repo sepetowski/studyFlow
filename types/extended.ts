@@ -46,7 +46,7 @@ export interface UserInfo {
 
 export interface ExtendedTask extends Task {
 	tags: Tag[];
-	date?: {
+	taskDate?: {
 		id: string;
 		from: Date | undefined;
 		to: Date | undefined;

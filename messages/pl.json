@@ -466,7 +466,9 @@
 					"DESC": "Jesteś pewien, że chcesz usunąć tę notatkę? Stracisz wszystkie dane w niej zawarte oraz związane z nią czynności. Usunięcie jest nieodwracalne",
 					"BTN_DELETE": "Usuń",
 					"BTN_PENDING": "Usuwanie"
-				}
+				},
+				"CREATOR_INFO": "Utworzone przez",
+				"EDITOR_INFO": "Edytowane przez"
 			}
 		},
 		"BTN": {
@@ -539,7 +541,7 @@
 			"CANCEL": "Anuluj"
 		},
 		"PREVIEW": {
-			"INFO":"Jest to storna podglądu, możesz poruszać przestrzenią mapy, jednak aby ja edytować przejdz do strony edycji (jeśli posiadasz takie prawa)",
+			"INFO": "Jest to storna podglądu, możesz poruszać przestrzenią mapy, jednak aby ja edytować przejdz do strony edycji (jeśli posiadasz takie prawa)",
 			"NO_TITLE": "Mapa myśli bez tytułu",
 			"DELETE": "Usuń",
 			"EDIT": "Edytuj",
@@ -550,7 +552,9 @@
 				"DESC": "Jesteś pewien, że chcesz usunąć mapę myśli? Stracisz wszystkie dane w niej zawarte oraz związane z nią czynności. Usunięcie jest nieodwracalne",
 				"BTN_DELETE": "Usuń",
 				"BTN_PENDING": "Usuwanie"
-			}
+			},
+			"CREATOR_INFO": "Utworzone przez",
+			"EDITOR_INFO": "Edytowane przez"
 		}
 	},
 	"ROUTES": {
