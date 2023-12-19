@@ -20,6 +20,24 @@ export const GET = async (request: Request, { params: { mind_map_id } }: Params)
 			include: {
 				tags: true,
 				savedMindMaps: true,
+				creator: {
+					select: {
+						id: true,
+						username: true,
+						image: true,
+						name: true,
+						surname: true,
+					},
+				},
+				updatedBy: {
+					select: {
+						id: true,
+						username: true,
+						image: true,
+						name: true,
+						surname: true,
+					},
+				},
 			},
 		});
 

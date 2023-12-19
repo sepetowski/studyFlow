@@ -21,9 +21,18 @@ export const GET = async (request: Request, { params: { task_id } }: Params) => 
 				tags: true,
 				date: true,
 				savedTask: true,
+				creator: {
+					select: {
+						id: true,
+						username: true,
+						image: true,
+						name: true,
+						surname: true,
+					},
+				},
+				updatedBy: true,
 			},
 		});
-		
 
 		if (!task) return NextResponse.json('task not found', { status: 404 });
 
