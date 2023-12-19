@@ -93,7 +93,7 @@ model Task {
   emoji         String      @default("1f9e0")
   content       Json?
   tags          Tag[]
-  date          Date?       @relation(fields: [dateId], references: [id], onDelete: Cascade)
+  taskDate      TaskDate?   @relation(fields: [dateId], references: [id], onDelete: Cascade)
   dateId        String?
   savedTask     savedTask[]
 
@@ -124,7 +124,7 @@ model MindMap {
   @@index([creatorId])
 }
 
-model Date {
+model TaskDate {
   id   String  @id @default(cuid())
   from String?
   to   String?

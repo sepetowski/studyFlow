@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 				id: taskId,
 			},
 			include: {
-				date: true,
+				taskDate: true,
 			},
 		});
 		if (!task) return NextResponse.json('ERRORS.NO_TASK_FOUND', { status: 404 });

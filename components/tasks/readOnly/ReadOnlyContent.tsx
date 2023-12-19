@@ -9,7 +9,9 @@ import { ReadOnlyEditor } from './ReadOnlyEditor';
 import { TaskOptons } from './TaskOptons';
 import { StarSvg } from '@/components/common/StarSvg';
 import { UserPermisson } from '@prisma/client';
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
+import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
+import { Separator } from '@/components/ui/separator';
 
 interface Props {
 	task: ExtendedTask;
@@ -19,12 +21,18 @@ interface Props {
 
 export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 	const [isSaved, setIsSaved] = useState(isSavedByUser);
+	const [updater] = useState(task.updatedBy);
 	const t = useTranslations('TASK.EDITOR.READ_ONLY');
+
+	const format = useFormatter();
+	const dateTime = new Date(task.updatedAt);
+	const now = new Date();
 
 	const onSetIsSaved = () => {
 		setIsSaved((prev) => !prev);
 	};
 
+	console.log(task);
 	return (
 		<Card>
 			<CardContent className='py-4 sm:py-6 flex flex-col gap-10 relative'>
@@ -49,18 +57,24 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 							</div>
 						</div>
 						<div className='w-full gap-1 flex flex-wrap flex-row'>
-							<ReadOnlyCallendar />
+							<ReadOnlyCallendar from={task.taskDate?.from} to={task.taskDate?.to} />
 							{task.tags && task.tags.map((tag) => <LinkTag key={tag.id} tag={tag} />)}
 						</div>
 					</div>
 				</div>
 				<ReadOnlyEditor content={task.content as unknown as JSON} />
 			</CardContent>
-			<CardFooter className='w-full flex  items-center justify-center gap-2 text-xs'>
-				<div>
-					<p>Utworozne przez Bush</p>
+			<CardFooter className='w-full flex flex-col sm:flex-row  items-center justify-center gap-2 text-xs'>
+				<div className='flex items-center'>
+					<p>Utworozne przez</p>
+					<UserHoverInfoCard user={updater} />
 				</div>
-				<p>Ostatnio edytowane przez Bush</p>
+				<Separator className='hidden h-4 sm:block' orientation='vertical' />
+				<div className='flex items-center'>
+					<p>Edytowane przez</p>
+					<UserHoverInfoCard user={updater} />
+					<p>{format.relativeTime(dateTime, now)}</p>
+				</div>
 			</CardFooter>
 		</Card>
 	);

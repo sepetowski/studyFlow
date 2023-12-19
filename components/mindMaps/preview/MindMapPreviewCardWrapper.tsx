@@ -1,15 +1,17 @@
 'use client';
 import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { ExtendedMindMap, ExtendedTask } from '@/types/extended';
 import { LinkTag } from '@/components/common/LinkTag';
 import { StarSvg } from '@/components/common/StarSvg';
 import { UserPermisson } from '@prisma/client';
-import { useTranslations } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 import { ReadOnlyEmoji } from '../../common/ReadOnlyEmoji';
 import { MindMapCardPreviewOptions } from './MindMapCardPreviewOptions';
 import { Info } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
+import { Separator } from '@/components/ui/separator';
 
 interface Props {
 	mindMap: ExtendedMindMap;
@@ -26,6 +28,10 @@ export const MindMapPreviewCardWrapper = ({
 }: Props) => {
 	const [isSaved, setIsSaved] = useState(isSavedByUser);
 	const t = useTranslations('MIND_MAP.PREVIEW');
+
+	const format = useFormatter();
+	const dateTime = new Date(mindMap.updatedAt);
+	const now = new Date();
 
 	const onSetIsSaved = () => {
 		setIsSaved((prev) => !prev);
@@ -73,6 +79,18 @@ export const MindMapPreviewCardWrapper = ({
 				</div>
 				<div className='h-full w-full'>{children}</div>
 			</CardContent>
+			<CardFooter className='w-full flex flex-col sm:flex-row  items-center justify-center gap-2 text-xs mt-4 sm:mt-0'>
+				<div className='flex items-center'>
+					<p>Utworozne przez</p>
+					<UserHoverInfoCard user={mindMap.updatedBy} />
+				</div>
+				<Separator className='hidden h-4 sm:block' orientation='vertical' />
+				<div className='flex items-center'>
+					<p>Edytowane przez</p>
+					<UserHoverInfoCard user={mindMap.updatedBy} />
+					<p>{format.relativeTime(dateTime, now)}</p>
+				</div>
+			</CardFooter>
 		</Card>
 	);
 };

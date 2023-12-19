@@ -54,6 +54,15 @@ export async function POST(request: Request) {
 			},
 		});
 
+		await db.mindMap.update({
+			where: {
+				id: mindMap.id,
+			},
+			data: {
+				updatedUserId: session.user.id,
+			},
+		});
+
 		return NextResponse.json(mindMap, { status: 200 });
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
