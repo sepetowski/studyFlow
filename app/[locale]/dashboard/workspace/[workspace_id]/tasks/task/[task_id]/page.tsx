@@ -23,9 +23,10 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 		getTask(task_id, session.user.id),
 	]);
 
-	
 	const isSavedByUser =
 		task.savedTask?.find((task) => task.userId === session.user.id) !== undefined;
+
+	console.log(task.createdAt);
 
 	return (
 		<>

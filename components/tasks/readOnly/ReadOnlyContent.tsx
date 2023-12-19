@@ -1,6 +1,6 @@
 'use client';
 import React, { useState } from 'react';
-import { Card, CardContent } from '@/components/ui/card';
+import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { ReadOnlyEmoji } from '../../common/ReadOnlyEmoji';
 import { ExtendedTask } from '@/types/extended';
 import { ReadOnlyCallendar } from './ReadOnlyCallendar';
@@ -56,6 +56,12 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 				</div>
 				<ReadOnlyEditor content={task.content as unknown as JSON} />
 			</CardContent>
+			<CardFooter className='w-full flex  items-center justify-center gap-2 text-xs'>
+				<div>
+					<p>Utworozne przez Bush</p>
+				</div>
+				<p>Ostatnio edytowane przez Bush</p>
+			</CardFooter>
 		</Card>
 	);
 };
