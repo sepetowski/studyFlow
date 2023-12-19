@@ -53,7 +53,7 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 					]}>
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				</DashboardHeader>
-				<main className='flex flex-col gap-2 h-full mb-4'>
+				<main className='flex flex-col gap-2 h-full'>
 					<MindMapPreviewCardWrapper
 						mindMap={mindMap}
 						userRole={userRole}

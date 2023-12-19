@@ -66,12 +66,12 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 			</CardContent>
 			<CardFooter className='w-full flex flex-col sm:flex-row  items-center justify-center gap-2 text-xs'>
 				<div className='flex items-center'>
-					<p>Utworozne przez</p>
+					<p>{t('CREATOR_INFO')}</p>
 					<UserHoverInfoCard user={updater} />
 				</div>
 				<Separator className='hidden h-4 sm:block' orientation='vertical' />
 				<div className='flex items-center'>
-					<p>Edytowane przez</p>
+					<p>{t('EDITOR_INFO')}</p>
 					<UserHoverInfoCard user={updater} />
 					<p>{format.relativeTime(dateTime, now)}</p>
 				</div>
