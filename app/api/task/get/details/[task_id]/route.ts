@@ -19,7 +19,7 @@ export const GET = async (request: Request, { params: { task_id } }: Params) => 
 			},
 			include: {
 				tags: true,
-				date: true,
+				taskDate: true,
 				savedTask: true,
 				creator: {
 					select: {
@@ -30,7 +30,15 @@ export const GET = async (request: Request, { params: { task_id } }: Params) => 
 						surname: true,
 					},
 				},
-				updatedBy: true,
+				updatedBy: {
+					select: {
+						id: true,
+						username: true,
+						image: true,
+						name: true,
+						surname: true,
+					},
+				},
 			},
 		});
 

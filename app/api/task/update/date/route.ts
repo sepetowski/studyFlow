@@ -17,7 +17,6 @@ export async function POST(request: Request) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	('test');
 	const { date, taskId, workspaceId } = result.data;
 
 	try {
@@ -50,14 +49,14 @@ export async function POST(request: Request) {
 				id: taskId,
 			},
 			include: {
-				date: true,
+				taskDate: true,
 			},
 		});
 		if (!task) return NextResponse.json('ERRORS.NO_TASK_FOUND', { status: 404 });
 
-		await db.date.update({
+		await db.taskDate.update({
 			where: {
-				id: task.date?.id,
+				id: task.taskDate?.id,
 			},
 			data: {
 				from: date?.from ? date.from : null,
@@ -75,7 +74,8 @@ export async function POST(request: Request) {
 		});
 
 		return NextResponse.json(updatedTask, { status: 200 });
-	} catch (_) {
+	} catch (err) {
+		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

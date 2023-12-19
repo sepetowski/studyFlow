@@ -43,7 +43,8 @@ export const TaskContener = ({
 }: Props) => {
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
-
+	const [taskDate] = useState({ from, to });
+	console.log(from, to);
 	const { onSetStatus, status } = useAutosaveIndicator();
 	const t = useTranslations('TASK');
 
@@ -166,8 +167,8 @@ export const TaskContener = ({
 								<TaskCalendar
 									workspaceId={workspaceId}
 									taskId={taskId}
-									from={from}
-									to={to}
+									from={taskDate.from}
+									to={taskDate.to}
 									onUpdateForm={onUpdateFormHandler}
 								/>
 								<TagSelector

@@ -38,6 +38,7 @@ export const GET = async (request: Request, { params: { mind_map_id } }: Params)
 						surname: true,
 					},
 				},
+				
 			},
 		});
 

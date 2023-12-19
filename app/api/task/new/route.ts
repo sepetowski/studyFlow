@@ -47,7 +47,7 @@ export async function POST(request: Request) {
 		)
 			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
 
-		const date = await db.date.create({
+		const date = await db.taskDate.create({
 			data: {
 				from: undefined,
 				to: undefined,
@@ -60,6 +60,15 @@ export async function POST(request: Request) {
 				creatorId: user.id,
 				workspaceId,
 				dateId: date.id,
+			},
+		});
+
+		await db.task.update({
+			where: {
+				id: task.id,
+			},
+			data: {
+				updatedUserId: session.user.id,
 			},
 		});
 
