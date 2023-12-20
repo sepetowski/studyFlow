@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { CalendarDays, Home } from 'lucide-react';
+import { CalendarDays, Home, AlarmClockIcon, BrainCircuit } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import ActiveLink from '@/components/ui/active-link';
 
@@ -18,6 +18,21 @@ export const Top = () => {
 				</HoverCardTrigger>
 				<HoverCardContent align='start'>
 					<span>{t('MAIN.HOME_HOVER')}</span>
+				</HoverCardContent>
+			</HoverCard>
+
+			<HoverCard openDelay={250} closeDelay={250}>
+				<HoverCardTrigger asChild>
+					<ActiveLink
+						include='pomodoro'
+						variant={'ghost'}
+						size={'icon'}
+						href={`/dashboard/pomodoro`}>
+						<BrainCircuit />
+					</ActiveLink>
+				</HoverCardTrigger>
+				<HoverCardContent align='start'>
+					<span>Pomodoro</span>
 				</HoverCardContent>
 			</HoverCard>
 

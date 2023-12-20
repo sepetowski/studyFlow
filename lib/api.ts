@@ -1,5 +1,5 @@
 import { ExtendedMindMap, ExtendedTask, SettingsWorkspace } from '@/types/extended';
-import { UserPermisson, Workspace } from '@prisma/client';
+import { PomodoroSettings, UserPermisson, Workspace } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
 export const domain =
@@ -86,4 +86,14 @@ export const getMindMap = async (mind_map_id: string, userId: string) => {
 		return notFound();
 	}
 	return res.json() as Promise<ExtendedMindMap>;
+};
+export const getUserPomodoroSettings = async (userId: string) => {
+	const res = await fetch(`${domain}/api/pomodoro/get_settings?userId=${userId}`, {
+		method: 'GET',
+		cache: 'no-store',
+	});
+	if (!res.ok) {
+		return notFound();
+	}
+	return res.json() as Promise<PomodoroSettings>;
 };

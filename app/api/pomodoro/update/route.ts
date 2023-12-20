@@ -1,7 +1,8 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { updateTaskTitleSchema } from '@/schema/updateTaskSchema';
+import { pomodoroSettingsSchema } from '@/schema/pomodoroSettingsSchema';
+import { id } from 'date-fns/locale';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -9,14 +10,15 @@ export async function POST(request: Request) {
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
-	const result = updateTaskTitleSchema.safeParse(body);
+	const result = pomodoroSettingsSchema.safeParse(body);
 
 	if (!result.success) {
 		result.error;
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { title, taskId, workspaceId } = result.data;
+	const { longBreakDuration, longBreakInterval, rounds, shortBreakDuration, workDuration } =
+		result.data;
 
 	try {
 		const user = await db.user.findUnique({
@@ -24,12 +26,10 @@ export async function POST(request: Request) {
 				id: session.user.id,
 			},
 			include: {
-				subscriptions: {
-					where: {
-						workspaceId: workspaceId,
-					},
+				pomodoroSettings: {
 					select: {
-						userRole: true,
+						userId: true,
+						id: true,
 					},
 				},
 			},
@@ -37,33 +37,24 @@ export async function POST(request: Request) {
 
 		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
-		if (
-			user.subscriptions[0].userRole === 'CAN_EDIT' ||
-			user.subscriptions[0].userRole === 'READ_ONLY'
-		)
-			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
+		const pomodoro = user.pomodoroSettings.find((settings) => settings.userId === user.id);
 
-		const task = await db.task.findUnique({
-			where: {
-				id: taskId,
-			},
-			include: {
-				taskDate: true,
-			},
-		});
-		if (!task) return NextResponse.json('ERRORS.NO_TASK_FOUND', { status: 404 });
+		if (!pomodoro) return NextResponse.json('ERRORS.NO_POMODORO_SETTINGS', { status: 404 });
 
-		const updatedTask = await db.task.update({
+		await db.pomodoroSettings.update({
 			where: {
-				id: task.id,
+				id: pomodoro.id,
 			},
 			data: {
-				updatedUserId: session.user.id,
-				title,
+				longBreakDuration,
+				longBreakInterval,
+				rounds,
+				shortBreakDuration,
+				workDuration,
 			},
 		});
 
-		return NextResponse.json(updatedTask, { status: 200 });
+		return NextResponse.json('OK', { status: 200 });
 	} catch (err) {
 		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

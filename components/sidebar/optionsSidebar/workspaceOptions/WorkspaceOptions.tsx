@@ -1,20 +1,8 @@
 'use client';
 
-import React, { useMemo } from 'react';
-import {
-	User2,
-	PencilRuler,
-	Plus,
-	PlusSquare,
-	Map,
-	Files,
-	Brain,
-	CalendarRange,
-	ChevronDown,
-} from 'lucide-react';
+import React from 'react';
+import { PencilRuler, Workflow } from 'lucide-react';
 import { useTranslations } from 'next-intl';
-import ActiveLink from '@/components/ui/active-link';
-import { Button } from '@/components/ui/button';
 import { WorkspaceOption } from './WorkspaceOption';
 import { useQuery } from '@tanstack/react-query';
 import { WorkspaceShortcuts } from '@/types/extended';
@@ -92,7 +80,7 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 							workspaceId={workspaceId}
 							href={`mind-maps/mind-map`}
 							fields={workspaceShortcuts.mindMaps}>
-							<Map size={16} />
+							<Workflow size={16} />
 							{t('MIND_MAPS')}
 						</WorkspaceOption>
 					</div>
