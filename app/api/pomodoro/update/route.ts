@@ -3,6 +3,7 @@ import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { pomodoroSettingsSchema } from '@/schema/pomodoroSettingsSchema';
 import { id } from 'date-fns/locale';
+import { PomodoroSoundEffect } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -17,8 +18,15 @@ export async function POST(request: Request) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { longBreakDuration, longBreakInterval, rounds, shortBreakDuration, workDuration } =
-		result.data;
+	const {
+		longBreakDuration,
+		longBreakInterval,
+		rounds,
+		shortBreakDuration,
+		workDuration,
+		soundEffect,
+		soundEffectVloume,
+	} = result.data;
 
 	try {
 		const user = await db.user.findUnique({
@@ -51,6 +59,8 @@ export async function POST(request: Request) {
 				rounds,
 				shortBreakDuration,
 				workDuration,
+				soundEffect: soundEffect as PomodoroSoundEffect,
+				soundEffectVloume: soundEffectVloume / 100,
 			},
 		});
 

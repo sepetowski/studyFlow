@@ -60,14 +60,16 @@ model User {
 }
 
 model PomodoroSettings {
-  id                 String @id @default(cuid())
-  user               User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id                 String              @id @default(cuid())
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId             String
-  workDuration       Int    @default(25)
-  shortBreakDuration Int    @default(5)
-  longBreakDuration  Int    @default(15)
-  longBreakInterval  Int    @default(2)
-  rounds             Int    @default(3)
+  workDuration       Int                 @default(25)
+  shortBreakDuration Int                 @default(5)
+  longBreakDuration  Int                 @default(15)
+  longBreakInterval  Int                 @default(2)
+  rounds             Int                 @default(3)
+  soundEffect        PomodoroSoundEffect @default(BELL)
+  soundEffectVloume  Float               @default(0.5)
 
   @@index([userId])
 }
@@ -225,4 +227,13 @@ enum UserPermisson {
   CAN_EDIT
   READ_ONLY
   OWNER
+}
+
+enum PomodoroSoundEffect {
+  ANALOG
+  BIRD
+  CHURCH_BELL
+  DIGITAL
+  FANCY
+  BELL
 }

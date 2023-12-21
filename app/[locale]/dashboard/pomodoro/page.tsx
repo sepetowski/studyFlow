@@ -1,6 +1,7 @@
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { getUserPomodoroSettings } from '@/lib/api';
+import { PomodoroContainer } from '@/components/pomodoro/timer/PomodoroContainer';
 
 const Pomodoro = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/pomodoro');
@@ -10,7 +11,9 @@ const Pomodoro = async () => {
 	return (
 		<>
 			<DashboardHeader />
-			<main>pomodoro</main>
+			<main className='flex flex-col gap-2 h-full  items-center'>
+				<PomodoroContainer pomodoroSettings={pomodoroSettings} />
+			</main>
 		</>
 	);
 };
