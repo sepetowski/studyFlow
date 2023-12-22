@@ -37,6 +37,7 @@ import { Separator } from '../ui/separator';
 import { EditInfo } from './editInfo/EditInfo';
 import { ExtendedMindMap } from '@/types/extended';
 import { useTranslations } from 'next-intl';
+import { v4 as uuidv4 } from 'uuid';
 
 const nodeTypes = { textNode: TextNode };
 const edgeTypes: EdgeTypes = {
@@ -176,7 +177,7 @@ export const MindMap = ({ initialInfo, workspaceId, candEdit, initialActiveTags 
 
 	const onAddNode = useCallback(() => {
 		const newNode = {
-			id: Math.random().toString(),
+			id: uuidv4(),
 			type: 'textNode',
 			position: { x: 0, y: 0 },
 			data: { text: '', color: 12, onDelete: onNodesDelete },

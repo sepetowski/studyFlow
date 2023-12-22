@@ -16,7 +16,6 @@ export async function POST(request: Request) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	('test');
 	const { title, taskId, workspaceId } = result.data;
 
 	try {

@@ -61,6 +61,12 @@ export async function POST(request: Request) {
 			},
 		});
 
+		await db.pomodoroSettings.create({
+			data: {
+				userId: user.id,
+			},
+		});
+
 		return NextResponse.json('OK', { status: 200 });
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

@@ -203,7 +203,9 @@
 			"TASK_ADDED": "Task has been added",
 			"TASK_DELETED": "Task has been deleted",
 			"MIND_MAP_ADDED": "Mind map has been added",
-			"MIND_MAP_DELETED": "Mind map has been deleted"
+			"MIND_MAP_DELETED": "Mind map has been deleted",
+			"RESET_POMODORO_SETTINGS": "Settings reset",
+			"UPDATE_POMODORO_SETTINGS": "New settings saved"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -243,6 +245,7 @@
 			"CALENDAR_HOVER": "Calendar",
 			"LOG_OUT_HOVER": "Log out",
 			"SETTINGS_HOVER": "Settings",
+			"POMODORO_HOVER": "Pomodoro",
 			"NEW_WORKSAPCE_HOVER": "New workscape",
 			"NEW_WORKSAPCE_DIALOG_TITLE": "Create new workscape",
 			"NEW_WORKSAPCE_DIALOG_DESC": "Remember that you can have a maximum of 5 active workspaces at the same time."
@@ -253,6 +256,10 @@
 			"SECURITY": "Security",
 			"THEME": "Theme",
 			"WORKSPACE": "Workspace"
+		},
+		"POMODORO": {
+			"TIMER": "Timer",
+			"SETTINGS": "Settings"
 		},
 		"WORKSPACE_OPTIONS": {
 			"SHORTCUTS": "Shortcuts",
@@ -555,12 +562,80 @@
 		}
 	},
 
+	"POMODORO": {
+		"SETTINGS": {
+			"CARD": {
+				"TITLE": "Pomodoro Settings",
+				"DESC": "Manage your settings. Personalize your Pomodoro as you wish. You can change the number of rounds, work and break durations, as well as customize notification sounds."
+			},
+			"FORM": {
+				"TIMER": "Timer",
+				"SOUND": "Sound",
+				"WORK": {
+					"LABEL": "Work duration: {value} minutes",
+					"DESC": "Set the duration of your work"
+				},
+				"SHORT_BREAK": {
+					"LABEL": "Short break duration: {value} minutes",
+					"DESC": "Set the duration of your short break"
+				},
+				"LONG_BREAK": {
+					"LABEL": "Long break duration: {value} minutes",
+					"DESC": "Set the duration of your long break"
+				},
+				"ROUNDS": {
+					"LABEL": "Number of rounds: {value}",
+					"DESC": "Set how many rounds complete a full session (one round ends after the long break time elapses)"
+				},
+				"LONG_BREAKS_INTERVAL": {
+					"LABEL": "Interval between long breaks: {value}",
+					"DESC": "The larger the value, the longer one round lasts (greater interval between long breaks)"
+				},
+				"ALARM": {
+					"LABEL": "Notification sound",
+					"DESC": "Choose the sound to play when the time is up",
+					"ANALOG": "Analog",
+					"BELL": "Bell",
+					"BIRD": "Bird",
+					"CHURCH_BELL": "Church Bell",
+					"DIGITAL": "Digital",
+					"FANCY": "Fancy"
+				},
+				"VOLUME": {
+					"LABEL": "Notification sound volume: {value}%",
+					"DESC": "To mute the notification, set the volume to 0%"
+				},
+				"RESET": {
+					"BTN": "Reset Settings",
+					"BTN_PENDING": "Resetting"
+				},
+				"SAVE": {
+					"BTN": "Save Changes",
+					"BTN_PENDING": "Saving"
+				}
+			}
+		},
+		"TIMER": {
+			"END_TEXT": "Good job!",
+			"FOCUS": "Time to focus",
+			"BREAK": "Break time!",
+			"ROUNDS": {
+				"FIRST": "Round",
+				"SECOND": "of"
+			},
+			"NEW": "Start a new session",
+			"START": "Start",
+			"STOP": "Stop"
+		}
+	},
+
 	"ROUTES": {
 		"DASHBOARD": "Home",
 		"SETTINGS": "Settings",
 		"SECURITY": "Security",
 		"THEME": "Theme",
 		"TASKS": "Tasks",
-		"UNTITLED": "Untitled"
+		"UNTITLED": "Untitled",
+		"POMODORO": "Pomodoro"
 	}
 }

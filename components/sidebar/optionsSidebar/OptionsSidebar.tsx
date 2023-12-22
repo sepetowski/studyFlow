@@ -6,6 +6,7 @@ import { Settings } from './settingsOptions/Settings';
 import { CreatedWorkspacesInfo } from '@/components/common/CreatedWorkspacesInfo';
 import { Workspace } from '@prisma/client';
 import { WorkspaceOptions } from './workspaceOptions/WorkspaceOptions';
+import { PomodoroLinks } from './pomodoro/PomodoroLinks';
 
 interface Props {
 	createdWorkspaces: number;
@@ -37,6 +38,9 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 				pathname ===
 					`/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}`) && (
 				<WorkspaceOptions workspaceId={workspaceId} />
+			)}
+			{(pathname === '/dashboard/pomodoro' || pathname === '/dashboard/pomodoro/settings') && (
+				<PomodoroLinks />
 			)}
 
 			<CreatedWorkspacesInfo createdNumber={createdWorkspaces} />

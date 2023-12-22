@@ -36,26 +36,42 @@ model Session {
 }
 
 model User {
-  id                  String          @id @default(cuid())
+  id                  String             @id @default(cuid())
   name                String?
   surname             String?
-  username            String          @unique
-  email               String?         @unique
+  username            String             @unique
+  email               String?            @unique
   emailVerified       DateTime?
   hashedPassword      String?
   image               String?
-  completedOnboarding Boolean         @default(false)
+  completedOnboarding Boolean            @default(false)
   accounts            Account[]
   sessions            Session[]
   useCase             UseCase?
-  createdWorkspaces   Workspace[]     @relation("CreatedBy")
+  createdWorkspaces   Workspace[]        @relation("CreatedBy")
   subscriptions       Subscription[]
-  createdTasks        Task[]          @relation("TaskCreatedByUser")
-  updatedTasks        Task[]          @relation("TaskUpdatedByUser")
+  createdTasks        Task[]             @relation("TaskCreatedByUser")
+  updatedTasks        Task[]             @relation("TaskUpdatedByUser")
   savedTask           savedTask[]
-  createdMindMaps     MindMap[]       @relation("MindMapCreatedByUser")
-  updatedMindMaps     MindMap[]       @relation("MindMapUpdatedByUser")
+  createdMindMaps     MindMap[]          @relation("MindMapCreatedByUser")
+  updatedMindMaps     MindMap[]          @relation("MindMapUpdatedByUser")
   savedMindMaps       savedMindMaps[]
+  pomodoroSettings    PomodoroSettings[]
+}
+
+model PomodoroSettings {
+  id                 String              @id @default(cuid())
+  user               User                @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId             String
+  workDuration       Int                 @default(25)
+  shortBreakDuration Int                 @default(5)
+  longBreakDuration  Int                 @default(15)
+  longBreakInterval  Int                 @default(2)
+  rounds             Int                 @default(3)
+  soundEffect        PomodoroSoundEffect @default(BELL)
+  soundEffectVloume  Float               @default(0.5)
+
+  @@index([userId])
 }
 
 model Workspace {
@@ -211,4 +227,13 @@ enum UserPermisson {
   CAN_EDIT
   READ_ONLY
   OWNER
+}
+
+enum PomodoroSoundEffect {
+  ANALOG
+  BIRD
+  CHURCH_BELL
+  DIGITAL
+  FANCY
+  BELL
 }
