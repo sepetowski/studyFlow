@@ -38,7 +38,6 @@ interface Props {
 
 export const SettingsForm = ({
 	pomodoroSettings: {
-		id,
 		longBreakDuration,
 		longBreakInterval,
 		rounds,
@@ -48,6 +47,7 @@ export const SettingsForm = ({
 		soundEffectVloume,
 	},
 }: Props) => {
+	const t = useTranslations('POMODORO.SETTINGS.FORM');
 	const m = useTranslations('MESSAGES');
 	const [isPlaying, setIsPlaying] = useState(false);
 
@@ -81,7 +81,7 @@ export const SettingsForm = ({
 		},
 		onSuccess: async () => {
 			toast({
-				title: m('SUCCES.DELETED_INFO'),
+				title: m('SUCCES.UPDATE_POMODORO_SETTINGS'),
 			});
 			router.refresh();
 		},
@@ -110,7 +110,7 @@ export const SettingsForm = ({
 		},
 		onSuccess: async () => {
 			toast({
-				title: m('SUCCES.DELETED_INFO'),
+				title: m('SUCCES.RESET_POMODORO_SETTINGS'),
 			});
 			form.reset({
 				workDuration: 25,
@@ -176,14 +176,14 @@ export const SettingsForm = ({
 				<div className='space-y-6  w-full'>
 					<div className='flex gap-2 items-center text-muted-foreground'>
 						<Clock />
-						<p>Timer</p>
+						<p>{t('TIMER')}</p>
 					</div>
 					<FormField
 						control={form.control}
 						name='workDuration'
 						render={({ field: { value, onChange } }) => (
-							<FormItem>
-								<FormLabel>Work duration - {value} minutes</FormLabel>
+							<FormItem className='space-y-1.5'>
+								<FormLabel>{t('WORK.LABEL', { value })}</FormLabel>
 								<FormControl>
 									<Slider
 										min={15}
@@ -196,9 +196,7 @@ export const SettingsForm = ({
 										value={[value]}
 									/>
 								</FormControl>
-								<FormDescription>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, tempora!
-								</FormDescription>
+								<FormDescription>{t('WORK.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -208,8 +206,8 @@ export const SettingsForm = ({
 						control={form.control}
 						name='shortBreakDuration'
 						render={({ field: { value, onChange } }) => (
-							<FormItem>
-								<FormLabel>Short break duration - {value} minutes</FormLabel>
+							<FormItem className='space-y-1.5'>
+								<FormLabel>{t('SHORT_BREAK.LABEL', { value })}</FormLabel>
 								<FormControl>
 									<Slider
 										min={1}
@@ -222,9 +220,7 @@ export const SettingsForm = ({
 										value={[value]}
 									/>
 								</FormControl>
-								<FormDescription>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, tempora!
-								</FormDescription>
+								<FormDescription>{t('SHORT_BREAK.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -233,8 +229,8 @@ export const SettingsForm = ({
 						control={form.control}
 						name='longBreakDuration'
 						render={({ field: { value, onChange } }) => (
-							<FormItem>
-								<FormLabel>Long break duration - {value} minutes</FormLabel>
+							<FormItem className='space-y-1.5'>
+								<FormLabel>{t('LONG_BREAK.LABEL', { value })}</FormLabel>
 								<FormControl>
 									<Slider
 										min={10}
@@ -247,9 +243,7 @@ export const SettingsForm = ({
 										value={[value]}
 									/>
 								</FormControl>
-								<FormDescription>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, tempora!
-								</FormDescription>
+								<FormDescription>{t('LONG_BREAK.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -259,8 +253,8 @@ export const SettingsForm = ({
 						control={form.control}
 						name='rounds'
 						render={({ field: { value, onChange } }) => (
-							<FormItem>
-								<FormLabel>Rounds - {value}</FormLabel>
+							<FormItem className='space-y-1.5'>
+								<FormLabel>{t('ROUNDS.LABEL', { value })}</FormLabel>
 								<FormControl>
 									<Slider
 										min={1}
@@ -273,9 +267,7 @@ export const SettingsForm = ({
 										value={[value]}
 									/>
 								</FormControl>
-								<FormDescription>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, tempora!
-								</FormDescription>
+								<FormDescription>{t('ROUNDS.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -285,8 +277,8 @@ export const SettingsForm = ({
 						control={form.control}
 						name='longBreakInterval'
 						render={({ field: { value, onChange } }) => (
-							<FormItem>
-								<FormLabel>Long brake intervals - {value}</FormLabel>
+							<FormItem className='space-y-1.5'>
+								<FormLabel>{t('LONG_BREAKS_INTERVAL.LABEL', { value })}</FormLabel>
 								<FormControl>
 									<Slider
 										min={2}
@@ -299,38 +291,42 @@ export const SettingsForm = ({
 										value={[value]}
 									/>
 								</FormControl>
-								<FormDescription>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, tempora!
-								</FormDescription>
+								<FormDescription>{t('LONG_BREAKS_INTERVAL.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
 					/>
 					<div className='flex gap-2 items-center text-muted-foreground'>
 						<Volume2 />
-						<p>Sound</p>
+						<p>{t('SOUND')}</p>
 					</div>
 
 					<FormField
 						control={form.control}
 						name='soundEffect'
 						render={({ field }) => (
-							<FormItem className='sm:max-w-sm'>
-								<FormLabel>Alaram sound effect</FormLabel>
+							<FormItem className='sm:max-w-sm space-y-1.5'>
+								<FormLabel>{t('ALARM.LABEL')}</FormLabel>
 								<div className='flex gap-2 items-center'>
 									<Select onValueChange={field.onChange} value={field.value}>
 										<FormControl>
 											<SelectTrigger>
-												<SelectValue placeholder='Select a verified email to display' />
+												<SelectValue />
 											</SelectTrigger>
 										</FormControl>
 										<SelectContent>
-											<SelectItem value={PomodoroSoundEffect.ANALOG}>Analog</SelectItem>
-											<SelectItem value={PomodoroSoundEffect.BELL}>Bell</SelectItem>
-											<SelectItem value={PomodoroSoundEffect.BIRD}>Bird</SelectItem>
-											<SelectItem value={PomodoroSoundEffect.CHURCH_BELL}>Church bell</SelectItem>
-											<SelectItem value={PomodoroSoundEffect.DIGITAL}>Digital</SelectItem>
-											<SelectItem value={PomodoroSoundEffect.FANCY}>Fancy</SelectItem>
+											<SelectItem value={PomodoroSoundEffect.ANALOG}>
+												{t('ALARM.ANALOG')}
+											</SelectItem>
+											<SelectItem value={PomodoroSoundEffect.BELL}>{t('ALARM.BELL')}</SelectItem>
+											<SelectItem value={PomodoroSoundEffect.BIRD}>{t('ALARM.BIRD')}</SelectItem>
+											<SelectItem value={PomodoroSoundEffect.CHURCH_BELL}>
+												{t('ALARM.CHURCH_BELL')}
+											</SelectItem>
+											<SelectItem value={PomodoroSoundEffect.DIGITAL}>
+												{t('ALARM.DIGITAL')}
+											</SelectItem>
+											<SelectItem value={PomodoroSoundEffect.FANCY}>{t('ALARM.FANCY')}</SelectItem>
 										</SelectContent>
 									</Select>
 									<Button
@@ -344,7 +340,7 @@ export const SettingsForm = ({
 										<Play />
 									</Button>
 								</div>
-								<FormDescription>Lorem ipsum dolor sit amet.</FormDescription>
+								<FormDescription>{t('ALARM.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -353,8 +349,8 @@ export const SettingsForm = ({
 						control={form.control}
 						name='soundEffectVloume'
 						render={({ field: { value, onChange } }) => (
-							<FormItem className='sm:max-w-sm'>
-								<FormLabel>Sound effect volume - {value}%</FormLabel>
+							<FormItem className='sm:max-w-sm space-y-1.5'>
+								<FormLabel>{t('VOLUME.LABEL', { value })}</FormLabel>
 								<FormControl>
 									<Slider
 										min={0}
@@ -367,9 +363,7 @@ export const SettingsForm = ({
 										value={[value]}
 									/>
 								</FormControl>
-								<FormDescription>
-									Lorem ipsum, dolor sit amet consectetur adipisicing elit. Cupiditate, tempora!
-								</FormDescription>
+								<FormDescription>{t('VOLUME.DESC')}</FormDescription>
 								<FormMessage />
 							</FormItem>
 						)}
@@ -384,10 +378,10 @@ export const SettingsForm = ({
 						}}
 						className='w-full sm:w-auto'
 						variant={'secondary'}>
-						{isReseting ? <LoadingState /> : 'Reset settings'}
+						{isReseting ? <LoadingState loadingText={t('RESET.BTN_PENDING')} /> : t('RESET.BTN')}
 					</Button>
 					<Button disabled={isReseting} className='text-white w-full sm:w-auto' type='submit'>
-						{isUpdating ? <LoadingState /> : 'Update settings'}
+						{isUpdating ? <LoadingState loadingText={t('SAVE.BTN_PENDING')} /> : t('SAVE.BTN')}
 					</Button>
 				</div>
 			</form>

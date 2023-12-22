@@ -1,19 +1,13 @@
 'use client';
 
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
-import {
-	Card,
-	CardContent,
-	CardDescription,
-	CardFooter,
-	CardHeader,
-	CardTitle,
-} from '@/components/ui/card';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { SkipForward } from 'lucide-react';
 import { PomodoroSettings } from '@prisma/client';
 import { Howl } from 'howler';
 import { pathsToSoundEffects } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	pomodoroSettings: PomodoroSettings;
@@ -30,6 +24,8 @@ export const PomodoroContainer = ({
 		workDuration,
 	},
 }: Props) => {
+	const t = useTranslations('POMODORO.TIMER');
+
 	const [timer, setTimer] = useState({ minutes: workDuration, seconds: 0 });
 	const [isTimerRunning, setIsTimerRunning] = useState(false);
 	const [completedIntervals, setCompletedIntervals] = useState(1);
@@ -44,12 +40,12 @@ export const PomodoroContainer = ({
 			setTimer({ minutes: workDuration, seconds: 0 });
 			setIsBreakTime(false);
 			setCompletedIntervals((prev) => prev + 1);
+			completedIntervals === 0 && setCurrentRounds((prev) => prev + 1);
 		} else {
 			setIsBreakTime(true);
 			if (completedIntervals === longBreakInterval) {
 				setTimer({ minutes: longBreakDuration, seconds: 0 });
 				setCompletedIntervals(0);
-				setCurrentRounds((prev) => prev + 1);
 			} else {
 				setTimer({ minutes: shortBreakDuration, seconds: 0 });
 			}
@@ -78,7 +74,7 @@ export const PomodoroContainer = ({
 	useEffect(() => {
 		let interval: NodeJS.Timeout;
 
-		if (isTimerRunning) {
+		if (isTimerRunning && currentRounds <= rounds) {
 			interval = setInterval(() => {
 				if (timer.minutes === 0 && timer.seconds === 0) {
 					clearInterval(interval);
@@ -115,10 +111,12 @@ export const PomodoroContainer = ({
 		timer,
 		isBreakTime,
 		completedIntervals,
+		currentRounds,
 		shortBreakDuration,
 		longBreakDuration,
 		longBreakInterval,
 		workDuration,
+		rounds,
 		handleTimer,
 	]);
 
@@ -131,34 +129,65 @@ export const PomodoroContainer = ({
 		() => (timer.seconds < 10 ? `0${timer.seconds}` : timer.seconds),
 		[timer.seconds]
 	);
+	const resetPomodoro = useCallback(() => {
+		setTimer({ minutes: workDuration, seconds: 0 });
+		setIsBreakTime(false);
+		setCurrentRounds(1);
+		setCompletedIntervals(1);
+	}, [workDuration]);
 
 	return (
 		<Card className='mt-6 w-full sm:w-auto sm:min-w-[40rem] py-10 '>
 			<CardHeader className='justify-center items-center'>
-				<CardTitle className='text-7xl sm:text-9xl'>
-					{formattedMinutes}:{formattedSeconds}
+				<CardTitle
+					className={` ${
+						currentRounds <= rounds ? 'text-7xl sm:text-9xl' : 'text-4xl sm:text-7xl'
+					}`}>
+					{currentRounds <= rounds ? (
+						<span>
+							{formattedMinutes}:{formattedSeconds}
+						</span>
+					) : (
+						t('END_TEXT')
+					)}
 				</CardTitle>
-				<CardDescription className='text-lg sm:text-2xl mt-6 '>
-					{isBreakTime ? 'Time for a break!' : 'Time for focus!'}
-				</CardDescription>
+				{currentRounds <= rounds && (
+					<CardDescription className='text-lg sm:text-2xl mt-6 '>
+						{isBreakTime ? t('BREAK') : t('FOCUS')}
+					</CardDescription>
+				)}
 			</CardHeader>
-			<CardContent className='flex justify-center items-center mt-4 gap-4'>
-				<Button
-					onClick={() => {
-						setIsTimerRunning((prev) => !prev);
-					}}
-					size={'lg'}
-					className='text-white text-2xl uppercase'>
-					{isTimerRunning ? 'Stop' : 'Start'}
-				</Button>
-				{isTimerRunning && (
-					<Button
-						onClick={handleTimer}
-						size={'icon'}
-						variant={'ghost'}
-						className='text-white text-2xl uppercase h-11 w-11'>
-						<SkipForward />
+			<CardContent className='flex flex-col  justify-center items-center mt-4 gap-4'>
+				{currentRounds <= rounds ? (
+					<p>
+						{t('ROUNDS.FIRST')} <span>{currentRounds}</span> {t('ROUNDS.SECOND')}{' '}
+						<span>{rounds}</span>
+					</p>
+				) : (
+					<Button onClick={resetPomodoro} size={'lg'} className='text-white text-xl'>
+						{t('NEW')}
 					</Button>
+				)}
+				{currentRounds <= rounds && (
+					<div className='flex items-center gap-4'>
+						<Button
+							onClick={() => {
+								setIsTimerRunning((prev) => !prev);
+							}}
+							size={'lg'}
+							className='text-white text-2xl '>
+							{isTimerRunning ? t('STOP') : t('START')}
+						</Button>
+						{isTimerRunning && (
+							<Button
+								onClick={handleTimer}
+								size={'icon'}
+								variant={'ghost'}
+								className='text-white h-11 w-11'>
+								<SkipForward />
+							</Button>
+						)}
+					</div>
 				)}
 			</CardContent>
 		</Card>

@@ -1,8 +1,12 @@
+'use client';
+
 import ActiveLink from '@/components/ui/active-link';
 import { Clock, Settings } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import React from 'react';
 
 export const PomodoroLinks = () => {
+	const t = useTranslations('SIDEBAR.POMODORO');
 	return (
 		<div className='flex flex-col gap-6 w-full'>
 			<div className='flex flex-col gap-2 w-full mt-2'>
@@ -12,7 +16,7 @@ export const PomodoroLinks = () => {
 					size={'sm'}
 					className='w-full flex justify-start items-center gap-2 '>
 					<Clock />
-					Timer
+					{t('TIMER')}
 				</ActiveLink>
 
 				<ActiveLink
@@ -21,7 +25,7 @@ export const PomodoroLinks = () => {
 					size={'sm'}
 					className='w-full flex justify-start items-center gap-2 '>
 					<Settings />
-					Ustawienia
+					{t('SETTINGS')}
 				</ActiveLink>
 			</div>
 		</div>

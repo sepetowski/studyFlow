@@ -204,7 +204,9 @@
 			"TASK_ADDED": "Zadanie zostało dodane",
 			"TASK_DELETED": "Zadanie zostało usunięte",
 			"MIND_MAP_ADDED": "Mapa myśli została dodana",
-			"MIND_MAP_DELETED": "Mapa myśli została usunięta"
+			"MIND_MAP_DELETED": "Mapa myśli została usunięta",
+			"RESET_POMODORO_SETTINGS": "Zresetowano ustawienia",
+			"UPDATE_POMODORO_SETTINGS": "Zapisano nowe ustawienia"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -245,6 +247,7 @@
 			"CALENDAR_HOVER": "Kalendarz",
 			"LOG_OUT_HOVER": "Wyloguj się",
 			"SETTINGS_HOVER": "Ustawienia",
+			"POMODORO_HOVER": "Pomodoro",
 			"NEW_WORKSAPCE_HOVER": "Nowa przestrzeń robocza",
 			"NEW_WORKSAPCE_DIALOG_TITLE": "Stwórz nowy obszar roboczy",
 			"NEW_WORKSAPCE_DIALOG_DESC": "Pamiętaj, że możesz mieć maksymalnie 5 aktywnych przestrzeni roboczych w tym samym czasie."
@@ -255,6 +258,10 @@
 			"SECURITY": "Bezpieczeństwo",
 			"THEME": "Motyw",
 			"WORKSPACE": "Przestrzeń robocza"
+		},
+		"POMODORO": {
+			"TIMER": "Zegar",
+			"SETTINGS": "Ustawienia"
 		},
 		"WORKSPACE_OPTIONS": {
 			"SHORTCUTS": "Skróty",
@@ -555,6 +562,72 @@
 			},
 			"CREATOR_INFO": "Utworzone przez",
 			"EDITOR_INFO": "Edytowane przez"
+		}
+	},
+	"POMODORO": {
+		"SETTINGS": {
+			"CARD": {
+				"TITLE": "Ustawienia pomodoro",
+				"DESC": "Zarządzaj swoimi ustawieniami. Spersonalizuj swoje Pomodoro tak, jak tylko chcesz. Możesz zmienić ilość rund, czas trwania pracy i przerw, a także dostosować dźwięki powiadomień."
+			},
+			"FORM": {
+				"TIMER": "Zegar",
+				"SOUND": "Czas",
+				"WORK": {
+					"LABEL": "Czas trwania pracy: {value} minut",
+					"DESC": "Ustaw czas trwania swojej pracy"
+				},
+				"SHORT_BREAK": {
+					"LABEL": "Czas trwania krótkiej przerwy: {value} minut",
+					"DESC": "Ustaw czas trwania krótkiej przerwy"
+				},
+				"LONG_BREAK": {
+					"LABEL": "Czas trwania długiej przerwy: {value} minut",
+					"DESC": "Ustaw czas trwania długiej przerwy"
+				},
+				"ROUNDS": {
+					"LABEL": "Ilość rund: {value}",
+					"DESC": "Ustaw po ilu rundach kończysz całą sesje (jedna runda kończy się po upłynięciu czasu długiej przerwy)"
+				},
+				"LONG_BREAKS_INTERVAL": {
+					"LABEL": "Odstęp od wystąpień długiej przerwy: {value}",
+					"DESC": "Im większa wartość, tym jedna runda trwa dłużej (większy odstęp od wystąpiena długiej przerwy)"
+				},
+				"ALARM": {
+					"LABEL": "Dźwięk powiadomienia",
+					"DESC": "Wybierz jaki dźwięk ma być odtworzony gdy skończy się czas",
+					"ANALOG": "Analogowy",
+					"BELL": "Dzownek",
+					"BIRD": "Ptak",
+					"CHURCH_BELL": "Dzwon kościelny",
+					"DIGITAL": "Cyfrowy",
+					"FANCY": "Wymyślny"
+				},
+				"VOLUME": {
+					"LABEL": "Głośność dźwięku powiadomienia: {value}%",
+					"DESC": "Aby wyciszyć powiadomienie ustaw dźwięk na 0%"
+				},
+				"RESET": {
+					"BTN": "Zresetuj ustawienia",
+					"BTN_PENDING": "Resetowanie"
+				},
+				"SAVE": {
+					"BTN": "Zapisz zmiany",
+					"BTN_PENDING": "Zapisywanie"
+				}
+			}
+		},
+		"TIMER": {
+			"END_TEXT": "Dobra robota!",
+			"FOCUS": "Czas na koncentrację",
+			"BREAK": "Czas na przerwe!",
+			"ROUNDS": {
+				"FIRST": "Runda",
+				"SECOND": "z"
+			},
+			"NEW": "Rozpocznij nową sesje",
+			"START": "Uruchom",
+			"STOP": "Zatrzymaj"
 		}
 	},
 	"ROUTES": {

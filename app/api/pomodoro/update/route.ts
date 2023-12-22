@@ -47,24 +47,39 @@ export async function POST(request: Request) {
 
 		const pomodoro = user.pomodoroSettings.find((settings) => settings.userId === user.id);
 
-		if (!pomodoro) return NextResponse.json('ERRORS.NO_POMODORO_SETTINGS', { status: 404 });
+		if (!pomodoro) {
+			await db.pomodoroSettings.create({
+				data: {
+					userId: user.id,
+					longBreakDuration,
+					longBreakInterval,
+					rounds,
+					shortBreakDuration,
+					workDuration,
+					soundEffect: soundEffect as PomodoroSoundEffect,
+					soundEffectVloume: soundEffectVloume / 100,
+				},
+			});
 
-		await db.pomodoroSettings.update({
-			where: {
-				id: pomodoro.id,
-			},
-			data: {
-				longBreakDuration,
-				longBreakInterval,
-				rounds,
-				shortBreakDuration,
-				workDuration,
-				soundEffect: soundEffect as PomodoroSoundEffect,
-				soundEffectVloume: soundEffectVloume / 100,
-			},
-		});
+			return NextResponse.json('OK', { status: 200 });
+		} else {
+			await db.pomodoroSettings.update({
+				where: {
+					id: pomodoro.id,
+				},
+				data: {
+					longBreakDuration,
+					longBreakInterval,
+					rounds,
+					shortBreakDuration,
+					workDuration,
+					soundEffect: soundEffect as PomodoroSoundEffect,
+					soundEffectVloume: soundEffectVloume / 100,
+				},
+			});
 
-		return NextResponse.json('OK', { status: 200 });
+			return NextResponse.json('OK', { status: 200 });
+		}
 	} catch (err) {
 		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
