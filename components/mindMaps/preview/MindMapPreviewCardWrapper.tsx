@@ -82,7 +82,7 @@ export const MindMapPreviewCardWrapper = ({
 			<CardFooter className='w-full flex flex-col sm:flex-row  items-center justify-center gap-2 text-xs mt-4 sm:mt-0'>
 				<div className='flex items-center'>
 					<p>{t('CREATOR_INFO')}</p>
-					<UserHoverInfoCard user={updater} />
+					<UserHoverInfoCard user={mindMap.creator} />
 				</div>
 				<Separator className='hidden h-4 sm:block' orientation='vertical' />
 				<div className='flex items-center'>

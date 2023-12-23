@@ -12,6 +12,7 @@ import { UserPermisson } from '@prisma/client';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { Separator } from '@/components/ui/separator';
+import { AssignedToTaskSelector } from '@/components/common/asignToTask/AssignedToTaskSelector';
 
 interface Props {
 	task: ExtendedTask;
@@ -32,7 +33,6 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 		setIsSaved((prev) => !prev);
 	};
 
-	console.log(task);
 	return (
 		<Card>
 			<CardContent className='py-4 sm:py-6 flex flex-col gap-10 relative'>
@@ -57,6 +57,7 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 							</div>
 						</div>
 						<div className='w-full gap-1 flex flex-wrap flex-row'>
+							<AssignedToTaskSelector taskId={task.id} workspaceId={task.workspaceId} />
 							<ReadOnlyCallendar from={task.taskDate?.from} to={task.taskDate?.to} />
 							{task.tags && task.tags.map((tag) => <LinkTag key={tag.id} tag={tag} />)}
 						</div>
@@ -67,7 +68,7 @@ export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
 			<CardFooter className='w-full flex flex-col sm:flex-row  items-center justify-center gap-2 text-xs'>
 				<div className='flex items-center'>
 					<p>{t('CREATOR_INFO')}</p>
-					<UserHoverInfoCard user={updater} />
+					<UserHoverInfoCard user={task.creator} />
 				</div>
 				<Separator className='hidden h-4 sm:block' orientation='vertical' />
 				<div className='flex items-center'>

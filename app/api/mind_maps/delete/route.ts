@@ -5,7 +5,7 @@ import { deleteMindMapSchema } from '@/schema/mindMapSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
-	
+
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
@@ -36,17 +36,13 @@ export async function POST(request: Request) {
 
 		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
-		if (
-			user.subscriptions[0].userRole === 'CAN_EDIT' ||
-			user.subscriptions[0].userRole === 'READ_ONLY'
-		)
+		if (user.subscriptions[0].userRole === 'READ_ONLY')
 			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
 
 		const mindMap = await db.mindMap.findUnique({
 			where: {
 				id: mindMapId,
 			},
-			
 		});
 
 		if (!mindMap) return NextResponse.json('ERRORS.NO_MIND_MAP_FOUND', { status: 404 });

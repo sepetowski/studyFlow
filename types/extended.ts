@@ -61,3 +61,18 @@ export interface ExtendedMindMap extends MindMap {
 	creator: UserInfo;
 	updatedBy: UserInfo;
 }
+
+export interface AssignedToTaskUser {
+	user: {
+		id: string;
+		image: string | null;
+		username: string;
+		assignedToTask: {
+			userId: string;
+		}[];
+	};
+}
+
+export interface UsersAssingedToTaskInfo extends Workspace {
+	subscribers: AssignedToTaskUser[];
+}

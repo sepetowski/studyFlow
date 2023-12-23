@@ -1,23 +1,31 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { apiDeletetagSchema } from '@/schema/tagSchema';
+import { apitagSchema } from '@/schema/tagSchema';
+import { z } from 'zod';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
 
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
+	const assignToTaskSchema = z.object({
+		taskId: z.string(),
+		workspaceId: z.string(),
+		assignToUserId: z.string(),
+	});
+
 	const body: unknown = await request.json();
-	const result = apiDeletetagSchema.safeParse(body);
+	const result = assignToTaskSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { id, workspaceId } = result.data;
+	const { taskId, workspaceId, assignToUserId } = result.data;
 
 	try {
+		console.log(taskId, workspaceId, assignToUserId);
 		const user = await db.user.findUnique({
 			where: {
 				id: session.user.id,
@@ -39,40 +47,43 @@ export async function POST(request: Request) {
 		if (user.subscriptions[0].userRole === 'READ_ONLY')
 			return NextResponse.json('ERRORS.NO_PERMISSION', { status: 403 });
 
-		const workspace = await db.workspace.findUnique({
+		const assigningUser = await db.user.findUnique({
 			where: {
-				id: workspaceId,
+				id: assignToUserId,
 			},
 			include: {
-				tags: {
+				assignedToTask: {
 					where: {
-						workspaceId,
-					},
-					select: {
-						name: true,
+						taskId,
 					},
 				},
 			},
 		});
 
-		if (!workspace) return NextResponse.json('ERRORS.NO_WORKSPACE', { status: 404 });
+		if (!assignToUserId) return NextResponse.json('ERRORS.USER_NO_EXIST', { status: 4054 });
 
-		const tag = await db.tag.findUnique({
-			where: {
-				id,
-			},
-		});
+		console.log(assigningUser);
 
-		if (!tag) return NextResponse.json('ERRORS.NO_TAG', { status: 404 });
+		if (!assigningUser?.assignedToTask || assigningUser?.assignedToTask.length === 0) {
+			await db.assignedToTask.create({
+				data: {
+					userId: assignToUserId,
+					taskId,
+				},
+			});
 
-		const deletedTag = await db.tag.delete({
-			where: {
-				id,
-			},
-		});
+			return NextResponse.json('OK', { status: 200 });
+		} else {
+			await db.assignedToTask.delete({
+				where: {
+					id: assigningUser.assignedToTask[0].id,
+				},
+			});
 
-		return NextResponse.json(deletedTag, { status: 200 });
+			return NextResponse.json('OK', { status: 200 });
+		}
 	} catch (err) {
+		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }
