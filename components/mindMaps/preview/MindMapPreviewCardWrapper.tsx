@@ -12,6 +12,7 @@ import { Info } from 'lucide-react';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { Separator } from '@/components/ui/separator';
+import { AssignedToMindMapSelector } from '../assignToMindMap/AssignedToMindMapSelector';
 
 interface Props {
 	mindMap: ExtendedMindMap;
@@ -61,7 +62,7 @@ export const MindMapPreviewCardWrapper = ({
 							</div>
 						</div>
 						<div className='w-full gap-1 flex flex-wrap flex-row items-center'>
-							<div>
+							<div className='mr-2'>
 								<HoverCard openDelay={250} closeDelay={250}>
 									<HoverCardTrigger>
 										<Info size={16} className='w-4 h-4 ' />
@@ -73,6 +74,7 @@ export const MindMapPreviewCardWrapper = ({
 									</HoverCardContent>
 								</HoverCard>
 							</div>
+							<AssignedToMindMapSelector mindMapId={mindMap.id} workspaceId={mindMap.workspaceId} />
 							{mindMap.tags && mindMap.tags.map((tag) => <LinkTag key={tag.id} tag={tag} />)}
 						</div>
 					</div>

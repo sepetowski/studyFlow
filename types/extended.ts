@@ -76,3 +76,18 @@ export interface AssignedToTaskUser {
 export interface UsersAssingedToTaskInfo extends Workspace {
 	subscribers: AssignedToTaskUser[];
 }
+
+export interface AssignedToMindMapUser {
+	user: {
+		id: string;
+		image: string | null;
+		username: string;
+		assignedToMindMap: {
+			userId: string;
+		}[];
+	};
+}
+
+export interface UsersAssingedToMindMapInfo extends Workspace {
+	subscribers: AssignedToMindMapUser[];
+}

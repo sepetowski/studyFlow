@@ -96,6 +96,9 @@ export const TaskOptons = ({ isSaved, taskId, workspaceId, userRole, onSetIsSave
 				variant: 'destructive',
 			});
 		},
+		onSuccess: () => {
+			router.refresh();
+		},
 
 		mutationKey: ['toogleSaveTask'],
 	});

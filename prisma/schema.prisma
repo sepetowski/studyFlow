@@ -186,25 +186,25 @@ model assignedToTask {
 }
 
 model savedMindMaps {
-  id      String  @id @default(cuid())
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
-  mindMap MindMap @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  taskId  String
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  mindMap   MindMap @relation(fields: [mindMapId], references: [id], onDelete: Cascade)
+  mindMapId String
 
   @@index([userId])
-  @@index([taskId])
+  @@index([mindMapId])
 }
 
 model assignedToMindMap {
-  id      String  @id @default(cuid())
-  user    User    @relation(fields: [userId], references: [id], onDelete: Cascade)
-  userId  String
-  mindMap MindMap @relation(fields: [taskId], references: [id], onDelete: Cascade)
-  taskId  String
+  id        String  @id @default(cuid())
+  user      User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId    String
+  mindMap   MindMap @relation(fields: [mindMapId], references: [id], onDelete: Cascade)
+  mindMapId String
 
   @@index([userId])
-  @@index([taskId])
+  @@index([mindMapId])
 }
 
 model Subscription {

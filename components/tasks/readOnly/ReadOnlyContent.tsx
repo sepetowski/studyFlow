@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card, CardContent, CardFooter } from '@/components/ui/card';
 import { ReadOnlyEmoji } from '../../common/ReadOnlyEmoji';
 import { ExtendedTask } from '@/types/extended';
@@ -21,6 +21,7 @@ interface Props {
 }
 
 export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
+	console.log(task);
 	const [isSaved, setIsSaved] = useState(isSavedByUser);
 	const [updater] = useState(task.updatedBy);
 	const t = useTranslations('TASK.EDITOR.READ_ONLY');
