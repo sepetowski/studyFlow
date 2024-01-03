@@ -16,6 +16,7 @@ import { CommandContainer } from './CommandContainer';
 import { useRouter } from 'next-intl/client';
 import { useQuery } from '@tanstack/react-query';
 import { UsersAssingedToTaskInfo } from '@/types/extended';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	className?: string;
@@ -34,15 +35,17 @@ export const AssignedToTaskSelector = ({
 }: Props) => {
 	const router = useRouter();
 
-	console.log(workspaceId, taskId);
-
-	const { data: assgingedUsersInfo, isLoading: isLodingInfo } = useQuery({
+	const {
+		data: assgingedUsersInfo,
+		isLoading: isLodingInfo,
+		isError,
+	} = useQuery({
 		queryFn: async () => {
 			const res = await fetch(
 				`/api/assigned_to/tasks/get?workspaceId=${workspaceId}&taskId=${taskId}`
 			);
 
-			if (!res.ok) return {} as UsersAssingedToTaskInfo;
+			if (!res.ok) throw new Error();
 
 			const data = await res.json();
 			return data as UsersAssingedToTaskInfo;
@@ -50,8 +53,6 @@ export const AssignedToTaskSelector = ({
 
 		queryKey: ['getAssignedToTaskInfo'],
 	});
-
-	console.log(assgingedUsersInfo);
 
 	return (
 		<DropdownMenu>
@@ -73,15 +74,16 @@ export const AssignedToTaskSelector = ({
 						<LoadingState />
 					</div>
 				)}
-				{!isLodingInfo && assgingedUsersInfo ? (
+				{!isLodingInfo && assgingedUsersInfo && (
 					<CommandContainer
 						users={assgingedUsersInfo.subscribers}
 						taskId={taskId}
 						workspaceId={workspaceId}
 					/>
-				) : (
+				)}
+				{isError && (
 					<div className='p-3 text-sm flex justify-center items-center flex-col gap-4 '>
-						<p>error</p>
+						<p>Cos poszlo nie tak, sporobuj ponownie</p>
 						<Button
 							className='w-full'
 							size={'sm'}

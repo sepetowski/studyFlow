@@ -22,7 +22,6 @@ interface Props {
 }
 
 export const CommandContainer = ({ users, taskId, workspaceId }: Props) => {
-	console.log(users);
 	return (
 		<Command className='w-[15rem]'>
 			<CommandInput className='text-xs' placeholder='Filter' />

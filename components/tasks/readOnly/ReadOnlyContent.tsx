@@ -12,7 +12,7 @@ import { UserPermisson } from '@prisma/client';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { Separator } from '@/components/ui/separator';
-import { AssignedToTaskSelector } from '@/components/common/asignToTask/AssignedToTaskSelector';
+import { AssignedToTaskSelector } from '../asignToTask/AssignedToTaskSelector';
 
 interface Props {
 	task: ExtendedTask;

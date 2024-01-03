@@ -62,7 +62,6 @@ export async function POST(request: Request) {
 
 		return NextResponse.json(updatedTask, { status: 200 });
 	} catch (err) {
-		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

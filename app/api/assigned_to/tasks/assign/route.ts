@@ -25,7 +25,6 @@ export async function POST(request: Request) {
 	const { taskId, workspaceId, assignToUserId } = result.data;
 
 	try {
-		console.log(taskId, workspaceId, assignToUserId);
 		const user = await db.user.findUnique({
 			where: {
 				id: session.user.id,
@@ -62,8 +61,6 @@ export async function POST(request: Request) {
 
 		if (!assignToUserId) return NextResponse.json('ERRORS.USER_NO_EXIST', { status: 4054 });
 
-		console.log(assigningUser);
-
 		if (!assigningUser?.assignedToTask || assigningUser?.assignedToTask.length === 0) {
 			await db.assignedToTask.create({
 				data: {
@@ -83,7 +80,6 @@ export async function POST(request: Request) {
 			return NextResponse.json('OK', { status: 200 });
 		}
 	} catch (err) {
-		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

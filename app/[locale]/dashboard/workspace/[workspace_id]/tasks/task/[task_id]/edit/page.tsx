@@ -29,7 +29,6 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 
 	if (!candEdit) redirect(`/dashboard/workspace/${workspace_id}/tasks/task/${task_id}`);
 
-	console.log(task.taskDate?.from);
 	return (
 		<AutosaveIndicatorProvider>
 			<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>

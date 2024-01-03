@@ -2,7 +2,6 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
-	console.log('ala');
 	const url = new URL(request.url);
 	const workspaceId = url.searchParams.get('workspaceId');
 	const taskId = url.searchParams.get('taskId');

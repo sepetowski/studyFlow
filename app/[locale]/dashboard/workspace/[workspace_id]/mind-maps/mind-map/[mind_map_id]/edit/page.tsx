@@ -33,7 +33,7 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		<AutosaveIndicatorProvider>
 			<AutoSaveMindMapProvider>
 				<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
-					<InviteUsers workspace={workspace} />
+					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
 					<MindMap
