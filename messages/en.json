@@ -477,6 +477,14 @@
 		},
 		"BTN": {
 			"SAVE_TASK": "Add task"
+		},
+		"ASSIGNMENT": {
+			"TRIGGER": "Assign",
+			"ERROR_MSG": "Something went wrong, please try again",
+			"ERROR_BTN": "Try again",
+			"PLACEHOLDER": "Filter",
+			"NOT_FOUND": "User not found",
+			"HEADING": "ASSIGN TO"
 		}
 	},
 	"MIND_MAP": {
@@ -559,6 +567,14 @@
 			},
 			"CREATOR_INFO": "Created by",
 			"EDITOR_INFO": "Edited by"
+		},
+		"ASSIGNMENT": {
+			"TRIGGER": "Assign",
+			"ERROR_MSG": "Something went wrong, please try again",
+			"ERROR_BTN": "Try again",
+			"PLACEHOLDER": "Filter",
+			"NOT_FOUND": "User not found",
+			"HEADING": "ASSIGN TO"
 		}
 	},
 

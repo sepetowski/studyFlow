@@ -12,7 +12,7 @@ import { UserPermisson } from '@prisma/client';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { Separator } from '@/components/ui/separator';
-import { AssignedToTaskSelector } from '../asignToTask/AssignedToTaskSelector';
+import { AssignedToTaskSelector } from '../assignToTask/AssignedToTaskSelector';
 
 interface Props {
 	task: ExtendedTask;
@@ -21,7 +21,6 @@ interface Props {
 }
 
 export const ReadOnlyContent = ({ task, isSavedByUser, userRole }: Props) => {
-	console.log(task);
 	const [isSaved, setIsSaved] = useState(isSavedByUser);
 	const [updater] = useState(task.updatedBy);
 	const t = useTranslations('TASK.EDITOR.READ_ONLY');

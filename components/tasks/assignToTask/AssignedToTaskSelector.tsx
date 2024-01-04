@@ -13,6 +13,7 @@ import { CommandContainer } from './CommandContainer';
 import { useRouter } from 'next-intl/client';
 import { useQuery } from '@tanstack/react-query';
 import { UsersAssingedToTaskInfo } from '@/types/extended';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	className?: string;
@@ -30,6 +31,7 @@ export const AssignedToTaskSelector = ({
 	workspaceId,
 }: Props) => {
 	const router = useRouter();
+	const t = useTranslations('TASK.ASSIGNMENT');
 
 	const {
 		data: assgingedUsersInfo,
@@ -61,7 +63,7 @@ export const AssignedToTaskSelector = ({
 					variant={'outline'}
 					size={'sm'}>
 					<Users2 size={plusIconSize} className='mr-1 ' />
-					<span>Przypisz</span>
+					<span>{t('TRIGGER')}</span>
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent sideOffset={dropDownSizeOffset && dropDownSizeOffset}>
@@ -79,13 +81,13 @@ export const AssignedToTaskSelector = ({
 				)}
 				{isError && (
 					<div className='p-3 text-sm flex justify-center items-center flex-col gap-4 '>
-						<p>Cos poszlo nie tak, sporobuj ponownie</p>
+						<p>{t('ERROR_MSG')}</p>
 						<Button
 							className='w-full'
 							size={'sm'}
 							variant={'default'}
 							onClick={() => router.refresh()}>
-							reset
+							{t('ERROR_BTN')}
 						</Button>
 					</div>
 				)}

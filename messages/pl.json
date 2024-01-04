@@ -480,6 +480,14 @@
 		},
 		"BTN": {
 			"SAVE_TASK": "Dodaj zadanie"
+		},
+		"ASSIGNMENT": {
+			"TRIGGER": "Przypisz",
+			"ERROR_MSG": "Coś poszło nie tak, spróbuj ponownie",
+			"ERROR_BTN": "Spróbuj ponownie",
+			"PLACEHOLDER": "Filtruj",
+			"NOT_FOUND": "Nie znaleziono użytkownika",
+			"HEADING": "PRZYPISZ DO"
 		}
 	},
 	"MIND_MAP": {
@@ -562,6 +570,14 @@
 			},
 			"CREATOR_INFO": "Utworzone przez",
 			"EDITOR_INFO": "Edytowane przez"
+		},
+		"ASSIGNMENT": {
+			"TRIGGER": "Przypisz",
+			"ERROR_MSG": "Coś poszło nie tak, spróbuj ponownie",
+			"ERROR_BTN": "Spróbuj ponownie",
+			"PLACEHOLDER": "Filtruj",
+			"NOT_FOUND": "Nie znaleziono użytkownika",
+			"HEADING": "PRZYPISZ DO"
 		}
 	},
 	"POMODORO": {

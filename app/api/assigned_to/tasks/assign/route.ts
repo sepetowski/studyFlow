@@ -1,7 +1,6 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { apitagSchema } from '@/schema/tagSchema';
 import { z } from 'zod';
 
 export async function POST(request: Request) {
