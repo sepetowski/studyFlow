@@ -248,6 +248,8 @@
 			"LOG_OUT_HOVER": "Wyloguj się",
 			"SETTINGS_HOVER": "Ustawienia",
 			"POMODORO_HOVER": "Pomodoro",
+			"STARRED_HOVER": "Wyróżnione",
+			"ASSIGNED_TO_ME_HOVER": "Przypisane do mnie",
 			"NEW_WORKSAPCE_HOVER": "Nowa przestrzeń robocza",
 			"NEW_WORKSAPCE_DIALOG_TITLE": "Stwórz nowy obszar roboczy",
 			"NEW_WORKSAPCE_DIALOG_DESC": "Pamiętaj, że możesz mieć maksymalnie 5 aktywnych przestrzeni roboczych w tym samym czasie."
@@ -653,6 +655,8 @@
 		"THEME": "Motyw",
 		"TASKS": "Zadania",
 		"UNTITLED": "Bez tytułu",
-		"POMODORO": "Pomodoro"
+		"POMODORO": "Pomodoro",
+		"STARRED": "Wyróżnione",
+		"ASSIGNED-TO-ME": "Przypisane do mnie"
 	}
 }

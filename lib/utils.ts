@@ -1,4 +1,5 @@
 import { type ClassValue, clsx } from 'clsx';
+import { Home, BrainCircuit, CalendarDays, Star, User, Clock } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
 
@@ -29,3 +30,31 @@ export const pathsToSoundEffects = {
 	DIGITAL: '/music/digital.mp3',
 	FANCY: '/music/fancy.mp3',
 } as const;
+
+export const topSidebarLinks = [
+	{
+		href: '/dashboard',
+		Icon: Home,
+		hoverTextKey: 'HOME_HOVER',
+	},
+	{
+		href: '/dashboard/pomodoro',
+		Icon: Clock,
+		hoverTextKey: 'POMODORO_HOVER',
+	},
+	{
+		href: '/dashboard/calendar',
+		Icon: CalendarDays,
+		hoverTextKey: 'CALENDAR_HOVER',
+	},
+	{
+		href: '/dashboard/starred',
+		Icon: Star,
+		hoverTextKey: 'STARRED_HOVER',
+	},
+	{
+		href: '/dashboard/assigned-to-me',
+		Icon: User,
+		hoverTextKey: 'ASSIGNED_TO_ME_HOVER',
+	},
+];

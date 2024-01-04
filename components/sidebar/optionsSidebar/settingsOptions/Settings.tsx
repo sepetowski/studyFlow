@@ -5,9 +5,7 @@ import ActiveLink from '@/components/ui/active-link';
 import { User2, SunMoon, LockKeyhole } from 'lucide-react';
 import { useTranslations } from 'next-intl';
 import { Workspace } from '@prisma/client';
-import { Workspaces } from '@/components/sidebar/shortcutSidebar.tsx/workspaces/Workspaces';
 import { SettingsWorkspace } from './SettingsWorkspace';
-
 
 interface Props {
 	userAdminWorkspaces: Workspace[];
