@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { CommandItem } from '@/components/ui/command';
 import { UserAvatar } from '@/components/ui/user-avatar';
-import { AssignedToTaskUser, UsersAssingedToTaskInfo } from '@/types/extended';
+import { AssignedToTaskUser } from '@/types/extended';
 import { Check } from 'lucide-react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
@@ -49,10 +49,10 @@ export const CommandUser = ({ user, taskId, workspaceId }: Props) => {
 			});
 		},
 		onSettled: () => {
-			queryClient.invalidateQueries(['getAssignedToTaskInfo']);
+			queryClient.invalidateQueries(['getAssignedToTaskInfo', taskId]);
 		},
 
-		mutationKey: ['handleTaskAssigment'],
+		mutationKey: ['handleTaskAssigment', taskId],
 	});
 
 	return (

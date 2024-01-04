@@ -3,20 +3,16 @@ import React from 'react';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
-	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
-import { UserPlus2, Users2 } from 'lucide-react';
+import { Users2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { LoadingState } from '@/components/ui/loading-state';
 import { CommandContainer } from './CommandContainer';
 import { useRouter } from 'next-intl/client';
 import { useQuery } from '@tanstack/react-query';
 import { UsersAssingedToTaskInfo } from '@/types/extended';
-import { useTranslations } from 'next-intl';
 
 interface Props {
 	className?: string;
@@ -51,7 +47,7 @@ export const AssignedToTaskSelector = ({
 			return data as UsersAssingedToTaskInfo;
 		},
 
-		queryKey: ['getAssignedToTaskInfo'],
+		queryKey: ['getAssignedToTaskInfo', taskId],
 	});
 
 	return (
