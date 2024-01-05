@@ -22,6 +22,7 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 
 	if (
 		pathname === '/dashboard' ||
+		pathname === '/dashboard/starred' ||
 		(urlAditionalId &&
 			pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}/edit`) ||
 		(urlAditionalId &&

@@ -1,5 +1,6 @@
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
+import { StarredContainer } from '@/components/starred/StarredContainer';
 
 const Starred = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/starred');
@@ -7,7 +8,9 @@ const Starred = async () => {
 	return (
 		<>
 			<DashboardHeader />
-			<main className='flex flex-col gap-2 h-full  items-center'></main>
+			<main>
+				<StarredContainer userId={session.user.id} />
+			</main>
 		</>
 	);
 };

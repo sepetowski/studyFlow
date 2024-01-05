@@ -7,6 +7,10 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+export const compareDates = (a: { updated: { at: Date } }, b: { updated: { at: Date } }) => {
+	return new Date(a.updated.at).getTime() - new Date(b.updated.at).getTime();
+};
+
 export const color = z.enum([
 	'PURPLE',
 	'RED',
