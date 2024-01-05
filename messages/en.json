@@ -647,6 +647,36 @@
 		}
 	},
 
+	"STARRED": {
+		"TITLE": "Your starred items",
+		"DESC": "Here you will find all your saved mind maps and tasks.",
+		"ERROR": "An error occurred while retrieving your data. Please try again.",
+		"ITEM_SENTENCE": {
+			"MIND_MAP": "Mind map edited",
+			"TASK": "Task edited",
+			"BY": "by",
+			"IN": " - in"
+		},
+		"DEFAULT_NAME": {
+			"MIND_MAP": "Untitled Mind Map",
+			"TASK": "Untitled Task"
+		},
+		"UNSTAR": "Remove star",
+		"SORT": {
+			"ASC": "Latest",
+			"DESC": "Oldest",
+			"INFO": "Sorting by edit date"
+		},
+		"NO_ITEMS": {
+			"TITLE": "You have no projects marked with a star",
+			"DESC": "Any task or mind map you star will appear here."
+		}
+	},
+	"CLIENT_ERROR": {
+		"TITLE": "Oh no... Something went wrong",
+		"BTN": "Try again"
+	},
+
 	"ROUTES": {
 		"DASHBOARD": "Home",
 		"SETTINGS": "Settings",

@@ -5,7 +5,7 @@ import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next-intl/link';
 import { ReadOnlyEmoji } from '../common/ReadOnlyEmoji';
 import { MoreHorizontal, Star, StarOff } from 'lucide-react';
-import { useFormatter } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '../common/UserHoverInfoCard';
 import { Button } from '@/components/ui/button';
 import {
@@ -29,14 +29,16 @@ export const StarredItem = ({
 	sortType,
 	userId,
 }: Props) => {
+	const t = useTranslations('STARRED');
+
 	const onUnstar = useUnstarItem({ id, itemId, sortType, type, userId });
+
 	const format = useFormatter();
 	const dateTime = new Date(updated.at);
 	const now = new Date();
 
-	const itemTypeSentence = useMemo(() => {
-		return type === 'mindMap' ? 'Mapa myśli edytowana' : 'Zadanie edytowane';
-	}, [type]);
+	const itemTypeSentence =
+		type === 'mindMap' ? t('ITEM_SENTENCE.MIND_MAP') : t('ITEM_SENTENCE.TASK');
 
 	const unstarHanlder = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -51,17 +53,24 @@ export const StarredItem = ({
 						<ReadOnlyEmoji className='sm:h-16 sm:w-16 h-12 w-12' selectedEmoji={emoji} />
 						<div className='w-full'>
 							<div className='flex items-center'>
-								<h2 className='text-lg sm:text-2xl font-semibold'>{title}</h2>
+								<h2 className='text-lg sm:text-2xl font-semibold'>
+									{!title && type === 'mindMap' && t('DEAFULT_NAME.MIND_MAP')}
+									{!title && type === 'task' && t('DEAFULT_NAME.TASK')}
+									{title && title}
+								</h2>
 								<Star size={22} className='ml-2' />
 							</div>
 							{updated.by && (
 								<div className='flex flex-col md:flex-row md:items-center md:gap-1'>
 									<p className='text-muted-foreground'>
-										<span>{itemTypeSentence}</span> {format.relativeTime(dateTime, now)} przez
+										<span>{itemTypeSentence}</span> {format.relativeTime(dateTime, now)}{' '}
+										{t('ITEM_SENTENCE.BY')}
 									</p>
 									<div className='flex items-center gap-1'>
 										<UserHoverInfoCard className='px-0' user={updated.by} />
-										<p> - w {workspaceName}</p>
+										<p>
+											{t('ITEM_SENTENCE.IN')} {workspaceName}
+										</p>
 									</div>
 								</div>
 							)}
@@ -75,7 +84,7 @@ export const StarredItem = ({
 						</DropdownMenuTrigger>
 						<DropdownMenuContent align='end'>
 							<DropdownMenuItem onClick={unstarHanlder} className='cursor-pointer'>
-								<StarOff size={18} /> <span className='ml-2'>Unstar</span>
+								<StarOff size={18} /> <span className='ml-2'>{t('UNSTAR')}</span>
 							</DropdownMenuItem>
 						</DropdownMenuContent>
 					</DropdownMenu>

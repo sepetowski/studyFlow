@@ -8,14 +8,18 @@ import { SortSelect } from './SortSelect';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { StarredItem } from './StarredItem';
 import { NoStarredItems } from './NoStarredItems';
+import { ClientError } from '@/components/error/ClientError';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	userId: string;
 }
 export const StarredContainer = ({ userId }: Props) => {
+	const t = useTranslations('STARRED');
 	const params = useSearchParams();
+
 	const sortParam = params.get('sort');
-	const sortType = sortParam && sortParam === 'asc' ? 'asc' : 'desc';
+	const sortType = sortParam && sortParam === 'desc' ? 'desc' : 'asc';
 
 	const {
 		data: starredItems,
@@ -37,7 +41,7 @@ export const StarredContainer = ({ userId }: Props) => {
 
 	if (isLoading) return <LoadingScreen />;
 
-	if (isError) return <p>Ops... sometihn went wrong</p>;
+	if (isError) return <ClientError message={t('ERROR')} />;
 
 	if (starredItems.length === 0) return <NoStarredItems />;
 
@@ -45,10 +49,8 @@ export const StarredContainer = ({ userId }: Props) => {
 		<Card className='bg-background border-none shadow-none'>
 			<CardHeader className='sm:flex-row sm:items-center sm:justify-between'>
 				<div className='flex flex-col space-y-1.5 mb-4 sm:mb-0'>
-					<h1 className='text-2xl font-semibold leading-none tracking-tight'>Zapisane elemnty</h1>
-					<CardDescription className='text-base'>
-						Lorem ipsum dolor sit amet consectetur.
-					</CardDescription>
+					<h1 className='text-2xl font-semibold leading-none tracking-tight'>{t('TITLE')}</h1>
+					<CardDescription className='text-base'>{t('DESC')}</CardDescription>
 				</div>
 				<SortSelect sortType={sortType} refetch={refetch} />
 			</CardHeader>

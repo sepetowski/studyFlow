@@ -8,7 +8,7 @@ export const GET = async (request: Request) => {
 	const userId = url.searchParams.get('userId');
 	const sort = url.searchParams.get('sort');
 
-	const sortType = sort && sort === 'asc' ? true : false;
+	const sortType = sort && sort === 'asc' ? false : true;
 
 	if (!userId) return NextResponse.json('ERRORS.WRONG_DATA', { status: 404 });
 	try {
