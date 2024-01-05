@@ -57,6 +57,7 @@ export const MindMapTagsSelector = ({
 		tags,
 		currentActiveTags,
 		isLodingTags,
+		isError,
 		onDeleteActiveTagHandler,
 		onSelectActiveTagHandler,
 		onUpdateActiveTagsHandler,
@@ -67,6 +68,7 @@ export const MindMapTagsSelector = ({
 			<HoverCard openDelay={250} closeDelay={250}>
 				<HoverCardTrigger>
 					<TagSelector
+						isError={isError}
 						plusIconSize={20}
 						dropDownSizeOffset={10}
 						className='border-none h-9 px-2.5 py-0 text-base'

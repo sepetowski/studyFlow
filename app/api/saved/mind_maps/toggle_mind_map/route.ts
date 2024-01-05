@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
 		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
-		const existSavedMindMap = user.savedMindMaps.find((mindMap) => mindMap.id === mindMapId);
+		const existSavedMindMap = user.savedMindMaps.find((mindMap) => mindMap.mindMapId === mindMapId);
 
 		if (existSavedMindMap) {
 			await db.savedMindMaps.delete({
@@ -51,7 +51,8 @@ export async function POST(request: Request) {
 		}
 
 		return NextResponse.json('ok', { status: 200 });
-	} catch (_) {
+	} catch (err) {
+		console.log(err);
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}
 }

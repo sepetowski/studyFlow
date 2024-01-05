@@ -25,15 +25,15 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		getUserWorkspaceRole(workspace_id, session.user.id),
 		getMindMap(mind_map_id, session.user.id),
 	]);
-
-	const candEdit = userRole === 'ADMIN' || userRole === 'OWNER' ? true : false;
+	const candEdit =
+		userRole === 'ADMIN' || userRole === 'OWNER' || userRole === 'CAN_EDIT' ? true : false;
 	if (!candEdit) redirect(`/dashboard/workspace/${workspace_id}/tasks/task/${mind_map_id}`);
 
 	return (
 		<AutosaveIndicatorProvider>
 			<AutoSaveMindMapProvider>
 				<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
-					<InviteUsers workspace={workspace} />
+					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
 					<MindMap

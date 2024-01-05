@@ -102,6 +102,9 @@ export const MindMapCardPreviewOptions = ({
 				variant: 'destructive',
 			});
 		},
+		onSuccess: () => {
+			router.refresh();
+		},
 
 		mutationKey: ['toogleSaveMindMap'],
 	});

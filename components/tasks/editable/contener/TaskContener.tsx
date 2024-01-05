@@ -44,7 +44,6 @@ export const TaskContener = ({
 	const _titleRef = useRef<HTMLTextAreaElement>(null);
 	const [isMounted, setIsMounted] = useState(false);
 	const [taskDate] = useState({ from, to });
-	console.log(from, to);
 	const { onSetStatus, status } = useAutosaveIndicator();
 	const t = useTranslations('TASK');
 
@@ -58,6 +57,7 @@ export const TaskContener = ({
 		currentActiveTags,
 		tags,
 		isLodingTags,
+		isError,
 		onDeleteActiveTagHandler,
 		onSelectActiveTagHandler,
 		onUpdateActiveTagsHandler,
@@ -172,6 +172,7 @@ export const TaskContener = ({
 									onUpdateForm={onUpdateFormHandler}
 								/>
 								<TagSelector
+									isError={isError}
 									isLoading={isLodingTags}
 									workspaceId={workspaceId}
 									tags={tags}

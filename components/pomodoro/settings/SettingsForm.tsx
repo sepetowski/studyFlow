@@ -147,7 +147,6 @@ export const SettingsForm = ({
 	]);
 
 	const onSubmit = (data: PomodoroSettingsSchema) => {
-		console.log(data);
 		updateSettings(data);
 	};
 

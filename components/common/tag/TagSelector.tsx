@@ -26,6 +26,7 @@ interface Props {
 	className?: string;
 	plusIconSize?: number;
 	dropDownSizeOffset?: number;
+	isError: boolean;
 }
 
 export const TagSelector = ({
@@ -36,6 +37,7 @@ export const TagSelector = ({
 	className,
 	plusIconSize = 16,
 	dropDownSizeOffset,
+	isError,
 	onSelectActiveTag,
 	onUpdateActiveTags,
 	onDeleteActiveTag,
@@ -65,7 +67,7 @@ export const TagSelector = ({
 						<LoadingState />
 					</div>
 				)}
-				{!isLoading && tags ? (
+				{!isLoading && tags && (
 					<CommandContainer
 						workspaceId={workspaceId}
 						tags={tags}
@@ -74,7 +76,8 @@ export const TagSelector = ({
 						onUpdateActiveTags={onUpdateActiveTags}
 						onDeleteActiveTag={onDeleteActiveTag}
 					/>
-				) : (
+				)}
+				{isError && (
 					<div className='p-3 text-sm flex justify-center items-center flex-col gap-4 '>
 						<p>{t('ERROR')}</p>
 						<Button

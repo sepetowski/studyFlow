@@ -30,37 +30,6 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 		queryKey: ['getWorkspaceShortcuts'],
 	});
 
-	// const workspaceOptionsFields = useMemo(
-	// 	() => [
-	// 		{
-	// 			href: `/dashboard/workspace/${workspaceId}/tasks`,
-	// 			icon: <PencilRuler size={16} />,
-	// 			title: `${t('TASKS')}`,
-	// 		},
-	// 		{
-	// 			href: `/dashboard/workspace/${workspaceId}/mind-maps`,
-	// 			icon: <Map size={16} />,
-	// 			title: `${t('MIND_MAPS')}`,
-	// 		},
-	// 		{
-	// 			href: `/dashboard/workspace/${workspaceId}/schedules`,
-	// 			icon: <CalendarRange size={16} />,
-	// 			title: `${t('SCHEDULES')}`,
-	// 		},
-	// 		{
-	// 			href: `/dashboard/workspace/${workspaceId}/study`,
-	// 			icon: <Brain size={16} />,
-	// 			title: `${t('STUDY')}`,
-	// 		},
-	// 		{
-	// 			href: `/dashboard/workspace/${workspaceId}/files`,
-	// 			icon: <Files size={16} />,
-	// 			title: `${t('FILES')}`,
-	// 		},
-	// 	],
-	// 	[workspaceId, t]
-	// );
-
 	return (
 		<div className='w-full flex flex-col gap-6 '>
 			<div>

@@ -28,6 +28,7 @@ export const Bottom = () => {
 					<span>{t('MAIN.LOG_OUT_HOVER')}</span>
 				</HoverCardContent>
 			</HoverCard>
+
 			<HoverCard openDelay={250} closeDelay={250}>
 				<HoverCardTrigger asChild>
 					<ActiveLink

@@ -248,6 +248,8 @@
 			"LOG_OUT_HOVER": "Wyloguj się",
 			"SETTINGS_HOVER": "Ustawienia",
 			"POMODORO_HOVER": "Pomodoro",
+			"STARRED_HOVER": "Wyróżnione",
+			"ASSIGNED_TO_ME_HOVER": "Przypisane do mnie",
 			"NEW_WORKSAPCE_HOVER": "Nowa przestrzeń robocza",
 			"NEW_WORKSAPCE_DIALOG_TITLE": "Stwórz nowy obszar roboczy",
 			"NEW_WORKSAPCE_DIALOG_DESC": "Pamiętaj, że możesz mieć maksymalnie 5 aktywnych przestrzeni roboczych w tym samym czasie."
@@ -480,6 +482,14 @@
 		},
 		"BTN": {
 			"SAVE_TASK": "Dodaj zadanie"
+		},
+		"ASSIGNMENT": {
+			"TRIGGER": "Przypisz",
+			"ERROR_MSG": "Coś poszło nie tak, spróbuj ponownie",
+			"ERROR_BTN": "Spróbuj ponownie",
+			"PLACEHOLDER": "Filtruj",
+			"NOT_FOUND": "Nie znaleziono użytkownika",
+			"HEADING": "PRZYPISZ DO"
 		}
 	},
 	"MIND_MAP": {
@@ -562,6 +572,14 @@
 			},
 			"CREATOR_INFO": "Utworzone przez",
 			"EDITOR_INFO": "Edytowane przez"
+		},
+		"ASSIGNMENT": {
+			"TRIGGER": "Przypisz",
+			"ERROR_MSG": "Coś poszło nie tak, spróbuj ponownie",
+			"ERROR_BTN": "Spróbuj ponownie",
+			"PLACEHOLDER": "Filtruj",
+			"NOT_FOUND": "Nie znaleziono użytkownika",
+			"HEADING": "PRZYPISZ DO"
 		}
 	},
 	"POMODORO": {
@@ -630,6 +648,35 @@
 			"STOP": "Zatrzymaj"
 		}
 	},
+	"STARRED": {
+		"TITLE": "Twoje wyróżnione elementy",
+		"DESC": "Tutaj znajdziesz wszytskie swoje zapisane mapy myśli i zadania",
+		"ERROR": "Wystąpił błąd podczas pobierania Twoich danych. Proszę spróbuj ponownie.",
+		"ITEM_SENTENCE": {
+			"MIND_MAP": "Mapa myśli edytowana",
+			"TASK": "Zadanie edytowane",
+			"BY": "przez",
+			"IN": " - w"
+		},
+		"DEAFULT_NAME": {
+			"MIND_MAP": "Mapa myśli bez tytułu",
+			"TASK": "Zadanie bez tytułu"
+		},
+		"UNSTAR": "Usuń gwiazdkę",
+		"SORT": {
+			"ASC": "Najnowsze",
+			"DESC": "Najstarsze",
+			"INFO": "Sortowanie względem daty edycji"
+		},
+		"NO_ITEMS": {
+			"TITLE": "Nie posiadasz żadnych projektów oznaczonych gwiazdką",
+			"DESC": "Jakiekolwiek zadanie lub mapa myśli, którą oznaczysz gwiazdką, pojawi się tutaj."
+		}
+	},
+	"CLIENT_ERROR": {
+		"TITLE": "O nie... Coś poszło nie tak",
+		"BTN": "Spróbuj ponownie"
+	},
 	"ROUTES": {
 		"DASHBOARD": "Strona główna",
 		"SETTINGS": "Ustawienia",
@@ -637,6 +684,8 @@
 		"THEME": "Motyw",
 		"TASKS": "Zadania",
 		"UNTITLED": "Bez tytułu",
-		"POMODORO": "Pomodoro"
+		"POMODORO": "Pomodoro",
+		"STARRED": "Wyróżnione",
+		"ASSIGNED-TO-ME": "Przypisane do mnie"
 	}
 }

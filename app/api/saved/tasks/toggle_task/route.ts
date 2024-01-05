@@ -33,7 +33,7 @@ export async function POST(request: Request) {
 
 		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
-		const existSavedTask = user.savedTask.find((task) => task.id === taskId);
+		const existSavedTask = user.savedTask.find((task) => task.taskId === taskId);
 
 		if (existSavedTask) {
 			await db.savedTask.delete({

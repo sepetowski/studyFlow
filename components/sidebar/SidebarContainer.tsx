@@ -12,7 +12,7 @@ interface Props {
 	userId: string;
 }
 
-export const SidebarContener = ({ userWorkspaces, userAdminWorkspaces, userId }: Props) => {
+export const SidebarContainer = ({ userWorkspaces, userAdminWorkspaces, userId }: Props) => {
 	const { isOpen, setIsOpen } = useToggleSidebar();
 	const createdWorkspaces = userWorkspaces.filter((workspace) => workspace.creatorId === userId);
 	return (

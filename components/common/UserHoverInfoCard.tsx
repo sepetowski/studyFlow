@@ -2,19 +2,24 @@
 import { Button } from '@/components/ui/button';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import { UserAvatar } from '@/components/ui/user-avatar';
+import { cn } from '@/lib/utils';
 import { UserInfo } from '@/types/extended';
 
 interface Props {
 	user: UserInfo;
+	className?: string;
 }
 
-export const UserHoverInfoCard = ({ user }: Props) => {
+export const UserHoverInfoCard = ({ user, className }: Props) => {
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>
 			<HoverCardTrigger asChild>
 				<Button
 					size='sm'
-					className='px-1.5 hover:bg-transparent font-semibold h-fit'
+					className={cn(
+						'px-1.5 w-fit hover:bg-transparent text-secondary-foreground font-semibold h-fit',
+						className
+					)}
 					variant='ghost'>
 					{user?.username}
 				</Button>

@@ -15,11 +15,15 @@ export const useTags = (
 	const [currentActiveTags, setCurrentActiveTags] = useState(initialActiveTags);
 	const { onSetStatus, status } = useAutosaveIndicator();
 
-	const { data: tags, isLoading: isLodingTags } = useQuery({
+	const {
+		data: tags,
+		isLoading: isLodingTags,
+		isError,
+	} = useQuery({
 		queryFn: async () => {
 			const res = await fetch(`/api/tags/get/get_workspace_tags?workspaceId=${workspaceId}`);
 
-			if (!res.ok) return [];
+			if (!res.ok) throw new Error();
 
 			const data = await res.json();
 			return data as Tag[];
@@ -85,6 +89,7 @@ export const useTags = (
 		currentActiveTags,
 		tags,
 		isLodingTags,
+		isError,
 		onSelectActiveTagHandler,
 		onUpdateActiveTagsHandler,
 		onDeleteActiveTagHandler,

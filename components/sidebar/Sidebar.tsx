@@ -1,5 +1,5 @@
 import { getUserAdminWorkspaces, getWorkspaces } from '@/lib/api';
-import { SidebarContener } from './SidebarContener';
+import { SidebarContainer } from './SidebarContainer';
 import { getAuthSession } from '@/lib/auth';
 
 export const Sidebar = async () => {
@@ -11,5 +11,11 @@ export const Sidebar = async () => {
 		getUserAdminWorkspaces(session.user.id),
 	]);
 
-	return <SidebarContener userWorkspaces={userWorkspaces} userAdminWorkspaces={userAdminWorkspaces} userId={session.user.id} />;
+	return (
+		<SidebarContainer
+			userWorkspaces={userWorkspaces}
+			userAdminWorkspaces={userAdminWorkspaces}
+			userId={session.user.id}
+		/>
+	);
 };

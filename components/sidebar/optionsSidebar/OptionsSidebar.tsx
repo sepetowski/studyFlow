@@ -7,6 +7,7 @@ import { CreatedWorkspacesInfo } from '@/components/common/CreatedWorkspacesInfo
 import { Workspace } from '@prisma/client';
 import { WorkspaceOptions } from './workspaceOptions/WorkspaceOptions';
 import { PomodoroLinks } from './pomodoro/PomodoroLinks';
+import { ScrollArea } from '@/components/ui/scroll-area';
 
 interface Props {
 	createdWorkspaces: number;
@@ -21,6 +22,7 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 
 	if (
 		pathname === '/dashboard' ||
+		pathname === '/dashboard/starred' ||
 		(urlAditionalId &&
 			pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}/edit`) ||
 		(urlAditionalId &&
@@ -29,20 +31,21 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 		return null;
 
 	return (
-		<div className='h-full p-4 sm:py-6 border-r w-52 sm:w-64 flex flex-col justify-between'>
-			{pathname.includes('/dashboard/settings') && (
-				<Settings userAdminWorkspaces={userAdminWorkspaces} />
-			)}
-			{(pathname === `/dashboard/workspace/${workspaceId}` ||
-				pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}` ||
-				pathname ===
-					`/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}`) && (
-				<WorkspaceOptions workspaceId={workspaceId} />
-			)}
-			{(pathname === '/dashboard/pomodoro' || pathname === '/dashboard/pomodoro/settings') && (
-				<PomodoroLinks />
-			)}
-
+		<div className='h-full p-4 sm:py-6 border-r w-52 sm:w-64 flex flex-col justify-between gap-2'>
+			<ScrollArea className='h-full'>
+				{pathname.includes('/dashboard/settings') && (
+					<Settings userAdminWorkspaces={userAdminWorkspaces} />
+				)}
+				{(pathname === `/dashboard/workspace/${workspaceId}` ||
+					pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}` ||
+					pathname ===
+						`/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}`) && (
+					<WorkspaceOptions workspaceId={workspaceId} />
+				)}
+				{(pathname === '/dashboard/pomodoro' || pathname === '/dashboard/pomodoro/settings') && (
+					<PomodoroLinks />
+				)}
+			</ScrollArea>
 			<CreatedWorkspacesInfo createdNumber={createdWorkspaces} />
 		</div>
 	);
