@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { useQuery } from '@tanstack/react-query';
 import { StarredItem as StarredItemType } from '@/types/saved';
@@ -7,6 +7,7 @@ import { useSearchParams } from 'next/navigation';
 import { SortSelect } from './SortSelect';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { StarredItem } from './StarredItem';
+import { NoStarredItems } from './NoStarredItems';
 
 interface Props {
 	userId: string;
@@ -38,6 +39,8 @@ export const StarredContainer = ({ userId }: Props) => {
 
 	if (isError) return <p>Ops... sometihn went wrong</p>;
 
+	if (starredItems.length === 0) return <NoStarredItems />;
+
 	return (
 		<Card className='bg-background border-none shadow-none'>
 			<CardHeader className='sm:flex-row sm:items-center sm:justify-between'>
@@ -51,7 +54,12 @@ export const StarredContainer = ({ userId }: Props) => {
 			</CardHeader>
 			<CardContent className='flex flex-col gap-4'>
 				{starredItems.map((starredItem) => (
-					<StarredItem key={starredItem.id} item={starredItem} />
+					<StarredItem
+						key={starredItem.id}
+						item={starredItem}
+						sortType={sortType}
+						userId={userId}
+					/>
 				))}
 			</CardContent>
 		</Card>

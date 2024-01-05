@@ -85,6 +85,7 @@ export const GET = async (request: Request) => {
 				at: mindMap.mindMap.updatedAt,
 				by: mindMap.mindMap.updatedBy,
 			},
+			itemId: mindMap.mindMapId,
 		}));
 
 		const mappedTasks: StarredItem[] = savedByUser.savedTask.map((task) => ({
@@ -98,6 +99,7 @@ export const GET = async (request: Request) => {
 				at: task.task.updatedAt,
 				by: task.task.updatedBy,
 			},
+			itemId: task.taskId,
 		}));
 
 		const mappedSavedInfo = [...mappedMindMaps, ...mappedTasks];

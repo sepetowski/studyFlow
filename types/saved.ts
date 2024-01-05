@@ -2,7 +2,7 @@ import { UserInfo } from './extended';
 
 export interface StarredItem {
 	id: string;
-	linkId: string;
+	link: string;
 	type: 'mindMap' | 'task';
 	title: string;
 	emoji: string;
@@ -11,4 +11,5 @@ export interface StarredItem {
 		at: Date;
 		by?: UserInfo | null;
 	};
+	itemId: string;
 }

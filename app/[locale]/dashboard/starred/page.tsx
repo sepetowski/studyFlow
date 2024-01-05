@@ -8,7 +8,7 @@ const Starred = async () => {
 	return (
 		<>
 			<DashboardHeader />
-			<main>
+			<main className='h-full'>
 				<StarredContainer userId={session.user.id} />
 			</main>
 		</>
