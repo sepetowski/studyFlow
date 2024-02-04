@@ -11,6 +11,7 @@ export const Top = () => {
 					Icon={link.Icon}
 					hoverTextKey={link.hoverTextKey}
 					href={link.href}
+					include={link?.include}
 				/>
 			))}
 		</div>

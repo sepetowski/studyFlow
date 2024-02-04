@@ -17,7 +17,7 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 const RadioGroupItem = React.forwardRef<
 	React.ElementRef<typeof RadioGroupPrimitive.Item>,
 	React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
->(({ className, children, useCheckIcon, ...props }, ref) => {
+>(({ className, children, useCheckIcon, indicatorSize, ...props }, ref) => {
 	return (
 		<RadioGroupPrimitive.Item
 			ref={ref}
@@ -30,7 +30,7 @@ const RadioGroupItem = React.forwardRef<
 				{useCheckIcon ? (
 					<Check size={14} className='text-white' />
 				) : (
-					<Circle className='h-4 w-4 fill-current text-current' />
+					<Circle className={`fill-current text-current ${indicatorSize ? '' : 'h-4 w-4'}`} />
 				)}
 			</RadioGroupPrimitive.Indicator>
 		</RadioGroupPrimitive.Item>

@@ -39,6 +39,7 @@ export const topSidebarLinks = [
 	},
 	{
 		href: '/dashboard/pomodoro',
+		include: '/dashboard/pomodoro',
 		Icon: Clock,
 		hoverTextKey: 'POMODORO_HOVER',
 	},

@@ -27,7 +27,7 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 			return data as WorkspaceShortcuts;
 		},
 
-		queryKey: ['getWorkspaceShortcuts'],
+		queryKey: ['getWorkspaceShortcuts', workspaceId],
 	});
 
 	return (

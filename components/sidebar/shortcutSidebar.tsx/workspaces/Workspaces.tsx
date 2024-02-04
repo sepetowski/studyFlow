@@ -1,4 +1,3 @@
-import ActiveLink from '@/components/ui/active-link';
 import { Workspace } from '@prisma/client';
 import React from 'react';
 import { Worksapce } from './Worksapce';
