@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 export const useChangeCodeToEmoji = (...codes: string[]) => {
 	const emojis = useMemo(() => {

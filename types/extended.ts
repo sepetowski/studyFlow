@@ -91,3 +91,16 @@ export interface AssignedToMindMapUser {
 export interface UsersAssingedToMindMapInfo extends Workspace {
 	subscribers: AssignedToMindMapUser[];
 }
+
+export interface AssignedToMeDataItem {
+	id: string;
+	title: string;
+	emoji: string;
+	link: string;
+	workspaceName: string;
+}
+
+export interface AssignedToMeTaskAndMindMaps {
+	tasks: AssignedToMeDataItem[];
+	mindMaps: AssignedToMeDataItem[];
+}

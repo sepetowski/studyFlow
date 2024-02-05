@@ -8,6 +8,7 @@ import { useSearchParams } from 'next/navigation';
 import { LayoutGrid } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
+import { useGetAssignedToMeParams } from '@/hooks/useGetAssignedToMeParams';
 
 interface Props {
 	userWorkspaces: Workspace[];
@@ -29,19 +30,8 @@ const RADIO_OPTIONS = [
 ] as const;
 
 export const AssignedToMeFilter = ({ userWorkspaces }: Props) => {
-	const searchParams = useSearchParams();
-
-	const typeParams = searchParams.get('type');
-	const workspaceFilterParam = searchParams.get('workspace');
-
+	const { currentType, workspaceFilterParam } = useGetAssignedToMeParams();
 	const router = useRouter();
-	const currentType = useMemo(
-		() =>
-			typeParams && (typeParams === 'all' || typeParams === 'mind-maps' || typeParams === 'tasks')
-				? typeParams
-				: 'all',
-		[typeParams]
-	);
 
 	const handleRadioChange = (value: 'all' | 'tasks' | 'mind-maps') => {
 		let link = '/dashboard/assigned-to-me';
