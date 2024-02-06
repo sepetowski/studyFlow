@@ -11,7 +11,7 @@ export const useGetAssignedToMeParams = () => {
 		? searchParams.get('workspace')
 		: 'all';
 
-	const currentType = useMemo(
+	const currentType: 'all' | 'mind-maps' | 'tasks' = useMemo(
 		() =>
 			typeParams && (typeParams === 'all' || typeParams === 'mind-maps' || typeParams === 'tasks')
 				? typeParams

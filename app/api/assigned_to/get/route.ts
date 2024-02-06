@@ -1,5 +1,6 @@
 import { db } from '@/lib/db';
-import { AssignedToMeTaskAndMindMaps } from '@/types/extended';
+import { sortAssignedDataByCreatedAt } from '@/lib/sortAssignedToMeData';
+import { AssignedItemType, AssignedToMeTaskAndMindMaps } from '@/types/extended';
 import { NextResponse } from 'next/server';
 
 export const GET = async (request: Request) => {
@@ -49,10 +50,12 @@ export const GET = async (request: Request) => {
 							emoji: task.emoji,
 							link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 							workspaceName: taskAndMindMaps.name,
+							createdAt: task.createdAt,
+							type: 'task',
 						})),
 						mindMaps: [],
 					};
-					return NextResponse.json(assignedTasksData, { status: 200 });
+					return NextResponse.json(sortAssignedDataByCreatedAt(assignedTasksData), { status: 200 });
 				case 'mind-maps':
 					const assignedMindMapsData: AssignedToMeTaskAndMindMaps = {
 						tasks: [],
@@ -62,9 +65,13 @@ export const GET = async (request: Request) => {
 							emoji: mindMap.emoji,
 							link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 							workspaceName: taskAndMindMaps.name,
+							createdAt: mindMap.createdAt,
+							type: 'mindMap',
 						})),
 					};
-					return NextResponse.json(assignedMindMapsData, { status: 200 });
+					return NextResponse.json(sortAssignedDataByCreatedAt(assignedMindMapsData), {
+						status: 200,
+					});
 
 				default:
 					const assignedAllData: AssignedToMeTaskAndMindMaps = {
@@ -74,6 +81,8 @@ export const GET = async (request: Request) => {
 							emoji: task.emoji,
 							link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 							workspaceName: taskAndMindMaps.name,
+							createdAt: task.createdAt,
+							type: 'task',
 						})),
 						mindMaps: taskAndMindMaps.mindMaps.map((mindMap) => ({
 							id: mindMap.id,
@@ -81,9 +90,12 @@ export const GET = async (request: Request) => {
 							emoji: mindMap.emoji,
 							link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 							workspaceName: taskAndMindMaps.name,
+							createdAt: mindMap.createdAt,
+							type: 'mindMap',
 						})),
 					};
-					return NextResponse.json(assignedAllData, { status: 200 });
+
+					return NextResponse.json(sortAssignedDataByCreatedAt(assignedAllData), { status: 200 });
 			}
 		} else {
 			const taskAndMindMaps = await db.workspace.findMany({
@@ -126,6 +138,8 @@ export const GET = async (request: Request) => {
 								emoji: task.emoji,
 								link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 								workspaceName: item.name,
+								createdAt: task.createdAt,
+								type: 'task' as AssignedItemType,
 							}))
 						);
 					});
@@ -139,6 +153,8 @@ export const GET = async (request: Request) => {
 								emoji: mindMap.emoji,
 								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 								workspaceName: item.name,
+								createdAt: mindMap.createdAt,
+								type: 'mindMap' as AssignedItemType,
 							}))
 						);
 					});
@@ -153,6 +169,8 @@ export const GET = async (request: Request) => {
 								emoji: task.emoji,
 								link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 								workspaceName: item.name,
+								createdAt: task.createdAt,
+								type: 'task' as AssignedItemType,
 							}))
 						);
 
@@ -163,13 +181,15 @@ export const GET = async (request: Request) => {
 								emoji: mindMap.emoji,
 								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 								workspaceName: item.name,
+								createdAt: mindMap.createdAt,
+								type: 'mindMap' as AssignedItemType,
 							}))
 						);
 					});
 					break;
 			}
 
-			return NextResponse.json(assignedData, { status: 200 });
+			return NextResponse.json(sortAssignedDataByCreatedAt(assignedData), { status: 200 });
 		}
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

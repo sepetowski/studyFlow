@@ -8,7 +8,7 @@ const AssignedToMe = async () => {
 	return (
 		<>
 			<DashboardHeader />
-			<main className='flex flex-col gap-2 h-full  items-center'>
+			<main>
 				<AssignedToMeContainer userId={session.user.id} />
 			</main>
 		</>
