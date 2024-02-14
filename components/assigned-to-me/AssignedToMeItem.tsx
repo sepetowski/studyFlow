@@ -14,7 +14,7 @@ interface Props {
 }
 
 export const AssignedToMeItem = ({
-	info: { emoji, id, link, title, workspaceName, type, updated, workspaceId },
+	info: { emoji, link, title, workspaceName, type, updated, workspaceId },
 }: Props) => {
 	const t = useTranslations('ASSIGNED_TO_ME');
 	const c = useTranslations('COMMON');
@@ -27,7 +27,7 @@ export const AssignedToMeItem = ({
 		type === 'mindMap' ? c('EDITED_ITEM_SENTENCE.MIND_MAP') : c('EDITED_ITEM_SENTENCE.TASK');
 
 	return (
-		<Link href={link}>
+		<Link className='hover:scale-[1.01] transition-transform duration-200' href={link}>
 			<Card>
 				<CardContent className='flex w-full justify-between sm:items-center pt-4'>
 					<div className='flex flex-col sm:flex-row gap-4 sm:items-center w-full'>

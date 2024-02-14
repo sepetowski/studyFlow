@@ -18,6 +18,7 @@ export const AssignedToMeContainer = ({ userId }: Props) => {
 	const { currentType, workspaceFilterParam } = useGetAssignedToMeParams();
 
 	const m = useTranslations('MESSAGES');
+	const t = useTranslations('ASSIGNED_TO_ME');
 
 	const {
 		data: assgingedInfo,
@@ -55,17 +56,15 @@ export const AssignedToMeContainer = ({ userId }: Props) => {
 		<Card className='bg-background border-none shadow-none'>
 			<CardHeader className='sm:flex-row sm:items-center sm:justify-between'>
 				<div className='flex flex-col space-y-1.5 mb-4 sm:mb-0'>
-					<h1 className='text-2xl font-semibold leading-none tracking-tight'>Przypisane do mnie</h1>
-					<CardDescription className='text-base'>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolore, voluptatum?
-					</CardDescription>
+					<h1 className='text-2xl font-semibold leading-none tracking-tight'>{t('TITLE')}</h1>
+					<CardDescription className='text-base'>{t('DESC')}</CardDescription>
 				</div>
 			</CardHeader>
 			<CardContent className='flex flex-col gap-4'>
 				{currentType === 'all' && workspaceFilterParam === 'all' && assgingedInfo.length === 0 ? (
-					<p>Nie zostałes jeszcze nigdzie przypisany</p>
+					<p>{t('NO_ASSIGMENT')}</p>
 				) : assgingedInfo.length == 0 ? (
-					<p>Nie znależliśmy żadnego zadania ani mapy mysli które spełniały by ktyertia</p>
+					<p>{t('NOT_FOUND')}</p>
 				) : (
 					assgingedInfo.map((info) => <AssignedToMeItem info={info} key={info.id} />)
 				)}

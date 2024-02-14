@@ -675,7 +675,13 @@
 	},
 
 	"ASSIGNED_TO_ME": {
-		"DEFAULT_NAME": {
+		"TITLE": "Assigned to Me",
+		"DESC": "Here you will find all your saved mind maps and tasks",
+
+		"NO_ASSIGMENT": "You haven't been assigned anywhere yet",
+		"NOT_FOUND": "We couldn't find any tasks or mind maps that met the criteria",
+
+		"DEAFULT_NAME": {
 			"MIND_MAP": "Untitled Mind Map",
 			"TASK": "Untitled Task"
 		}

@@ -676,6 +676,12 @@
 	},
 
 	"ASSIGNED_TO_ME": {
+		"TITLE": "Przypisane do mnie",
+		"DESC": "Tutaj znajdziesz wszytskie swoje zapisane mapy myśli i zadania",
+
+		"NO_ASSIGMENT": "Nie zostałeś jeszcze nigdzie przypisany",
+		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria",
+
 		"DEAFULT_NAME": {
 			"MIND_MAP": "Mapa myśli bez tytułu",
 			"TASK": "Zadanie bez tytułu"

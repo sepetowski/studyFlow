@@ -48,7 +48,7 @@ export const StarredItem = ({
 	};
 
 	return (
-		<Link href={link}>
+		<Link className='hover:scale-[1.01] transition-transform duration-200' href={link}>
 			<Card>
 				<CardContent className='flex w-full justify-between sm:items-center pt-4'>
 					<div className='flex flex-col sm:flex-row gap-4 sm:items-center w-full'>
