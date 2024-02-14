@@ -7,6 +7,7 @@ export interface StarredItem {
 	title: string;
 	emoji: string;
 	workspaceName: string;
+	workspaceId: string;
 	updated: {
 		at: Date;
 		by?: UserInfo | null;

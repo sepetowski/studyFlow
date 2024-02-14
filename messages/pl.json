@@ -389,6 +389,12 @@
 				"DELETE": "Usuń",
 				"UPDATE": "Aktualizuj"
 			}
+		},
+		"EDITED_ITEM_SENTENCE": {
+			"MIND_MAP": "Mapa myśli edytowana",
+			"TASK": "Zadanie edytowane",
+			"BY": "przez",
+			"IN": " - w"
 		}
 	},
 
@@ -652,12 +658,7 @@
 		"TITLE": "Twoje wyróżnione elementy",
 		"DESC": "Tutaj znajdziesz wszytskie swoje zapisane mapy myśli i zadania",
 		"ERROR": "Wystąpił błąd podczas pobierania Twoich danych. Proszę spróbuj ponownie.",
-		"ITEM_SENTENCE": {
-			"MIND_MAP": "Mapa myśli edytowana",
-			"TASK": "Zadanie edytowane",
-			"BY": "przez",
-			"IN": " - w"
-		},
+
 		"DEAFULT_NAME": {
 			"MIND_MAP": "Mapa myśli bez tytułu",
 			"TASK": "Zadanie bez tytułu"
@@ -673,6 +674,14 @@
 			"DESC": "Jakiekolwiek zadanie lub mapa myśli, którą oznaczysz gwiazdką, pojawi się tutaj."
 		}
 	},
+
+	"ASSIGNED_TO_ME": {
+		"DEAFULT_NAME": {
+			"MIND_MAP": "Mapa myśli bez tytułu",
+			"TASK": "Zadanie bez tytułu"
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "O nie... Coś poszło nie tak",
 		"BTN": "Spróbuj ponownie"

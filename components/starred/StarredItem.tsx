@@ -7,7 +7,7 @@ import { ReadOnlyEmoji } from '../common/ReadOnlyEmoji';
 import { MoreHorizontal, Star, StarOff } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '../common/UserHoverInfoCard';
-import { Button } from '@/components/ui/button';
+import { Button, buttonVariants } from '@/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -17,6 +17,7 @@ import {
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useUnstarItem } from '@/hooks/useUnstarItem';
+import { cn } from '@/lib/utils';
 
 interface Props {
 	item: StarredItemType;
@@ -25,11 +26,12 @@ interface Props {
 }
 
 export const StarredItem = ({
-	item: { emoji, id, link, title, type, updated, workspaceName, itemId },
+	item: { emoji, id, link, title, type, updated, workspaceName, itemId, workspaceId },
 	sortType,
 	userId,
 }: Props) => {
 	const t = useTranslations('STARRED');
+	const c = useTranslations('COMMON');
 
 	const onUnstar = useUnstarItem({ id, itemId, sortType, type, userId });
 
@@ -38,7 +40,7 @@ export const StarredItem = ({
 	const now = new Date();
 
 	const itemTypeSentence =
-		type === 'mindMap' ? t('ITEM_SENTENCE.MIND_MAP') : t('ITEM_SENTENCE.TASK');
+		type === 'mindMap' ? c('EDITED_ITEM_SENTENCE.MIND_MAP') : c('EDITED_ITEM_SENTENCE.TASK');
 
 	const unstarHanlder = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -64,12 +66,17 @@ export const StarredItem = ({
 								<div className='flex flex-col md:flex-row md:items-center md:gap-1'>
 									<p className='text-muted-foreground'>
 										<span>{itemTypeSentence}</span> {format.relativeTime(dateTime, now)}{' '}
-										{t('ITEM_SENTENCE.BY')}
+										{c('EDITED_ITEM_SENTENCE.BY')}
 									</p>
 									<div className='flex items-center gap-1'>
 										<UserHoverInfoCard className='px-0' user={updated.by} />
 										<p>
-											{t('ITEM_SENTENCE.IN')} {workspaceName}
+											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
+											<Link
+												className={cn(`${buttonVariants({ variant: 'link' })} px-0 `)}
+												href={`/dashboard/workspace/${workspaceId}`}>
+												{workspaceName}
+											</Link>
 										</p>
 									</div>
 								</div>

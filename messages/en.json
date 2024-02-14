@@ -387,6 +387,12 @@
 				"DELETE": "Delete",
 				"UPDATE": "Update"
 			}
+		},
+		"EDITED_ITEM_SENTENCE": {
+			"MIND_MAP": "Mind map edited",
+			"TASK": "Task edited",
+			"BY": "by",
+			"IN": " - in"
 		}
 	},
 	"PERMISSONS": {
@@ -651,12 +657,7 @@
 		"TITLE": "Your starred items",
 		"DESC": "Here you will find all your saved mind maps and tasks.",
 		"ERROR": "An error occurred while retrieving your data. Please try again.",
-		"ITEM_SENTENCE": {
-			"MIND_MAP": "Mind map edited",
-			"TASK": "Task edited",
-			"BY": "by",
-			"IN": " - in"
-		},
+
 		"DEFAULT_NAME": {
 			"MIND_MAP": "Untitled Mind Map",
 			"TASK": "Untitled Task"
@@ -672,6 +673,14 @@
 			"DESC": "Any task or mind map you star will appear here."
 		}
 	},
+
+	"ASSIGNED_TO_ME": {
+		"DEFAULT_NAME": {
+			"MIND_MAP": "Untitled Mind Map",
+			"TASK": "Untitled Task"
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"

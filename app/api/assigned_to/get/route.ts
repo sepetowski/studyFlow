@@ -26,12 +26,34 @@ export const GET = async (request: Request) => {
 								},
 							},
 						},
+						include: {
+							updatedBy: {
+								select: {
+									username: true,
+									name: true,
+									id: true,
+									image: true,
+									surname: true,
+								},
+							},
+						},
 					},
 					mindMaps: {
 						where: {
 							assignedToMindMap: {
 								some: {
 									userId,
+								},
+							},
+						},
+						include: {
+							updatedBy: {
+								select: {
+									username: true,
+									name: true,
+									id: true,
+									image: true,
+									surname: true,
 								},
 							},
 						},
@@ -48,10 +70,15 @@ export const GET = async (request: Request) => {
 							id: task.id,
 							title: task.title,
 							emoji: task.emoji,
+							workspaceId: task.workspaceId,
 							link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 							workspaceName: taskAndMindMaps.name,
 							createdAt: task.createdAt,
 							type: 'task',
+							updated: {
+								at: task.updatedAt,
+								by: task.updatedBy,
+							},
 						})),
 						mindMaps: [],
 					};
@@ -63,10 +90,15 @@ export const GET = async (request: Request) => {
 							id: mindMap.id,
 							title: mindMap.title,
 							emoji: mindMap.emoji,
+							workspaceId: mindMap.workspaceId,
 							link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 							workspaceName: taskAndMindMaps.name,
 							createdAt: mindMap.createdAt,
 							type: 'mindMap',
+							updated: {
+								at: mindMap.updatedAt,
+								by: mindMap.updatedBy,
+							},
 						})),
 					};
 					return NextResponse.json(sortAssignedDataByCreatedAt(assignedMindMapsData), {
@@ -79,19 +111,29 @@ export const GET = async (request: Request) => {
 							id: task.id,
 							title: task.title,
 							emoji: task.emoji,
+							workspaceId: task.workspaceId,
 							link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 							workspaceName: taskAndMindMaps.name,
 							createdAt: task.createdAt,
 							type: 'task',
+							updated: {
+								at: task.updatedAt,
+								by: task.updatedBy,
+							},
 						})),
 						mindMaps: taskAndMindMaps.mindMaps.map((mindMap) => ({
 							id: mindMap.id,
 							title: mindMap.title,
 							emoji: mindMap.emoji,
+							workspaceId: mindMap.workspaceId,
 							link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 							workspaceName: taskAndMindMaps.name,
 							createdAt: mindMap.createdAt,
 							type: 'mindMap',
+							updated: {
+								at: mindMap.updatedAt,
+								by: mindMap.updatedBy,
+							},
 						})),
 					};
 
@@ -108,12 +150,35 @@ export const GET = async (request: Request) => {
 								},
 							},
 						},
+
+						include: {
+							updatedBy: {
+								select: {
+									username: true,
+									name: true,
+									id: true,
+									image: true,
+									surname: true,
+								},
+							},
+						},
 					},
 					mindMaps: {
 						where: {
 							assignedToMindMap: {
 								some: {
 									userId,
+								},
+							},
+						},
+						include: {
+							updatedBy: {
+								select: {
+									username: true,
+									name: true,
+									id: true,
+									image: true,
+									surname: true,
 								},
 							},
 						},
@@ -136,10 +201,15 @@ export const GET = async (request: Request) => {
 								id: task.id,
 								title: task.title,
 								emoji: task.emoji,
+								workspaceId: task.workspaceId,
 								link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 								workspaceName: item.name,
 								createdAt: task.createdAt,
 								type: 'task' as AssignedItemType,
+								updated: {
+									at: task.updatedAt,
+									by: task.updatedBy,
+								},
 							}))
 						);
 					});
@@ -151,10 +221,15 @@ export const GET = async (request: Request) => {
 								id: mindMap.id,
 								title: mindMap.title,
 								emoji: mindMap.emoji,
+								workspaceId: mindMap.workspaceId,
 								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 								workspaceName: item.name,
 								createdAt: mindMap.createdAt,
 								type: 'mindMap' as AssignedItemType,
+								updated: {
+									at: mindMap.updatedAt,
+									by: mindMap.updatedBy,
+								},
 							}))
 						);
 					});
@@ -167,10 +242,15 @@ export const GET = async (request: Request) => {
 								id: task.id,
 								title: task.title,
 								emoji: task.emoji,
+								workspaceId: task.workspaceId,
 								link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
 								workspaceName: item.name,
 								createdAt: task.createdAt,
 								type: 'task' as AssignedItemType,
+								updated: {
+									at: task.updatedAt,
+									by: task.updatedBy,
+								},
 							}))
 						);
 
@@ -179,10 +259,15 @@ export const GET = async (request: Request) => {
 								id: mindMap.id,
 								title: mindMap.title,
 								emoji: mindMap.emoji,
+								workspaceId: mindMap.workspaceId,
 								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
 								workspaceName: item.name,
 								createdAt: mindMap.createdAt,
 								type: 'mindMap' as AssignedItemType,
+								updated: {
+									at: mindMap.updatedAt,
+									by: mindMap.updatedBy,
+								},
 							}))
 						);
 					});

@@ -77,6 +77,7 @@ export const GET = async (request: Request) => {
 		const mappedMindMaps: StarredItem[] = savedByUser.savedMindMaps.map((mindMap) => ({
 			id: mindMap.id,
 			link: `/dashboard/workspace/${mindMap.mindMap.workspace.id}/mind-maps/mind-map/${mindMap.mindMapId}`,
+			workspaceId: mindMap.mindMap.workspace.id,
 			type: 'mindMap',
 			title: mindMap.mindMap.title,
 			emoji: mindMap.mindMap.emoji,
@@ -91,6 +92,7 @@ export const GET = async (request: Request) => {
 		const mappedTasks: StarredItem[] = savedByUser.savedTask.map((task) => ({
 			id: task.id,
 			link: `/dashboard/workspace/${task.task.workspace.id}/tasks/task/${task.taskId}`,
+			workspaceId: task.task.workspace.id,
 			type: 'task',
 			title: task.task.title,
 			emoji: task.task.emoji,

@@ -102,6 +102,11 @@ export interface AssignedToMeDataItem {
 	workspaceName: string;
 	createdAt: Date;
 	type: AssignedItemType;
+	updated: {
+		at: Date;
+		by?: UserInfo | null;
+	};
+	workspaceId: string;
 }
 
 export interface AssignedToMeTaskAndMindMaps {
