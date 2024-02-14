@@ -156,6 +156,14 @@
 		"TITLE": "Zaproś do",
 		"DESC": "Skopiuj link zaproszenia i wyślij do osób które chcesz zaprsić do tej przestrzeni roboczej. Mozesz ustawić role oraz wygenerować nowy link."
 	},
+	"LEAVE_FROM_WORKSAPCE": {
+		"LEAVE": "Opuść",
+		"TITLE": "Opuść",
+		"DESC": "Możesz w każdej chwili opuścić przestrzeń roboczą i w każdym momencie wrócić do niej, jeśli zostaniesz ponownie zaproszony.",
+		"WARNING": "Wszytskie zadania i mapy myśli z tego obszaru roboczego, które zostały dodane do zakładki “Wyróżnione” zostaną z niej usunięte. To samo tyczy sie przypisanych do Ciebie aktywnośći.",
+		"LOADING_BTN": "Opuszcanie. Proszę czekać"
+	},
+
 	"MESSAGES": {
 		"ERRORS": {
 			"DEFAULT": "O nie.. Coś poszło nie tak",
@@ -184,7 +192,8 @@
 			"WRONG_IMAGE_LINK": "Proszę podać poprawny link",
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
 			"NO_TASK_FOUND": "Nie znaleziono zadania",
-			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli"
+			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli",
+			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -206,7 +215,8 @@
 			"MIND_MAP_ADDED": "Mapa myśli została dodana",
 			"MIND_MAP_DELETED": "Mapa myśli została usunięta",
 			"RESET_POMODORO_SETTINGS": "Zresetowano ustawienia",
-			"UPDATE_POMODORO_SETTINGS": "Zapisano nowe ustawienia"
+			"UPDATE_POMODORO_SETTINGS": "Zapisano nowe ustawienia",
+			"LEAVE_FROM_WORKSAPCE": "Pomyślnie opuszczono przestrzeń roboczą"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"

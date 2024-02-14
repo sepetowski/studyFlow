@@ -91,18 +91,18 @@ export const InviteContent = ({
 			});
 			router.refresh();
 		},
-		mutationKey: ['regenerateLink'],
+		mutationKey: ['regenerateLink', id],
 	});
 
 	return (
 		<div>
 			<div className='space-y-4 my-6'>
 				<div className='h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm  flex items-center justify-between'>
-					<div className='flex items-center gap-4'>
+					<div className='flex items-center gap-4 mr-2'>
 						<Link className='w-5 h-5' size={18} />
 						<HoverCard openDelay={250} closeDelay={250}>
 							<HoverCardTrigger asChild>
-								<p className=' overflow-hidden h-5 w-full'>{inviteURL}</p>
+								<p className=' overflow-hidden break-all h-5 w-full  inline-block  '>{inviteURL}</p>
 							</HoverCardTrigger>
 							<HoverCardContent className='max-w-xs sm:max-w-sm md:max-w-md lg:max-w-4xl'>
 								<p className='break-words'>{inviteURL}</p>

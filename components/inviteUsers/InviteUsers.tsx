@@ -20,17 +20,17 @@ interface Props {
 export const InviteUsers = ({ workspace }: Props) => {
 	const t = useTranslations('INVITE');
 	return (
-		<Dialog >
+		<Dialog>
 			<DialogTrigger asChild>
 				<Button
 					size={'icon'}
-					className=' sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2'
+					className=' sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
 					variant='ghost'>
 					<span className='hidden sm:inline'>{t('INVITE')}</span>
-					<UserPlus2 className='' size={18} />
+					<UserPlus2 size={18} />
 				</Button>
 			</DialogTrigger>
-			<DialogContent >
+			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>
 						<span>{t('TITLE')}</span> <span>{workspace.name}</span>
