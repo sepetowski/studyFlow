@@ -1,4 +1,3 @@
-
 import { Sidebar } from '@/components/sidebar/Sidebar';
 import { ToggleSidebarProvider } from '@/context/ToggleSidebar';
 

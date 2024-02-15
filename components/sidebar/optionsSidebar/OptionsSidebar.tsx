@@ -29,6 +29,7 @@ export const OptionsSidebar = ({
 	if (
 		pathname === '/dashboard' ||
 		pathname === '/dashboard/starred' ||
+		pathname === '/dashboard/calendar' ||
 		(urlAditionalId &&
 			pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}/edit`) ||
 		(urlAditionalId &&

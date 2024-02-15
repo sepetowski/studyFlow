@@ -711,6 +711,7 @@
 		"UNTITLED": "Untitled",
 		"POMODORO": "Pomodoro",
 		"STARRED": "Starred",
-		"ASSIGNED-TO-ME": "Assigned to me"
+		"ASSIGNED-TO-ME": "Assigned to me",
+		"CALENDAR": "Calendar"
 	}
 }
