@@ -1,6 +1,6 @@
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
-import { CalendarGrid } from '@/components/calendar/CalendarGrid';
+
 import { Calendar } from '@/components/calendar/Calendar';
 
 const CalendarPage = async () => {
@@ -10,7 +10,7 @@ const CalendarPage = async () => {
 		<>
 			<DashboardHeader />
 			<main className='h-full'>
-				<Calendar />
+				<Calendar userId={session.user.id} />
 			</main>
 		</>
 	);

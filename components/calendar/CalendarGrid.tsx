@@ -2,13 +2,15 @@
 import React, { Fragment } from 'react';
 import { Day } from './Day';
 import dayjs from 'dayjs';
+import { CalendarItem } from '@/types/extended';
 
 interface Props {
 	currMonth: dayjs.Dayjs[][];
 	monthIndex: number;
+	calendarItems: CalendarItem[];
 }
 
-export const CalendarGrid = ({ currMonth, monthIndex }: Props) => {
+export const CalendarGrid = ({ currMonth, monthIndex, calendarItems }: Props) => {
 	const daysOfWeek = ['pon', 'wt', 'śr', 'czw', 'pt', 'sob', 'ndz'];
 
 	return (
@@ -25,7 +27,7 @@ export const CalendarGrid = ({ currMonth, monthIndex }: Props) => {
 					{currMonth.map((row, i) => (
 						<Fragment key={i}>
 							{row.map((day, idx) => (
-								<Day key={idx} day={day} monthIndex={monthIndex} />
+								<Day key={idx} day={day} monthIndex={monthIndex} daysInfo={calendarItems} />
 							))}
 						</Fragment>
 					))}

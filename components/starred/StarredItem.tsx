@@ -1,23 +1,21 @@
 'use client';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { StarredItem as StarredItemType } from '@/types/saved';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next-intl/link';
 import { ReadOnlyEmoji } from '../common/ReadOnlyEmoji';
 import { MoreHorizontal, Star, StarOff } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
-import { UserHoverInfoCard } from '../common/UserHoverInfoCard';
-import { Button, buttonVariants } from '@/components/ui/button';
+import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
+import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useUnstarItem } from '@/hooks/useUnstarItem';
-import { cn } from '@/lib/utils';
+import { useRouter } from 'next-intl/client';
 
 interface Props {
 	item: StarredItemType;
@@ -32,6 +30,8 @@ export const StarredItem = ({
 }: Props) => {
 	const t = useTranslations('STARRED');
 	const c = useTranslations('COMMON');
+
+	const router = useRouter();
 
 	const onUnstar = useUnstarItem({ id, itemId, sortType, type, userId });
 
@@ -72,11 +72,15 @@ export const StarredItem = ({
 										<UserHoverInfoCard className='px-0' user={updated.by} />
 										<p>
 											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
-											<Link
-												className={cn(`${buttonVariants({ variant: 'link' })} px-0 `)}
-												href={`/dashboard/workspace/${workspaceId}`}>
+											<Button
+												variant={'link'}
+												onClick={(e) => {
+													e.preventDefault();
+													router.push(`/dashboard/workspace/${workspaceId}`);
+												}}
+												className='px-0'>
 												{workspaceName}
-											</Link>
+											</Button>
 										</p>
 									</div>
 								</div>

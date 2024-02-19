@@ -1,13 +1,13 @@
 'use client';
 import React from 'react';
-import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
-import { ReadOnlyEmoji } from '../common/ReadOnlyEmoji';
+import { Card, CardContent } from '@/components/ui/card';
+import { ReadOnlyEmoji } from '@/components/common/ReadOnlyEmoji';
 import { AssignedToMeDataItem } from '@/types/extended';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import Link from 'next-intl/link';
-import { cn } from '@/lib/utils';
-import { buttonVariants } from '@/components/ui/button';
+import { Button } from '@/components/ui/button';
+import { useRouter } from 'next-intl/client';
 
 interface Props {
 	info: AssignedToMeDataItem;
@@ -18,6 +18,8 @@ export const AssignedToMeItem = ({
 }: Props) => {
 	const t = useTranslations('ASSIGNED_TO_ME');
 	const c = useTranslations('COMMON');
+
+	const router = useRouter();
 
 	const format = useFormatter();
 	const dateTime = new Date(updated.at);
@@ -50,11 +52,15 @@ export const AssignedToMeItem = ({
 										<UserHoverInfoCard className='px-0' user={updated.by} />
 										<p>
 											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
-											<Link
-												className={cn(`${buttonVariants({ variant: 'link' })} px-0 `)}
-												href={`/dashboard/workspace/${workspaceId}`}>
+											<Button
+												variant={'link'}
+												onClick={(e) => {
+													e.preventDefault();
+													router.push(`/dashboard/workspace/${workspaceId}`);
+												}}
+												className='px-0'>
 												{workspaceName}
-											</Link>
+											</Button>
 										</p>
 									</div>
 								</div>

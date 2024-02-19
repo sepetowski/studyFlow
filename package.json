@@ -57,6 +57,7 @@
 		"emoji-mart": "^5.5.2",
 		"howler": "^2.2.4",
 		"lucide-react": "^0.284.0",
+		"moment": "^2.30.1",
 		"next": "13.5.4",
 		"next-auth": "^4.23.2",
 		"next-intl": "^3.0.0-beta.19",
