@@ -8,6 +8,7 @@ import { useQuery } from '@tanstack/react-query';
 import { CalendarItem } from '@/types/extended';
 import { LoadingScreen } from '@/components/common/LoadingScreen';
 import { ClientError } from '@/components/error/ClientError';
+import { createCalendarBlocks } from '@/lib/createCalendarBlocks';
 
 interface Props {
 	userId: string;
@@ -42,7 +43,20 @@ export const Calendar = ({ userId }: Props) => {
 			if (!res.ok) throw new Error();
 
 			const data = (await res.json()) as CalendarItem[];
-			return data;
+
+			console.log(data);
+			const calendarItems = data.map((dataItem) => {
+				return {
+					...dataItem,
+
+					taskBlocks: createCalendarBlocks(
+						dataItem.taskDate?.from ? dayjs(dataItem.taskDate?.from) : null,
+						dataItem.taskDate?.to ? dayjs(dataItem.taskDate?.to) : null
+					),
+				};
+			});
+			console.log(calendarItems);
+			return calendarItems;
 		},
 
 		queryKey: ['getCalendarItems', userId],

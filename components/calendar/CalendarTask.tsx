@@ -7,10 +7,15 @@ import React, { useMemo } from 'react';
 interface Props {
 	dayInfo: CalendarItem;
 	topOffset: number;
+	blockTask: {
+		from: string;
+		to: string | null;
+	};
 }
 
 export const CalendarTask = ({
 	dayInfo: { taskDate, taskId, title, workspaceColor, workspaceId, workspaceName },
+	blockTask,
 	topOffset,
 }: Props) => {
 	const color = useMemo(() => {
@@ -56,13 +61,15 @@ export const CalendarTask = ({
 	}, [workspaceColor]);
 
 	const durationInDays = useMemo(() => {
-		if (taskDate?.from && taskDate?.to) {
-			const startDate = dayjs(taskDate.from);
-			const endDate = dayjs(taskDate.to);
+		console.log(blockTask);
+		if (blockTask.from && blockTask.to) {
+			const startDate = dayjs(blockTask.from);
+			const endDate = dayjs(blockTask.to);
+
 			return endDate.diff(startDate, 'day') + 1;
 		}
 		return 1;
-	}, [taskDate]);
+	}, [blockTask]);
 
 	const taskWidth = useMemo(() => `${durationInDays * 100}%`, [durationInDays]);
 

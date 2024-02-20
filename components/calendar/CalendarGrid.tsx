@@ -1,7 +1,7 @@
 'use client';
 import React, { Fragment } from 'react';
 import { Day } from './Day';
-import dayjs from 'dayjs';
+import dayjs, { Dayjs } from 'dayjs';
 import { CalendarItem } from '@/types/extended';
 
 interface Props {
