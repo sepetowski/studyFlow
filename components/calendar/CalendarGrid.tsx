@@ -1,7 +1,7 @@
 'use client';
 import React, { Fragment } from 'react';
 import { Day } from './Day';
-import dayjs, { Dayjs } from 'dayjs';
+import dayjs from 'dayjs';
 import { CalendarItem } from '@/types/extended';
 
 interface Props {
@@ -27,7 +27,7 @@ export const CalendarGrid = ({ currMonth, monthIndex, calendarItems }: Props) =>
 					{currMonth.map((row, i) => (
 						<Fragment key={i}>
 							{row.map((day, idx) => (
-								<Day key={idx} day={day} monthIndex={monthIndex} daysInfo={calendarItems} />
+								<Day key={idx} day={day} monthIndex={monthIndex} calendarItems={calendarItems} />
 							))}
 						</Fragment>
 					))}

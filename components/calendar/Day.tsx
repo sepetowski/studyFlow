@@ -1,23 +1,37 @@
-import React, { useState } from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import { Dayjs } from 'dayjs';
 import dayjs from 'dayjs';
 import { cn } from '@/lib/utils';
 import { CalendarItem } from '@/types/extended';
-import { CalendarTask } from './CalendarTask';
-import moment from 'moment';
-import isBetween from 'dayjs/plugin/isBetween';
-dayjs.extend(isBetween);
+import isSameOrAfter from 'dayjs/plugin/isSameOrAfter';
+import isSameOrBefore from 'dayjs/plugin/isSameOrBefore';
+import { CalendarTasks } from './CalendarTasks';
+dayjs.extend(isSameOrAfter);
+dayjs.extend(isSameOrBefore);
 
 interface Props {
 	day: Dayjs;
 	monthIndex: number;
-	daysInfo: CalendarItem[];
+	calendarItems: CalendarItem[];
 }
 
-export const Day = ({ day, monthIndex, daysInfo }: Props) => {
+export const Day = ({ day, monthIndex, calendarItems }: Props) => {
 	const isPreviousMonth = day.month() !== monthIndex;
+	const [tasks, setTasks] = useState<CalendarItem[]>([]);
 
-	// howManyDaysAvaibleInWeek(dayjs('2024-02-21'), dayjs('2024-03-6'));
+	useEffect(() => {
+		const filterTasks = calendarItems.filter((dayInfo, i) => {
+			const startDate = dayjs(dayInfo.taskDate?.from);
+			const endDate = dayjs(dayInfo.taskDate?.to);
+
+			if (day.isSameOrAfter(startDate) && day.isSameOrBefore(endDate)) {
+				return dayInfo;
+			}
+		});
+
+		setTasks(filterTasks);
+	}, [day, calendarItems]);
 
 	return (
 		<div
@@ -39,25 +53,7 @@ export const Day = ({ day, monthIndex, daysInfo }: Props) => {
 				</p>
 			</div>
 
-			<div className='relative flex flex-col gap-2 h-full overflow-y-clip'>
-				{daysInfo.map((dayInfo, i) => {
-					if (dayInfo.taskBlocks) {
-						return dayInfo.taskBlocks.map((task, j) => {
-							const taskStartDate = dayjs(task.from);
-
-							if (taskStartDate.isSame(day, 'day'))
-								return (
-									<CalendarTask
-										key={dayInfo.taskId}
-										dayInfo={dayInfo}
-										blockTask={task}
-										topOffset={0}
-									/>
-								);
-						});
-					}
-				})}
-			</div>
+			<CalendarTasks calendarItems={tasks} />
 		</div>
 	);
 };

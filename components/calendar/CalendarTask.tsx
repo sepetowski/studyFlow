@@ -6,22 +6,15 @@ import React, { useMemo } from 'react';
 
 interface Props {
 	dayInfo: CalendarItem;
-	topOffset: number;
-	blockTask: {
-		from: string;
-		to: string | null;
-	};
 }
 
 export const CalendarTask = ({
 	dayInfo: { taskDate, taskId, title, workspaceColor, workspaceId, workspaceName },
-	blockTask,
-	topOffset,
 }: Props) => {
 	const color = useMemo(() => {
 		switch (workspaceColor) {
 			case CustomColors.PURPLE:
-				return 'bg-purple-600 hover:bg-purple-500';
+				return 'bg-purple-600  hover:bg-purple-500';
 
 			case CustomColors.GREEN:
 				return 'bg-green-600 hover:bg-green-500';
@@ -60,29 +53,7 @@ export const CalendarTask = ({
 		}
 	}, [workspaceColor]);
 
-	const durationInDays = useMemo(() => {
-		console.log(blockTask);
-		if (blockTask.from && blockTask.to) {
-			const startDate = dayjs(blockTask.from);
-			const endDate = dayjs(blockTask.to);
-
-			return endDate.diff(startDate, 'day') + 1;
-		}
-		return 1;
-	}, [blockTask]);
-
-	const taskWidth = useMemo(() => `${durationInDays * 100}%`, [durationInDays]);
-
 	return (
-		<div
-			style={{
-				width: taskWidth,
-				top: topOffset,
-			}}
-			className={`${
-				taskDate?.to ? '  relative z-10' : ''
-			}  flex justify-center items-center p-1 rounded-md ${color}`}>
-			CalendarTask
-		</div>
+		<div className={`  relative z-10  py-0.5  px-1 rounded-md    ${color}  `}>CalendarTask</div>
 	);
 };

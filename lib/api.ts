@@ -1,4 +1,4 @@
-import { CalendarItem, ExtendedMindMap, ExtendedTask, SettingsWorkspace } from '@/types/extended';
+import {  ExtendedMindMap, ExtendedTask, SettingsWorkspace } from '@/types/extended';
 import { PomodoroSettings, UserPermisson, Workspace } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
@@ -99,14 +99,4 @@ export const getUserPomodoroSettings = async (user_id: string) => {
 		return notFound();
 	}
 	return res.json() as Promise<PomodoroSettings>;
-};
-export const getUserCallendar = async (user_id: string) => {
-	const res = await fetch(`${domain}/api/calendar/get?userId=${user_id}`, {
-		method: 'GET',
-		cache: 'no-store',
-	});
-	if (!res.ok) {
-		return notFound();
-	}
-	return res.json() as Promise<CalendarItem[]>;
 };

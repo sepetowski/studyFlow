@@ -117,10 +117,7 @@ export interface AssignedToMeTaskAndMindMaps {
 
 export interface CalendarItem {
 	title: string;
-	taskBlocks?: {
-		from: string;
-		to: string | null;
-	}[];
+
 	taskDate: {
 		id: string;
 		from: Date | undefined;
