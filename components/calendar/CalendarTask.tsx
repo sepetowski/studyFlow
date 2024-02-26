@@ -1,15 +1,17 @@
 'use client';
+import React, { useMemo } from 'react';
 import { CalendarItem } from '@/types/extended';
 import { CustomColors } from '@prisma/client';
-import dayjs from 'dayjs';
-import React, { useMemo } from 'react';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 interface Props {
 	dayInfo: CalendarItem;
+	showMore?: boolean;
 }
 
 export const CalendarTask = ({
 	dayInfo: { taskDate, taskId, title, workspaceColor, workspaceId, workspaceName },
+	showMore,
 }: Props) => {
 	const color = useMemo(() => {
 		switch (workspaceColor) {
@@ -54,6 +56,18 @@ export const CalendarTask = ({
 	}, [workspaceColor]);
 
 	return (
-		<div className={`  relative z-10  py-0.5  px-1 rounded-md    ${color}  `}>CalendarTask</div>
+		<HoverCard openDelay={250} closeDelay={250}>
+			<HoverCardTrigger>
+				<div
+					className={`shadow-sm rounded-md text-white ${color} bg-opacity-80 dark:bg-opacity-60 transition-colors duration-200 cursor-pointer  overflow-hidden  ${
+						showMore ? 'py-1.5 px-4 h-10' : 'py-0.5 px-2 h-7'
+					}`}>
+					{title ? title : 'Jakis bardzo długo dziwny tytuł XD'}
+				</div>
+			</HoverCardTrigger>
+			<HoverCardContent className='break-words' side='top' sideOffset={6}>
+				{title ? title : 'Jakis bardzo długo dziwny tytuł XD'} – {workspaceName}
+			</HoverCardContent>
+		</HoverCard>
 	);
 };

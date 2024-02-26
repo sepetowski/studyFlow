@@ -36,7 +36,7 @@ export const Day = ({ day, monthIndex, calendarItems }: Props) => {
 	return (
 		<div
 			className={cn(
-				`border border-border flex flex-col  transition-opacity duration-200 bg-background ${
+				`border border-border flex flex-col  transition-opacity duration-200 bg-background py-1 px-1.5  ${
 					day.format('ddd') === 'Sat' || day.format('ddd') === 'Sun'
 						? ' bg-accent dark:bg-popover/50 '
 						: ''

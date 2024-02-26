@@ -14,7 +14,7 @@ export const ShortcutSidebar = ({ userWorkspaces, createdWorkspaces }: Props) =>
 	return (
 		<div className='flex flex-col justify-between items-center h-full p-4 sm:py-6 border-r gap-2'>
 			<ScrollArea className='max-h-[35rem]'>
-				<div className='w-full space-y-3 '>
+				<div className='w-full space-y-3 p-1 '>
 					<Top />
 					<Workspaces userWorkspaces={userWorkspaces} href='/dashboard/workspace' />
 					<AddWorkspace createdWorkspaces={createdWorkspaces} />
