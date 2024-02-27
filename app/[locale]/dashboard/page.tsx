@@ -1,13 +1,19 @@
+import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import Welcoming from '@/components/common/Welcoming';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
+import { getUserEditableWorkspaces } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
 const Dashboard = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard');
 
+	const userEditableWorkspaces = await getUserEditableWorkspaces(session.user.id);
+
 	return (
 		<>
-			<DashboardHeader />
+			<DashboardHeader>
+				<AddTaskShortcut userId={session.user.id} userEditableWorkspaces={userEditableWorkspaces} />
+			</DashboardHeader>
 			<main>
 				<Welcoming
 					hideOnDesktop
