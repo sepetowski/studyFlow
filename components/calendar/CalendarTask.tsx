@@ -3,6 +3,7 @@ import React, { useMemo } from 'react';
 import { CalendarItem } from '@/types/extended';
 import { CustomColors } from '@prisma/client';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+import Link from 'next/link';
 
 interface Props {
 	dayInfo: CalendarItem;
@@ -58,15 +59,17 @@ export const CalendarTask = ({
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>
 			<HoverCardTrigger>
-				<div
-					className={`shadow-sm rounded-md text-white ${color} bg-opacity-80 dark:bg-opacity-60 transition-colors duration-200 cursor-pointer  overflow-hidden  ${
-						showMore ? 'py-1.5 px-4 h-10' : 'py-0.5 px-2 h-7'
-					}`}>
-					{title ? title : 'Jakis bardzo długo dziwny tytuł XD'}
-				</div>
+				<Link href={`/dashboard/workspace/${workspaceId}/tasks/task/${taskId}`}>
+					<div
+						className={`shadow-sm rounded-md text-white ${color} bg-opacity-90 transition-colors duration-200 cursor-pointer  overflow-hidden  ${
+							showMore ? 'py-1.5 px-4 h-10' : 'py-0.5 px-2 h-7'
+						}`}>
+						{title ? title : 'Zadanie bez tytułu'}
+					</div>
+				</Link>
 			</HoverCardTrigger>
 			<HoverCardContent className='break-words' side='top' sideOffset={6}>
-				{title ? title : 'Jakis bardzo długo dziwny tytuł XD'} – {workspaceName}
+				{title ? title : 'Zadanie bez tytułu'} – {workspaceName}
 			</HoverCardContent>
 		</HoverCard>
 	);

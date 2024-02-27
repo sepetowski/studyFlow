@@ -71,13 +71,3 @@
 	height: 0;
 	pointer-events: none;
 }
-
-.calendar-content {
-	height: 100%;
-	display: grid;
-	grid-auto-rows: 30px;
-}
-
-.calendar-task {
-	grid-row: 2 / span 1;
-}

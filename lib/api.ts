@@ -1,4 +1,4 @@
-import {  ExtendedMindMap, ExtendedTask, SettingsWorkspace } from '@/types/extended';
+import { ExtendedMindMap, ExtendedTask, SettingsWorkspace } from '@/types/extended';
 import { PomodoroSettings, UserPermisson, Workspace } from '@prisma/client';
 import { notFound } from 'next/navigation';
 
@@ -49,6 +49,20 @@ export const getUserAdminWorkspaces = async (user_id: string) => {
 		method: 'GET',
 		cache: 'no-store',
 	});
+	if (!res.ok) {
+		return [];
+	}
+	return res.json() as Promise<Workspace[]>;
+};
+
+export const getUserEditableWorkspaces = async (user_id: string) => {
+	const res = await fetch(
+		`${domain}/api/workspace/get/user_editable_workspaces?userId=${user_id}`,
+		{
+			method: 'GET',
+			cache: 'no-store',
+		}
+	);
 	if (!res.ok) {
 		return [];
 	}

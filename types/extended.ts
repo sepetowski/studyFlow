@@ -117,7 +117,6 @@ export interface AssignedToMeTaskAndMindMaps {
 
 export interface CalendarItem {
 	title: string;
-
 	taskDate: {
 		id: string;
 		from: Date | undefined;
@@ -127,4 +126,8 @@ export interface CalendarItem {
 	workspaceName: string;
 	workspaceColor: CustomColors;
 	taskId: string;
+}
+
+export interface ResponseShortTask extends Task {
+	redirect: boolean;
 }

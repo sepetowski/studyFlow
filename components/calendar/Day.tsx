@@ -23,9 +23,10 @@ export const Day = ({ day, monthIndex, calendarItems }: Props) => {
 	useEffect(() => {
 		const filterTasks = calendarItems.filter((dayInfo, i) => {
 			const startDate = dayjs(dayInfo.taskDate?.from);
-			const endDate = dayjs(dayInfo.taskDate?.to);
+			const endDate = dayInfo.taskDate?.to ? dayjs(dayInfo.taskDate?.to) : null;
 
-			if (day.isSameOrAfter(startDate) && day.isSameOrBefore(endDate)) {
+			if (startDate.isSame(day) && !endDate) return dayInfo;
+			else if (day.isSameOrAfter(startDate) && day.isSameOrBefore(endDate)) {
 				return dayInfo;
 			}
 		});
