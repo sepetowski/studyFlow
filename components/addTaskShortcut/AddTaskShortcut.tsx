@@ -10,7 +10,7 @@ import {
 	DialogTitle,
 	DialogTrigger,
 } from '@/components/ui/dialog';
-import { ExternalLink, PencilRuler, UserPlus2 } from 'lucide-react';
+import { ExternalLink, PencilRuler } from 'lucide-react';
 import { Task, Workspace } from '@prisma/client';
 import { ChevronLeft } from 'lucide-react';
 import { useChangeCodeToEmoji } from '@/hooks/useChangeCodeToEmoji';
@@ -30,7 +30,9 @@ interface Props {
 }
 
 export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
+	const t = useTranslations('TASK_SHORTCUT');
 	const m = useTranslations('MESSAGES');
+
 	const queryClient = useQueryClient();
 
 	const [currentTab, setCurrentTab] = useState<'main' | 'workspaces'>('main');
@@ -140,7 +142,7 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 					size={'icon'}
 					className=' sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
 					variant='ghost'>
-					<span className='hidden sm:inline'>Utwórz zadanie</span>
+					<span className='hidden sm:inline'>{t('TITLE')}</span>
 					<PencilRuler size={16} />
 				</Button>
 			</DialogTrigger>
@@ -148,9 +150,9 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 				<DialogHeader>
 					<div className='flex flex-col items-start gap-2'>
 						{newTaskLink && (
-							<Link target='_blank' className='w-full' href={newTaskLink}>
+							<Link target='_blank' className='w-full cursor-pointer' href={newTaskLink}>
 								<div className='mt-6  mb-4 p-2 border border-primary rounded-md bg-primary/10 w-full text-primary font-semibold flex justify-between items-center '>
-									<p>Dodano zadanie do projektu! Zobacz zadanie</p>
+									<p>{t('ADDED_TASK')}</p>
 									<ExternalLink />
 								</div>
 							</Link>
@@ -168,13 +170,13 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 								</Button>
 							)}
 							<DialogTitle>
-								{currentTab === 'main' ? 'Utworz zadanie' : 'Wybierz przestren roboczą'}
+								{currentTab === 'main' ? t('TITLE') : t('CHOOSE_WORKSPACE')}
 							</DialogTitle>
 						</div>
 					</div>
-					<DialogDescription>
-						Make changes to your profile here. Click save when youre done.
-					</DialogDescription>
+					{currentTab === 'main' && (
+						<DialogDescription className='text-left'>{t('DESC')}</DialogDescription>
+					)}
 				</DialogHeader>
 				<div className='flex flex-col w-full my-4 gap-6'>
 					{currentTab === 'main' ? (
@@ -197,17 +199,24 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 				</div>
 				{currentTab === 'main' && (
 					<DialogFooter className='w-full'>
-						<Button
-							onClick={() => newShortTask()}
-							disabled={!activeWorkspace || title.length === 0 || isLoading}
-							size={'lg'}
-							className='w-full text-white'>
-							{isLoading ? (
-								<LoadingState loadingText='Dodawanie. Proszę czekać' />
-							) : (
-								'Dodaj do obszaru '
-							)}
-						</Button>
+						{!activeWorkspace ? (
+							<Button
+								onClick={() => newShortTask()}
+								disabled={!activeWorkspace || title.length === 0 || isLoading}
+								size={'lg'}
+								className='w-full text-white'>
+								{isLoading ? <LoadingState loadingText={t('BTN_PENDING')} /> : t('BTN_ADD')}
+							</Button>
+						) : (
+							<Button
+								onClick={() => {
+									setOpen(false);
+								}}
+								size={'lg'}
+								className='w-full text-white'>
+								{t('BTN_NO_WORKSPACES')}
+							</Button>
+						)}
 					</DialogFooter>
 				)}
 			</DialogContent>

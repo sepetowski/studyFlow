@@ -11,7 +11,7 @@ interface Props {
 export const Workspaces = ({ workspaces, onSelectActiveWorkspace }: Props) => {
 	return (
 		<ScrollArea className='w-full max-h-64 sm:max-h-72  bg-background/70 border border-border p-4 rounded-md shadow-sm'>
-			<div className='w-full h-full flex flex-col gap-1 '>
+			<div className='w-full h-full flex flex-col  '>
 				{workspaces.map((workspace) => (
 					<SelectWorkspace
 						key={workspace.id}

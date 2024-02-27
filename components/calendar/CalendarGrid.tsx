@@ -3,6 +3,7 @@ import React, { Fragment } from 'react';
 import { Day } from './Day';
 import dayjs from 'dayjs';
 import { CalendarItem } from '@/types/extended';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	currMonth: dayjs.Dayjs[][];
@@ -10,8 +11,10 @@ interface Props {
 	calendarItems: CalendarItem[];
 }
 
+const daysOfWeek = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'];
+
 export const CalendarGrid = ({ currMonth, monthIndex, calendarItems }: Props) => {
-	const daysOfWeek = ['pon', 'wt', 'śr', 'czw', 'pt', 'sob', 'ndz'];
+	const t = useTranslations('CALENDAR.DAYS_OF_WEEK');
 
 	return (
 		<>
@@ -19,7 +22,7 @@ export const CalendarGrid = ({ currMonth, monthIndex, calendarItems }: Props) =>
 				<div className='w-full grid grid-cols-7 text-right '>
 					{daysOfWeek.map((day, index) => (
 						<p key={index} className='mr-2 font-semibold text-sm'>
-							{day.toLocaleUpperCase()}
+							{t(day)}
 						</p>
 					))}
 				</div>

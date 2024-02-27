@@ -6,7 +6,8 @@ import { Workspace } from '@prisma/client';
 import { ActiveWorkspaceInfo } from './ActiveWorkspaceInfo';
 import { CalendarTask } from './CalendarTask';
 import { DateRange } from 'react-day-picker';
-import { Checkbox } from '@/components/ui/checkbox';
+import { useTranslations } from 'next-intl';
+import Warning from '../ui/warning';
 
 interface Props {
 	renderedEmoji: string | string[];
@@ -24,50 +25,58 @@ export const MainTab = ({
 	date,
 	renderedEmoji,
 	activeWorkspace,
-
 	onSelectEmojiHandler,
 	onChangeTabHandler,
 	onSelectedDate,
 	onChangeTitle,
 }: Props) => {
-	return (
-		<>
-			<div className='w-full flex flex-col gap-4   bg-background/70 border border-border p-3 rounded-md shadow-sm'>
-				<div className='flex gap-4 w-full items-center '>
-					<EmojiSelector
-						slide='right'
-						align='center'
-						className='w-fit'
-						onSelectedEmoji={onSelectEmojiHandler}>
-						<span className='w-16 h-16 rounded-lg bg-secondary flex justify-center items-center text-3xl'>
-							{renderedEmoji}
-						</span>
-					</EmojiSelector>
+	const t = useTranslations('TASK_SHORTCUT.MAIN_TAB');
 
-					<TextareaAutosize
-						value={title}
-						onChange={(e) => {
-							onChangeTitle(e.target.value);
-						}}
-						placeholder={'Dodaj tytuł'}
-						className='w-full resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground text-2xl font-semibold focus:outline-none max-h-28 overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground scrollbar-track-secondary  '
-					/>
-				</div>
-				<CalendarTask date={date} onSelectedDate={onSelectedDate} />
-			</div>
+	if (!activeWorkspace)
+		return (
+			<Warning blue className='my-0'>
+				<p>{t('WARNING')}</p>
+			</Warning>
+		);
+	else
+		return (
+			<>
+				<div className='w-full flex flex-col gap-4   bg-background/70 border border-border p-3 rounded-md shadow-sm'>
+					<div className='flex gap-4 w-full items-center '>
+						<EmojiSelector
+							slide='right'
+							align='center'
+							className='w-fit'
+							onSelectedEmoji={onSelectEmojiHandler}>
+							<span className='w-16 h-16 rounded-lg bg-secondary flex justify-center items-center text-3xl'>
+								{renderedEmoji}
+							</span>
+						</EmojiSelector>
 
-			<div
-				onClick={() => {
-					activeWorkspace && onChangeTabHandler('workspaces');
-				}}
-				className='w-full flex gap-4  items-center justify-between bg-background/70 border border-border p-3 rounded-md shadow-sm cursor-pointer hover:bg-accent transition-colors duration-200'>
-				<div className='text-muted-foreground'>
-					<p>Obszar roboczy</p>
+						<TextareaAutosize
+							value={title}
+							onChange={(e) => {
+								onChangeTitle(e.target.value);
+							}}
+							placeholder={t('PLACEHOLDER')}
+							className='w-full resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground text-2xl font-semibold focus:outline-none max-h-28 overflow-y-auto scrollbar-thin scrollbar-thumb-muted-foreground scrollbar-track-secondary  '
+						/>
+					</div>
+					<CalendarTask date={date} onSelectedDate={onSelectedDate} />
 				</div>
-				<div>
-					{activeWorkspace ? <ActiveWorkspaceInfo workspace={activeWorkspace} /> : 'nie ma'}
+
+				<div
+					onClick={() => {
+						activeWorkspace && onChangeTabHandler('workspaces');
+					}}
+					className='w-full flex gap-4  items-center justify-between bg-background/70 border border-border p-3 rounded-md shadow-sm cursor-pointer hover:bg-accent transition-colors duration-200'>
+					<div className='text-muted-foreground'>
+						<p>{t('WORKSPACE')}</p>
+					</div>
+					<div>
+						<ActiveWorkspaceInfo workspace={activeWorkspace} />
+					</div>
 				</div>
-			</div>
-		</>
-	);
+			</>
+		);
 };

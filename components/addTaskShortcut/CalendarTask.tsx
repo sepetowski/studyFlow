@@ -1,14 +1,14 @@
 'use client';
 import React, { useMemo } from 'react';
 import { format } from 'date-fns';
-import { Calendar as CalendarIcon, Info } from 'lucide-react';
+import { Calendar as CalendarIcon } from 'lucide-react';
 import { DateRange } from 'react-day-picker';
 import { pl, enGB } from 'date-fns/locale';
 import { cn } from '@/lib/utils';
 import { Button } from '@/components/ui/button';
 import { Calendar } from '@/components/ui/calendar';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Props {
 	date: DateRange | undefined;
@@ -16,6 +16,7 @@ interface Props {
 }
 
 export const CalendarTask = ({ date, onSelectedDate }: Props) => {
+	const t = useTranslations('TASK_SHORTCUT');
 	const lang = useLocale();
 
 	const currentLocale = useMemo(() => {
@@ -50,7 +51,7 @@ export const CalendarTask = ({ date, onSelectedDate }: Props) => {
 								})
 							)
 						) : (
-							<span>Termin</span>
+							<span>{t('DUE_DATE')}</span>
 						)}
 					</Button>
 				</PopoverTrigger>

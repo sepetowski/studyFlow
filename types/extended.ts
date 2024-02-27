@@ -127,7 +127,3 @@ export interface CalendarItem {
 	workspaceColor: CustomColors;
 	taskId: string;
 }
-
-export interface ResponseShortTask extends Task {
-	redirect: boolean;
-}

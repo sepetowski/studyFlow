@@ -2,7 +2,7 @@
 import { CustomColors, Workspace } from '@prisma/client';
 import React, { useMemo } from 'react';
 import Image from 'next/image';
-import { ChevronRight, ExternalLink, Link2 } from 'lucide-react';
+import { ExternalLink } from 'lucide-react';
 import Link from 'next-intl/link';
 import { buttonVariants } from '@/components/ui/button';
 
@@ -76,7 +76,7 @@ export const SelectWorkspace = ({ workspace, onSelectActiveWorkspace }: Props) =
 						<p>{workspace.name[0].toUpperCase()}</p>
 					)}
 				</div>
-				<p className='font-semibold '>{workspace.name ? workspace.name : 'Unitlied worksapce'}</p>
+				<p className='font-semibold '>{workspace.name}</p>
 			</div>
 			<Link
 				target='_blank'

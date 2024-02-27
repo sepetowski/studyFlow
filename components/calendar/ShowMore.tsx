@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+'use client';
+import React from 'react';
 import { Button } from '@/components/ui/button';
 import {
 	Dialog,
@@ -12,6 +13,7 @@ import {
 import { CalendarItem } from '@/types/extended';
 import { CalendarTask } from './CalendarTask';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { useTranslations } from 'next-intl';
 interface Props {
 	calendarItems: CalendarItem[];
 	leftItemsAmmount: number;
@@ -19,6 +21,8 @@ interface Props {
 }
 
 export const ShowMore = ({ calendarItems, leftItemsAmmount, small }: Props) => {
+	const t = useTranslations('CALENDAR.SHOW_MORE');
+
 	return (
 		<Dialog>
 			<DialogTrigger asChild>
@@ -34,16 +38,14 @@ export const ShowMore = ({ calendarItems, leftItemsAmmount, small }: Props) => {
 						className='w-fit py-0.5 px-2 h-7 text-muted-foreground relative z-10   '
 						size={'sm'}
 						variant='ghost'>
-						{leftItemsAmmount > 10 ? '+9' : leftItemsAmmount} more
+						{leftItemsAmmount > 10 ? '+9' : leftItemsAmmount} {t('MORE')}
 					</Button>
 				)}
 			</DialogTrigger>
-			<DialogContent className='sm:max-w-[600px]'>
+			<DialogContent className='sm:max-w-[520px]'>
 				<DialogHeader className='p-1'>
-					<DialogTitle>All events</DialogTitle>
-					<DialogDescription>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-					</DialogDescription>
+					<DialogTitle>{t('TITLE')}</DialogTitle>
+					<DialogDescription>{t('DESC')}</DialogDescription>
 				</DialogHeader>
 				<ScrollArea className='max-h-64 '>
 					<div className='h-full flex flex-col gap-3 p-1 '>

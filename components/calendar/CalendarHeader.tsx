@@ -1,7 +1,7 @@
 'use client';
 import React from 'react';
 import dayjs from 'dayjs';
-import { useFormatter } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 import { Button } from '@/components/ui/button';
 
 interface Props {
@@ -15,6 +15,8 @@ export const CalendarHeader = ({
 	onChangeMonthHandler,
 	onResetMonthHandler,
 }: Props) => {
+	const t = useTranslations('CALENDAR.HEADER');
+
 	const format = useFormatter();
 	const dateTime = new Date(dayjs().year(), monthIndex);
 
@@ -37,13 +39,13 @@ export const CalendarHeader = ({
 					}}
 					className='rounded-e-none px-2 py-1  h-8  sm:h-10 sm:px-4 sm:py-2'
 					variant={'outline'}>
-					Poprzedni
+					{t('PREV')}
 				</Button>
 				<Button
 					onClick={onResetMonthHandler}
 					className='rounded-none px-2 py-1 h-8 sm:h-10 sm:px-4 sm:py-2'
 					variant={'outline'}>
-					Dzisaj
+					{t('TODAY')}
 				</Button>
 				<Button
 					onClick={() => {
@@ -51,7 +53,7 @@ export const CalendarHeader = ({
 					}}
 					className='rounded-s-none px-2 py-1 h-8 sm:h-10 sm:px-4 sm:py-2'
 					variant={'outline'}>
-					Następny
+					{t('NEXT')}
 				</Button>
 			</div>
 		</div>

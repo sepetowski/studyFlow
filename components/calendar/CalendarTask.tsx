@@ -4,6 +4,7 @@ import { CalendarItem } from '@/types/extended';
 import { CustomColors } from '@prisma/client';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	dayInfo: CalendarItem;
@@ -11,9 +12,11 @@ interface Props {
 }
 
 export const CalendarTask = ({
-	dayInfo: { taskDate, taskId, title, workspaceColor, workspaceId, workspaceName },
+	dayInfo: { taskId, title, workspaceColor, workspaceId, workspaceName },
 	showMore,
 }: Props) => {
+	const t = useTranslations('CALENDAR');
+
 	const color = useMemo(() => {
 		switch (workspaceColor) {
 			case CustomColors.PURPLE:
@@ -64,12 +67,12 @@ export const CalendarTask = ({
 						className={`shadow-sm rounded-md text-white ${color} bg-opacity-90 transition-colors duration-200 cursor-pointer  overflow-hidden  ${
 							showMore ? 'py-1.5 px-4 h-10' : 'py-0.5 px-2 h-7'
 						}`}>
-						{title ? title : 'Zadanie bez tytułu'}
+						{title ? title : t('TASK')}
 					</div>
 				</Link>
 			</HoverCardTrigger>
 			<HoverCardContent className='break-words' side='top' sideOffset={6}>
-				{title ? title : 'Zadanie bez tytułu'} – {workspaceName}
+				{title ? title : t('TASK')} – {workspaceName}
 			</HoverCardContent>
 		</HoverCard>
 	);

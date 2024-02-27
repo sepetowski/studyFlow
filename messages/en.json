@@ -697,6 +697,46 @@
 		}
 	},
 
+	"CALENDAR": {
+		"DAYS_OF_WEEK": {
+			"MON": "MON",
+			"TUE": "TUE",
+			"WED": "WED",
+			"THU": "THU",
+			"FRI": "FRI",
+			"SAT": "SAT",
+			"SUN": "SUN"
+		},
+		"HEADER": {
+			"PREV": "Previous",
+			"TODAY": "Today",
+			"NEXT": "Next"
+		},
+		"TASK": "Untitled Task",
+		"SHOW_MORE": {
+			"MORE": "More",
+			"TITLE": "All tasks",
+			"DESC": "All tasks from workspaces you belong to"
+		}
+	},
+
+	"TASK_SHORTCUT": {
+		"TITLE": "Create Task",
+		"ADDED_TASK": "Task added to project! View Task",
+		"CHOOSE_WORKSPACE": "Choose Workspace",
+		"DESC": "Add a task to the selected workspace you belong to and have the required permissions in",
+		"BTN_ADD": "Add to Workspace",
+		"BTN_NO_WORKSPACES": "I understand",
+		"BTN_PENDING": "Adding. Please wait",
+		"DUE_DATE": "Due Date",
+
+		"MAIN_TAB": {
+			"PLACEHOLDER": "Add title",
+			"WORKSPACE": "Workspace",
+			"WARNING": "You don't have any workspaces yet where you can add a task. Create a new workspace or join an existing workspace with at least “Editor” level permission."
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"
