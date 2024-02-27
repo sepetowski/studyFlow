@@ -1,22 +1,21 @@
 'use client';
-import React, { useMemo } from 'react';
+import React from 'react';
 import { StarredItem as StarredItemType } from '@/types/saved';
 import { Card, CardContent } from '@/components/ui/card';
 import Link from 'next-intl/link';
 import { ReadOnlyEmoji } from '../common/ReadOnlyEmoji';
 import { MoreHorizontal, Star, StarOff } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
-import { UserHoverInfoCard } from '../common/UserHoverInfoCard';
+import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { Button } from '@/components/ui/button';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { useUnstarItem } from '@/hooks/useUnstarItem';
+import { useRouter } from 'next-intl/client';
 
 interface Props {
 	item: StarredItemType;
@@ -25,11 +24,14 @@ interface Props {
 }
 
 export const StarredItem = ({
-	item: { emoji, id, link, title, type, updated, workspaceName, itemId },
+	item: { emoji, id, link, title, type, updated, workspaceName, itemId, workspaceId },
 	sortType,
 	userId,
 }: Props) => {
 	const t = useTranslations('STARRED');
+	const c = useTranslations('COMMON');
+
+	const router = useRouter();
 
 	const onUnstar = useUnstarItem({ id, itemId, sortType, type, userId });
 
@@ -38,7 +40,7 @@ export const StarredItem = ({
 	const now = new Date();
 
 	const itemTypeSentence =
-		type === 'mindMap' ? t('ITEM_SENTENCE.MIND_MAP') : t('ITEM_SENTENCE.TASK');
+		type === 'mindMap' ? c('EDITED_ITEM_SENTENCE.MIND_MAP') : c('EDITED_ITEM_SENTENCE.TASK');
 
 	const unstarHanlder = (e: React.MouseEvent) => {
 		e.preventDefault();
@@ -46,7 +48,7 @@ export const StarredItem = ({
 	};
 
 	return (
-		<Link href={link}>
+		<Link className='hover:scale-[1.01] transition-transform duration-200' href={link}>
 			<Card>
 				<CardContent className='flex w-full justify-between sm:items-center pt-4'>
 					<div className='flex flex-col sm:flex-row gap-4 sm:items-center w-full'>
@@ -64,12 +66,21 @@ export const StarredItem = ({
 								<div className='flex flex-col md:flex-row md:items-center md:gap-1'>
 									<p className='text-muted-foreground'>
 										<span>{itemTypeSentence}</span> {format.relativeTime(dateTime, now)}{' '}
-										{t('ITEM_SENTENCE.BY')}
+										{c('EDITED_ITEM_SENTENCE.BY')}
 									</p>
 									<div className='flex items-center gap-1'>
 										<UserHoverInfoCard className='px-0' user={updated.by} />
 										<p>
-											{t('ITEM_SENTENCE.IN')} {workspaceName}
+											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
+											<Button
+												variant={'link'}
+												onClick={(e) => {
+													e.preventDefault();
+													router.push(`/dashboard/workspace/${workspaceId}`);
+												}}
+												className='px-0'>
+												{workspaceName}
+											</Button>
 										</p>
 									</div>
 								</div>

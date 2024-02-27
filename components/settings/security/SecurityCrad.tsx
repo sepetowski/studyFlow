@@ -14,7 +14,7 @@ export const SecurityCrad = () => {
 				<CardDescription className='text-base max-w-3xl break-words'>{t('DESC')}</CardDescription>
 			</CardHeader>
 			<CardContent className='max-w-3xl'>
-				<Warning yellow className='my-0  mb-6 sm:mb-10'>
+				<Warning blue className='my-0  mb-6 sm:mb-10'>
 					<p>
 						{t('WARNING.FIRST')}
 						<span className='font-bold'> {t('WARNING.SECOND')}</span>

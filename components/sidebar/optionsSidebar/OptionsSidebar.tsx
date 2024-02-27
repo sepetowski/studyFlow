@@ -8,13 +8,19 @@ import { Workspace } from '@prisma/client';
 import { WorkspaceOptions } from './workspaceOptions/WorkspaceOptions';
 import { PomodoroLinks } from './pomodoro/PomodoroLinks';
 import { ScrollArea } from '@/components/ui/scroll-area';
+import { AssignedToMeFilter } from './assignedToMeFilter/AssignedToMeFilter';
 
 interface Props {
 	createdWorkspaces: number;
 	userAdminWorkspaces: Workspace[];
+	userWorkspaces: Workspace[];
 }
 
-export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props) => {
+export const OptionsSidebar = ({
+	createdWorkspaces,
+	userAdminWorkspaces,
+	userWorkspaces,
+}: Props) => {
 	const pathname = usePathname();
 	const urlWorkspaceId: string | undefined = pathname.split('/')[3];
 	const urlAditionalId: string | undefined = pathname.split('/')[6];
@@ -23,6 +29,7 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 	if (
 		pathname === '/dashboard' ||
 		pathname === '/dashboard/starred' ||
+		pathname === '/dashboard/calendar' ||
 		(urlAditionalId &&
 			pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}/edit`) ||
 		(urlAditionalId &&
@@ -44,6 +51,9 @@ export const OptionsSidebar = ({ createdWorkspaces, userAdminWorkspaces }: Props
 				)}
 				{(pathname === '/dashboard/pomodoro' || pathname === '/dashboard/pomodoro/settings') && (
 					<PomodoroLinks />
+				)}
+				{pathname === '/dashboard/assigned-to-me' && (
+					<AssignedToMeFilter userWorkspaces={userWorkspaces} />
 				)}
 			</ScrollArea>
 			<CreatedWorkspacesInfo createdNumber={createdWorkspaces} />

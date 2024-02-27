@@ -7,9 +7,10 @@ import { useTranslations } from 'next-intl';
 
 interface Props {
 	message: string;
+	hrefToGoOnReset?: string;
 }
 
-export const ClientError = ({ message }: Props) => {
+export const ClientError = ({ message, hrefToGoOnReset }: Props) => {
 	const t = useTranslations('CLIENT_ERROR');
 	const router = useRouter();
 
@@ -26,7 +27,7 @@ export const ClientError = ({ message }: Props) => {
 					size={'lg'}
 					className='text-white'
 					onClick={() => {
-						router.refresh();
+						hrefToGoOnReset ? router.push(hrefToGoOnReset) : router.refresh();
 					}}>
 					{t('BTN')}
 				</Button>

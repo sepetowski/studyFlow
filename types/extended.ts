@@ -1,4 +1,5 @@
 import {
+	CustomColors,
 	MindMap,
 	Tag,
 	Task,
@@ -90,4 +91,39 @@ export interface AssignedToMindMapUser {
 
 export interface UsersAssingedToMindMapInfo extends Workspace {
 	subscribers: AssignedToMindMapUser[];
+}
+
+export type AssignedItemType = 'task' | 'mindMap';
+
+export interface AssignedToMeDataItem {
+	id: string;
+	title: string;
+	emoji: string;
+	link: string;
+	workspaceName: string;
+	createdAt: Date;
+	type: AssignedItemType;
+	updated: {
+		at: Date;
+		by?: UserInfo | null;
+	};
+	workspaceId: string;
+}
+
+export interface AssignedToMeTaskAndMindMaps {
+	tasks: AssignedToMeDataItem[];
+	mindMaps: AssignedToMeDataItem[];
+}
+
+export interface CalendarItem {
+	title: string;
+	taskDate: {
+		id: string;
+		from: Date | undefined;
+		to: Date | undefined;
+	} | null;
+	workspaceId: string;
+	workspaceName: string;
+	workspaceColor: CustomColors;
+	taskId: string;
 }

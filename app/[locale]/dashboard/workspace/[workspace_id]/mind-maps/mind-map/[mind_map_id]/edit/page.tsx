@@ -1,5 +1,6 @@
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
+import { LeaveWorkspace } from '@/components/leaveWorksapce/LeaveWorkspace';
 import { MindMap } from '@/components/mindMaps/MindMap';
 import { TaskContener } from '@/components/tasks/editable/contener/TaskContener';
 import { AutoSaveMindMapProvider } from '@/context/AutoSaveMindMap';
@@ -34,6 +35,7 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 			<AutoSaveMindMapProvider>
 				<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
+					{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
 					<MindMap

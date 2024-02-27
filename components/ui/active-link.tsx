@@ -12,6 +12,7 @@ interface Props extends React.AnchorHTMLAttributes<HTMLAnchorElement> {
 	size?: 'default' | 'sm' | 'lg' | 'icon' | null;
 	include?: string;
 	workspaceIcon?: boolean;
+	disableActiveStateColor?: boolean;
 }
 const ActiveLink = React.forwardRef<HTMLAnchorElement, Props>(
 	(
@@ -23,13 +24,13 @@ const ActiveLink = React.forwardRef<HTMLAnchorElement, Props>(
 			children,
 			include,
 			workspaceIcon,
+			disableActiveStateColor = false,
 			...props
 		}: Props,
 		ref
 	) => {
 		const { setIsOpen } = useToggleSidebar();
 		const pathname = usePathname();
-	
 
 		return (
 			<Link
@@ -42,9 +43,11 @@ const ActiveLink = React.forwardRef<HTMLAnchorElement, Props>(
 						variant,
 						size,
 					})} ${
-						href === pathname || (include && pathname.includes(include))
+						href === (pathname || (include && pathname.includes(include)))
 							? workspaceIcon
 								? 'font-semibold border-secondary-foreground border-2 '
+								: disableActiveStateColor
+								? ''
 								: 'bg-secondary font-semibold'
 							: ''
 					} `,

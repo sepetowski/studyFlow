@@ -156,6 +156,14 @@
 		"TITLE": "Invite to",
 		"DESC": "Copy the invitation link and send it to the people you want to invite to this workspace. You can set up roles and generate a new link."
 	},
+
+	"LEAVE_FROM_WORKSAPCE": {
+		"LEAVE": "Leave",
+		"TITLE": "Leave",
+		"DESC": "You can leave the workspace at any time and return to it whenever you're invited back.",
+		"WARNING": "All tasks and mind maps from this workspace that have been added to the “Starred” tab will be removed from it. The same applies to activities assigned to you.",
+		"LOADING_BTN": "Leaving. Please wait"
+	},
 	"MESSAGES": {
 		"ERRORS": {
 			"DEFAULT": "Oh no.. Something went wrong. Please try again",
@@ -183,7 +191,8 @@
 			"NO_TAG": "Tag not found",
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
 			"NO_TASK_FOUND": "Task not found",
-			"NO_MIND_MAP_FOUND": "Mind map not found"
+			"NO_MIND_MAP_FOUND": "Mind map not found",
+			"CANT_LEAVE": "Owner of workspace cannot leave from worksapce. You have to delete workspace from settings page"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -205,7 +214,8 @@
 			"MIND_MAP_ADDED": "Mind map has been added",
 			"MIND_MAP_DELETED": "Mind map has been deleted",
 			"RESET_POMODORO_SETTINGS": "Settings reset",
-			"UPDATE_POMODORO_SETTINGS": "New settings saved"
+			"UPDATE_POMODORO_SETTINGS": "New settings saved",
+			"LEAVE_FROM_WORKSAPCE": "Successfully left the workspace"
 		},
 		"PENDING": {
 			"LOADING": "Please wait"
@@ -387,6 +397,12 @@
 				"DELETE": "Delete",
 				"UPDATE": "Update"
 			}
+		},
+		"EDITED_ITEM_SENTENCE": {
+			"MIND_MAP": "Mind map edited",
+			"TASK": "Task edited",
+			"BY": "by",
+			"IN": " - in"
 		}
 	},
 	"PERMISSONS": {
@@ -651,12 +667,7 @@
 		"TITLE": "Your starred items",
 		"DESC": "Here you will find all your saved mind maps and tasks.",
 		"ERROR": "An error occurred while retrieving your data. Please try again.",
-		"ITEM_SENTENCE": {
-			"MIND_MAP": "Mind map edited",
-			"TASK": "Task edited",
-			"BY": "by",
-			"IN": " - in"
-		},
+
 		"DEFAULT_NAME": {
 			"MIND_MAP": "Untitled Mind Map",
 			"TASK": "Untitled Task"
@@ -672,6 +683,59 @@
 			"DESC": "Any task or mind map you star will appear here."
 		}
 	},
+
+	"ASSIGNED_TO_ME": {
+		"TITLE": "Assigned to Me",
+		"DESC": "Here you will find all your saved mind maps and tasks",
+
+		"NO_ASSIGMENT": "You haven't been assigned anywhere yet",
+		"NOT_FOUND": "We couldn't find any tasks or mind maps that met the criteria",
+
+		"DEAFULT_NAME": {
+			"MIND_MAP": "Untitled Mind Map",
+			"TASK": "Untitled Task"
+		}
+	},
+
+	"CALENDAR": {
+		"DAYS_OF_WEEK": {
+			"MON": "MON",
+			"TUE": "TUE",
+			"WED": "WED",
+			"THU": "THU",
+			"FRI": "FRI",
+			"SAT": "SAT",
+			"SUN": "SUN"
+		},
+		"HEADER": {
+			"PREV": "Previous",
+			"TODAY": "Today",
+			"NEXT": "Next"
+		},
+		"TASK": "Untitled Task",
+		"SHOW_MORE": {
+			"MORE": "More",
+			"TITLE": "All tasks",
+			"DESC": "All tasks from workspaces you belong to"
+		}
+	},
+
+	"TASK_SHORTCUT": {
+		"TITLE": "Create Task",
+		"ADDED_TASK": "Task added to project! View Task",
+		"CHOOSE_WORKSPACE": "Choose Workspace",
+		"DESC": "Add a task to the selected workspace you belong to and have the required permissions in",
+		"BTN_ADD": "Add to Workspace",
+		"BTN_NO_WORKSPACES": "I understand",
+		"BTN_PENDING": "Adding. Please wait",
+		"DUE_DATE": "Due Date",
+		"MAIN_TAB": {
+			"PLACEHOLDER": "Add title",
+			"WORKSPACE": "Workspace",
+			"WARNING": "You don't have any workspaces yet where you can add a task. Create a new workspace or join an existing workspace with at least “Editor” level permission."
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"
@@ -686,6 +750,7 @@
 		"UNTITLED": "Untitled",
 		"POMODORO": "Pomodoro",
 		"STARRED": "Starred",
-		"ASSIGNED-TO-ME": "Assigned to me"
+		"ASSIGNED-TO-ME": "Assigned to me",
+		"CALENDAR": "Calendar"
 	}
 }

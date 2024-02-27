@@ -64,7 +64,7 @@
 			"BTN": "Usuń",
 			"DIALOG": {
 				"TITLE": "Usuń przestrzeń roboczą",
-				"DESC": "Wszytskie dane zostaną trwale usunięte, a wszyscy użytkownicy należacy do tego obszaru roboczego stracą do niej dostęp",
+				"DESC": "Wszystkie dane zostaną trwale usunięte, a wszyscy użytkownicy należacy do tego obszaru roboczego stracą do niej dostęp",
 				"WARNING": "Usunięcie przestrzeni roboczej jest trwałe i nie można jej cofnąć, kliknij „Usuń przestrzeń roboczą”, aby usunąć tę przestrzeń",
 				"BUTTON": "USUŃ PRZESTRZEŃ ROBOCZĄ",
 				"PENDING_BTN": "Usuwanie. Proszę czekać"
@@ -156,6 +156,14 @@
 		"TITLE": "Zaproś do",
 		"DESC": "Skopiuj link zaproszenia i wyślij do osób które chcesz zaprsić do tej przestrzeni roboczej. Mozesz ustawić role oraz wygenerować nowy link."
 	},
+	"LEAVE_FROM_WORKSAPCE": {
+		"LEAVE": "Opuść",
+		"TITLE": "Opuść",
+		"DESC": "Możesz w każdej chwili opuścić przestrzeń roboczą i w każdym momencie wrócić do niej, jeśli zostaniesz ponownie zaproszony.",
+		"WARNING": "Wszystkie zadania i mapy myśli z tego obszaru roboczego, które zostały dodane do zakładki “Wyróżnione” zostaną z niej usunięte. To samo tyczy sie przypisanych do Ciebie aktywnośći.",
+		"LOADING_BTN": "Opuszcanie. Proszę czekać"
+	},
+
 	"MESSAGES": {
 		"ERRORS": {
 			"DEFAULT": "O nie.. Coś poszło nie tak",
@@ -184,7 +192,8 @@
 			"WRONG_IMAGE_LINK": "Proszę podać poprawny link",
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
 			"NO_TASK_FOUND": "Nie znaleziono zadania",
-			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli"
+			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli",
+			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -206,7 +215,8 @@
 			"MIND_MAP_ADDED": "Mapa myśli została dodana",
 			"MIND_MAP_DELETED": "Mapa myśli została usunięta",
 			"RESET_POMODORO_SETTINGS": "Zresetowano ustawienia",
-			"UPDATE_POMODORO_SETTINGS": "Zapisano nowe ustawienia"
+			"UPDATE_POMODORO_SETTINGS": "Zapisano nowe ustawienia",
+			"LEAVE_FROM_WORKSAPCE": "Pomyślnie opuszczono przestrzeń roboczą"
 		},
 		"PENDING": {
 			"LOADING": "Proszę czekać"
@@ -389,6 +399,12 @@
 				"DELETE": "Usuń",
 				"UPDATE": "Aktualizuj"
 			}
+		},
+		"EDITED_ITEM_SENTENCE": {
+			"MIND_MAP": "Mapa myśli edytowana",
+			"TASK": "Zadanie edytowane",
+			"BY": "przez",
+			"IN": " - w"
 		}
 	},
 
@@ -401,7 +417,7 @@
 		},
 		"ADMIN": {
 			"TITLE": "Admin",
-			"DESC": "Posiada wszytskie możliwe prawa, również do zmiany ustawień obszaru roboczego, jak i do zarządzania innymi użytkownikami."
+			"DESC": "Posiada wszystkie możliwe prawa, również do zmiany ustawień obszaru roboczego, jak i do zarządzania innymi użytkownikami."
 		},
 		"EDITOR": {
 			"TITLE": "Wykonawca",
@@ -503,11 +519,11 @@
 				"SUCCES": "Zresetowano stan",
 				"ERROR": "Nie udało sie zapisać zmian."
 			},
-			"HOVER": "Usuń wszytskie kafelki",
+			"HOVER": "Usuń wszystkie kafelki",
 			"DIALOG": {
-				"TITLE": "Usuń wszytskie kafelki",
+				"TITLE": "Usuń wszystkie kafelki",
 				"DESC": "Zresetuj układ mapy myŚli do początkowego stanu",
-				"WARNING": "Przywrócenie stanu początkowego, usunie wszytskie obecne kafelki i połączenia. Kliknij „Zresetuj stan”, aby usunąć wszytskie kafelki i połączenia.",
+				"WARNING": "Przywrócenie stanu początkowego, usunie wszystkie obecne kafelki i połączenia. Kliknij „Zresetuj stan”, aby usunąć wszystkie kafelki i połączenia.",
 				"BTN_RESET": "Zresetuj stan",
 				"BTN_PENDING": "Resetowanie"
 			}
@@ -650,14 +666,9 @@
 	},
 	"STARRED": {
 		"TITLE": "Twoje wyróżnione elementy",
-		"DESC": "Tutaj znajdziesz wszytskie swoje zapisane mapy myśli i zadania",
+		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
 		"ERROR": "Wystąpił błąd podczas pobierania Twoich danych. Proszę spróbuj ponownie.",
-		"ITEM_SENTENCE": {
-			"MIND_MAP": "Mapa myśli edytowana",
-			"TASK": "Zadanie edytowane",
-			"BY": "przez",
-			"IN": " - w"
-		},
+
 		"DEAFULT_NAME": {
 			"MIND_MAP": "Mapa myśli bez tytułu",
 			"TASK": "Zadanie bez tytułu"
@@ -673,6 +684,58 @@
 			"DESC": "Jakiekolwiek zadanie lub mapa myśli, którą oznaczysz gwiazdką, pojawi się tutaj."
 		}
 	},
+
+	"ASSIGNED_TO_ME": {
+		"TITLE": "Przypisane do mnie",
+		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
+
+		"NO_ASSIGMENT": "Nie zostałeś jeszcze nigdzie przypisany",
+		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria",
+
+		"DEAFULT_NAME": {
+			"MIND_MAP": "Mapa myśli bez tytułu",
+			"TASK": "Zadanie bez tytułu"
+		}
+	},
+
+	"CALENDAR": {
+		"DAYS_OF_WEEK": {
+			"MON": "PON",
+			"TUE": "WT",
+			"WED": "ŚR",
+			"THU": "CZW",
+			"FRI": "PT",
+			"SAT": "SOB",
+			"SUN": "NDZ"
+		},
+		"HEADER": {
+			"PREV": "Poprzedni",
+			"TODAY": "Dzisiaj",
+			"NEXT": "Następny"
+		},
+		"TASK": "Zadanie bez tytułu",
+		"SHOW_MORE": {
+			"MORE": "Więcej",
+			"TITLE": "Wszystkie zadania",
+			"DESC": "Wszystkie zadania z przestrzeni roboczych, do których należysz"
+		}
+	},
+	"TASK_SHORTCUT": {
+		"TITLE": "Utwórz zadanie",
+		"ADDED_TASK": "Dodano zadanie do projektu! Zobacz zadanie",
+		"CHOOSE_WORKSPACE": "Wybierz przestrzeń roboczą",
+		"DESC": "Dodaj zadanie do wybranej przestrzeni roboczej, do której należysz i posiadasz w niej wymagane uprawnienia",
+		"BTN_ADD": "Dodaj do obszaru",
+		"BTN_NO_WORKSPACES": "Rozumiem",
+		"BTN_PENDING": "Dodawanie. Proszę czekać",
+		"DUE_DATE": "TERMIN",
+		"MAIN_TAB": {
+			"PLACEHOLDER": "Dodaj tytuł",
+			"WORKSPACE": "Obszar roboczy",
+			"WARNING": "Nie posiadasz jeszcze żadnego obszaru roboczego, w ktorym mogłbyś dodać zadanie. Utwórz nowy obszar roboczy, badź dołącz do istniejącego obszaru z uprawnieniem poziomu minimum “Wykonawcy”."
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "O nie... Coś poszło nie tak",
 		"BTN": "Spróbuj ponownie"
@@ -686,6 +749,7 @@
 		"UNTITLED": "Bez tytułu",
 		"POMODORO": "Pomodoro",
 		"STARRED": "Wyróżnione",
-		"ASSIGNED-TO-ME": "Przypisane do mnie"
+		"ASSIGNED-TO-ME": "Przypisane do mnie",
+		"CALENDAR": "Kalendarz"
 	}
 }

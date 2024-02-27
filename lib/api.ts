@@ -55,6 +55,20 @@ export const getUserAdminWorkspaces = async (user_id: string) => {
 	return res.json() as Promise<Workspace[]>;
 };
 
+export const getUserEditableWorkspaces = async (user_id: string) => {
+	const res = await fetch(
+		`${domain}/api/workspace/get/user_editable_workspaces?userId=${user_id}`,
+		{
+			method: 'GET',
+			cache: 'no-store',
+		}
+	);
+	if (!res.ok) {
+		return [];
+	}
+	return res.json() as Promise<Workspace[]>;
+};
+
 export const getUserWorkspaceRole = async (workspace_id: string, user_id: string) => {
 	const res = await fetch(
 		`${domain}/api/workspace/get/user_role?workspaceId=${workspace_id}&userId=${user_id}`,
