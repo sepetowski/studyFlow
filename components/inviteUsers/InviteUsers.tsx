@@ -23,8 +23,8 @@ export const InviteUsers = ({ workspace }: Props) => {
 	return (
 		<Dialog>
 			<HoverCard openDelay={250} closeDelay={250}>
-				<HoverCardTrigger asChild>
-					<DialogTrigger asChild>
+				<DialogTrigger asChild>
+					<HoverCardTrigger>
 						<Button
 							size={'icon'}
 							className='w-8 h-8 sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white  sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
@@ -32,21 +32,21 @@ export const InviteUsers = ({ workspace }: Props) => {
 							<span className='hidden sm:inline'>{t('INVITE')}</span>
 							<UserPlus2 size={18} />
 						</Button>
-					</DialogTrigger>
-				</HoverCardTrigger>
+					</HoverCardTrigger>
+				</DialogTrigger>
 				<HoverCardContent align='center'>
 					<span>{t('HINT')}</span>
 				</HoverCardContent>
+				<DialogContent>
+					<DialogHeader>
+						<DialogTitle>
+							<span>{t('TITLE')}</span> <span>{workspace.name}</span>
+						</DialogTitle>
+						<DialogDescription>{t('DESC')}</DialogDescription>
+					</DialogHeader>
+					<InviteContent workspace={workspace} />
+				</DialogContent>
 			</HoverCard>
-			<DialogContent>
-				<DialogHeader>
-					<DialogTitle>
-						<span>{t('TITLE')}</span> <span>{workspace.name}</span>
-					</DialogTitle>
-					<DialogDescription>{t('DESC')}</DialogDescription>
-				</DialogHeader>
-				<InviteContent workspace={workspace} />
-			</DialogContent>
 		</Dialog>
 	);
 };
