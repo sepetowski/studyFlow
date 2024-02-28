@@ -150,7 +150,7 @@ export const InviteContent = ({
 								<ChevronDown size={16} />
 							</Button>
 						</DropdownMenuTrigger>
-						<DropdownMenuContent sideOffset={15} className='max-w-xs'>
+						<DropdownMenuContent side='right' align='center' sideOffset={15} className='max-w-xs'>
 							<DropdownMenuItem
 								className='cursor-pointer'
 								onClick={() => {

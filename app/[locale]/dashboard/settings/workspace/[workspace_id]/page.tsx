@@ -1,3 +1,4 @@
+import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { WorkspaceTab } from '@/components/settings/workspace/WorkspaceTab';
@@ -39,6 +40,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 				{(user?.userRole === 'ADMIN' || user?.userRole === 'OWNER') && (
 					<InviteUsers workspace={workspace} />
 				)}
+				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
 			<main className='flex flex-col gap-2'>
 				<WorkspaceTab workspace={workspace} workspaceId={workspace.id} />

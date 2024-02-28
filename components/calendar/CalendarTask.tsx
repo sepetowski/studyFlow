@@ -61,7 +61,7 @@ export const CalendarTask = ({
 
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>
-			<HoverCardTrigger>
+			<HoverCardTrigger asChild>
 				<Link href={`/dashboard/workspace/${workspaceId}/tasks/task/${taskId}`}>
 					<div
 						className={`shadow-sm rounded-md text-white ${color} bg-opacity-90 transition-colors duration-200 cursor-pointer  overflow-hidden  ${

@@ -4,13 +4,16 @@ import { Heading } from '@/components/settings/account/Heading';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { Separator } from '@/components/ui/separator';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
+import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 
 const Settings = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/settings');
 
 	return (
 		<>
-			<DashboardHeader />
+			<DashboardHeader>
+				<AddTaskShortcut userId={session.user.id} />
+			</DashboardHeader>
 			<main>
 				<Heading />
 				<AccountInfo session={session} />

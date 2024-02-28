@@ -7,12 +7,10 @@ import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboar
 const Dashboard = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard');
 
-	const userEditableWorkspaces = await getUserEditableWorkspaces(session.user.id);
-
 	return (
 		<>
 			<DashboardHeader>
-				<AddTaskShortcut userId={session.user.id} userEditableWorkspaces={userEditableWorkspaces} />
+				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
 			<main>
 				<Welcoming

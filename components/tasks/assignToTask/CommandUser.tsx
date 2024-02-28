@@ -14,9 +14,10 @@ interface Props {
 	user: AssignedToTaskUser;
 	taskId: string;
 	workspaceId: string;
+	canEdit: boolean;
 }
 
-export const CommandUser = ({ user, taskId, workspaceId }: Props) => {
+export const CommandUser = ({ user, taskId, workspaceId, canEdit }: Props) => {
 	const [isActiveUser, setIsActiveUser] = useState(
 		user.user.assignedToTask.length === 1 ? true : false
 	);
@@ -58,6 +59,7 @@ export const CommandUser = ({ user, taskId, workspaceId }: Props) => {
 	return (
 		<CommandItem className='p-0'>
 			<Button
+				disabled={!canEdit}
 				onClick={() => {
 					handleTaskAssigment();
 				}}

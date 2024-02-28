@@ -1,3 +1,4 @@
+import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { LeaveWorkspace } from '@/components/leaveWorksapce/LeaveWorkspace';
@@ -54,6 +55,7 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 					]}>
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 					{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
+					<AddTaskShortcut userId={session.user.id} />
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
 					<MindMapPreviewCardWrapper
