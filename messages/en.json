@@ -152,6 +152,7 @@
 		"UPLOAD": "Upload"
 	},
 	"INVITE": {
+		"HINT": "Add to workspace",
 		"INVITE": "Invite",
 		"TITLE": "Invite to",
 		"DESC": "Copy the invitation link and send it to the people you want to invite to this workspace. You can set up roles and generate a new link."
@@ -722,6 +723,7 @@
 
 	"TASK_SHORTCUT": {
 		"TITLE": "Create Task",
+		"HINT": "Quick add",
 		"ADDED_TASK": "Task added to project! View Task",
 		"CHOOSE_WORKSPACE": "Choose Workspace",
 		"DESC": "Add a task to the selected workspace you belong to and have the required permissions in",

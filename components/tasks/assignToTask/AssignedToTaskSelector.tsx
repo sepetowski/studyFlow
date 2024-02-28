@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -14,6 +14,7 @@ import { useRouter } from 'next-intl/client';
 import { useQuery } from '@tanstack/react-query';
 import { UsersAssingedToTaskInfo } from '@/types/extended';
 import { useTranslations } from 'next-intl';
+import { useUserEditableWorkspaces } from '@/context/UserEditableWorkspaces';
 
 interface Props {
 	className?: string;
@@ -32,11 +33,28 @@ export const AssignedToTaskSelector = ({
 }: Props) => {
 	const router = useRouter();
 	const t = useTranslations('TASK.ASSIGNMENT');
+	const [canEdit, setCanEdit] = useState(false);
+
+	const {
+		data: editableWorksapces,
+		isError: isErrorGettingWorkspaces,
+		isLoading: isGettingWorkspaces,
+		refetch: refetchWorkspaces,
+	} = useUserEditableWorkspaces();
+
+	useEffect(() => {
+		if (editableWorksapces) {
+			const inThisWorkspace = editableWorksapces.some((workspace) => workspace.id === workspaceId);
+
+			setCanEdit(inThisWorkspace);
+		}
+	}, [editableWorksapces, workspaceId]);
 
 	const {
 		data: assgingedUsersInfo,
 		isLoading: isLodingInfo,
-		isError,
+		isError: isErrorGettingAssignedUser,
+		refetch: refetchAssigned,
 	} = useQuery({
 		queryFn: async () => {
 			const res = await fetch(
@@ -67,26 +85,39 @@ export const AssignedToTaskSelector = ({
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent sideOffset={dropDownSizeOffset && dropDownSizeOffset}>
-				{isLodingInfo && (
+				{(isLodingInfo || isGettingWorkspaces) && (
 					<div className=' p-3  flex justify-center items-center'>
 						<LoadingState />
 					</div>
 				)}
-				{!isLodingInfo && assgingedUsersInfo && (
+				{!isLodingInfo && !isGettingWorkspaces && assgingedUsersInfo && (
 					<CommandContainer
 						users={assgingedUsersInfo.subscribers}
 						taskId={taskId}
 						workspaceId={workspaceId}
+						canEdit={canEdit}
 					/>
 				)}
-				{isError && (
+				{isErrorGettingAssignedUser && (
 					<div className='p-3 text-sm flex justify-center items-center flex-col gap-4 '>
 						<p>{t('ERROR_MSG')}</p>
 						<Button
 							className='w-full'
 							size={'sm'}
 							variant={'default'}
-							onClick={() => router.refresh()}>
+							onClick={() => refetchAssigned()}>
+							{t('ERROR_BTN')}
+						</Button>
+					</div>
+				)}
+				{isErrorGettingWorkspaces && (
+					<div className='p-3 text-sm flex justify-center items-center flex-col gap-4 '>
+						<p>{t('ERROR_MSG')}</p>
+						<Button
+							className='w-full'
+							size={'sm'}
+							variant={'default'}
+							onClick={() => refetchWorkspaces()}>
 							{t('ERROR_BTN')}
 						</Button>
 					</div>

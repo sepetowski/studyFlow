@@ -14,9 +14,10 @@ interface Props {
 	users: AssignedToTaskUser[];
 	taskId: string;
 	workspaceId: string;
+	canEdit: boolean;
 }
 
-export const CommandContainer = ({ users, taskId, workspaceId }: Props) => {
+export const CommandContainer = ({ users, taskId, workspaceId, canEdit }: Props) => {
 	const t = useTranslations('TASK.ASSIGNMENT');
 
 	return (
@@ -26,7 +27,13 @@ export const CommandContainer = ({ users, taskId, workspaceId }: Props) => {
 				<CommandEmpty>{t('NOT_FOUND')}</CommandEmpty>
 				<CommandGroup heading={t('HEADING')}>
 					{users.map((user) => (
-						<CommandUser key={user.user.id} user={user} taskId={taskId} workspaceId={workspaceId} />
+						<CommandUser
+							key={user.user.id}
+							user={user}
+							taskId={taskId}
+							workspaceId={workspaceId}
+							canEdit={canEdit}
+						/>
 					))}
 				</CommandGroup>
 			</CommandList>

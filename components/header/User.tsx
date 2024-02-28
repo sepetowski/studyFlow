@@ -41,7 +41,7 @@ export const User = ({ profileImage, email, username }: Props) => {
 	};
 	return (
 		<DropdownMenu>
-			<DropdownMenuTrigger className='rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2  ring-offset-background'>
+			<DropdownMenuTrigger className='rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2  ring-offset-background ml-2'>
 				{profileImage ? (
 					<Image
 						src={profileImage}

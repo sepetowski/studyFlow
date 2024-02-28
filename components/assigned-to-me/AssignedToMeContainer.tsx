@@ -7,7 +7,7 @@ import { LoadingScreen } from '../common/LoadingScreen';
 import { ClientError } from '../error/ClientError';
 import { Card, CardContent, CardDescription, CardHeader } from '@/components/ui/card';
 import { useTranslations } from 'next-intl';
-import { AssignedToMeDataItem, AssignedToMeTaskAndMindMaps } from '@/types/extended';
+import { AssignedToMeDataItem } from '@/types/extended';
 import { AssignedToMeItem } from './AssignedToMeItem';
 
 interface Props {

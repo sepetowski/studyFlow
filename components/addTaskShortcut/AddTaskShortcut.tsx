@@ -24,12 +24,22 @@ import { useToast } from '@/components/ui/use-toast';
 import { useTranslations } from 'next-intl';
 import { LoadingState } from '../ui/loading-state';
 import Link from 'next-intl/link';
+import { useUserEditableWorkspaces } from '@/context/UserEditableWorkspaces';
+import { ClientError } from '@/components/error/ClientError';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
+
 interface Props {
-	userEditableWorkspaces: Workspace[];
 	userId: string;
 }
 
-export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
+export const AddTaskShortcut = ({ userId }: Props) => {
+	const {
+		data: workspaces,
+		isError,
+		isLoading: isGettingWorkspaces,
+		refetch,
+	} = useUserEditableWorkspaces();
+
 	const t = useTranslations('TASK_SHORTCUT');
 	const m = useTranslations('MESSAGES');
 
@@ -46,9 +56,11 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 
 	const [newTaskLink, setNewTaskLink] = useState<null | string>(null);
 
-	const [activeWorkspace, setActiveWorksapce] = useState(
-		userEditableWorkspaces.length >= 0 ? userEditableWorkspaces[0] : null
-	);
+	const [activeWorkspace, setActiveWorksapce] = useState<null | Workspace>(null);
+
+	useEffect(() => {
+		if (workspaces) setActiveWorksapce(workspaces[0]);
+	}, [workspaces]);
 
 	const [date, setDate] = useState<DateRange | undefined>({
 		from: undefined,
@@ -113,7 +125,7 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 			setNewTaskLink(`/dashboard/workspace/${data.workspaceId}/tasks/task/${data.id}/edit`);
 			setTitle('');
 			setSelectedEmoji('1f9e0');
-			setActiveWorksapce(userEditableWorkspaces.length >= 0 ? userEditableWorkspaces[0] : null);
+			setActiveWorksapce(workspaces ? workspaces[0] : null);
 			setDate({
 				from: undefined,
 				to: undefined,
@@ -137,20 +149,30 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 
 	return (
 		<Dialog open={open} onOpenChange={setOpen}>
-			<DialogTrigger asChild>
-				<Button
-					size={'icon'}
-					className=' sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
-					variant='ghost'>
-					<span className='hidden sm:inline'>{t('TITLE')}</span>
-					<PencilRuler size={16} />
-				</Button>
-			</DialogTrigger>
+			<HoverCard openDelay={250} closeDelay={250}>
+				<HoverCardTrigger asChild>
+					<DialogTrigger asChild>
+						<Button className='w-8 h-8 sm:w-9 sm:h-9' size={'icon'} variant='ghost'>
+							<PencilRuler size={18} />
+						</Button>
+					</DialogTrigger>
+				</HoverCardTrigger>
+				<HoverCardContent align='center'>
+					<span>{t('HINT')}</span>
+				</HoverCardContent>
+			</HoverCard>
+
 			<DialogContent className='sm:max-w-[600px]'>
 				<DialogHeader>
 					<div className='flex flex-col items-start gap-2'>
 						{newTaskLink && (
-							<Link target='_blank' className='w-full cursor-pointer' href={newTaskLink}>
+							<Link
+								onClick={() => {
+									setOpen(false);
+								}}
+								target='_blank'
+								className='w-full cursor-pointer'
+								href={newTaskLink}>
 								<div className='mt-6  mb-4 p-2 border border-primary rounded-md bg-primary/10 w-full text-primary font-semibold flex justify-between items-center '>
 									<p>{t('ADDED_TASK')}</p>
 									<ExternalLink />
@@ -178,46 +200,64 @@ export const AddTaskShortcut = ({ userEditableWorkspaces, userId }: Props) => {
 						<DialogDescription className='text-left'>{t('DESC')}</DialogDescription>
 					)}
 				</DialogHeader>
-				<div className='flex flex-col w-full my-4 gap-6'>
-					{currentTab === 'main' ? (
-						<MainTab
-							date={date}
-							title={title}
-							renderedEmoji={renderedEmoji}
-							activeWorkspace={activeWorkspace}
-							onChangeTitle={changeTitleHandler}
-							onSelectedDate={selectedDateHandler}
-							onChangeTabHandler={changeTabHandler}
-							onSelectEmojiHandler={selectEmojiHandler}
-						/>
-					) : (
-						<Workspaces
-							workspaces={userEditableWorkspaces}
-							onSelectActiveWorkspace={onSelectActiveWorkspace}
-						/>
-					)}
-				</div>
-				{currentTab === 'main' && (
-					<DialogFooter className='w-full'>
-						{!activeWorkspace ? (
-							<Button
-								onClick={() => newShortTask()}
-								disabled={!activeWorkspace || title.length === 0 || isLoading}
-								size={'lg'}
-								className='w-full text-white'>
-								{isLoading ? <LoadingState loadingText={t('BTN_PENDING')} /> : t('BTN_ADD')}
-							</Button>
+				{isError ? (
+					<ClientError
+						className='mt-0 sm:mt-0 md:mt-0 '
+						message='Nie udało się pobrać Twoich danych'
+						onReftech={refetch}
+					/>
+				) : (
+					<>
+						{isGettingWorkspaces ? (
+							<div className='w-full h-20 flex justify-center items-center'>
+								<LoadingState className='w-10 h-10' />
+							</div>
 						) : (
-							<Button
-								onClick={() => {
-									setOpen(false);
-								}}
-								size={'lg'}
-								className='w-full text-white'>
-								{t('BTN_NO_WORKSPACES')}
-							</Button>
+							<>
+								<div className='flex flex-col w-full my-4 gap-6'>
+									{currentTab === 'main' ? (
+										<MainTab
+											date={date}
+											title={title}
+											renderedEmoji={renderedEmoji}
+											activeWorkspace={activeWorkspace}
+											onChangeTitle={changeTitleHandler}
+											onSelectedDate={selectedDateHandler}
+											onChangeTabHandler={changeTabHandler}
+											onSelectEmojiHandler={selectEmojiHandler}
+										/>
+									) : (
+										<Workspaces
+											workspaces={workspaces}
+											onSelectActiveWorkspace={onSelectActiveWorkspace}
+										/>
+									)}
+								</div>
+								{currentTab === 'main' && (
+									<DialogFooter className='w-full'>
+										{activeWorkspace ? (
+											<Button
+												onClick={() => newShortTask()}
+												disabled={!activeWorkspace || title.length === 0 || isLoading}
+												size={'lg'}
+												className='w-full text-white'>
+												{isLoading ? <LoadingState loadingText={t('BTN_PENDING')} /> : t('BTN_ADD')}
+											</Button>
+										) : (
+											<Button
+												onClick={() => {
+													setOpen(false);
+												}}
+												size={'lg'}
+												className='w-full text-white'>
+												{t('BTN_NO_WORKSPACES')}
+											</Button>
+										)}
+									</DialogFooter>
+								)}
+							</>
 						)}
-					</DialogFooter>
+					</>
 				)}
 			</DialogContent>
 		</Dialog>

@@ -152,6 +152,7 @@
 		"UPLOAD": "Prześlij"
 	},
 	"INVITE": {
+		"HINT": "Dodaj do przestrzeni roboczej",
 		"INVITE": "Zaproś",
 		"TITLE": "Zaproś do",
 		"DESC": "Skopiuj link zaproszenia i wyślij do osób które chcesz zaprsić do tej przestrzeni roboczej. Mozesz ustawić role oraz wygenerować nowy link."
@@ -722,6 +723,7 @@
 	},
 	"TASK_SHORTCUT": {
 		"TITLE": "Utwórz zadanie",
+		"HINT": "Szybkie dodawanie",
 		"ADDED_TASK": "Dodano zadanie do projektu! Zobacz zadanie",
 		"CHOOSE_WORKSPACE": "Wybierz przestrzeń roboczą",
 		"DESC": "Dodaj zadanie do wybranej przestrzeni roboczej, do której należysz i posiadasz w niej wymagane uprawnienia",

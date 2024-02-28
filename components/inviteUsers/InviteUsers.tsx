@@ -12,6 +12,7 @@ import { UserPlus2 } from 'lucide-react';
 import { Workspace } from '@prisma/client';
 import { InviteContent } from './InviteContent';
 import { useTranslations } from 'next-intl';
+import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
 
 interface Props {
 	workspace: Workspace;
@@ -21,15 +22,22 @@ export const InviteUsers = ({ workspace }: Props) => {
 	const t = useTranslations('INVITE');
 	return (
 		<Dialog>
-			<DialogTrigger asChild>
-				<Button
-					size={'icon'}
-					className=' sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
-					variant='ghost'>
-					<span className='hidden sm:inline'>{t('INVITE')}</span>
-					<UserPlus2 size={18} />
-				</Button>
-			</DialogTrigger>
+			<HoverCard openDelay={250} closeDelay={250}>
+				<HoverCardTrigger asChild>
+					<DialogTrigger asChild>
+						<Button
+							size={'icon'}
+							className='w-8 h-8 sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white  sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
+							variant='ghost'>
+							<span className='hidden sm:inline'>{t('INVITE')}</span>
+							<UserPlus2 size={18} />
+						</Button>
+					</DialogTrigger>
+				</HoverCardTrigger>
+				<HoverCardContent align='center'>
+					<span>{t('HINT')}</span>
+				</HoverCardContent>
+			</HoverCard>
 			<DialogContent>
 				<DialogHeader>
 					<DialogTitle>
