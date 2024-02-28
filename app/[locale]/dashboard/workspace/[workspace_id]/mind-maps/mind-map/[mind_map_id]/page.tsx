@@ -4,7 +4,6 @@ import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { LeaveWorkspace } from '@/components/leaveWorksapce/LeaveWorkspace';
 import { MindMap } from '@/components/mindMaps/MindMap';
 import { MindMapPreviewCardWrapper } from '@/components/mindMaps/preview/MindMapPreviewCardWrapper';
-import { TaskContener } from '@/components/tasks/editable/contener/TaskContener';
 import { AutoSaveMindMapProvider } from '@/context/AutoSaveMindMap';
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getMindMap, getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
