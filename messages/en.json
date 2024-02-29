@@ -738,6 +738,25 @@
 		}
 	},
 
+	"PERMISSION_INDICATOR": {
+		"TITLE": "Your current role is",
+		"DESC": "Your permissions in workspace {workspace} are currently",
+		"ROLES": {
+			"OWNER": "Owner",
+			"ADMIN": "Admin",
+			"CAN_EDIT": "Editor",
+			"READ_ONLY": "Viewer"
+		},
+		"HINT": "Permission in {workspace} is",
+		"ROLES_DESC": {
+			"OWNER": "As the Owner, you have all possible rights. You can manage content, other users, and customize workspace settings. However, as the Owner, you cannot leave this workspace; the only option is to completely delete it in the settings.",
+			"ADMIN": "As an Admin, you have all possible rights, including changing workspace settings and managing other users.",
+			"CAN_EDIT": "As an Editor, you have full access to the workspace, with rights to edit and delete content within the workspace. However, you do not have access to workspace settings.",
+			"READ_ONLY": "As a Viewer, you have full access to the workspace but do not have permissions to edit the content within it. You also do not have access to workspace settings."
+		},
+		"BTN": "Understood"
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"

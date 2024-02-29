@@ -1,6 +1,6 @@
 'use client';
 import React from 'react';
-import { ChevronRight, Divide } from 'lucide-react';
+import { ChevronRight } from 'lucide-react';
 import { usePathname } from 'next/navigation';
 import Link from 'next-intl/link';
 import { useTranslations } from 'next-intl';
@@ -63,7 +63,9 @@ export const BreadcrumbNav = ({ addManualRoutes, workspaceHref }: Props) => {
 											<ChevronRight className='text-primary' />
 										</>
 									) : (
-										<p className='font-bold text-primary px-1 sm:px-2'>{t(link.toUpperCase())}</p>
+										<div>
+											<p className='font-bold text-primary px-1 sm:px-2'>{t(link.toUpperCase())}</p>
+										</div>
 									)}
 								</div>
 							);
