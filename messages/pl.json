@@ -158,6 +158,7 @@
 		"DESC": "Skopiuj link zaproszenia i wyślij do osób które chcesz zaprsić do tej przestrzeni roboczej. Mozesz ustawić role oraz wygenerować nowy link."
 	},
 	"LEAVE_FROM_WORKSAPCE": {
+		"HINT": "Opuść przestrzeń roboczą",
 		"LEAVE": "Opuść",
 		"TITLE": "Opuść",
 		"DESC": "Możesz w każdej chwili opuścić przestrzeń roboczą i w każdym momencie wrócić do niej, jeśli zostaniesz ponownie zaproszony.",
@@ -194,7 +195,8 @@
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
 			"NO_TASK_FOUND": "Nie znaleziono zadania",
 			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli",
-			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień"
+			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień",
+			"CANT_GET_USERS": "Nie udało sie zaktualizować statusu aktywności"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -754,6 +756,19 @@
 			"READ_ONLY": "Jako Przeglądający, posiadasz pełen dostęp do przestrzeni roboczej, jednak nie masz uprawnień na edycje zawartośći w tej przestrzeni. Nie posiadasz równieżcdostępu do ustawień obszaru."
 		},
 		"BTN": "Rozumiem"
+	},
+	"USERS_STATUS_LIST": {
+		"ROLES": {
+			"OWNER": "Założyciel",
+			"ADMIN": "Admin",
+			"CAN_EDIT": "Edytor",
+			"READ_ONLY": "Przeglądający",
+			"UNAVAILABLE": "Niedostępny"
+		},
+		"ERROR": {
+			"MG": "Nie udało się pobrać informacji o czołonkach przestrzeni roboczej",
+			"BTN": "Spróbuj ponownie"
+		}
 	},
 
 	"CLIENT_ERROR": {

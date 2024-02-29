@@ -159,6 +159,7 @@
 	},
 
 	"LEAVE_FROM_WORKSAPCE": {
+		"HINT": "Leave the workspace",
 		"LEAVE": "Leave",
 		"TITLE": "Leave",
 		"DESC": "You can leave the workspace at any time and return to it whenever you're invited back.",
@@ -193,7 +194,8 @@
 			"IMAGE_TO_EDITOR": "Nie udało się dodać zdjęcia, Spróbuj ponownie",
 			"NO_TASK_FOUND": "Task not found",
 			"NO_MIND_MAP_FOUND": "Mind map not found",
-			"CANT_LEAVE": "Owner of workspace cannot leave from worksapce. You have to delete workspace from settings page"
+			"CANT_LEAVE": "Owner of workspace cannot leave from worksapce. You have to delete workspace from settings page",
+			"CANT_GET_USERS": "Failed to update activity status"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -755,6 +757,19 @@
 			"READ_ONLY": "As a Viewer, you have full access to the workspace but do not have permissions to edit the content within it. You also do not have access to workspace settings."
 		},
 		"BTN": "Understood"
+	},
+	"USERS_STATUS_LIST": {
+		"ROLES": {
+			"OWNER": "Owner",
+			"ADMIN": "Admin",
+			"CAN_EDIT": "Editor",
+			"READ_ONLY": "Viewer",
+			"UNAVAILABLE": "UNAVAILABLE"
+		},
+		"ERROR": {
+			"MG": "Failed to retrieve workspace members information",
+			"BTN": "Try again"
+		}
 	},
 
 	"CLIENT_ERROR": {
