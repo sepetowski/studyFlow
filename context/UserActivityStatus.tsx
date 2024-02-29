@@ -1,9 +1,8 @@
 'use client';
 
 import React, { useContext, useEffect, useState } from 'react';
-import { UserPermisson, Workspace } from '@prisma/client';
-import { UseQueryResult, useMutation, useQuery } from '@tanstack/react-query';
-import { useSession } from 'next-auth/react';
+import { UserPermisson } from '@prisma/client';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { createContext } from 'react';
 import { UserActiveItemList } from '@/types/extended';
 import { useParams } from 'next/navigation';
