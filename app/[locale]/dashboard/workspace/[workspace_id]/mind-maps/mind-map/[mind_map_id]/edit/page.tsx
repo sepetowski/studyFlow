@@ -3,6 +3,7 @@ import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { LeaveWorkspace } from '@/components/leaveWorksapce/LeaveWorkspace';
 import { MindMap } from '@/components/mindMaps/MindMap';
+import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { AutoSaveMindMapProvider } from '@/context/AutoSaveMindMap';
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getMindMap, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
@@ -34,6 +35,7 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		<AutosaveIndicatorProvider>
 			<AutoSaveMindMapProvider>
 				<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
+					<PermissionIndicator userRole={userRole} worksapceName={workspace.name} />
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 					{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 					<AddTaskShortcut userId={session.user.id} />

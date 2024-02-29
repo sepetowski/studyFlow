@@ -2,6 +2,7 @@ import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { LeaveWorkspace } from '@/components/leaveWorksapce/LeaveWorkspace';
+import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { ReadOnlyContent } from '@/components/tasks/readOnly/ReadOnlyContent';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
@@ -48,6 +49,7 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 						useTranslate: task.title ? false : true,
 					},
 				]}>
+				<PermissionIndicator userRole={userRole} worksapceName={workspace.name} />
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 				<AddTaskShortcut userId={session.user.id} />

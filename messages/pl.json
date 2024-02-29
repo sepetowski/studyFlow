@@ -737,6 +737,24 @@
 			"WARNING": "Nie posiadasz jeszcze żadnego obszaru roboczego, w ktorym mogłbyś dodać zadanie. Utwórz nowy obszar roboczy, badź dołącz do istniejącego obszaru z uprawnieniem poziomu minimum “Wykonawcy”."
 		}
 	},
+	"PERMISSION_INDICATOR": {
+		"TITLE": "Twoja obecna rola to",
+		"DESC": "Twoje uprawnienia w przestrzeni roboczej {workspace} to aktualnie",
+		"ROLES": {
+			"OWNER": "Założyciel",
+			"ADMIN": "Admin",
+			"CAN_EDIT": "Edytor",
+			"READ_ONLY": "Przeglądający"
+		},
+		"HINT": "Uprawnienie w {workspace} to",
+		"ROLES_DESC": {
+			"OWNER": "Jako Założyciel, posiadasz wszystkie możliwe prawa, możesz zarządzać treścią, innymi użytkownikami oraz dostosować ustawienia przestrzeni roboczej. Nie możesz, jednak jako Założyciel opuścić tej przestrzeni, jedyną możliwośćią jest całkowite usunięcie jej w ustawieniach.",
+			"ADMIN": "Jako Admin, posiadasz wszystkie możliwe prawa, również do zmiany ustawień obszaru roboczego, jak i do zarządzania innymi użytkownikami.",
+			"CAN_EDIT": "Jako Wykonawca, posiadasz pełen dostęp do przestrzeni roboczej, posiadasz prawa do edycji i usuwania treści w przestrzeni roboczej. Nie posiadasz jednak dostępu do ustawień obszaru.",
+			"READ_ONLY": "Jako Przeglądający, posiadasz pełen dostęp do przestrzeni roboczej, jednak nie masz uprawnień na edycje zawartośći w tej przestrzeni. Nie posiadasz równieżcdostępu do ustawień obszaru."
+		},
+		"BTN": "Rozumiem"
+	},
 
 	"CLIENT_ERROR": {
 		"TITLE": "O nie... Coś poszło nie tak",
