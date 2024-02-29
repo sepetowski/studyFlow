@@ -54,7 +54,7 @@ export const PermissionIndicator = ({ userRole, worksapceName }: Props) => {
 						)}
 						{userRole === 'CAN_EDIT' && (
 							<span className='text-primary'>
-								{t('ROLES.EDITOR')} {userRoleEmojis[2]}
+								{t('ROLES.CAN_EDIT')} {userRoleEmojis[2]}
 							</span>
 						)}
 						{userRole === 'READ_ONLY' && (
@@ -80,7 +80,7 @@ export const PermissionIndicator = ({ userRole, worksapceName }: Props) => {
 							)}
 							{userRole === 'CAN_EDIT' && (
 								<span className='text-primary'>
-									{t('ROLES.EDITOR')} {userRoleEmojis[2]}
+									{t('ROLES.CAN_EDIT')} {userRoleEmojis[2]}
 								</span>
 							)}
 							{userRole === 'READ_ONLY' && (
@@ -93,7 +93,7 @@ export const PermissionIndicator = ({ userRole, worksapceName }: Props) => {
 							{t('DESC', { workspace: worksapceName })}{' '}
 							{userRole === 'OWNER' && <span>{t('ROLES.OWNER')}</span>}
 							{userRole === 'ADMIN' && <span>{t('ROLES.ADMIN')}</span>}
-							{userRole === 'CAN_EDIT' && <span>{t('ROLES.EDITOR')}</span>}
+							{userRole === 'CAN_EDIT' && <span>{t('ROLES.CAN_EDIT')}</span>}
 							{userRole === 'READ_ONLY' && <span>{t('ROLES.READ_ONLY')}</span>}
 						</DialogDescription>
 					</DialogHeader>
@@ -101,7 +101,7 @@ export const PermissionIndicator = ({ userRole, worksapceName }: Props) => {
 						<p>
 							{userRole === 'OWNER' && <>{t('ROLES_DESC.OWNER')}</>}
 							{userRole === 'ADMIN' && <>{t('ROLES_DESC.ADMIN')}</>}
-							{userRole === 'CAN_EDIT' && <>{t('ROLES_DESC.EDITOR')}</>}
+							{userRole === 'CAN_EDIT' && <>{t('ROLES_DESC.CAN_EDIT')}</>}
 							{userRole === 'READ_ONLY' && <>{t('ROLES_DESC.READ_ONLY')}</>}
 						</p>
 					</div>

@@ -59,6 +59,7 @@ model User {
   pomodoroSettings    PomodoroSettings[]
   assignedToTask      assignedToTask[]
   assignedToMindMap   assignedToMindMap[]
+  lastTimeActive      DateTime            @default(now())
 }
 
 model PomodoroSettings {

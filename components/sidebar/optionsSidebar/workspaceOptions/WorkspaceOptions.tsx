@@ -9,6 +9,7 @@ import { WorkspaceShortcuts } from '@/types/extended';
 import { LoadingState } from '@/components/ui/loading-state';
 import { NewTask } from './actions/NewTask';
 import { NewMindMap } from './actions/NewMindMap';
+import { UsersContainer } from './usersList/UsersContainer';
 
 interface Props {
 	workspaceId: string;
@@ -67,6 +68,7 @@ export const WorkspaceOptions = ({ workspaceId }: Props) => {
 					<NewMindMap workspaceId={workspaceId} />
 				</div>
 			</div>
+			<UsersContainer />
 		</div>
 	);
 };

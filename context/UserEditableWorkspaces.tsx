@@ -29,8 +29,6 @@ export const UserEditableWorkspacesProvider = ({ children }: Props) => {
 
 			const resposne = await res.json();
 
-			console.log(resposne);
-
 			return resposne;
 		},
 

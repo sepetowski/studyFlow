@@ -53,7 +53,7 @@ export const DashboardHeader = async ({
 				)}
 			</div>
 			<div className='flex items-center gap-1 sm:gap-2 '>
-				{children}
+				<div className='flex flex-wrap items-center gap-1 sm:gap-2'>{children}</div>
 				<User
 					profileImage={session?.user.image}
 					username={session.user.username!}

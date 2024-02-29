@@ -37,10 +37,10 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 						href: '/',
 					},
 				]}>
+				<AddTaskShortcut userId={session.user.id} />
 				{(user?.userRole === 'ADMIN' || user?.userRole === 'OWNER') && (
 					<InviteUsers workspace={workspace} />
 				)}
-				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
 			<main className='flex flex-col gap-2'>
 				<WorkspaceTab workspace={workspace} workspaceId={workspace.id} />
