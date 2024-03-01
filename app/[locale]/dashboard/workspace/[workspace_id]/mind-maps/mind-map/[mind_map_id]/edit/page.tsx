@@ -35,10 +35,9 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		<AutosaveIndicatorProvider>
 			<AutoSaveMindMapProvider>
 				<DashboardHeader showBackBtn hideBreadCrumb showSavingStatus>
-					<PermissionIndicator userRole={userRole} worksapceName={workspace.name} />
-					<AddTaskShortcut userId={session.user.id} />
 					{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
+					<AddTaskShortcut userId={session.user.id} />
 				</DashboardHeader>
 				<main className='flex flex-col gap-2 h-full'>
 					<MindMap

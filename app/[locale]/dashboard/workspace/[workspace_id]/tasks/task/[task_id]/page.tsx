@@ -49,10 +49,9 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 						useTranslate: task.title ? false : true,
 					},
 				]}>
-				<PermissionIndicator userRole={userRole} worksapceName={workspace.name} />
-				<AddTaskShortcut userId={session.user.id} />
 				{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
+				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
 			<main className='flex flex-col gap-2  '>
 				<ReadOnlyContent task={task} isSavedByUser={isSavedByUser} userRole={userRole} />

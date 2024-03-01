@@ -27,7 +27,7 @@ export const InviteUsers = ({ workspace }: Props) => {
 					<HoverCardTrigger>
 						<Button
 							size={'icon'}
-							className='w-8 h-8 sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white  sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 text-primary'
+							className='w-6 h-6  sm:h-9 sm:w-auto sm:bg-primary/10 sm:text-primary sm:font-semibold sm:hover:bg-primary sm:hover:text-white sm:rounded-md sm:px-3 sm:space-x-2 text-primary'
 							variant='ghost'>
 							<span className='hidden sm:inline'>{t('INVITE')}</span>
 							<UserPlus2 size={18} />
