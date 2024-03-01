@@ -23,8 +23,8 @@ export const NotificationItem = ({
 		createdDate,
 		workspace,
 		newUserRole,
-		tasktId,
-		mindMaptId,
+		taskId,
+		mindMapId,
 		notfiyType,
 		id,
 	},
@@ -43,8 +43,8 @@ export const NotificationItem = ({
 		notfiyType,
 		newUserRole,
 		workspace,
-		tasktId,
-		mindMaptId
+		taskId,
+		mindMapId
 	);
 
 	const { mutate: updateToClickStatus } = useMutation({
@@ -103,11 +103,16 @@ export const NotificationItem = ({
 						<p>
 							<span className='font-bold'>{name}</span> <span>{textContent}</span>
 						</p>
-						<p className='text-xs text-muted-foreground'>{format.relativeTime(dateTime, now)}</p>
+						<p
+							className={`text-xs transition-colors duration-200 ${
+								cliked ? 'text-muted-foreground' : ' text-primary font-bold'
+							}`}>
+							{format.relativeTime(dateTime, now)}
+						</p>
 					</div>
 					{!cliked && (
 						<div>
-							<div className='h-6 w-6'>
+							<div className='h-6 w-6 text-primary'>
 								<BellDot size={16} />
 							</div>
 						</div>

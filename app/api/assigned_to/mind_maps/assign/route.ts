@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { z } from 'zod';
+import { NotfiyType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -68,6 +69,17 @@ export async function POST(request: Request) {
 				},
 			});
 
+			if (assignToUserId !== session.user.id)
+				await db.notification.create({
+					data: {
+						notifayCreatorId: session.user.id,
+						userId: assignToUserId,
+						notfiyType: NotfiyType.NEW_ASSIGMENT_MIND_MAP,
+						workspaceId,
+						mindMapId,
+					},
+				});
+
 			return NextResponse.json('OK', { status: 200 });
 		} else {
 			await db.assignedToMindMap.delete({
@@ -75,6 +87,17 @@ export async function POST(request: Request) {
 					id: assigningUser.assignedToMindMap[0].id,
 				},
 			});
+
+			if (assigningUser.assignedToMindMap[0].id !== session.user.id)
+				await db.notification.deleteMany({
+					where: {
+						notifayCreatorId: session.user.id,
+						userId: assigningUser.assignedToMindMap[0].id,
+						notfiyType: NotfiyType.NEW_ASSIGMENT_MIND_MAP,
+						workspaceId,
+						mindMapId,
+					},
+				});
 
 			return NextResponse.json('OK', { status: 200 });
 		}

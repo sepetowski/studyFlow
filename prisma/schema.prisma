@@ -245,8 +245,8 @@ model Notification {
   createdDate      DateTime       @default(now())
   notfiyType       NotfiyType
   newUserRole      UserPermisson?
-  tasktId          String?
-  mindMaptId       String?
+  taskId           String?
+  mindMapId        String?
 
   @@index([userId])
   @@index([notifayCreatorId])

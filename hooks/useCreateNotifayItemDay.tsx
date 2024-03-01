@@ -9,7 +9,7 @@ export const useCreateNotifayItemDay = (
 		id: string;
 		name: string;
 	} | null,
-	tasktId: string | null,
+	taskId: string | null,
 	mindMapId: string | null
 ) => {
 	const t = useTranslations('NOTIFICATIONS.NOTIFAY_ITEM');
@@ -27,27 +27,27 @@ export const useCreateNotifayItemDay = (
 			break;
 
 		case 'NEW_TASK':
-			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${tasktId}`;
+			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${taskId}`;
 			textContent = t('NEW_TASK_TEXT', { name: workspace?.name });
 			break;
 		case 'NEW_MIND_MAP':
-			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${mindMapId}`;
+			link = `/dashboard/workspace/${workspace?.id}/mind-maps/mind-map/${mindMapId}`;
 			textContent = t('NEW_MIND_MAP_TEXT', { name: workspace?.name });
 			break;
 		case 'NEW_ROLE':
 			let role =
 				newUserRole === 'ADMIN' ? 'Admin' : newUserRole === 'CAN_EDIT' ? 'Edytor' : 'Przeglądajacy';
 
-			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${tasktId}`;
+			link = `/dashboard/workspace/${workspace?.id}`;
 			textContent = t('NEW_ROLE_TEXT', { name: workspace?.name, role });
 			break;
 		case 'NEW_ASSIGMENT_TASK': {
-			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${tasktId}`;
+			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${taskId}`;
 			textContent = t('NEW_ASSIGMENT_TASK_TEXT', { name: workspace?.name });
 			break;
 		}
 		case 'NEW_ASSIGMENT_MIND_MAP': {
-			link = `/dashboard/workspace/${workspace?.id}/tasks/task/${mindMapId}`;
+			link = `/dashboard/workspace/${workspace?.id}/mind-maps/mind-map/${mindMapId}`;
 			textContent = t('NEW_ASSIGMENT_MIND_MAP_TEXT', { name: workspace?.name });
 			break;
 		}

@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { deleteMindMapSchema } from '@/schema/mindMapSchema';
+import { NotfiyType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -50,6 +51,14 @@ export async function POST(request: Request) {
 		await db.mindMap.delete({
 			where: {
 				id: mindMap.id,
+			},
+		});
+
+		await db.notification.deleteMany({
+			where: {
+				workspaceId,
+				mindMapId: mindMap.id,
+				notfiyType: NotfiyType.NEW_MIND_MAP,
 			},
 		});
 

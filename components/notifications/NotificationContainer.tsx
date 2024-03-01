@@ -1,11 +1,9 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Bell } from 'lucide-react';
+import { Bell, BellOff } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area';
 import { NotificationItem } from './NotificationItem';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -14,6 +12,7 @@ import { LoadingState } from '../ui/loading-state';
 import axios, { AxiosError } from 'axios';
 import { useToast } from '../ui/use-toast';
 import { useTranslations } from 'next-intl';
+import { ClientError } from '../error/ClientError';
 
 interface Props {
 	userId: string;
@@ -163,33 +162,53 @@ export const NotificationContainer = ({ userId }: Props) => {
 				<PopoverContent
 					side='bottom'
 					align='end'
-					className='w-fit max-w-[300px] sm:max-w-[390px] p-2 sm:p-4'>
-					{isLoading ? (
+					className='w-fit max-w-[300px] sm:max-w-[390px] p-2 sm:p-4 '>
+					{isError ? (
+						<ClientError
+							onReftech={refetch}
+							className='bg-popover mt-0 sm:mt-0 md:mt-0'
+							message='Wystapił błąd podczas poberania powaidomień'
+						/>
+					) : isLoading ? (
 						<div className='w-28 h-28 flex justify-center items-center'>
 							<LoadingState className='w-6 h-6' />
 						</div>
-					) : (
-						<div className='flex flex-col gap-6'>
-							<div className='flex gap-2  sm:gap-6  items-center'>
-								<h4 className='font-medium leading-none'>Powiadomienia</h4>
-								<Button
-									disabled={!isAnyClickedFalse}
-									onClick={() => {
-										updateAllToClickStatus();
-									}}
-									className='text-xs '
-									size={'sm'}
-									variant={'secondary'}>
-									Oznacz wszystkie jako przeczytane
-								</Button>
-							</div>
-							<ScrollArea className='	h-96'>
-								<div className='flex flex-col gap-3 h-full '>
-									{userNotifications?.map((notifay) => (
-										<NotificationItem key={notifay.id} notifay={notifay} />
-									))}
+					) : userNotifications.length > 0 ? (
+						<>
+							<div className='flex flex-col gap-6'>
+								<div className='flex gap-2  sm:gap-6  items-center'>
+									<h4 className='font-medium leading-none'>Powiadomienia</h4>
+									<Button
+										disabled={!isAnyClickedFalse}
+										onClick={() => {
+											updateAllToClickStatus();
+										}}
+										className='text-xs '
+										size={'sm'}
+										variant={'secondary'}>
+										Oznacz wszystkie jako przeczytane
+									</Button>
 								</div>
-							</ScrollArea>
+								{/* h-max dosent work due to ScrolLArea bug in Popover */}
+								<ScrollArea
+									className={`${
+										userNotifications.length >= 4
+											? userNotifications.length >= 8
+												? 'h-96'
+												: 'h-72'
+											: 'h-56'
+									}`}>
+									<div className='flex flex-col gap-3 h-full '>
+										{userNotifications?.map((notifay) => (
+											<NotificationItem key={notifay.id} notifay={notifay} />
+										))}
+									</div>
+								</ScrollArea>
+							</div>
+						</>
+					) : (
+						<div className='py-2'>
+							<p className=' font-semibold'>Nie posiadasz jeszcze żadnych powaidomień</p>
 						</div>
 					)}
 				</PopoverContent>
