@@ -56,7 +56,7 @@ export const DashboardHeader = async ({
 			<div className='flex items-center gap-0.5 sm:gap-1 '>
 				<div className='flex flex-wrap items-center gap-0.5 sm:gap-1'>
 					{children}
-					<NotificationContainer />
+					<NotificationContainer userId={session.user.id} />
 				</div>
 				<User
 					profileImage={session?.user.image}

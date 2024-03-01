@@ -195,7 +195,8 @@
 			"NO_TASK_FOUND": "Task not found",
 			"NO_MIND_MAP_FOUND": "Mind map not found",
 			"CANT_LEAVE": "Owner of workspace cannot leave from worksapce. You have to delete workspace from settings page",
-			"CANT_GET_USERS": "Failed to update activity status"
+			"CANT_GET_USERS": "Failed to update activity status",
+			"CANT_UPDATE_SEEN_NOTIFY": "Failed to update the read status of notifications"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -769,6 +770,17 @@
 		"ERROR": {
 			"MG": "Failed to retrieve workspace members information",
 			"BTN": "Try again"
+		}
+	},
+	"NOTIFICATIONS": {
+		"NOTIFAY_ITEM": {
+			"NEW_USER_IN_WORKSPACE_TEXT": "has joined the workspace {name}",
+			"USER_LEFT_WORKSPACE_TEXT": "has left the workspace {name}",
+			"NEW_TASK_TEXT": "has added a new task in the workspace {name}",
+			"NEW_MIND_MAP_TEXT": "has added a new mind map in the workspace {name}",
+			"NEW_ROLE_TEXT": "You have been granted {role} level permissions in the workspace {name}",
+			"NEW_ASSIGMENT_TASK_TEXT": "You have been assigned a task in the workspace {name}",
+			"NEW_ASSIGMENT_MIND_MAP_TEXT": "You have been assigned to a mind map in the workspace {name}"
 		}
 	},
 

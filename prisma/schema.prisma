@@ -240,7 +240,7 @@ model Notification {
   notifayCreatorId String
   workspace        Workspace?     @relation(fields: [workspaceId], references: [id])
   workspaceId      String?
-  unseen           Boolean        @default(false)
+  seen             Boolean        @default(false)
   cliked           Boolean        @default(false)
   createdDate      DateTime       @default(now())
   notfiyType       NotfiyType
@@ -290,12 +290,6 @@ enum PomodoroSoundEffect {
   BELL
 }
 
-// 1. User dolaczyl do wokrpsaeca (wszytskim czlonkom wokrspace)
-// 2. User wyszedl z worksapcea (wszytskim czlonkom workspacea)
-// 3. User dodal nowe zadanie  (wszytskim czlonkom workspacea)
-// 4. User dodal nowa mape mysli (wszytskim czlonkom workspacea)
-// 5. Userowi zmieniono range (konretny user)
-// 6. User zostal przypisany do zadania (konrenty user)
 enum NotfiyType {
   NEW_USER_IN_WORKSPACE
   USER_LEFT_WORKSPACE
