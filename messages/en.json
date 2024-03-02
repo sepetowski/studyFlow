@@ -794,6 +794,11 @@
 		}
 	},
 
+	"NETWORK_INDICAOTR": {
+		"ONLINE": "Reconnected to the internet",
+		"OFLINE": "No internet connection. Check your network connection"
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"
