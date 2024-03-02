@@ -793,11 +793,6 @@
 		}
 	},
 
-	"NETWORK_INDICAOTR": {
-		"ONLINE": "Ponownie połączono z internetem",
-		"OFLINE": "Brak internetu. Sprawdź swoje połączenie sieciowe"
-	},
-
 	"CLIENT_ERROR": {
 		"TITLE": "O nie... Coś poszło nie tak",
 		"BTN": "Spróbuj ponownie"
