@@ -7,7 +7,7 @@ import { useTuncateText } from '@/hooks/useTruncateText';
 import { UserNotification } from '@/types/extended';
 import { useFormatter, useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
-import { useCreateNotifayItemDay } from '@/hooks/useCreateNotifayItemDay';
+import { useCreateNotifayItem } from '@/hooks/useCreateNotifayItem';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useToast } from '../ui/use-toast';
@@ -39,7 +39,7 @@ export const NotificationItem = ({
 	const { toast } = useToast();
 	const name = useTuncateText(username, 20);
 
-	const { link, textContent } = useCreateNotifayItemDay(
+	const { link, textContent } = useCreateNotifayItem(
 		notfiyType,
 		newUserRole,
 		workspace,

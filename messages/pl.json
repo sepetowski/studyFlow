@@ -772,7 +772,17 @@
 		}
 	},
 	"NOTIFICATIONS": {
+		"TITLE": "Powiadomienia",
+		"MARK_AS_READ": "Oznacz wszystkie jako przeczytane",
+		"NO_NOTIFICATIONS": "Nie posiadasz jeszcze żadnych powiadomień",
+		"ERROR": "Wystąpił błąd podczas poberania powaidomień",
 		"NOTIFAY_ITEM": {
+			"ROLES": {
+				"ADMIN": "Admin",
+				"CAN_EDIT": "Edytor",
+				"READ_ONLY": "Przeglądający"
+			},
+
 			"NEW_USER_IN_WORKSPACE_TEXT": "dołączył(a) do przestrzeni roboczej {name}",
 			"USER_LEFT_WORKSPACE_TEXT": "opuścił(a) przestrzeń roboczą {name}",
 			"NEW_TASK_TEXT": "dodał(a) nowe zadanie w przestrzeni roboczej {name}",

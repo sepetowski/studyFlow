@@ -2,7 +2,7 @@
 import { NotfiyType, UserPermisson } from '@prisma/client';
 import { useTranslations } from 'next-intl';
 
-export const useCreateNotifayItemDay = (
+export const useCreateNotifayItem = (
 	notifayType: NotfiyType,
 	newUserRole: UserPermisson | null,
 	workspace: {
@@ -36,7 +36,11 @@ export const useCreateNotifayItemDay = (
 			break;
 		case 'NEW_ROLE':
 			let role =
-				newUserRole === 'ADMIN' ? 'Admin' : newUserRole === 'CAN_EDIT' ? 'Edytor' : 'Przeglądajacy';
+				newUserRole === 'ADMIN'
+					? t('ROLES.ADMIN')
+					: newUserRole === 'CAN_EDIT'
+					? t('ROLES.CAN_EDIT')
+					: t('ROLES.READ_ONLY');
 
 			link = `/dashboard/workspace/${workspace?.id}`;
 			textContent = t('NEW_ROLE_TEXT', { name: workspace?.name, role });

@@ -773,13 +773,23 @@
 		}
 	},
 	"NOTIFICATIONS": {
+		"TITLE": "Notifications",
+		"MARK_AS_READ": "Mark all as read",
+		"NO_NOTIFICATIONS": "You don't have any notifications yet",
+		"ERROR": "An error occurred while fetching notifications",
 		"NOTIFAY_ITEM": {
+			"ROLES": {
+				"ADMIN": "Admin",
+				"CAN_EDIT": "Editor",
+				"READ_ONLY": "Viewer"
+			},
+
 			"NEW_USER_IN_WORKSPACE_TEXT": "has joined the workspace {name}",
 			"USER_LEFT_WORKSPACE_TEXT": "has left the workspace {name}",
 			"NEW_TASK_TEXT": "has added a new task in the workspace {name}",
 			"NEW_MIND_MAP_TEXT": "has added a new mind map in the workspace {name}",
 			"NEW_ROLE_TEXT": "You have been granted {role} level permissions in the workspace {name}",
-			"NEW_ASSIGMENT_TASK_TEXT": "You have been assigned a task in the workspace {name}",
+			"NEW_ASSIGMENT_TASK_TEXT": "You have been assigned to a task in the workspace {name}",
 			"NEW_ASSIGMENT_MIND_MAP_TEXT": "You have been assigned to a mind map in the workspace {name}"
 		}
 	},

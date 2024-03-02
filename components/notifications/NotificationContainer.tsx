@@ -19,6 +19,7 @@ interface Props {
 }
 
 export const NotificationContainer = ({ userId }: Props) => {
+	const t = useTranslations('NOTIFICATIONS');
 	const m = useTranslations('MESSAGES');
 
 	const [unseenNotifications, setUnseenNotifications] = useState<UserNotification[]>([]);
@@ -157,7 +158,7 @@ export const NotificationContainer = ({ userId }: Props) => {
 					</HoverCardTrigger>
 				</PopoverTrigger>
 				<HoverCardContent>
-					<span>Powiadomienia</span>
+					<span>{t('TITLE')}</span>
 				</HoverCardContent>
 				<PopoverContent
 					side='bottom'
@@ -167,7 +168,7 @@ export const NotificationContainer = ({ userId }: Props) => {
 						<ClientError
 							onReftech={refetch}
 							className='bg-popover mt-0 sm:mt-0 md:mt-0'
-							message='Wystapił błąd podczas poberania powaidomień'
+							message={t('ERROR')}
 						/>
 					) : isLoading ? (
 						<div className='w-28 h-28 flex justify-center items-center'>
@@ -176,8 +177,8 @@ export const NotificationContainer = ({ userId }: Props) => {
 					) : userNotifications.length > 0 ? (
 						<>
 							<div className='flex flex-col gap-6'>
-								<div className='flex gap-2  sm:gap-6  items-center'>
-									<h4 className='font-medium leading-none'>Powiadomienia</h4>
+								<div className='flex gap-2  sm:gap-6  items-center justify-between'>
+									<h4 className='font-medium leading-none'>{t('TITLE')}</h4>
 									<Button
 										disabled={!isAnyClickedFalse}
 										onClick={() => {
@@ -186,7 +187,7 @@ export const NotificationContainer = ({ userId }: Props) => {
 										className='text-xs '
 										size={'sm'}
 										variant={'secondary'}>
-										Oznacz wszystkie jako przeczytane
+										{t('MARK_AS_READ')}
 									</Button>
 								</div>
 								{/* h-max dosent work due to ScrolLArea bug in Popover */}
@@ -208,7 +209,7 @@ export const NotificationContainer = ({ userId }: Props) => {
 						</>
 					) : (
 						<div className='py-2'>
-							<p className=' font-semibold'>Nie posiadasz jeszcze żadnych powaidomień</p>
+							<p className=' font-semibold'>{t('NO_NOTIFICATIONS')}</p>
 						</div>
 					)}
 				</PopoverContent>
