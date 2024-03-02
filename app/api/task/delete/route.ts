@@ -61,7 +61,6 @@ export async function POST(request: Request) {
 			where: {
 				workspaceId,
 				taskId: task.id,
-
 				notfiyType: NotfiyType.NEW_TASK,
 			},
 		});
