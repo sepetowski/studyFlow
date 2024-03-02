@@ -143,7 +143,7 @@
 		"FINISH": {
 			"TITLE": "That's it!",
 			"DESC_FIRST": "You can already start using",
-			"DESC_SECOND": "by clicking the button below"
+			"DESC_SECOND": " by clicking the button below"
 		},
 		"START_BTN": "Start",
 		"NEXT_BTN": "Continue"
