@@ -1,6 +1,7 @@
 import {
 	CustomColors,
 	MindMap,
+	Notification,
 	Tag,
 	Task,
 	UserPermisson,
@@ -134,4 +135,16 @@ export interface UserActiveItemList {
 	image: string | null;
 	userRole: UserPermisson;
 	lastTimeActive: Date;
+}
+
+export interface UserNotification extends Notification {
+	notifayCreator: {
+		id: string;
+		username: string;
+		image: string | null;
+	};
+	workspace: {
+		id: string;
+		name: string;
+	} | null;
 }

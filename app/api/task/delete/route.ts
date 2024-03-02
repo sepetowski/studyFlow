@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { deleteTaskSchema } from '@/schema/taskSchema';
+import { NotfiyType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -53,6 +54,15 @@ export async function POST(request: Request) {
 		await db.task.delete({
 			where: {
 				id: task.id,
+			},
+		});
+
+		await db.notification.deleteMany({
+			where: {
+				workspaceId,
+				taskId: task.id,
+
+				notfiyType: NotfiyType.NEW_TASK,
 			},
 		});
 

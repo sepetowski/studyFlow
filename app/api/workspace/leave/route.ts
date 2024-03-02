@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { z } from 'zod';
+import { NotfiyType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -108,6 +109,26 @@ export async function POST(request: Request) {
 					userId: session.user.id,
 				},
 			},
+		});
+
+		const workspaceUsers = await db.subscription.findMany({
+			where: {
+				workspaceId: id,
+			},
+			select: {
+				userId: true,
+			},
+		});
+
+		const notificationsData = workspaceUsers.map((user) => ({
+			notifayCreatorId: session.user.id,
+			userId: user.userId,
+			workspaceId: id,
+			notfiyType: NotfiyType.USER_LEFT_WORKSPACE,
+		}));
+
+		await db.notification.createMany({
+			data: notificationsData,
 		});
 
 		return NextResponse.json('ok', { status: 200 });

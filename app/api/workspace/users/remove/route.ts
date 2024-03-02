@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { deleteUserFromWorkspaceSchema } from '@/schema/deleteUserFromWorkspaceSchema';
+import { NotfiyType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -50,7 +51,27 @@ export async function POST(request: Request) {
 			},
 		});
 
-		return NextResponse.json("OK", { status: 200 });
+		const workspaceUsers = await db.subscription.findMany({
+			where: {
+				workspaceId,
+			},
+			select: {
+				userId: true,
+			},
+		});
+
+		const notificationsData = workspaceUsers.map((user) => ({
+			notifayCreatorId: userId,
+			userId: user.userId,
+			workspaceId,
+			notfiyType: NotfiyType.USER_LEFT_WORKSPACE,
+		}));
+
+		await db.notification.createMany({
+			data: notificationsData,
+		});
+
+		return NextResponse.json('OK', { status: 200 });
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}

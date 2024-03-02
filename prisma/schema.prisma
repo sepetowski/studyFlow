@@ -36,30 +36,33 @@ model Session {
 }
 
 model User {
-  id                  String              @id @default(cuid())
-  name                String?
-  surname             String?
-  username            String              @unique
-  email               String?             @unique
-  emailVerified       DateTime?
-  hashedPassword      String?
-  image               String?
-  completedOnboarding Boolean             @default(false)
-  accounts            Account[]
-  sessions            Session[]
-  useCase             UseCase?
-  createdWorkspaces   Workspace[]         @relation("CreatedBy")
-  subscriptions       Subscription[]
-  createdTasks        Task[]              @relation("TaskCreatedByUser")
-  updatedTasks        Task[]              @relation("TaskUpdatedByUser")
-  savedTask           savedTask[]
-  createdMindMaps     MindMap[]           @relation("MindMapCreatedByUser")
-  updatedMindMaps     MindMap[]           @relation("MindMapUpdatedByUser")
-  savedMindMaps       savedMindMaps[]
-  pomodoroSettings    PomodoroSettings[]
-  assignedToTask      assignedToTask[]
-  assignedToMindMap   assignedToMindMap[]
-  lastTimeActive      DateTime            @default(now())
+  id                       String              @id @default(cuid())
+  name                     String?
+  surname                  String?
+  username                 String              @unique
+  email                    String?             @unique
+  emailVerified            DateTime?
+  hashedPassword           String?
+  image                    String?
+  completedOnboarding      Boolean             @default(false)
+  accounts                 Account[]
+  sessions                 Session[]
+  useCase                  UseCase?
+  createdWorkspaces        Workspace[]         @relation("CreatedBy")
+  subscriptions            Subscription[]
+  createdTasks             Task[]              @relation("TaskCreatedByUser")
+  updatedTasks             Task[]              @relation("TaskUpdatedByUser")
+  savedTask                savedTask[]
+  createdMindMaps          MindMap[]           @relation("MindMapCreatedByUser")
+  updatedMindMaps          MindMap[]           @relation("MindMapUpdatedByUser")
+  savedMindMaps            savedMindMaps[]
+  pomodoroSettings         PomodoroSettings[]
+  assignedToTask           assignedToTask[]
+  assignedToMindMap        assignedToMindMap[]
+  userNotifications        Notification[]      @relation("NotifayUser")
+  userCreatedNotifications Notification[]      @relation("NotifayCreator")
+
+  lastTimeActive DateTime @default(now())
 }
 
 model PomodoroSettings {
@@ -94,6 +97,7 @@ model Workspace {
   tasks        Task[]
   tags         Tag[]
   mindMaps     MindMap[]
+  notification Notification[]
 
   @@index([creatorId])
 }
@@ -228,6 +232,27 @@ model VerificationToken {
   @@unique([identifier, token])
 }
 
+model Notification {
+  id               String         @id @default(cuid())
+  user             User           @relation(name: "NotifayUser", fields: [userId], references: [id], onDelete: Cascade)
+  userId           String
+  notifayCreator   User           @relation(name: "NotifayCreator", fields: [notifayCreatorId], references: [id], onDelete: Cascade)
+  notifayCreatorId String
+  workspace        Workspace?     @relation(fields: [workspaceId], references: [id])
+  workspaceId      String?
+  seen             Boolean        @default(false)
+  cliked           Boolean        @default(false)
+  createdDate      DateTime       @default(now())
+  notfiyType       NotfiyType
+  newUserRole      UserPermisson?
+  taskId           String?
+  mindMapId        String?
+
+  @@index([userId])
+  @@index([notifayCreatorId])
+  @@index([workspaceId])
+}
+
 enum CustomColors {
   PURPLE
   RED
@@ -263,4 +288,14 @@ enum PomodoroSoundEffect {
   DIGITAL
   FANCY
   BELL
+}
+
+enum NotfiyType {
+  NEW_USER_IN_WORKSPACE
+  USER_LEFT_WORKSPACE
+  NEW_TASK
+  NEW_MIND_MAP
+  NEW_ROLE
+  NEW_ASSIGMENT_TASK
+  NEW_ASSIGMENT_MIND_MAP
 }

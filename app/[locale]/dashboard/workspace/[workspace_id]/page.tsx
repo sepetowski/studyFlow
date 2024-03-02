@@ -34,10 +34,9 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 						href: `/dashboard/workspace/${workspace_id}`,
 					},
 				]}>
-				<PermissionIndicator userRole={userRole} worksapceName={workspace.name} />
-				<AddTaskShortcut userId={session.user.id} />
 				{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
+				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 h-full'>
 				{workspace.name} {workspace.id}

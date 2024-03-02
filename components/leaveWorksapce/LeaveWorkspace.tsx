@@ -63,7 +63,7 @@ export const LeaveWorkspace = ({ workspace: { id, name } }: Props) => {
 				<DialogTrigger asChild>
 					<HoverCardTrigger>
 						<Button
-							className='sm:h-9 sm:rounded-md sm:px-3 sm:w-auto sm:space-x-2 sm:bg-destructive/10 sm:hover:bg-destructive text-destructive hover:text-white'
+							className=' w-6 h-6 sm:h-9 sm:w-auto sm:rounded-md sm:px-3  sm:space-x-2 sm:bg-destructive/10 sm:hover:bg-destructive text-destructive hover:text-white'
 							onClick={() => setOpen(true)}
 							variant={'ghost'}
 							size={'icon'}>

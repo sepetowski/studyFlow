@@ -196,7 +196,8 @@
 			"NO_TASK_FOUND": "Nie znaleziono zadania",
 			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli",
 			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień",
-			"CANT_GET_USERS": "Nie udało sie zaktualizować statusu aktywności"
+			"CANT_GET_USERS": "Nie udało sie zaktualizować statusu aktywności",
+			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -768,6 +769,27 @@
 		"ERROR": {
 			"MG": "Nie udało się pobrać informacji o czołonkach przestrzeni roboczej",
 			"BTN": "Spróbuj ponownie"
+		}
+	},
+	"NOTIFICATIONS": {
+		"TITLE": "Powiadomienia",
+		"MARK_AS_READ": "Oznacz wszystkie jako przeczytane",
+		"NO_NOTIFICATIONS": "Nie posiadasz jeszcze żadnych powiadomień",
+		"ERROR": "Wystąpił błąd podczas poberania powaidomień",
+		"NOTIFAY_ITEM": {
+			"ROLES": {
+				"ADMIN": "Admin",
+				"CAN_EDIT": "Edytor",
+				"READ_ONLY": "Przeglądający"
+			},
+
+			"NEW_USER_IN_WORKSPACE_TEXT": "dołączył(a) do przestrzeni roboczej {name}",
+			"USER_LEFT_WORKSPACE_TEXT": "opuścił(a) przestrzeń roboczą {name}",
+			"NEW_TASK_TEXT": "dodał(a) nowe zadanie w przestrzeni roboczej {name}",
+			"NEW_MIND_MAP_TEXT": "dodał(a) nową mapę myśli w przestrzeni roboczej {name}",
+			"NEW_ROLE_TEXT": "otrzymałeś(aś) uprawnienia poziomu {role} w przestrzeni roboczej {name}",
+			"NEW_ASSIGMENT_TASK_TEXT": "zostałeś(aś) przypisany(na) do zadania w przestrzeni roboczej  {name}",
+			"NEW_ASSIGMENT_MIND_MAP_TEXT": "zostałeś(aś) przypisany(na) do mapy myśli w przestrzeni roboczej {name}"
 		}
 	},
 

@@ -2,6 +2,7 @@ import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
 import { editUserRoleSchema } from '@/schema/editUserRoleSchema';
+import { NotfiyType } from '@prisma/client';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -51,6 +52,15 @@ export async function POST(request: Request) {
 			},
 			data: {
 				userRole: newRole,
+			},
+		});
+
+		await db.notification.create({
+			data: {
+				notifayCreatorId: session.user.id,
+				userId: userId,
+				workspaceId,
+				notfiyType: NotfiyType.NEW_ROLE,
 			},
 		});
 

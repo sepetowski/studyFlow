@@ -7,6 +7,7 @@ import Welcoming from '../common/Welcoming';
 import { cn } from '@/lib/utils';
 import { SavingStatus } from './SavingStatus';
 import { BackBtn } from './BackBtn';
+import { NotificationContainer } from '../notifications/NotificationContainer';
 
 interface Props {
 	addManualRoutes?: {
@@ -52,8 +53,11 @@ export const DashboardHeader = async ({
 					<BreadcrumbNav addManualRoutes={addManualRoutes} workspaceHref={workspaceHref} />
 				)}
 			</div>
-			<div className='flex items-center gap-1 sm:gap-2 '>
-				<div className='flex flex-wrap items-center gap-1 sm:gap-2'>{children}</div>
+			<div className='flex items-center gap-0.5 sm:gap-1 '>
+				<div className='flex flex-wrap items-center gap-0.5 sm:gap-1'>
+					{children}
+					<NotificationContainer userId={session.user.id} />
+				</div>
 				<User
 					profileImage={session?.user.image}
 					username={session.user.username!}

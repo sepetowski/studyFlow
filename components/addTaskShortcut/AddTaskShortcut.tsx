@@ -152,8 +152,8 @@ export const AddTaskShortcut = ({ userId }: Props) => {
 			<HoverCard openDelay={250} closeDelay={250}>
 				<DialogTrigger asChild>
 					<HoverCardTrigger>
-						<Button className='w-8 h-8 sm:w-9 sm:h-9' size={'icon'} variant='ghost'>
-							<PencilRuler size={18} />
+						<Button className='w-6 h-6  sm:h-9 sm:w-9' size={'icon'} variant='ghost'>
+							<PencilRuler size={16} />
 						</Button>
 					</HoverCardTrigger>
 				</DialogTrigger>
