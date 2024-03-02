@@ -8,6 +8,7 @@ import { AuthProvider } from '@/providers/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { QueryProvider } from '@/providers/QueryProvider';
 import './globals.css';
+import { NetworkStatusIndicator } from '@/components/networkStatusIndicator/NetworkStatusIndicator';
 
 const locales = ['en', 'pl'];
 const inter = Inter({ subsets: ['latin'] });
@@ -40,6 +41,7 @@ const RootLayout = async ({
 								enableSystem
 								disableTransitionOnChange>
 								<Toaster />
+								<NetworkStatusIndicator />
 								{children}
 							</ThemeProvider>
 						</QueryProvider>
