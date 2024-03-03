@@ -54,7 +54,7 @@ export const StarredContainer = ({ userId }: Props) => {
 				</div>
 				<SortSelect sortType={sortType} refetch={refetch} />
 			</CardHeader>
-			<CardContent className='flex flex-col gap-4'>
+			<CardContent className='flex flex-col gap-2'>
 				{starredItems.map((starredItem) => (
 					<StarredItem
 						key={starredItem.id}

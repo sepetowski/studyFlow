@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { sortAssignedDataByCreatedAt } from '@/lib/sortAssignedToMeData';
+import { sortMindMapsAndTasksDataByCreatedAt } from '@/lib/sortMindMapsAndTasksDataByCreatedAt';
 import { AssignedItemType, AssignedToMeTaskAndMindMaps } from '@/types/extended';
 import { NextResponse } from 'next/server';
 
@@ -36,6 +36,14 @@ export const GET = async (request: Request) => {
 									surname: true,
 								},
 							},
+							savedTask: {
+								where: {
+									userId,
+								},
+								select: {
+									taskId: true,
+								},
+							},
 						},
 					},
 					mindMaps: {
@@ -54,6 +62,14 @@ export const GET = async (request: Request) => {
 									id: true,
 									image: true,
 									surname: true,
+								},
+							},
+							savedMindMaps: {
+								where: {
+									userId,
+								},
+								select: {
+									mindMapId: true,
 								},
 							},
 						},
@@ -79,10 +95,13 @@ export const GET = async (request: Request) => {
 								at: task.updatedAt,
 								by: task.updatedBy,
 							},
+							starred: task.savedTask.length > 0,
 						})),
 						mindMaps: [],
 					};
-					return NextResponse.json(sortAssignedDataByCreatedAt(assignedTasksData), { status: 200 });
+					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedTasksData), {
+						status: 200,
+					});
 				case 'mind-maps':
 					const assignedMindMapsData: AssignedToMeTaskAndMindMaps = {
 						tasks: [],
@@ -99,9 +118,10 @@ export const GET = async (request: Request) => {
 								at: mindMap.updatedAt,
 								by: mindMap.updatedBy,
 							},
+							starred: mindMap.savedMindMaps.length > 0,
 						})),
 					};
-					return NextResponse.json(sortAssignedDataByCreatedAt(assignedMindMapsData), {
+					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedMindMapsData), {
 						status: 200,
 					});
 
@@ -120,6 +140,7 @@ export const GET = async (request: Request) => {
 								at: task.updatedAt,
 								by: task.updatedBy,
 							},
+							starred: task.savedTask.length > 0,
 						})),
 						mindMaps: taskAndMindMaps.mindMaps.map((mindMap) => ({
 							id: mindMap.id,
@@ -134,10 +155,13 @@ export const GET = async (request: Request) => {
 								at: mindMap.updatedAt,
 								by: mindMap.updatedBy,
 							},
+							starred: mindMap.savedMindMaps.length > 0,
 						})),
 					};
 
-					return NextResponse.json(sortAssignedDataByCreatedAt(assignedAllData), { status: 200 });
+					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedAllData), {
+						status: 200,
+					});
 			}
 		} else {
 			const taskAndMindMaps = await db.workspace.findMany({
@@ -161,6 +185,14 @@ export const GET = async (request: Request) => {
 									surname: true,
 								},
 							},
+							savedTask: {
+								where: {
+									userId,
+								},
+								select: {
+									taskId: true,
+								},
+							},
 						},
 					},
 					mindMaps: {
@@ -179,6 +211,14 @@ export const GET = async (request: Request) => {
 									id: true,
 									image: true,
 									surname: true,
+								},
+							},
+							savedMindMaps: {
+								where: {
+									userId,
+								},
+								select: {
+									mindMapId: true,
 								},
 							},
 						},
@@ -210,6 +250,7 @@ export const GET = async (request: Request) => {
 									at: task.updatedAt,
 									by: task.updatedBy,
 								},
+								starred: task.savedTask.length > 0,
 							}))
 						);
 					});
@@ -222,7 +263,7 @@ export const GET = async (request: Request) => {
 								title: mindMap.title,
 								emoji: mindMap.emoji,
 								workspaceId: mindMap.workspaceId,
-								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
+								link: `/dashboard/workspace/${mindMap.workspaceId}/mind-maps/mind-map/${mindMap.id}`,
 								workspaceName: item.name,
 								createdAt: mindMap.createdAt,
 								type: 'mindMap' as AssignedItemType,
@@ -230,6 +271,7 @@ export const GET = async (request: Request) => {
 									at: mindMap.updatedAt,
 									by: mindMap.updatedBy,
 								},
+								starred: mindMap.savedMindMaps.length > 0,
 							}))
 						);
 					});
@@ -251,6 +293,7 @@ export const GET = async (request: Request) => {
 									at: task.updatedAt,
 									by: task.updatedBy,
 								},
+								starred: task.savedTask.length > 0,
 							}))
 						);
 
@@ -260,7 +303,7 @@ export const GET = async (request: Request) => {
 								title: mindMap.title,
 								emoji: mindMap.emoji,
 								workspaceId: mindMap.workspaceId,
-								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
+								link: `/dashboard/workspace/${mindMap.workspaceId}/mind-maps/mind-map/${mindMap.id}`,
 								workspaceName: item.name,
 								createdAt: mindMap.createdAt,
 								type: 'mindMap' as AssignedItemType,
@@ -268,13 +311,14 @@ export const GET = async (request: Request) => {
 									at: mindMap.updatedAt,
 									by: mindMap.updatedBy,
 								},
+								starred: mindMap.savedMindMaps.length > 0,
 							}))
 						);
 					});
 					break;
 			}
 
-			return NextResponse.json(sortAssignedDataByCreatedAt(assignedData), { status: 200 });
+			return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedData), { status: 200 });
 		}
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

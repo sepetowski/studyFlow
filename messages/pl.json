@@ -374,6 +374,10 @@
 		"SETTINGS": "Ustawienia",
 		"WARNING": "OSTRZEŻENIE",
 		"NOTICE": "UWAGA",
+		"DEFAULT_NAME": {
+			"MIND_MAP": "Mapa myśli bez tytułu",
+			"TASK": "Zadanie bez tytułu"
+		},
 		"ACTIVE_WORKSACPES": {
 			"FIRST": "Utworzyłeś",
 			"SECOND": "z",
@@ -673,10 +677,6 @@
 		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
 		"ERROR": "Wystąpił błąd podczas pobierania Twoich danych. Proszę spróbuj ponownie.",
 
-		"DEAFULT_NAME": {
-			"MIND_MAP": "Mapa myśli bez tytułu",
-			"TASK": "Zadanie bez tytułu"
-		},
 		"UNSTAR": "Usuń gwiazdkę",
 		"SORT": {
 			"ASC": "Najnowsze",
@@ -694,12 +694,7 @@
 		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
 
 		"NO_ASSIGMENT": "Nie zostałeś jeszcze nigdzie przypisany",
-		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria",
-
-		"DEAFULT_NAME": {
-			"MIND_MAP": "Mapa myśli bez tytułu",
-			"TASK": "Zadanie bez tytułu"
-		}
+		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria"
 	},
 
 	"CALENDAR": {
@@ -775,7 +770,7 @@
 		"TITLE": "Powiadomienia",
 		"MARK_AS_READ": "Oznacz wszystkie jako przeczytane",
 		"NO_NOTIFICATIONS": "Nie posiadasz jeszcze żadnych powiadomień",
-		"ERROR": "Wystąpił błąd podczas poberania powaidomień",
+		"ERROR": "Wystąpił błąd podczas pobierania powaidomień",
 		"NOTIFAY_ITEM": {
 			"ROLES": {
 				"ADMIN": "Admin",
@@ -791,6 +786,10 @@
 			"NEW_ASSIGMENT_TASK_TEXT": "zostałeś(aś) przypisany(na) do zadania w przestrzeni roboczej  {name}",
 			"NEW_ASSIGMENT_MIND_MAP_TEXT": "zostałeś(aś) przypisany(na) do mapy myśli w przestrzeni roboczej {name}"
 		}
+	},
+	"HOME_PAGE": {
+		"NO_DATA": "Nie znaleziono żadnej aktywoności. Dołącz do przestrzeni roboczej lub stwóz swoją własną. Następnie wszystkie zadania i mapy myśli, które zostaną edytowane będa tutaj widoczne w kolejności od najnowszej.",
+		"ERROR": "Wystąpił błąd podczas pobierania ostatniej aktywnośći."
 	},
 
 	"CLIENT_ERROR": {

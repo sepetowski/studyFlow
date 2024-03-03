@@ -8,7 +8,7 @@ interface Props {
 export const StarSvg = ({ className }: Props) => {
 	return (
 		<svg
-			className={cn('w-6 h-6', className)}
+			className={cn('w-4 h-4 sm:w-6 sm:h-6', className)}
 			xmlns='http://www.w3.org/2000/svg'
 			xmlnsXlink='http://www.w3.org/1999/xlink'
 			version='1.1'

@@ -109,6 +109,7 @@ export interface AssignedToMeDataItem {
 		by?: UserInfo | null;
 	};
 	workspaceId: string;
+	starred: boolean;
 }
 
 export interface AssignedToMeTaskAndMindMaps {
@@ -148,3 +149,6 @@ export interface UserNotification extends Notification {
 		name: string;
 	} | null;
 }
+
+export interface HomeRecentActivity extends AssignedToMeDataItem {}
+export interface HomeRecentTasksAndMindMapsActivity extends AssignedToMeTaskAndMindMaps {}
