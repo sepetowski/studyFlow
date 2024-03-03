@@ -17,6 +17,7 @@ import {
 import { useUnstarItem } from '@/hooks/useUnstarItem';
 import { useRouter } from 'next-intl/client';
 import { useTuncateText } from '@/hooks/useTruncateText';
+import { StarSvg } from '../common/StarSvg';
 
 interface Props {
 	item: StarredItemType;
@@ -58,11 +59,11 @@ export const StarredItem = ({
 						<div className='w-full'>
 							<div className='flex items-center'>
 								<h2 className='text-lg sm:text-2xl font-semibold'>
-									{!title && type === 'mindMap' && t('DEFAULT_NAME.MIND_MAP')}
-									{!title && type === 'task' && t('DEFAULT_NAME.TASK')}
+									{!title && type === 'mindMap' && c('DEFAULT_NAME.MIND_MAP')}
+									{!title && type === 'task' && c('DEFAULT_NAME.TASK')}
 									{title && tuncateTitle}
 								</h2>
-								<Star size={22} className='ml-2' />
+								<StarSvg className='ml-2 w-4 h-4 sm:w-5 sm:h-5' />
 							</div>
 							{updated.by && (
 								<div className='flex flex-col md:flex-row md:items-center md:gap-1'>

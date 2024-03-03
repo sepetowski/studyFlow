@@ -36,6 +36,14 @@ export const GET = async (request: Request) => {
 									surname: true,
 								},
 							},
+							savedTask: {
+								where: {
+									userId,
+								},
+								select: {
+									taskId: true,
+								},
+							},
 						},
 					},
 					mindMaps: {
@@ -54,6 +62,14 @@ export const GET = async (request: Request) => {
 									id: true,
 									image: true,
 									surname: true,
+								},
+							},
+							savedMindMaps: {
+								where: {
+									userId,
+								},
+								select: {
+									mindMapId: true,
 								},
 							},
 						},
@@ -79,6 +95,7 @@ export const GET = async (request: Request) => {
 								at: task.updatedAt,
 								by: task.updatedBy,
 							},
+							starred: task.savedTask.length > 0,
 						})),
 						mindMaps: [],
 					};
@@ -101,6 +118,7 @@ export const GET = async (request: Request) => {
 								at: mindMap.updatedAt,
 								by: mindMap.updatedBy,
 							},
+							starred: mindMap.savedMindMaps.length > 0,
 						})),
 					};
 					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedMindMapsData), {
@@ -122,6 +140,7 @@ export const GET = async (request: Request) => {
 								at: task.updatedAt,
 								by: task.updatedBy,
 							},
+							starred: task.savedTask.length > 0,
 						})),
 						mindMaps: taskAndMindMaps.mindMaps.map((mindMap) => ({
 							id: mindMap.id,
@@ -136,6 +155,7 @@ export const GET = async (request: Request) => {
 								at: mindMap.updatedAt,
 								by: mindMap.updatedBy,
 							},
+							starred: mindMap.savedMindMaps.length > 0,
 						})),
 					};
 
@@ -165,6 +185,14 @@ export const GET = async (request: Request) => {
 									surname: true,
 								},
 							},
+							savedTask: {
+								where: {
+									userId,
+								},
+								select: {
+									taskId: true,
+								},
+							},
 						},
 					},
 					mindMaps: {
@@ -183,6 +211,14 @@ export const GET = async (request: Request) => {
 									id: true,
 									image: true,
 									surname: true,
+								},
+							},
+							savedMindMaps: {
+								where: {
+									userId,
+								},
+								select: {
+									mindMapId: true,
 								},
 							},
 						},
@@ -214,6 +250,7 @@ export const GET = async (request: Request) => {
 									at: task.updatedAt,
 									by: task.updatedBy,
 								},
+								starred: task.savedTask.length > 0,
 							}))
 						);
 					});
@@ -234,6 +271,7 @@ export const GET = async (request: Request) => {
 									at: mindMap.updatedAt,
 									by: mindMap.updatedBy,
 								},
+								starred: mindMap.savedMindMaps.length > 0,
 							}))
 						);
 					});
@@ -255,6 +293,7 @@ export const GET = async (request: Request) => {
 									at: task.updatedAt,
 									by: task.updatedBy,
 								},
+								starred: task.savedTask.length > 0,
 							}))
 						);
 
@@ -272,6 +311,7 @@ export const GET = async (request: Request) => {
 									at: mindMap.updatedAt,
 									by: mindMap.updatedBy,
 								},
+								starred: mindMap.savedMindMaps.length > 0,
 							}))
 						);
 					});

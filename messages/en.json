@@ -372,6 +372,10 @@
 		"SETTINGS": "Settings",
 		"WARNING": "WARNING",
 		"NOTICE": "NOTICE",
+		"DEFAULT_NAME": {
+			"MIND_MAP": "Untitled Mind Map",
+			"TASK": "Untitled Task"
+		},
 		"ACTIVE_WORKSACPES": {
 			"FIRST": "You have created",
 			"SECOND": "out of",
@@ -672,10 +676,6 @@
 		"DESC": "Here you will find all your saved mind maps and tasks.",
 		"ERROR": "An error occurred while retrieving your data. Please try again.",
 
-		"DEFAULT_NAME": {
-			"MIND_MAP": "Untitled Mind Map",
-			"TASK": "Untitled Task"
-		},
 		"UNSTAR": "Remove star",
 		"SORT": {
 			"ASC": "Latest",
@@ -693,12 +693,7 @@
 		"DESC": "Here you will find all your saved mind maps and tasks",
 
 		"NO_ASSIGMENT": "You haven't been assigned anywhere yet",
-		"NOT_FOUND": "We couldn't find any tasks or mind maps that met the criteria",
-
-		"DEAFULT_NAME": {
-			"MIND_MAP": "Untitled Mind Map",
-			"TASK": "Untitled Task"
-		}
+		"NOT_FOUND": "We couldn't find any tasks or mind maps that met the criteria"
 	},
 
 	"CALENDAR": {

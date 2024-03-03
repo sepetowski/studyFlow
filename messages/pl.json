@@ -374,6 +374,10 @@
 		"SETTINGS": "Ustawienia",
 		"WARNING": "OSTRZEŻENIE",
 		"NOTICE": "UWAGA",
+		"DEFAULT_NAME": {
+			"MIND_MAP": "Mapa myśli bez tytułu",
+			"TASK": "Zadanie bez tytułu"
+		},
 		"ACTIVE_WORKSACPES": {
 			"FIRST": "Utworzyłeś",
 			"SECOND": "z",
@@ -673,10 +677,6 @@
 		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
 		"ERROR": "Wystąpił błąd podczas pobierania Twoich danych. Proszę spróbuj ponownie.",
 
-		"DEFAULT_NAME": {
-			"MIND_MAP": "Mapa myśli bez tytułu",
-			"TASK": "Zadanie bez tytułu"
-		},
 		"UNSTAR": "Usuń gwiazdkę",
 		"SORT": {
 			"ASC": "Najnowsze",
@@ -694,12 +694,7 @@
 		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
 
 		"NO_ASSIGMENT": "Nie zostałeś jeszcze nigdzie przypisany",
-		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria",
-
-		"DEAFULT_NAME": {
-			"MIND_MAP": "Mapa myśli bez tytułu",
-			"TASK": "Zadanie bez tytułu"
-		}
+		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria"
 	},
 
 	"CALENDAR": {

@@ -10,105 +10,124 @@ export const GET = async (request: Request) => {
 	const page = url.searchParams.get('page');
 
 	if (!userId || !take || !page) return NextResponse.json('ERRORS.WRONG_DATA', { status: 404 });
+	const takeValue = parseInt(take ? take : '');
+	const pageValue = parseInt(page ? page : '');
+
+	const skipValue = takeValue * (pageValue - 1);
+
 	try {
-		const taskAndMindMaps = await db.workspace.findMany({
+		const tasks = await db.task.findMany({
 			where: {
-				subscribers: {
-					some: {
-						userId,
+				workspace: {
+					subscribers: {
+						some: {
+							userId,
+						},
 					},
 				},
 			},
 			include: {
-				tasks: {
-					include: {
-						updatedBy: {
-							select: {
-								username: true,
-								name: true,
-								id: true,
-								image: true,
-								surname: true,
-							},
-						},
-						savedTask: {
-							where: {
-								userId,
-							},
-							select: {
-								taskId: true,
-							},
-						},
+				updatedBy: {
+					select: {
+						username: true,
+						name: true,
+						id: true,
+						image: true,
+						surname: true,
 					},
 				},
-				mindMaps: {
-					include: {
-						updatedBy: {
-							select: {
-								username: true,
-								name: true,
-								id: true,
-								image: true,
-								surname: true,
-							},
-						},
-						savedMindMaps: {
-							where: {
-								userId,
-							},
-							select: {
-								mindMapId: true,
-							},
-						},
+				savedTask: {
+					where: {
+						userId,
+					},
+					select: {
+						taskId: true,
 					},
 				},
+				workspace: true,
 			},
 			orderBy: {
 				updatedAt: 'desc',
 			},
-			take: parseInt(take ? take : ''),
-			skip: (parseInt(page ? page : '') - 1) * parseInt(take ? take : ''),
+			skip: skipValue,
+			take: takeValue,
 		});
 
-		const tasks: HomeRecentActivity[] = taskAndMindMaps.flatMap((workspace) =>
-			workspace.tasks.map((task) => ({
-				id: task.id,
-				title: task.title,
-				emoji: task.emoji,
-				link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
-				workspaceName: workspace.name,
-				createdAt: new Date(task.createdAt),
-				type: 'task',
-				updated: {
-					at: new Date(task.updatedAt),
-					by: task.updatedBy,
+		const mindMaps = await db.mindMap.findMany({
+			where: {
+				workspace: {
+					subscribers: {
+						some: {
+							userId,
+						},
+					},
 				},
-				workspaceId: workspace.id,
-				starred: task.savedTask.length > 0,
-			}))
-		);
-
-		const mindMaps: HomeRecentActivity[] = taskAndMindMaps.flatMap((workspace) =>
-			workspace.mindMaps.map((mindMap) => ({
-				id: mindMap.id,
-				title: mindMap.title,
-				emoji: mindMap.emoji,
-				link: `/dashboard/workspace/${mindMap.workspaceId}/mind-maps/mind-map/${mindMap.id}`,
-				workspaceName: workspace.name,
-				createdAt: new Date(mindMap.createdAt),
-				type: 'mindMap',
-				updated: {
-					at: new Date(mindMap.updatedAt),
-					by: mindMap.updatedBy,
+			},
+			include: {
+				updatedBy: {
+					select: {
+						username: true,
+						name: true,
+						id: true,
+						image: true,
+						surname: true,
+					},
 				},
-				workspaceId: workspace.id,
-				starred: mindMap.savedMindMaps.length > 0,
-			}))
-		);
-
-		return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt({ tasks, mindMaps }), {
-			status: 200,
+				savedMindMaps: {
+					where: {
+						userId,
+					},
+					select: {
+						mindMapId: true,
+					},
+				},
+				workspace: true,
+			},
+			orderBy: {
+				updatedAt: 'desc',
+			},
+			skip: skipValue,
+			take: takeValue,
 		});
+
+		const tasksData: HomeRecentActivity[] = tasks.map((task) => ({
+			id: task.id,
+			title: task.title,
+			emoji: task.emoji,
+			link: `/dashboard/workspace/${task.workspaceId}/tasks/task/${task.id}`,
+			workspaceName: task.workspace.name,
+			createdAt: task.createdAt,
+			type: 'task',
+			updated: {
+				at: task.updatedAt,
+				by: task.updatedBy,
+			},
+			workspaceId: task.workspaceId,
+			starred: task.savedTask.length > 0,
+		}));
+
+		const mindMapsData: HomeRecentActivity[] = mindMaps.map((mindMap) => ({
+			id: mindMap.id,
+			title: mindMap.title,
+			emoji: mindMap.emoji,
+			link: `/dashboard/workspace/${mindMap.workspaceId}/mind-maps/mind-map/${mindMap.id}`,
+			workspaceName: mindMap.workspace.name,
+			createdAt: mindMap.createdAt,
+			type: 'mindMap',
+			updated: {
+				at: mindMap.updatedAt,
+				by: mindMap.updatedBy,
+			},
+			workspaceId: mindMap.workspaceId,
+			starred: mindMap.savedMindMaps.length > 0,
+		}));
+
+		return NextResponse.json(
+			sortMindMapsAndTasksDataByCreatedAt({ tasks: tasksData, mindMaps: mindMapsData }),
+			{
+				status: 200,
+			}
+		);
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });
 	}

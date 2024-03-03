@@ -9,17 +9,17 @@ import Link from 'next-intl/link';
 import { Button } from '@/components/ui/button';
 import { useRouter } from 'next-intl/client';
 import { useTuncateText } from '@/hooks/useTruncateText';
+import { StarSvg } from '../common/StarSvg';
 
 interface Props {
 	info: AssignedToMeDataItem;
 }
 
 export const AssignedToMeItem = ({
-	info: { emoji, link, title, workspaceName, type, updated, workspaceId },
+	info: { emoji, link, title, workspaceName, type, updated, workspaceId, starred },
 }: Props) => {
 	const tuncateTitle = useTuncateText(title, 50, 10);
 
-	const t = useTranslations('ASSIGNED_TO_ME');
 	const c = useTranslations('COMMON');
 
 	const router = useRouter();
@@ -40,10 +40,11 @@ export const AssignedToMeItem = ({
 						<div className='w-full'>
 							<div className='flex items-center'>
 								<h2 className='text-lg sm:text-2xl font-semibold'>
-									{!title && type === 'mindMap' && t('DEAFULT_NAME.MIND_MAP')}
-									{!title && type === 'task' && t('DEAFULT_NAME.TASK')}
+									{!title && type === 'mindMap' && c('DEFAULT_NAME.MIND_MAP')}
+									{!title && type === 'task' && c('DEFAULT_NAME.TASK')}
 									{title && tuncateTitle}
 								</h2>
+								{starred && <StarSvg className='ml-2 w-4 h-4 sm:w-5 sm:h-5' />}
 							</div>
 							{updated.by && (
 								<div className='flex flex-col md:flex-row md:items-center md:gap-1'>
