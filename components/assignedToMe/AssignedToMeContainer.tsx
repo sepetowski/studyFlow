@@ -60,7 +60,7 @@ export const AssignedToMeContainer = ({ userId }: Props) => {
 					<CardDescription className='text-base'>{t('DESC')}</CardDescription>
 				</div>
 			</CardHeader>
-			<CardContent className='flex flex-col gap-4'>
+			<CardContent className='flex flex-col gap-2'>
 				{currentType === 'all' && workspaceFilterParam === 'all' && assgingedInfo.length === 0 ? (
 					<p>{t('NO_ASSIGMENT')}</p>
 				) : assgingedInfo.length == 0 ? (

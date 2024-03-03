@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { useUnstarItem } from '@/hooks/useUnstarItem';
 import { useRouter } from 'next-intl/client';
+import { useTuncateText } from '@/hooks/useTruncateText';
 
 interface Props {
 	item: StarredItemType;
@@ -28,6 +29,7 @@ export const StarredItem = ({
 	sortType,
 	userId,
 }: Props) => {
+	const tuncateTitle = useTuncateText(title, 40, 15);
 	const t = useTranslations('STARRED');
 	const c = useTranslations('COMMON');
 
@@ -48,17 +50,17 @@ export const StarredItem = ({
 	};
 
 	return (
-		<Link className='hover:scale-[1.01] transition-transform duration-200' href={link}>
-			<Card>
-				<CardContent className='flex w-full justify-between sm:items-center pt-4'>
-					<div className='flex flex-col sm:flex-row gap-4 sm:items-center w-full'>
+		<Link href={link}>
+			<Card className='bg-background border-none hover:bg-accent transition-colors duration-200 p-2'>
+				<CardContent className='flex w-full justify-between sm:items-center p-2 sm:p-2 pt-0 '>
+					<div className='flex flex-row gap-2 sm:gap-4  w-full'>
 						<ReadOnlyEmoji className='sm:h-16 sm:w-16 h-12 w-12' selectedEmoji={emoji} />
 						<div className='w-full'>
 							<div className='flex items-center'>
 								<h2 className='text-lg sm:text-2xl font-semibold'>
-									{!title && type === 'mindMap' && t('DEAFULT_NAME.MIND_MAP')}
-									{!title && type === 'task' && t('DEAFULT_NAME.TASK')}
-									{title && title}
+									{!title && type === 'mindMap' && t('DEFAULT_NAME.MIND_MAP')}
+									{!title && type === 'task' && t('DEFAULT_NAME.TASK')}
+									{title && tuncateTitle}
 								</h2>
 								<Star size={22} className='ml-2' />
 							</div>

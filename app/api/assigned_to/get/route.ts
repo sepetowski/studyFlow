@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { sortAssignedDataByCreatedAt } from '@/lib/sortAssignedToMeData';
+import { sortMindMapsAndTasksDataByCreatedAt } from '@/lib/sortMindMapsAndTasksDataByCreatedAt';
 import { AssignedItemType, AssignedToMeTaskAndMindMaps } from '@/types/extended';
 import { NextResponse } from 'next/server';
 
@@ -82,7 +82,9 @@ export const GET = async (request: Request) => {
 						})),
 						mindMaps: [],
 					};
-					return NextResponse.json(sortAssignedDataByCreatedAt(assignedTasksData), { status: 200 });
+					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedTasksData), {
+						status: 200,
+					});
 				case 'mind-maps':
 					const assignedMindMapsData: AssignedToMeTaskAndMindMaps = {
 						tasks: [],
@@ -101,7 +103,7 @@ export const GET = async (request: Request) => {
 							},
 						})),
 					};
-					return NextResponse.json(sortAssignedDataByCreatedAt(assignedMindMapsData), {
+					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedMindMapsData), {
 						status: 200,
 					});
 
@@ -137,7 +139,9 @@ export const GET = async (request: Request) => {
 						})),
 					};
 
-					return NextResponse.json(sortAssignedDataByCreatedAt(assignedAllData), { status: 200 });
+					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedAllData), {
+						status: 200,
+					});
 			}
 		} else {
 			const taskAndMindMaps = await db.workspace.findMany({
@@ -222,7 +226,7 @@ export const GET = async (request: Request) => {
 								title: mindMap.title,
 								emoji: mindMap.emoji,
 								workspaceId: mindMap.workspaceId,
-								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
+								link: `/dashboard/workspace/${mindMap.workspaceId}/mind-maps/mind-map/${mindMap.id}`,
 								workspaceName: item.name,
 								createdAt: mindMap.createdAt,
 								type: 'mindMap' as AssignedItemType,
@@ -260,7 +264,7 @@ export const GET = async (request: Request) => {
 								title: mindMap.title,
 								emoji: mindMap.emoji,
 								workspaceId: mindMap.workspaceId,
-								link: `/dashboard/workspace/${mindMap.workspaceId}/tasks/task/${mindMap.id}`,
+								link: `/dashboard/workspace/${mindMap.workspaceId}/mind-maps/mind-map/${mindMap.id}`,
 								workspaceName: item.name,
 								createdAt: mindMap.createdAt,
 								type: 'mindMap' as AssignedItemType,
@@ -274,7 +278,7 @@ export const GET = async (request: Request) => {
 					break;
 			}
 
-			return NextResponse.json(sortAssignedDataByCreatedAt(assignedData), { status: 200 });
+			return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedData), { status: 200 });
 		}
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

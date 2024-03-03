@@ -673,7 +673,7 @@
 		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
 		"ERROR": "Wystąpił błąd podczas pobierania Twoich danych. Proszę spróbuj ponownie.",
 
-		"DEAFULT_NAME": {
+		"DEFAULT_NAME": {
 			"MIND_MAP": "Mapa myśli bez tytułu",
 			"TASK": "Zadanie bez tytułu"
 		},
