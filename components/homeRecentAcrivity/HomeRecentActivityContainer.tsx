@@ -58,7 +58,7 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 
 	if (isError) return <ClientError message={t('ERROR')} />;
 
-	if (activityItems.length === 0)
+	if (activityItems.length === 0 && initialData.length === 0)
 		return (
 			<div className='flex flex-col gap-4 sm:gap-6 w-full mt-16 sm:mt-40 items-center  '>
 				<div className='text-primary'>
