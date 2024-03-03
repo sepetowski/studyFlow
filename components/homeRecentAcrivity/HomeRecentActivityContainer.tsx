@@ -6,6 +6,9 @@ import { HomeRecentActivity } from '@/types/extended';
 import { useIntersection } from '@mantine/hooks';
 import { LoadingState } from '../ui/loading-state';
 import { ACTIVITY_PER_PAGE } from '@/lib/constants';
+import { Activity } from 'lucide-react';
+import { ClientError } from '../error/ClientError';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	userId: string;
@@ -13,6 +16,7 @@ interface Props {
 }
 
 export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
+	const t = useTranslations('HOME_PAGE');
 	const [activityItems, setActivityItems] = useState<HomeRecentActivity[]>([]);
 	const [isAllFetched, setIsAllFetched] = useState(false);
 
@@ -22,7 +26,7 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 		threshold: 1,
 	});
 
-	const { data, isFetchingNextPage, fetchNextPage } = useInfiniteQuery(
+	const { data, isFetchingNextPage, fetchNextPage, isError } = useInfiniteQuery(
 		['getHomeRecentActivity'],
 		async ({ pageParam = 1 }) => {
 			const res = await fetch(
@@ -52,6 +56,17 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 		}
 	}, [entry, isAllFetched, fetchNextPage]);
 
+	if (isError) return <ClientError message={t('ERROR')} />;
+
+	if (activityItems.length === 0)
+		return (
+			<div className='flex flex-col gap-4 sm:gap-6 w-full mt-16 sm:mt-40 items-center  '>
+				<div className='text-primary'>
+					<Activity size={66} />
+				</div>
+				<p className='font-semibold text-lg sm:text-2xl max-w-3xl text-center'>{t('NO_DATA')}</p>
+			</div>
+		);
 	return (
 		<div className='w-full flex flex-col gap-2 mt-10'>
 			{activityItems.map((activityItem, i) => {

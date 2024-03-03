@@ -15,7 +15,7 @@ const Dashboard = async () => {
 			<DashboardHeader>
 				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
-			<main>
+			<main className='h-full w-full'>
 				<Welcoming
 					hideOnDesktop
 					username={session.user.username!}
