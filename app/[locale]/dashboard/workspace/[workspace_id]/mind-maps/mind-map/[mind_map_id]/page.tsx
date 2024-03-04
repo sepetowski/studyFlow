@@ -1,7 +1,6 @@
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
-import { LeaveWorkspace } from '@/components/leaveWorksapce/LeaveWorkspace';
 import { MindMap } from '@/components/mindMaps/MindMap';
 import { MindMapPreviewCardWrapper } from '@/components/mindMaps/preview/MindMapPreviewCardWrapper';
 import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
@@ -53,7 +52,6 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 							useTranslate: mindMap.title ? false : true,
 						},
 					]}>
-					{userRole !== 'OWNER' && <LeaveWorkspace workspace={workspace} />}
 					{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 					<AddTaskShortcut userId={session.user.id} />
 				</DashboardHeader>
