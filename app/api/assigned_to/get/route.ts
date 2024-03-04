@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { sortMindMapsAndTasksDataByCreatedAt } from '@/lib/sortMindMapsAndTasksDataByCreatedAt';
+import { sortMindMapsAndTasksDataByUpdatedAt } from '@/lib/sortMindMapsAndTasksDataByUpdatedAt';
 import { AssignedItemType, AssignedToMeTaskAndMindMaps } from '@/types/extended';
 import { NextResponse } from 'next/server';
 
@@ -99,7 +99,7 @@ export const GET = async (request: Request) => {
 						})),
 						mindMaps: [],
 					};
-					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedTasksData), {
+					return NextResponse.json(sortMindMapsAndTasksDataByUpdatedAt(assignedTasksData), {
 						status: 200,
 					});
 				case 'mind-maps':
@@ -121,7 +121,7 @@ export const GET = async (request: Request) => {
 							starred: mindMap.savedMindMaps.length > 0,
 						})),
 					};
-					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedMindMapsData), {
+					return NextResponse.json(sortMindMapsAndTasksDataByUpdatedAt(assignedMindMapsData), {
 						status: 200,
 					});
 
@@ -159,7 +159,7 @@ export const GET = async (request: Request) => {
 						})),
 					};
 
-					return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedAllData), {
+					return NextResponse.json(sortMindMapsAndTasksDataByUpdatedAt(assignedAllData), {
 						status: 200,
 					});
 			}
@@ -318,7 +318,7 @@ export const GET = async (request: Request) => {
 					break;
 			}
 
-			return NextResponse.json(sortMindMapsAndTasksDataByCreatedAt(assignedData), { status: 200 });
+			return NextResponse.json(sortMindMapsAndTasksDataByUpdatedAt(assignedData), { status: 200 });
 		}
 	} catch (_) {
 		return NextResponse.json('ERRORS.DB_ERROR', { status: 405 });

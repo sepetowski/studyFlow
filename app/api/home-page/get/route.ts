@@ -1,5 +1,5 @@
 import { db } from '@/lib/db';
-import { sortMindMapsAndTasksDataByCreatedAt } from '@/lib/sortMindMapsAndTasksDataByCreatedAt';
+import { sortMindMapsAndTasksDataByUpdatedAt } from '@/lib/sortMindMapsAndTasksDataByUpdatedAt';
 import { HomeRecentActivity } from '@/types/extended';
 import { NextResponse } from 'next/server';
 
@@ -123,7 +123,7 @@ export const GET = async (request: Request) => {
 		}));
 
 		return NextResponse.json(
-			sortMindMapsAndTasksDataByCreatedAt({ tasks: tasksData, mindMaps: mindMapsData }),
+			sortMindMapsAndTasksDataByUpdatedAt({ tasks: tasksData, mindMaps: mindMapsData }),
 			{
 				status: 200,
 			}
