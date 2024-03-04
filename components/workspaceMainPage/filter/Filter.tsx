@@ -7,8 +7,19 @@ import {
 import { Button } from '@/components/ui/button';
 import { CommandContainer } from './FilterCommand/CommandContainer';
 import { FilterIcon } from 'lucide-react';
+import { FilterUser } from '@/types/extended';
 
-export const Filter = () => {
+interface Props {
+	sessionUserId: string;
+	currentFilterdAsssigedToUsers: FilterUser[];
+	onChangeAssigedUserToFilter: (userId: string) => void;
+}
+
+export const Filter = ({
+	sessionUserId,
+	currentFilterdAsssigedToUsers,
+	onChangeAssigedUserToFilter,
+}: Props) => {
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -17,7 +28,11 @@ export const Filter = () => {
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='w-fit' align='start'>
-				<CommandContainer />
+				<CommandContainer
+					sessionUserId={sessionUserId}
+					currentFilterdAsssigedToUsers={currentFilterdAsssigedToUsers}
+					onChangeAssigedUserToFilter={onChangeAssigedUserToFilter}
+				/>
 			</DropdownMenuContent>
 		</DropdownMenu>
 	);

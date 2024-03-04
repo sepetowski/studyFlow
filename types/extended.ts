@@ -150,5 +150,11 @@ export interface UserNotification extends Notification {
 	} | null;
 }
 
+export interface FilterUser {
+	id: string;
+	username: string;
+	image: string | null;
+}
+
 export interface HomeRecentActivity extends AssignedToMeDataItem {}
 export interface HomeRecentTasksAndMindMapsActivity extends AssignedToMeTaskAndMindMaps {}

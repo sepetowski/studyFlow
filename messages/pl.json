@@ -252,7 +252,12 @@
 			"LANGUAGE": "Proszę wybrać język",
 			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji",
 			"LINK": "Proszę podać poprawny link",
-			"IMAGE_REQUIRED": "Proszę podać zdjęcie"
+			"IMAGE_REQUIRED": "Proszę podać zdjęcie",
+			"TAG": {
+				"SHORT": "Nazwa tagu jest zbyt krótka",
+				"LONG": "Nazwa tagu jest za długa",
+				"SPECIAL_CHARS": "Nazwa tagu może składać się tylko z liter i cyfr"
+			}
 		}
 	},
 	"SIDEBAR": {

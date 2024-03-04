@@ -250,7 +250,12 @@
 			},
 			"LANGUAGE": "Please select a language",
 			"CHOOSE_ONE": "Please select one of the options",
-			"LINK": "Please provide the correct link"
+			"LINK": "Please provide the correct link",
+			"TAG": {
+				"SHORT": "Tag name is too short",
+				"LONG": "Tag name is too long",
+				"SPECIAL_CHARS": "Tag name must only contain letters and digits"
+			}
 		}
 	},
 	"SIDEBAR": {
