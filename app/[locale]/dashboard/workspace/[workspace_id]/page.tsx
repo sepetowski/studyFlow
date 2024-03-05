@@ -40,7 +40,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
-			<main className='flex flex-col gap-2 h-full w-full'>
+			<main className='flex flex-col gap-2 w-full'>
 				<ShortcutContainer workspace={workspace} userRole={userRole} />
 				<FilterContainer sessionUserId={session.user.id} workspaceId={workspace.id} />
 				<RecentActivityContainer userId={session.user.id} workspaceId={workspace.id} />

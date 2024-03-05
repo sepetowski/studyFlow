@@ -33,6 +33,7 @@ export const GET = async (request: Request) => {
 								id: true,
 								color: true,
 								name: true,
+								workspaceId: true,
 							},
 						},
 						updatedBy: {
@@ -75,6 +76,7 @@ export const GET = async (request: Request) => {
 								id: true,
 								color: true,
 								name: true,
+								workspaceId: true,
 							},
 						},
 						updatedBy: {

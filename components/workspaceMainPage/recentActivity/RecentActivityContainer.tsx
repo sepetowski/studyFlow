@@ -1,7 +1,9 @@
 'use client';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { WorkspaceRecentActivity } from '@/types/extended';
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { RecentActivityItem } from './RecentActivityItem';
 
 interface Props {
 	workspaceId: string;
@@ -9,6 +11,12 @@ interface Props {
 }
 
 export const RecentActivityContainer = ({ userId, workspaceId }: Props) => {
+	const [filteredRecentActivity, setFilteredRecentActivity] = useState<WorkspaceRecentActivity[]>(
+		[]
+	);
+
+	const { filterAssignedUsers, filterTags } = useFilterByUsersAndTagsInWorkspace();
+
 	const {
 		data: recentActivity,
 		isError,
@@ -32,7 +40,11 @@ export const RecentActivityContainer = ({ userId, workspaceId }: Props) => {
 		queryKey: ['getWorkspaceRecentActivity', workspaceId],
 	});
 
-	console.log(recentActivity);
-
-	return <div>RecentActivityContainer</div>;
+	return (
+		<div className='w-full flex flex-col gap-2 '>
+			{recentActivity?.map((activity) => (
+				<RecentActivityItem key={activity.id} activity={activity} />
+			))}
+		</div>
+	);
 };

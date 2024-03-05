@@ -156,12 +156,6 @@ export interface FilterUser {
 	image: string | null;
 }
 
-export interface WorkspaceRecentActivityTagItem {
-	id: string;
-	name: string;
-	color: CustomColors;
-}
-
 export interface WorkspaceRecentActivityAssignedToItem {
 	user: {
 		id: string;
@@ -184,7 +178,7 @@ export interface WorkspaceRecentActivity {
 		by?: UserInfo | null;
 	};
 	starred: boolean;
-	tags: WorkspaceRecentActivityTagItem[];
+	tags: Tag[];
 	assignedTo: WorkspaceRecentActivityAssignedToItem[];
 }
 export interface AssignedToMeTaskAndMindMapsWorkspaceRecentActivity {
