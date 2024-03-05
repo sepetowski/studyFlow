@@ -3,6 +3,7 @@ import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { FilterContainer } from '@/components/workspaceMainPage/filter/FilterContainer';
+import { RecentActivityContainer } from '@/components/workspaceMainPage/recentActivity/RecentActivityContainer';
 import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/ShortcutContainer';
 import { FilterByUsersAndTagsInWorkspaceProvider } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { getUserWorkspaceRole, getWorkspace } from '@/lib/api';
@@ -42,6 +43,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 			<main className='flex flex-col gap-2 h-full w-full'>
 				<ShortcutContainer workspace={workspace} userRole={userRole} />
 				<FilterContainer sessionUserId={session.user.id} workspaceId={workspace.id} />
+				<RecentActivityContainer userId={session.user.id} workspaceId={workspace.id} />
 			</main>
 		</FilterByUsersAndTagsInWorkspaceProvider>
 	);

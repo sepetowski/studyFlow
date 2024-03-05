@@ -156,5 +156,41 @@ export interface FilterUser {
 	image: string | null;
 }
 
+export interface WorkspaceRecentActivityTagItem {
+	id: string;
+	name: string;
+	color: CustomColors;
+}
+
+export interface WorkspaceRecentActivityAssignedToItem {
+	user: {
+		id: string;
+		image: string | null;
+		username: string;
+	};
+	id: string;
+	userId: string;
+	mindMapId?: string;
+	taskId?: string;
+}
+
+export interface WorkspaceRecentActivity {
+	id: string;
+	title: string;
+	emoji: string;
+	type: AssignedItemType;
+	updated: {
+		at: Date;
+		by?: UserInfo | null;
+	};
+	starred: boolean;
+	tags: WorkspaceRecentActivityTagItem[];
+	assignedTo: WorkspaceRecentActivityAssignedToItem[];
+}
+export interface AssignedToMeTaskAndMindMapsWorkspaceRecentActivity {
+	tasks: WorkspaceRecentActivity[];
+	mindMaps: WorkspaceRecentActivity[];
+}
+
 export interface HomeRecentActivity extends AssignedToMeDataItem {}
 export interface HomeRecentTasksAndMindMapsActivity extends AssignedToMeTaskAndMindMaps {}

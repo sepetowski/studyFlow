@@ -29,7 +29,7 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 		['getHomeRecentActivity'],
 		async ({ pageParam = 1 }) => {
 			const res = await fetch(
-				`/api/home-page/get?userId=${userId}&page=${pageParam}&take=${ACTIVITY_PER_PAGE}`
+				`/api/home_page/get?userId=${userId}&page=${pageParam}&take=${ACTIVITY_PER_PAGE}`
 			);
 			const posts = (await res.json()) as HomeRecentActivity[];
 			return posts;

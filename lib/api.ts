@@ -108,7 +108,7 @@ export const getUserPomodoroSettings = async (user_id: string) => {
 };
 export const getInitialHomeRecentActivitiy = async (userId: string) => {
 	const res = await fetch(
-		`${domain}/api/home-page/get?userId=${userId}&page=${1}&take=${ACTIVITY_PER_PAGE}`,
+		`${domain}/api/home_page/get?userId=${userId}&page=${1}&take=${ACTIVITY_PER_PAGE}`,
 		{
 			method: 'GET',
 			cache: 'no-store',
