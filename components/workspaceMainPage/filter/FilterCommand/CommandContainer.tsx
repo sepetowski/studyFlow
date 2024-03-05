@@ -2,39 +2,23 @@
 import React from 'react';
 import {
 	Command,
-	CommandDialog,
 	CommandEmpty,
 	CommandGroup,
 	CommandInput,
-	CommandItem,
 	CommandList,
 	CommandSeparator,
-	CommandShortcut,
 } from '@/components/ui/command';
-import { useUserActivityStatus } from '@/context/UserActivityStatus';
 import { CommandUserItem } from './CommandUserItem';
-import { FilterUser } from '@/types/extended';
-import { Tag } from '@prisma/client';
 import { CommandTagItem } from './CommandTagItem';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 
 interface Props {
 	sessionUserId: string;
-	currentFilterdAsssigedToUsers: FilterUser[];
-	tags: Tag[];
-	currentFilterdTags: Tag[];
-	onChangeAssigedUserToFilter: (userId: string) => void;
-	onChangeFilterTags: (tagId: string) => void;
 }
 
-export const CommandContainer = ({
-	sessionUserId,
-	currentFilterdAsssigedToUsers,
-	currentFilterdTags,
-	tags,
-	onChangeAssigedUserToFilter,
-	onChangeFilterTags,
-}: Props) => {
-	const { allUsers } = useUserActivityStatus();
+export const CommandContainer = ({ sessionUserId }: Props) => {
+	const { allUsers, filterAssignedUsers, allTags, filterTags } =
+		useFilterByUsersAndTagsInWorkspace();
 
 	return (
 		<Command className='w-[15rem]'>
@@ -43,9 +27,7 @@ export const CommandContainer = ({
 				<CommandEmpty>No results found.</CommandEmpty>
 				<CommandGroup heading='ASSIGNED TO'>
 					{allUsers.map((user) => {
-						const isActive = currentFilterdAsssigedToUsers.some(
-							(activeUser) => activeUser.id === user.id
-						);
+						const isActive = filterAssignedUsers.some((activeUser) => activeUser.id === user.id);
 						return (
 							<CommandUserItem
 								key={user.id}
@@ -54,25 +36,18 @@ export const CommandContainer = ({
 								image={user.image}
 								id={user.id}
 								active={isActive}
-								onChangeAssigedUserToFilter={onChangeAssigedUserToFilter}
 							/>
 						);
 					})}
 				</CommandGroup>
 				<CommandSeparator />
 				<CommandGroup heading='TAGS'>
-					{tags.map((tag) => {
-						const isActive = currentFilterdTags.some((activeTag) => activeTag.id === tag.id);
+					{allTags &&
+						allTags.map((tag) => {
+							const isActive = filterTags.some((activeTag) => activeTag.id === tag.id);
 
-						return (
-							<CommandTagItem
-								key={tag.id}
-								tag={tag}
-								active={isActive}
-								onChangeFilterTags={onChangeFilterTags}
-							/>
-						);
-					})}
+							return <CommandTagItem key={tag.id} tag={tag} active={isActive} />;
+						})}
 				</CommandGroup>
 			</CommandList>
 		</Command>

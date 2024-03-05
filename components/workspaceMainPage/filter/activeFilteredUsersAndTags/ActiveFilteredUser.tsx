@@ -4,12 +4,13 @@ import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import { FilterUser } from '@/types/extended';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 
-interface Props extends FilterUser {
-	onClearUser: (userId: string) => void;
-}
+interface Props extends FilterUser {}
 
-export const ActiveFilteredUser = ({ username, id, image, onClearUser }: Props) => {
+export const ActiveFilteredUser = ({ username, id, image }: Props) => {
+	const { onClearUser } = useFilterByUsersAndTagsInWorkspace();
+
 	const text = useTuncateText(username, 25, 0);
 
 	return (

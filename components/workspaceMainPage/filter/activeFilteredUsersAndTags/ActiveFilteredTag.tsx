@@ -3,13 +3,15 @@ import { Button } from '@/components/ui/button';
 import { Tag } from 'lucide-react';
 import React, { useMemo } from 'react';
 import { CustomColors, Tag as TagType } from '@prisma/client';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 
 interface Props {
 	tag: TagType;
-	onClearTag: (tagId: string) => void;
 }
 
-export const ActiveFilteredTag = ({ tag: { color, id, name }, onClearTag }: Props) => {
+export const ActiveFilteredTag = ({ tag: { color, id, name } }: Props) => {
+	const { onClearTag } = useFilterByUsersAndTagsInWorkspace();
+
 	const tagColor = useMemo(() => {
 		switch (color) {
 			case CustomColors.PURPLE:

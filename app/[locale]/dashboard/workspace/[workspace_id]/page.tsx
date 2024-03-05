@@ -4,6 +4,7 @@ import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { FilterContainer } from '@/components/workspaceMainPage/filter/FilterContainer';
 import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/ShortcutContainer';
+import { FilterByUsersAndTagsInWorkspaceProvider } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
@@ -22,7 +23,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 	]);
 
 	return (
-		<>
+		<FilterByUsersAndTagsInWorkspaceProvider>
 			<DashboardHeader
 				addManualRoutes={[
 					{
@@ -42,7 +43,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 				<ShortcutContainer workspace={workspace} userRole={userRole} />
 				<FilterContainer sessionUserId={session.user.id} workspaceId={workspace.id} />
 			</main>
-		</>
+		</FilterByUsersAndTagsInWorkspaceProvider>
 	);
 };
 export default Workspace;

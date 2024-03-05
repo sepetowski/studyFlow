@@ -1,13 +1,12 @@
 'use client';
 import { Button } from '@/components/ui/button';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { Eraser } from 'lucide-react';
 import React from 'react';
 
-interface Props {
-	onClearAll: () => void;
-}
+export const Clear = () => {
+	const { onClearAll } = useFilterByUsersAndTagsInWorkspace();
 
-export const Clear = ({ onClearAll }: Props) => {
 	return (
 		<Button
 			onClick={onClearAll}

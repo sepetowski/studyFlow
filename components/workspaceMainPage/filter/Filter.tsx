@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import {
 	DropdownMenu,
@@ -7,32 +8,17 @@ import {
 import { Button } from '@/components/ui/button';
 import { CommandContainer } from './FilterCommand/CommandContainer';
 import { FilterIcon } from 'lucide-react';
-import { FilterUser } from '@/types/extended';
 import { LoadingState } from '@/components/ui/loading-state';
 import { ClientError } from '@/components/error/ClientError';
-import { Tag } from '@prisma/client';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 
 interface Props {
 	sessionUserId: string;
-	currentFilterdAsssigedToUsers: FilterUser[];
-	currentFilterdTags: Tag[];
-	tags: Tag[] | undefined;
-	isError: boolean;
-	isLoding: boolean;
-	onChangeAssigedUserToFilter: (userId: string) => void;
-	onChangeFilterTags: (tagId: string) => void;
 }
 
-export const Filter = ({
-	sessionUserId,
-	currentFilterdAsssigedToUsers,
-	currentFilterdTags,
-	tags,
-	isError,
-	isLoding,
-	onChangeAssigedUserToFilter,
-	onChangeFilterTags,
-}: Props) => {
+export const Filter = ({ sessionUserId }: Props) => {
+	const { isError, isLoding } = useFilterByUsersAndTagsInWorkspace();
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -51,14 +37,7 @@ export const Filter = ({
 						message='nie udało sie załadować danych filtracji'
 					/>
 				) : (
-					<CommandContainer
-						sessionUserId={sessionUserId}
-						tags={tags!}
-						currentFilterdAsssigedToUsers={currentFilterdAsssigedToUsers}
-						currentFilterdTags={currentFilterdTags}
-						onChangeAssigedUserToFilter={onChangeAssigedUserToFilter}
-						onChangeFilterTags={onChangeFilterTags}
-					/>
+					<CommandContainer sessionUserId={sessionUserId} />
 				)}
 			</DropdownMenuContent>
 		</DropdownMenu>

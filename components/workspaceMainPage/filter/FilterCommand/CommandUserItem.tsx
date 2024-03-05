@@ -6,28 +6,22 @@ import { UserAvatar } from '@/components/ui/user-avatar';
 import { Check } from 'lucide-react';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import { FilterUser } from '@/types/extended';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 
 interface Props extends FilterUser {
 	sessionUserId: string;
 	active: boolean;
-	onChangeAssigedUserToFilter: (userId: string) => void;
 }
 
-export const CommandUserItem = ({
-	username,
-	id,
-	image,
-	sessionUserId,
-	active,
-	onChangeAssigedUserToFilter,
-}: Props) => {
+export const CommandUserItem = ({ username, id, image, sessionUserId, active }: Props) => {
+	const { onChangeAssigedUser } = useFilterByUsersAndTagsInWorkspace();
 	const name = useTuncateText(username, 25, 0);
 
 	return (
 		<CommandItem className='p-0'>
 			<Button
 				onClick={() => {
-					onChangeAssigedUserToFilter(id);
+					onChangeAssigedUser(id);
 				}}
 				size={'sm'}
 				variant={'ghost'}

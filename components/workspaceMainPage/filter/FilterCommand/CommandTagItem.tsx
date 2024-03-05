@@ -1,6 +1,7 @@
 'use client';
 import { Button } from '@/components/ui/button';
 import { CommandItem } from '@/components/ui/command';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { CustomColors, Tag as TagType } from '@prisma/client';
 import { Check, Tag } from 'lucide-react';
 import React, { useMemo } from 'react';
@@ -8,10 +9,11 @@ import React, { useMemo } from 'react';
 interface Props {
 	tag: TagType;
 	active: boolean;
-	onChangeFilterTags: (tagId: string) => void;
 }
 
-export const CommandTagItem = ({ tag: { color, id, name }, active, onChangeFilterTags }: Props) => {
+export const CommandTagItem = ({ tag: { color, id, name }, active }: Props) => {
+	const { onChangeFilterTags } = useFilterByUsersAndTagsInWorkspace();
+
 	const tagColor = useMemo(() => {
 		switch (color) {
 			case CustomColors.PURPLE:
