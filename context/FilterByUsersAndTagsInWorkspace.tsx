@@ -6,7 +6,8 @@ import { createContext } from 'react';
 import { useUserActivityStatus } from './UserActivityStatus';
 import { FilterUser, UserActiveItemList } from '@/types/extended';
 import { useQuery } from '@tanstack/react-query';
-import { useParams } from 'next/navigation';
+import { useParams, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next-intl/client';
 
 interface Props {
 	children: React.ReactNode;
@@ -29,8 +30,12 @@ export const FilterByUsersAndTagsInWorkspaceCtx =
 	createContext<FilterByUsersAndTagsInWorkspaceContex | null>(null);
 
 export const FilterByUsersAndTagsInWorkspaceProvider = ({ children }: Props) => {
+	const router = useRouter();
 	const params = useParams();
+	const searchParams = useSearchParams();
+
 	const workspaceId = params.workspace_id ? params.workspace_id : null;
+	const tagIdParam = searchParams.get('tagId');
 
 	const [currentFilterdAsssigedToUsers, setCurrentFilterdAsssigedToUsers] = useState<FilterUser[]>(
 		[]
@@ -68,6 +73,21 @@ export const FilterByUsersAndTagsInWorkspaceProvider = ({ children }: Props) => 
 		if (isUsersLoding || isTagsLoding) setIsLoding(true);
 		else setIsLoding(false);
 	}, [isUsersLoding, isTagsLoding]);
+
+	useEffect(() => {
+		if (!tagIdParam || !tags) return;
+
+		const isAlreadyFiltered = currentFilterdTags.some((tag) => tag.id === tagIdParam);
+		if (isAlreadyFiltered) return;
+
+		const tagToAdd = tags.find((tag) => tag.id === tagIdParam);
+		if (tagToAdd) {
+			setCurrentFilterdTags((prevTags) => {
+				return [...prevTags, tagToAdd];
+			});
+		}
+		router.replace(`/dashboard/workspace/${workspaceId}`);
+	}, [tagIdParam, tags, currentFilterdTags, workspaceId, router]);
 
 	const onChangeAssigedUserToFilterHandler = (userId: string) => {
 		const isAlreadyFiltered = currentFilterdAsssigedToUsers.some(
