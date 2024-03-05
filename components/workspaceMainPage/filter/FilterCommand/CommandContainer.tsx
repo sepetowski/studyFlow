@@ -14,17 +14,25 @@ import {
 import { useUserActivityStatus } from '@/context/UserActivityStatus';
 import { CommandUserItem } from './CommandUserItem';
 import { FilterUser } from '@/types/extended';
+import { Tag } from '@prisma/client';
+import { CommandTagItem } from './CommandTagItem';
 
 interface Props {
 	sessionUserId: string;
 	currentFilterdAsssigedToUsers: FilterUser[];
+	tags: Tag[];
+	currentFilterdTags: Tag[];
 	onChangeAssigedUserToFilter: (userId: string) => void;
+	onChangeFilterTags: (tagId: string) => void;
 }
 
 export const CommandContainer = ({
 	sessionUserId,
 	currentFilterdAsssigedToUsers,
+	currentFilterdTags,
+	tags,
 	onChangeAssigedUserToFilter,
+	onChangeFilterTags,
 }: Props) => {
 	const { allUsers } = useUserActivityStatus();
 
@@ -53,9 +61,18 @@ export const CommandContainer = ({
 				</CommandGroup>
 				<CommandSeparator />
 				<CommandGroup heading='TAGS'>
-					<CommandItem>Profile</CommandItem>
-					<CommandItem>Billing</CommandItem>
-					<CommandItem>Settings</CommandItem>
+					{tags.map((tag) => {
+						const isActive = currentFilterdTags.some((activeTag) => activeTag.id === tag.id);
+
+						return (
+							<CommandTagItem
+								key={tag.id}
+								tag={tag}
+								active={isActive}
+								onChangeFilterTags={onChangeFilterTags}
+							/>
+						);
+					})}
 				</CommandGroup>
 			</CommandList>
 		</Command>

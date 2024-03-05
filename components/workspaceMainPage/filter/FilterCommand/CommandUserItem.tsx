@@ -21,7 +21,7 @@ export const CommandUserItem = ({
 	active,
 	onChangeAssigedUserToFilter,
 }: Props) => {
-	const text = useTuncateText(username, 25, 0);
+	const name = useTuncateText(username, 25, 0);
 
 	return (
 		<CommandItem className='p-0'>
@@ -36,7 +36,7 @@ export const CommandUserItem = ({
 					<UserAvatar className='w-8 h-8' size={10} profileImage={image} />
 
 					<p className='text-secondary-foreground'>
-						{sessionUserId === id ? 'Przypisane do mnie' : text}
+						{sessionUserId === id ? 'Przypisane do mnie' : name}
 					</p>
 				</div>
 

@@ -40,7 +40,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 h-full w-full'>
 				<ShortcutContainer workspace={workspace} userRole={userRole} />
-				<FilterContainer sessionUserId={session.user.id} />
+				<FilterContainer sessionUserId={session.user.id} workspaceId={workspace.id} />
 			</main>
 		</>
 	);
