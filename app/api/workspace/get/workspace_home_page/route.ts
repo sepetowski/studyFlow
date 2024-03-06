@@ -57,6 +57,7 @@ export const GET = async (request: Request) => {
 					orderBy: {
 						updatedAt: 'desc',
 					},
+					take: 10,
 				},
 				mindMaps: {
 					include: {
@@ -100,6 +101,7 @@ export const GET = async (request: Request) => {
 					orderBy: {
 						updatedAt: 'desc',
 					},
+					take: 10,
 				},
 			},
 		});

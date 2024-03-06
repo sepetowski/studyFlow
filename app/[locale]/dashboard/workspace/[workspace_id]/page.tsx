@@ -42,7 +42,7 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 			</DashboardHeader>
 			<main className='flex flex-col gap-2 w-full'>
 				<ShortcutContainer workspace={workspace} userRole={userRole} />
-				<FilterContainer sessionUserId={session.user.id} workspaceId={workspace.id} />
+				<FilterContainer sessionUserId={session.user.id} />
 				<RecentActivityContainer userId={session.user.id} workspaceId={workspace.id} />
 			</main>
 		</FilterByUsersAndTagsInWorkspaceProvider>

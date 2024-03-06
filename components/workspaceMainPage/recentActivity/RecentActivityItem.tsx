@@ -58,11 +58,11 @@ export const RecentActivityItem = ({
 								</div>
 							)}
 							<div className='flex items-center flex-wrap gap-1 mt-2'>
-								{tags.map((tag) => (
-									<TagItem key={tag.id} tag={tag} />
-								))}
 								{assignedTo.map((user) => (
 									<AssignedToTaskUser key={user.id} userInfo={user} />
+								))}
+								{tags.map((tag) => (
+									<TagItem key={tag.id} tag={tag} />
 								))}
 							</div>
 						</div>
