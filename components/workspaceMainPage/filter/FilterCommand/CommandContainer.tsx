@@ -11,21 +11,24 @@ import {
 import { CommandUserItem } from './CommandUserItem';
 import { CommandTagItem } from './CommandTagItem';
 import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	sessionUserId: string;
 }
 
 export const CommandContainer = ({ sessionUserId }: Props) => {
+	const t = useTranslations('WORKSPACE_MAIN_PAGE.COMMAND');
+
 	const { allUsers, filterAssignedUsers, allTags, filterTags } =
 		useFilterByUsersAndTagsInWorkspace();
 
 	return (
 		<Command className='w-[15rem]'>
-			<CommandInput placeholder='Type a command or search...' />
+			<CommandInput placeholder={t('SEARCH')} />
 			<CommandList>
-				<CommandEmpty>No results found.</CommandEmpty>
-				<CommandGroup heading='ASSIGNED TO'>
+				<CommandEmpty>{t('NO_RESULTS_FOUND')}</CommandEmpty>
+				<CommandGroup heading={t('ASSIGNED_TO')}>
 					{allUsers.map((user) => {
 						const isActive = filterAssignedUsers.some((activeUser) => activeUser.id === user.id);
 						return (
@@ -41,7 +44,7 @@ export const CommandContainer = ({ sessionUserId }: Props) => {
 					})}
 				</CommandGroup>
 				<CommandSeparator />
-				<CommandGroup heading='TAGS'>
+				<CommandGroup heading={t('TAG')}>
 					{allTags &&
 						allTags.map((tag) => {
 							const isActive = filterTags.some((activeTag) => activeTag.id === tag.id);

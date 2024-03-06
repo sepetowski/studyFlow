@@ -7,6 +7,7 @@ import { Check } from 'lucide-react';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import { FilterUser } from '@/types/extended';
 import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
+import { useTranslations } from 'next-intl';
 
 interface Props extends FilterUser {
 	sessionUserId: string;
@@ -14,6 +15,8 @@ interface Props extends FilterUser {
 }
 
 export const CommandUserItem = ({ username, id, image, sessionUserId, active }: Props) => {
+	const t = useTranslations('WORKSPACE_MAIN_PAGE.COMMAND');
+
 	const { onChangeAssigedUser } = useFilterByUsersAndTagsInWorkspace();
 	const name = useTuncateText(username, 25, 0);
 
@@ -30,7 +33,7 @@ export const CommandUserItem = ({ username, id, image, sessionUserId, active }: 
 					<UserAvatar className='w-8 h-8' size={10} profileImage={image} />
 
 					<p className='text-secondary-foreground'>
-						{sessionUserId === id ? 'Przypisane do mnie' : name}
+						{sessionUserId === id ? t('ASSIGNED_TO_ME') : name}
 					</p>
 				</div>
 

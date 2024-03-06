@@ -1,6 +1,5 @@
 'use client';
 import React from 'react';
-import { Button } from '@/components/ui/button';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import { WorkspaceRecentActivityAssignedToItem } from '@/types/extended';

@@ -11,19 +11,21 @@ import { FilterIcon } from 'lucide-react';
 import { LoadingState } from '@/components/ui/loading-state';
 import { ClientError } from '@/components/error/ClientError';
 import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	sessionUserId: string;
 }
 
 export const Filter = ({ sessionUserId }: Props) => {
+	const t = useTranslations('WORKSPACE_MAIN_PAGE.FILTER');
 	const { isError, isLoding } = useFilterByUsersAndTagsInWorkspace();
 
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
 				<Button size={'sm'} className='text-white flex gap-2 items-center rounded-lg'>
-					<FilterIcon size={16} /> Filter
+					<FilterIcon size={16} /> {t('FILTER_BTN')}
 				</Button>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent className='w-fit' align='start'>

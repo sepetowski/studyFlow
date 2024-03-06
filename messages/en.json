@@ -798,6 +798,31 @@
 		"ERROR": "An error occurred while retrieving the latest activity."
 	},
 
+	"WORKSPACE_MAIN_PAGE": {
+		"FILTER": {
+			"FILTER_BTN": "Filter",
+			"CLEAR_BTN": "Clear"
+		},
+		"COMMAND": {
+			"SEARCH": "Search",
+			"NO_RESULTS_FOUND": "No results found",
+			"ASSIGNED_TO": "ASSIGNED TO",
+			"TAG": "TAG",
+			"ASSIGNED_TO_ME": "Assigned to me"
+		},
+		"RECENT_ACTIVITY": {
+			"NO_FILTERED_DATA": "No tasks and mind maps to display for the given criteria",
+			"ERROR": "Failed to fetch recent workspace activity data",
+			"NO_DATA": "No activity found. Create your first tasks and mind maps now!"
+		},
+		"SHORTCUT_CONTAINER": {
+			"GROUP_CHAT": "Group Chat",
+			"PRIVATE_CHAT": "Private Chat",
+			"NEW_TASK": "New Task",
+			"NEW_MIND_MAP": "New Mind Map"
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"

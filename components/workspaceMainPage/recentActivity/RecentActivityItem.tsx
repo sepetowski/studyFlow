@@ -7,7 +7,6 @@ import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import Link from 'next-intl/link';
-import { useRouter } from 'next-intl/client';
 import { StarSvg } from '@/components/common/StarSvg';
 import { AssignedToTaskUser } from './AssignedToTaskUser';
 import { TagItem } from './TagItem';
@@ -17,9 +16,8 @@ interface Props {
 }
 
 export const RecentActivityItem = ({
-	activity: { title, emoji, starred, type, updated, assignedTo, tags },
+	activity: { title, emoji, starred, type, updated, assignedTo, tags, link },
 }: Props) => {
-	const router = useRouter();
 	const tuncatedTilte = useTuncateText(title, 40, 10);
 
 	const c = useTranslations('COMMON');
@@ -32,7 +30,7 @@ export const RecentActivityItem = ({
 		type === 'mindMap' ? c('EDITED_ITEM_SENTENCE.MIND_MAP') : c('EDITED_ITEM_SENTENCE.TASK');
 
 	return (
-		<Link href={'/'}>
+		<Link href={link}>
 			<Card className='bg-background border-none hover:bg-accent transition-colors duration-200 p-2'>
 				<CardContent className='flex w-full justify-between sm:items-center p-2 sm:p-2 pt-0 '>
 					<div className='flex flex-row gap-2 sm:gap-4  w-full'>

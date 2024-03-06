@@ -2,7 +2,6 @@
 import React from 'react';
 import { Card, CardContent } from '@/components/ui/card';
 import { ReadOnlyEmoji } from '@/components/common/ReadOnlyEmoji';
-import { Star } from 'lucide-react';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
 import { Button } from '@/components/ui/button';

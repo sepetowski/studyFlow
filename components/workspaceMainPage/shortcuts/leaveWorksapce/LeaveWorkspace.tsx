@@ -11,7 +11,7 @@ import {
 import { Button } from '@/components/ui/button';
 import { DoorOpen } from 'lucide-react';
 import Warning from '@/components/ui/warning';
-import { UserPermisson, Workspace } from '@prisma/client';
+import { Workspace } from '@prisma/client';
 import { useMutation } from '@tanstack/react-query';
 import axios, { AxiosError } from 'axios';
 import { useTranslations } from 'next-intl';

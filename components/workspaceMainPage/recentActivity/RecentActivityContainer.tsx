@@ -1,42 +1,23 @@
 'use client';
 import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
-import { FilterUser, WorkspaceRecentActivity } from '@/types/extended';
+import { WorkspaceRecentActivity } from '@/types/extended';
 import { useQuery } from '@tanstack/react-query';
 import React, { useEffect, useMemo, useState } from 'react';
 import { RecentActivityItem } from './RecentActivityItem';
-import { Tag } from '@prisma/client';
 import { LoadingState } from '@/components/ui/loading-state';
 import { NoFilteredData } from './NoFilteredData';
 import { NoData } from './NoData';
 import { ClientError } from '@/components/error/ClientError';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	workspaceId: string;
 	userId: string;
 }
 
-function applyFilters(
-	data: WorkspaceRecentActivity[],
-	selectedTags: Tag[],
-	selectedUsers: FilterUser[]
-): WorkspaceRecentActivity[] {
-	return data.filter((activity) => {
-		// Filtracja na podstawie tagów
-		const tagsMatch = selectedTags.every((tag) =>
-			activity.tags.some((activityTag) => activityTag.id === tag.id)
-		);
-
-		// Filtracja na podstawie użytkowników
-		const usersMatch = selectedUsers.every((user) =>
-			activity.assignedTo.some((assignedUser) => assignedUser.id === user.id)
-		);
-
-		// Zwróć true tylko dla elementów, które spełniają oba kryteria
-		return tagsMatch && usersMatch;
-	});
-}
-
 export const RecentActivityContainer = ({ userId, workspaceId }: Props) => {
+	const t = useTranslations('WORKSPACE_MAIN_PAGE.RECENT_ACTIVITY');
+
 	const [filteredRecentActivity, setFilteredRecentActivity] = useState<WorkspaceRecentActivity[]>(
 		[]
 	);
@@ -98,10 +79,7 @@ export const RecentActivityContainer = ({ userId, workspaceId }: Props) => {
 			: recentActivity;
 	}, [recentActivity, filterAssignedUsers, filterTags, filteredRecentActivity]);
 
-	if (isError)
-		return (
-			<ClientError message='Nie udało pobrać się danych ostatniej aktywnośći w przestrzeni roboczej' />
-		);
+	if (isError) return <ClientError message={t('ERROR')} />;
 	else
 		return (
 			<div className='w-full flex flex-col gap-2 '>

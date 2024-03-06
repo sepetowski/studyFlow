@@ -180,6 +180,7 @@ export interface WorkspaceRecentActivity {
 	starred: boolean;
 	tags: Tag[];
 	assignedTo: WorkspaceRecentActivityAssignedToItem[];
+	link: string;
 }
 export interface AssignedToMeTaskAndMindMapsWorkspaceRecentActivity {
 	tasks: WorkspaceRecentActivity[];
