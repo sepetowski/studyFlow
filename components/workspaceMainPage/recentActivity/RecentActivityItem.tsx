@@ -1,24 +1,23 @@
 'use client';
 import React from 'react';
+import { WorkspaceRecentActivity } from '@/types/extended';
 import { Card, CardContent } from '@/components/ui/card';
 import { ReadOnlyEmoji } from '@/components/common/ReadOnlyEmoji';
 import { useFormatter, useTranslations } from 'next-intl';
 import { UserHoverInfoCard } from '@/components/common/UserHoverInfoCard';
-import { Button } from '@/components/ui/button';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import Link from 'next-intl/link';
-import { HomeRecentActivity } from '@/types/extended';
-import { StarSvg } from '../common/StarSvg';
-import { useRouter } from 'next-intl/client';
+import { StarSvg } from '@/components/common/StarSvg';
+import { AssignedToTaskUser } from './AssignedToTaskUser';
+import { TagItem } from './TagItem';
 
 interface Props {
-	activityItem: HomeRecentActivity;
+	activity: WorkspaceRecentActivity;
 }
 
-export const HomeRecentActivityItem = ({
-	activityItem: { emoji, link, title, type, updated, workspaceName, workspaceId, starred },
+export const RecentActivityItem = ({
+	activity: { title, emoji, starred, type, updated, assignedTo, tags, link },
 }: Props) => {
-	const router = useRouter();
 	const tuncatedTilte = useTuncateText(title, 40, 10);
 
 	const c = useTranslations('COMMON');
@@ -53,21 +52,17 @@ export const HomeRecentActivityItem = ({
 									</p>
 									<div className='flex items-center gap-1'>
 										<UserHoverInfoCard className='px-0' user={updated.by} />
-										<p>
-											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
-											<Button
-												variant={'link'}
-												onClick={(e) => {
-													e.preventDefault();
-													router.push(`/dashboard/workspace/${workspaceId}`);
-												}}
-												className='px-0'>
-												{workspaceName}
-											</Button>
-										</p>
 									</div>
 								</div>
 							)}
+							<div className='flex items-center flex-wrap gap-1 mt-2'>
+								{assignedTo.map((user) => (
+									<AssignedToTaskUser key={user.id} userInfo={user} />
+								))}
+								{tags.map((tag) => (
+									<TagItem key={tag.id} tag={tag} />
+								))}
+							</div>
 						</div>
 					</div>
 				</CardContent>

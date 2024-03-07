@@ -252,7 +252,12 @@
 			"LANGUAGE": "Proszę wybrać język",
 			"CHOOSE_ONE": "Proszę zaznaczyć jedną z opcji",
 			"LINK": "Proszę podać poprawny link",
-			"IMAGE_REQUIRED": "Proszę podać zdjęcie"
+			"IMAGE_REQUIRED": "Proszę podać zdjęcie",
+			"TAG": {
+				"SHORT": "Nazwa tagu jest zbyt krótka",
+				"LONG": "Nazwa tagu jest za długa",
+				"SPECIAL_CHARS": "Nazwa tagu może składać się tylko z liter i cyfr"
+			}
 		}
 	},
 	"SIDEBAR": {
@@ -790,6 +795,30 @@
 	"HOME_PAGE": {
 		"NO_DATA": "Nie znaleziono żadnej aktywoności. Dołącz do przestrzeni roboczej lub stwóz swoją własną. Następnie wszystkie zadania i mapy myśli, które zostaną edytowane będa tutaj widoczne w kolejności od najnowszej.",
 		"ERROR": "Wystąpił błąd podczas pobierania ostatniej aktywnośći."
+	},
+	"WORKSPACE_MAIN_PAGE": {
+		"FILTER": {
+			"FILTER_BTN": "Filtr",
+			"CLEAR_BTN": "Wyczyść"
+		},
+		"COMMAND": {
+			"SEARCH": "Szukaj",
+			"NO_RESULTS_FOUND": "Nic nie znaleziono",
+			"ASSIGNED_TO": "PRZYPISANE DO",
+			"TAG": "TAG",
+			"ASSIGNED_TO_ME": "Przypisane do mnie"
+		},
+		"RECENT_ACTIVITY": {
+			"NO_FILTERED_DATA": "Brak zadań i map myśli do wyświetlenia dla podanych kryteriów",
+			"ERROR": "Nie udało pobrać się danych ostatniej aktywnośći w przestrzeni roboczej",
+			"NO_DATA": "Nie znaleziono żadnej aktywoności. Utwórz pierwsze zadania i mapy myśli już teraz!"
+		},
+		"SHORTCUT_CONTAINER": {
+			"GROUP_CHAT": "Czat grupowy",
+			"PRIVATE_CHAT": "Czat prywatny",
+			"NEW_TASK": "Nowe zadanie",
+			"NEW_MIND_MAP": "Nowa mapa myśli"
+		}
 	},
 
 	"CLIENT_ERROR": {

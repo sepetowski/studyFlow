@@ -250,7 +250,12 @@
 			},
 			"LANGUAGE": "Please select a language",
 			"CHOOSE_ONE": "Please select one of the options",
-			"LINK": "Please provide the correct link"
+			"LINK": "Please provide the correct link",
+			"TAG": {
+				"SHORT": "Tag name is too short",
+				"LONG": "Tag name is too long",
+				"SPECIAL_CHARS": "Tag name must only contain letters and digits"
+			}
 		}
 	},
 	"SIDEBAR": {
@@ -791,6 +796,31 @@
 	"HOME_PAGE": {
 		"NO_DATA": "No activity found. Join a workspace or create your own. Then, all tasks and mind maps that are edited will be visible here in order from the latest.",
 		"ERROR": "An error occurred while retrieving the latest activity."
+	},
+
+	"WORKSPACE_MAIN_PAGE": {
+		"FILTER": {
+			"FILTER_BTN": "Filter",
+			"CLEAR_BTN": "Clear"
+		},
+		"COMMAND": {
+			"SEARCH": "Search",
+			"NO_RESULTS_FOUND": "No results found",
+			"ASSIGNED_TO": "ASSIGNED TO",
+			"TAG": "TAG",
+			"ASSIGNED_TO_ME": "Assigned to me"
+		},
+		"RECENT_ACTIVITY": {
+			"NO_FILTERED_DATA": "No tasks and mind maps to display for the given criteria",
+			"ERROR": "Failed to fetch recent workspace activity data",
+			"NO_DATA": "No activity found. Create your first tasks and mind maps now!"
+		},
+		"SHORTCUT_CONTAINER": {
+			"GROUP_CHAT": "Group Chat",
+			"PRIVATE_CHAT": "Private Chat",
+			"NEW_TASK": "New Task",
+			"NEW_MIND_MAP": "New Mind Map"
+		}
 	},
 
 	"CLIENT_ERROR": {

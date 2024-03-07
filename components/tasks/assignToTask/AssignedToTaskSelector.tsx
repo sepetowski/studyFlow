@@ -10,7 +10,6 @@ import { Users2 } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { LoadingState } from '@/components/ui/loading-state';
 import { CommandContainer } from './CommandContainer';
-import { useRouter } from 'next-intl/client';
 import { useQuery } from '@tanstack/react-query';
 import { UsersAssingedToTaskInfo } from '@/types/extended';
 import { useTranslations } from 'next-intl';
@@ -31,7 +30,6 @@ export const AssignedToTaskSelector = ({
 	taskId,
 	workspaceId,
 }: Props) => {
-	const router = useRouter();
 	const t = useTranslations('TASK.ASSIGNMENT');
 	const [canEdit, setCanEdit] = useState(false);
 

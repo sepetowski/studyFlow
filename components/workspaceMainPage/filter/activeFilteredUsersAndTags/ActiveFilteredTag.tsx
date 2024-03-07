@@ -1,17 +1,17 @@
 'use client';
+import { Button } from '@/components/ui/button';
 import { Tag } from 'lucide-react';
-import Link from 'next-intl/link';
 import React, { useMemo } from 'react';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { CustomColors, Tag as TagType } from '@prisma/client';
+import { useFilterByUsersAndTagsInWorkspace } from '@/context/FilterByUsersAndTagsInWorkspace';
 
 interface Props {
 	tag: TagType;
-	disabled?: boolean;
 }
 
-export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Props) => {
+export const ActiveFilteredTag = ({ tag: { color, id, name } }: Props) => {
+	const { onClearTag } = useFilterByUsersAndTagsInWorkspace();
+
 	const tagColor = useMemo(() => {
 		switch (color) {
 			case CustomColors.PURPLE:
@@ -54,19 +54,18 @@ export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Pro
 				return 'text-green-600 hover:text-green-500';
 		}
 	}, [color]);
-
 	return (
-		<Link
-			aria-disabled={disabled}
-			href={`/dashboard/workspace/${workspaceId}?tagId=${id}`}
-			className={cn(
-				` ${buttonVariants({
-					variant: 'outline',
-					size: 'sm',
-				})}  px-2.5 py-0.5  h-fit  text-xs ${disabled ? 'pointer-events-none' : ''}`
-			)}>
-			<Tag className={`mr-2 w-3 h-3  ${tagColor}`} size={16} />
-			<span>{name}</span>
-		</Link>
+		<Button
+			onClick={() => {
+				onClearTag(id);
+			}}
+			size={'sm'}
+			variant={'outline'}
+			className={`w-fit  flex gap-2 h-9 items-center px-2 py-1.5 text-xs rounded-lg ${tagColor} `}>
+			<p className='flex items-center'>
+				<Tag className='mr-2' size={16} />
+				<span className='text-secondary-foreground'>{name}</span>
+			</p>
+		</Button>
 	);
 };

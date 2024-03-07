@@ -1,17 +1,13 @@
 'use client';
 import { Tag } from 'lucide-react';
-import Link from 'next-intl/link';
 import React, { useMemo } from 'react';
-import { buttonVariants } from '@/components/ui/button';
-import { cn } from '@/lib/utils';
 import { CustomColors, Tag as TagType } from '@prisma/client';
 
 interface Props {
 	tag: TagType;
-	disabled?: boolean;
 }
 
-export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Props) => {
+export const TagItem = ({ tag: { color, name } }: Props) => {
 	const tagColor = useMemo(() => {
 		switch (color) {
 			case CustomColors.PURPLE:
@@ -56,17 +52,9 @@ export const LinkTag = ({ tag: { color, id, name, workspaceId }, disabled }: Pro
 	}, [color]);
 
 	return (
-		<Link
-			aria-disabled={disabled}
-			href={`/dashboard/workspace/${workspaceId}?tagId=${id}`}
-			className={cn(
-				` ${buttonVariants({
-					variant: 'outline',
-					size: 'sm',
-				})}  px-2.5 py-0.5  h-fit  text-xs ${disabled ? 'pointer-events-none' : ''}`
-			)}>
-			<Tag className={`mr-2 w-3 h-3  ${tagColor}`} size={16} />
+		<div className='w-fit  flex gap-2 items-center px-2.5 py-0.5  h-fit   text-xs rounded-lg border border-input bg-background'>
+			<Tag className={` w-3 h-3  ${tagColor}`} size={16} />
 			<span>{name}</span>
-		</Link>
+		</div>
 	);
 };

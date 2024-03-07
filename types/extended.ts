@@ -150,5 +150,42 @@ export interface UserNotification extends Notification {
 	} | null;
 }
 
+export interface FilterUser {
+	id: string;
+	username: string;
+	image: string | null;
+}
+
+export interface WorkspaceRecentActivityAssignedToItem {
+	user: {
+		id: string;
+		image: string | null;
+		username: string;
+	};
+	id: string;
+	userId: string;
+	mindMapId?: string;
+	taskId?: string;
+}
+
+export interface WorkspaceRecentActivity {
+	id: string;
+	title: string;
+	emoji: string;
+	type: AssignedItemType;
+	updated: {
+		at: Date;
+		by?: UserInfo | null;
+	};
+	starred: boolean;
+	tags: Tag[];
+	assignedTo: WorkspaceRecentActivityAssignedToItem[];
+	link: string;
+}
+export interface AssignedToMeTaskAndMindMapsWorkspaceRecentActivity {
+	tasks: WorkspaceRecentActivity[];
+	mindMaps: WorkspaceRecentActivity[];
+}
+
 export interface HomeRecentActivity extends AssignedToMeDataItem {}
 export interface HomeRecentTasksAndMindMapsActivity extends AssignedToMeTaskAndMindMaps {}

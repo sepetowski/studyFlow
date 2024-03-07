@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { HomeRecentActivityItem } from './HomeRecentActivityItem';
 import { useInfiniteQuery } from '@tanstack/react-query';
 import { HomeRecentActivity } from '@/types/extended';
@@ -17,7 +17,6 @@ interface Props {
 
 export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 	const t = useTranslations('HOME_PAGE');
-	const [activityItems, setActivityItems] = useState<HomeRecentActivity[]>([]);
 	const [isAllFetched, setIsAllFetched] = useState(false);
 
 	const lastActivityItem = useRef<null | HTMLDivElement>(null);
@@ -30,7 +29,7 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 		['getHomeRecentActivity'],
 		async ({ pageParam = 1 }) => {
 			const res = await fetch(
-				`/api/home-page/get?userId=${userId}&page=${pageParam}&take=${ACTIVITY_PER_PAGE}`
+				`/api/home_page/get?userId=${userId}&page=${pageParam}&take=${ACTIVITY_PER_PAGE}`
 			);
 			const posts = (await res.json()) as HomeRecentActivity[];
 			return posts;
@@ -45,9 +44,7 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 	);
 
 	useEffect(() => {
-		const activityItems = data?.pages.flatMap((page) => page) ?? initialData;
 		if (data?.pages[data.pages.length - 1].length === 0) setIsAllFetched(true);
-		setActivityItems(activityItems);
 	}, [data?.pages, initialData]);
 
 	useEffect(() => {
@@ -56,9 +53,13 @@ export const HomeRecentActivityContainer = ({ userId, initialData }: Props) => {
 		}
 	}, [entry, isAllFetched, fetchNextPage]);
 
+	const activityItems = useMemo(() => {
+		return data?.pages.flatMap((page) => page) ?? initialData;
+	}, [data?.pages, initialData]);
+
 	if (isError) return <ClientError message={t('ERROR')} />;
 
-	if (activityItems.length === 0 && initialData.length === 0)
+	if (activityItems.length === 0)
 		return (
 			<div className='flex flex-col gap-4 sm:gap-6 w-full mt-16 sm:mt-40 items-center  '>
 				<div className='text-primary'>
