@@ -1,7 +1,6 @@
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
-import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { FilterContainer } from '@/components/workspaceMainPage/filter/FilterContainer';
 import { RecentActivityContainer } from '@/components/workspaceMainPage/recentActivity/RecentActivityContainer';
 import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/ShortcutContainer';

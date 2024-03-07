@@ -1,8 +1,6 @@
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
-
-import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { ReadOnlyContent } from '@/components/tasks/readOnly/ReadOnlyContent';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';

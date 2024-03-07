@@ -2,7 +2,6 @@ import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { MindMap } from '@/components/mindMaps/MindMap';
-import { PermissionIndicator } from '@/components/permissionIndicator/PermissionIndicator';
 import { AutoSaveMindMapProvider } from '@/context/AutoSaveMindMap';
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getMindMap, getUserWorkspaceRole, getWorkspace } from '@/lib/api';

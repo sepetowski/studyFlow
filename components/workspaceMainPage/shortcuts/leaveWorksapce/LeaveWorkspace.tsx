@@ -61,7 +61,7 @@ export const LeaveWorkspace = ({ workspace: { id, name } }: Props) => {
 			<DialogTrigger asChild>
 				<Button
 					variant={'destructive'}
-					className='w-40 text-sm md:text-base md:w-52 xl:w-1/5 h-14 p-2 rounded-lg shadow-sm  flex justify-center items-center gap-1 md:gap-2 '
+					className=' text-sm md:text-base min-w-[10rem] sm:min-w-[13rem] w-1/5 h-14 p-2 rounded-lg shadow-sm  flex justify-center items-center gap-1 md:gap-2 '
 					onClick={() => setOpen(true)}>
 					<DoorOpen size={18} />
 					<span>{t('LEAVE')}</span>

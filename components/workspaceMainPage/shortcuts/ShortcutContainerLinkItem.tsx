@@ -18,8 +18,8 @@ export const ShortcutContainerLinkItem = ({ Icon, title, userRole, href }: Props
 			href={href}
 			className={`${buttonVariants({
 				variant: 'outline',
-			})} w-40 text-sm md:text-base md:w-52  h-14 p-2 rounded-lg shadow-sm  flex justify-center items-center gap-1 md:gap-2 ${
-				userRole !== 'OWNER' ? 'xl:w-1/5' : 'xl:w-1/4'
+			})} text-sm md:text-base min-w-[10rem] sm:min-w-[13rem] h-14 p-2 rounded-lg shadow-sm  flex justify-center items-center gap-1 md:gap-2 ${
+				userRole !== 'OWNER' ? 'w-1/5' : 'w-1/4'
 			} `}>
 			<Icon size={16} />
 			<h4 className='break-words'>{title}</h4>
