@@ -207,7 +207,7 @@ export interface ExtendedMessage extends Message {
 	sender: {
 		id: string;
 		username: string;
-		image: string | null;
+		image?: string | null;
 	};
 }
 

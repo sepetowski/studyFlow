@@ -11,7 +11,10 @@ import axios, { AxiosError } from 'axios';
 import { useTranslations } from 'next-intl';
 import { useToast } from '@/components/ui/use-toast';
 import { UploadFilesButton } from './UploadFileButton';
-import { AditionalResource } from '@/types/extended';
+import { AditionalResource, ExtendedMessage } from '@/types/extended';
+import { useMessage } from '@/store/conversation/messages';
+import { v4 as uuidv4 } from 'uuid';
+import { useSession } from 'next-auth/react';
 
 interface Props {
 	workspaceId: string;
@@ -21,6 +24,10 @@ interface Props {
 export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 	const m = useTranslations('MESSAGES');
 	const { toast } = useToast();
+	const session = useSession();
+
+	const [lastMessageId, setLastMessageid] = useState('');
+	const { addMessage, deleteMessage } = useMessage((state) => state);
 
 	const [uploadedFiles, setUploadedFiles] = useState<AditionalResource[] | null>(null);
 	const [message, setMessage] = useState('');
@@ -42,24 +49,32 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 
 	const { mutate: newMessage, isLoading } = useMutation({
 		mutationFn: async () => {
-			const text = message;
-			const attachments = uploadedFiles;
+			if (!session.data) return;
 
+			const user = session.data.user;
+			const id = uuidv4();
+			setLastMessageid(id);
+
+			const newMessage: ExtendedMessage = {
+				id,
+				edited: false,
+				content: message,
+				aditionalRecources: uploadedFiles ? uploadedFiles : [],
+				conversationId: chatId,
+				createdAt: new Date(),
+				sender: {
+					id: user.id,
+					image: user.image,
+					username: user.username!,
+				},
+				senderId: user.id,
+			};
+
+			addMessage(newMessage);
 			setUploadedFiles(null);
 			setMessage('');
 
-			await axios.post('/api/conversation/new_message', {
-				workspaceId,
-				chatId,
-				message: text,
-				attachments,
-			});
-		},
-
-		onSuccess: async () => {
-			toast({
-				title: m('SUCCES.TASK_ADDED'),
-			});
+			await axios.post('/api/conversation/new_message', newMessage);
 		},
 
 		onError: (err: AxiosError) => {
@@ -69,8 +84,9 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 				title: m(error),
 				variant: 'destructive',
 			});
+
+			deleteMessage(lastMessageId);
 		},
-		onMutate: () => {},
 
 		mutationKey: ['newMessage'],
 	});

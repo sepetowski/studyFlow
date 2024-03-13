@@ -9,32 +9,35 @@ export async function POST(request: Request) {
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
 	const body: unknown = await request.json();
+
 	const result = newMessageSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
 
-	const { workspaceId, attachments, chatId, message } = result.data;
+	const newMessage = result.data;
 
-	if (message.length === 0 && !attachments)
+	if (newMessage.content.length === 0 && newMessage.aditionalRecources.length === 0)
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 
 	try {
 		const chat = await db.conversation.findUnique({
-			where: { id: chatId, workspaceId },
+			where: { id: newMessage.conversationId },
 		});
 		if (!chat) return NextResponse.json('ERRORS.NO_CHAT', { status: 200 });
 
-		const newMessage = await db.message.create({
+		await db.message.create({
 			data: {
-				senderId: session.user.id,
-				content: message,
-				conversationId: chat.id,
+				id: newMessage.id,
+				senderId: newMessage.senderId,
+				content: newMessage.content,
+				conversationId: newMessage.conversationId,
+				edited: false,
 			},
 		});
-		if (attachments) {
-			for (const attachment of attachments) {
+		if (newMessage.aditionalRecources.length > 0) {
+			for (const attachment of newMessage.aditionalRecources) {
 				await db.aditionalRecource.create({
 					data: {
 						messageId: newMessage.id,
