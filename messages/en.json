@@ -838,6 +838,7 @@
 		"POMODORO": "Pomodoro",
 		"STARRED": "Starred",
 		"ASSIGNED-TO-ME": "Assigned to me",
-		"CALENDAR": "Calendar"
+		"CALENDAR": "Calendar",
+		"CHAT": "Chat"
 	}
 }

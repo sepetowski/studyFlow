@@ -835,6 +835,7 @@
 		"POMODORO": "Pomodoro",
 		"STARRED": "Wyróżnione",
 		"ASSIGNED-TO-ME": "Przypisane do mnie",
-		"CALENDAR": "Kalendarz"
+		"CALENDAR": "Kalendarz",
+		"CHAT": "Czat"
 	}
 }

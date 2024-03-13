@@ -1,29 +1,34 @@
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
-import { FilterContainer } from '@/components/workspaceMainPage/filter/FilterContainer';
-import { RecentActivityContainer } from '@/components/workspaceMainPage/recentActivity/RecentActivityContainer';
-import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/ShortcutContainer';
-import { FilterByUsersAndTagsInWorkspaceProvider } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { db } from '@/lib/db';
+import { redirect } from 'next-intl/server';
 
 interface Params {
 	params: {
 		workspace_id: string;
+		chat_id: string;
 	};
 }
 
-const Workspace = async ({ params: { workspace_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(`/dashboard/workspace/${workspace_id}`);
+const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
+	const session = await checkIfUserCompletedOnboarding(
+		`/dashboard/workspace/${workspace_id}/chat/${chat_id}`
+	);
 
 	const [workspace, userRole] = await Promise.all([
 		getWorkspaceWithChatId(workspace_id, session.user.id),
 		getUserWorkspaceRole(workspace_id, session.user.id),
 	]);
 
+	const conversationId = workspace.conversation.id;
+
+	if (conversationId !== chat_id) redirect('/dashboard/errors?error=no-conversation');
+
 	return (
-		<FilterByUsersAndTagsInWorkspaceProvider>
+		<>
 			<DashboardHeader
 				addManualRoutes={[
 					{
@@ -35,16 +40,17 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 						name: workspace.name,
 						href: `/dashboard/workspace/${workspace_id}`,
 					},
+					{
+						name: 'CHAT',
+						href: `/dashboard/workspace/${workspace_id}/chat/${chat_id}`,
+						useTranslate: true,
+					},
 				]}>
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
-			<main className='flex flex-col gap-2 w-full'>
-				<ShortcutContainer workspace={workspace} userRole={userRole} />
-				<FilterContainer sessionUserId={session.user.id} />
-				<RecentActivityContainer userId={session.user.id} workspaceId={workspace.id} />
-			</main>
-		</FilterByUsersAndTagsInWorkspaceProvider>
+			<main className='w-full h-full'></main>
+		</>
 	);
 };
-export default Workspace;
+export default Chat;

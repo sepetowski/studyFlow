@@ -62,7 +62,8 @@ model User {
   userNotifications        Notification[]      @relation("NotifayUser")
   userCreatedNotifications Notification[]      @relation("NotifayCreator")
 
-  lastTimeActive DateTime @default(now())
+  lastTimeActive DateTime  @default(now())
+  messages       Message[]
 }
 
 model PomodoroSettings {
@@ -76,8 +77,6 @@ model PomodoroSettings {
   rounds             Int                 @default(3)
   soundEffect        PomodoroSoundEffect @default(BELL)
   soundEffectVloume  Float               @default(0.5)
-
-  @@index([userId])
 }
 
 model Workspace {
@@ -98,8 +97,7 @@ model Workspace {
   tags         Tag[]
   mindMaps     MindMap[]
   notification Notification[]
-
-  @@index([creatorId])
+  conversation Conversation?
 }
 
 model Task {
@@ -120,11 +118,6 @@ model Task {
   dateId         String?
   savedTask      savedTask[]
   assignedToTask assignedToTask[]
-
-  @@index([dateId])
-  @@index([updatedUserId])
-  @@index([creatorId])
-  @@index([workspaceId])
 }
 
 model MindMap {
@@ -143,10 +136,6 @@ model MindMap {
   tags              Tag[]
   savedMindMaps     savedMindMaps[]
   assignedToMindMap assignedToMindMap[]
-
-  @@index([workspaceId])
-  @@index([updatedUserId])
-  @@index([creatorId])
 }
 
 model TaskDate {
@@ -164,8 +153,6 @@ model Tag {
   mindMaps    MindMap[]
   workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId String
-
-  @@index([workspaceId])
 }
 
 model savedTask {
@@ -174,9 +161,6 @@ model savedTask {
   userId String
   task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId String
-
-  @@index([userId])
-  @@index([taskId])
 }
 
 model assignedToTask {
@@ -185,9 +169,6 @@ model assignedToTask {
   userId String
   task   Task   @relation(fields: [taskId], references: [id], onDelete: Cascade)
   taskId String
-
-  @@index([userId])
-  @@index([taskId])
 }
 
 model savedMindMaps {
@@ -196,9 +177,6 @@ model savedMindMaps {
   userId    String
   mindMap   MindMap @relation(fields: [mindMapId], references: [id], onDelete: Cascade)
   mindMapId String
-
-  @@index([userId])
-  @@index([mindMapId])
 }
 
 model assignedToMindMap {
@@ -207,9 +185,6 @@ model assignedToMindMap {
   userId    String
   mindMap   MindMap @relation(fields: [mindMapId], references: [id], onDelete: Cascade)
   mindMapId String
-
-  @@index([userId])
-  @@index([mindMapId])
 }
 
 model Subscription {
@@ -220,16 +195,12 @@ model Subscription {
   userRole    UserPermisson @default(READ_ONLY)
 
   @@id([userId, workspaceId])
-  @@index([workspaceId])
-  @@index([userId])
 }
 
 model VerificationToken {
   identifier String
   token      String   @unique
   expires    DateTime
-
-  @@unique([identifier, token])
 }
 
 model Notification {
@@ -247,10 +218,40 @@ model Notification {
   newUserRole      UserPermisson?
   taskId           String?
   mindMapId        String?
+}
 
-  @@index([userId])
-  @@index([notifayCreatorId])
-  @@index([workspaceId])
+model Conversation {
+  id          String    @id @default(uuid())
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspaceId String    @unique
+  messages    Message[]
+}
+
+model Message {
+  id                 String              @id @default(cuid())
+  conversation       Conversation        @relation(fields: [conversationId], references: [id])
+  conversationId     String
+  sender             User                @relation(fields: [senderId], references: [id])
+  senderId           String
+  content            String
+  createdAt          DateTime            @default(now())
+  aditionalRecources aditionalRecource[]
+  edited             Boolean             @default(false)
+}
+
+model aditionalRecource {
+  id String @id @default(cuid())
+
+  message   Message?               @relation(fields: [messageId], references: [id])
+  messageId String?
+  type      AditionalRecourceTypes
+  name      String
+  url       String
+}
+
+enum AditionalRecourceTypes {
+  PDF
+  IMAGE
 }
 
 enum CustomColors {

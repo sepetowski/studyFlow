@@ -1,6 +1,7 @@
 import {
 	ExtendedMindMap,
 	ExtendedTask,
+	ExtendedWorkspace,
 	HomeRecentActivity,
 	SettingsWorkspace,
 } from '@/types/extended';
@@ -23,6 +24,20 @@ export const getWorkspace = async (workspace_id: string, user_id: string) => {
 		return notFound();
 	}
 	return res.json() as Promise<Workspace>;
+};
+
+export const getWorkspaceWithChatId = async (workspace_id: string, user_id: string) => {
+	const res = await fetch(
+		`${domain}/api/workspace/get/workspace_with_chat/${workspace_id}?userId=${user_id}`,
+		{
+			method: 'GET',
+			cache: 'no-store',
+		}
+	);
+	if (!res.ok) {
+		return notFound();
+	}
+	return res.json() as Promise<ExtendedWorkspace>;
 };
 
 export const getWorkspaceSettings = async (workspace_id: string, user_id: string) => {

@@ -24,6 +24,7 @@ export const OptionsSidebar = ({
 	const pathname = usePathname();
 	const urlWorkspaceId: string | undefined = pathname.split('/')[3];
 	const urlAditionalId: string | undefined = pathname.split('/')[6];
+	const chatId: string | undefined = pathname.split('/')[5];
 	const workspaceId = urlWorkspaceId ? urlWorkspaceId : '';
 
 	if (
@@ -45,8 +46,8 @@ export const OptionsSidebar = ({
 				)}
 				{(pathname === `/dashboard/workspace/${workspaceId}` ||
 					pathname === `/dashboard/workspace/${workspaceId}/tasks/task/${urlAditionalId}` ||
-					pathname ===
-						`/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}`) && (
+					pathname === `/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${urlAditionalId}` ||
+					pathname === `/dashboard/workspace/${workspaceId}/chat/${chatId}`) && (
 					<WorkspaceOptions workspaceId={workspaceId} />
 				)}
 				{(pathname === '/dashboard/pomodoro' || pathname === '/dashboard/pomodoro/settings') && (

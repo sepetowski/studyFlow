@@ -187,5 +187,11 @@ export interface AssignedToMeTaskAndMindMapsWorkspaceRecentActivity {
 	mindMaps: WorkspaceRecentActivity[];
 }
 
+export interface ExtendedWorkspace extends Workspace {
+	conversation: {
+		id: string;
+	};
+}
+
 export interface HomeRecentActivity extends AssignedToMeDataItem {}
 export interface HomeRecentTasksAndMindMapsActivity extends AssignedToMeTaskAndMindMaps {}
