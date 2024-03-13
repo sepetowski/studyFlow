@@ -15,6 +15,7 @@ interface MessageState {
 export const useMessage = create<MessageState>()((set) => ({
 	initialMessagesLoading: true,
 	messages: [],
+	ammountOfNewMessages: 0,
 	hasMore: true,
 	page: 1,
 	setMesssages: (messages) =>

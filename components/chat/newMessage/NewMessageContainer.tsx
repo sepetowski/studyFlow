@@ -92,7 +92,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 	});
 
 	return (
-		<div className='p-2 w-full flex flex-col gap-2 bg-popover rounded-b-md px-4 py-2 shadow-sm border-t border-border'>
+		<div className=' w-full flex flex-col gap-2 bg-popover rounded-b-md px-4 py-2 shadow-sm border-t border-border'>
 			{uploadedFiles && uploadedFiles.length > 0 && (
 				<ScrollArea className='w-full '>
 					<div className=' flex gap-4 pb-4  border-b border-border'>
@@ -103,11 +103,16 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 					<ScrollBar orientation='horizontal' />
 				</ScrollArea>
 			)}
-			<div className='w-full flex justify-between items-center gap-4'>
+			<div className='w-full flex justify-between items-center gap-2'>
 				<div className='flex gap-0.5  sm:gap-1'>
 					<UploadFilesButton onChangeUploadedFiles={onChangeUploadedFilesHandler} />
 
-					<EmojiSelector asChild slide='right' align='end' onSelectedEmoji={onSelectEmojiHandler}>
+					<EmojiSelector
+						className='hidden sm:flex'
+						asChild
+						slide='right'
+						align='end'
+						onSelectedEmoji={onSelectEmojiHandler}>
 						<Button className='w-8 h-8 sm:w-10 sm:h-10' size={'icon'} variant={'ghost'}>
 							<Smile className='w-5 h-5 sm:w-auto sm:h-auto' />
 						</Button>
@@ -120,7 +125,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 						setMessage(e.target.value);
 					}}
 					placeholder='Nowa wiadomosc'
-					className='w-full flex-grow resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground text-lg font-semibold focus:outline-none max-h-28 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background  '
+					className='w-full flex-grow resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground focus:outline-none max-h-28 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background  '
 				/>
 
 				<div>

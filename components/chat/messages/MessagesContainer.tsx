@@ -9,9 +9,10 @@ import { LoadingState } from '@/components/ui/loading-state';
 interface Props {
 	workspaceId: string;
 	chatId: string;
+	sessionUserId: string;
 }
 
-export const MessagesContainer = ({ chatId, workspaceId }: Props) => {
+export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props) => {
 	const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const [userScrolled, setUserScrolled] = useState(false);
 
@@ -51,7 +52,7 @@ export const MessagesContainer = ({ chatId, workspaceId }: Props) => {
 			ref={scrollRef}
 			className='h-full flex flex-col gap-2 px-4 py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background '>
 			{messages.map((message) => (
-				<Message key={message.id} message={message} />
+				<Message key={message.id} message={message} sessionUserId={sessionUserId} />
 			))}
 		</div>
 	);

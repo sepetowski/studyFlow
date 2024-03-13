@@ -11,9 +11,10 @@ interface Props {
 	workspaceId: string;
 	chatId: string;
 	initialMessages: ExtendedMessage[];
+	sessionUserId: string;
 }
 
-export const ChatContainer = ({ chatId, workspaceId, initialMessages }: Props) => {
+export const ChatContainer = ({ chatId, workspaceId, initialMessages, sessionUserId }: Props) => {
 	const initState = useRef(false);
 	const hasMore = initialMessages.length >= MESSAGES_LIMIT;
 
@@ -28,7 +29,7 @@ export const ChatContainer = ({ chatId, workspaceId, initialMessages }: Props) =
 	return (
 		<div className='w-full h-full flex flex-col justify-between  border border-border rounded-md shadow-sm '>
 			<Header />
-			<MessagesContainer chatId={chatId} workspaceId={workspaceId} />
+			<MessagesContainer chatId={chatId} workspaceId={workspaceId} sessionUserId={sessionUserId} />
 			<NewMessageContainer chatId={chatId} workspaceId={workspaceId} />
 		</div>
 	);
