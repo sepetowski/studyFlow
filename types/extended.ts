@@ -1,6 +1,7 @@
 import {
 	AditionalRecourceTypes,
 	CustomColors,
+	Message,
 	MindMap,
 	Notification,
 	Tag,
@@ -199,6 +200,15 @@ export interface AditionalResource {
 	name: string;
 	url: string;
 	type: AditionalRecourceTypes;
+}
+
+export interface ExtendedMessage extends Message {
+	aditionalRecources: AditionalResource[];
+	sender: {
+		id: string;
+		username: string;
+		image: string | null;
+	};
 }
 
 export interface HomeRecentActivity extends AssignedToMeDataItem {}

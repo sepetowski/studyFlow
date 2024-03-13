@@ -76,7 +76,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 	});
 
 	return (
-		<div className='p-2 w-full flex flex-col gap-2 bg-popover rounded-md'>
+		<div className='p-2 w-full flex flex-col gap-2 bg-popover rounded-b-md px-4 py-2 shadow-sm border-t border-border'>
 			{uploadedFiles && uploadedFiles.length > 0 && (
 				<ScrollArea className='w-full '>
 					<div className=' flex gap-4 pb-4  border-b border-border'>

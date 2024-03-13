@@ -1,4 +1,5 @@
 import {
+	ExtendedMessage,
 	ExtendedMindMap,
 	ExtendedTask,
 	ExtendedWorkspace,
@@ -133,4 +134,17 @@ export const getInitialHomeRecentActivitiy = async (userId: string) => {
 		return notFound();
 	}
 	return res.json() as Promise<HomeRecentActivity[]>;
+};
+export const getInitialMessages = async (userId: string, chatId: string) => {
+	const res = await fetch(
+		`${domain}/api/conversation/get/initial_messages?userId=${userId}&chatId=${chatId}`,
+		{
+			method: 'GET',
+			cache: 'no-store',
+		}
+	);
+	if (!res.ok) {
+		return notFound();
+	}
+	return res.json() as Promise<ExtendedMessage[]>;
 };
