@@ -1,4 +1,5 @@
 import {
+	AditionalRecourceTypes,
 	CustomColors,
 	MindMap,
 	Notification,
@@ -191,6 +192,13 @@ export interface ExtendedWorkspace extends Workspace {
 	conversation: {
 		id: string;
 	};
+}
+
+export interface AditionalResource {
+	id: string;
+	name: string;
+	url: string;
+	type: AditionalRecourceTypes;
 }
 
 export interface HomeRecentActivity extends AssignedToMeDataItem {}

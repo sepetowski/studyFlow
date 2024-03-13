@@ -197,7 +197,8 @@
 			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli",
 			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień",
 			"CANT_GET_USERS": "Nie udało sie zaktualizować statusu aktywności",
-			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień"
+			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień",
+			"NO_CHAT": "Nie znaleziono konwersacji"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",

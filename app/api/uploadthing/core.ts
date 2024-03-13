@@ -4,14 +4,18 @@ import { createUploadthing, type FileRouter } from 'uploadthing/next';
 const f = createUploadthing();
 
 export const ourFileRouter = {
-	imageUploader: f({ image: { maxFileSize: '4MB', maxFileCount: 2 } })
+	imageUploader: f({ image: { maxFileSize: '4MB', maxFileCount: 1 } })
 		.middleware(async (req) => {
 			const user = await getToken(req);
 			if (!user) throw new Error('Unauthorized');
 			return { userId: user.id };
 		})
 		.onUploadComplete(async () => {}),
-	pdfUploader: f({ pdf: { maxFileSize: '8MB' } })
+
+	addToChatFile: f({
+		pdf: { maxFileSize: '32MB', maxFileCount: 5 },
+		image: { maxFileSize: '16MB', maxFileCount: 5 },
+	})
 		.middleware(async (req) => {
 			const user = await getToken(req);
 			if (!user) throw new Error('Unauthorized');

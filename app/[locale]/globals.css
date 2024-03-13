@@ -71,3 +71,7 @@
 	height: 0;
 	pointer-events: none;
 }
+
+.custom-button-uploading::after {
+	background-color: transparent !important;
+}

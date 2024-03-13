@@ -1,4 +1,5 @@
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
+import { ChatContainer } from '@/components/chat/ChatContainer';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
@@ -49,7 +50,9 @@ const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
 				{(userRole === 'ADMIN' || userRole === 'OWNER') && <InviteUsers workspace={workspace} />}
 				<AddTaskShortcut userId={session.user.id} />
 			</DashboardHeader>
-			<main className='w-full h-full'></main>
+			<main className='w-full h-full max-h-fit'>
+				<ChatContainer chatId={conversationId} workspaceId={workspace.id} />
+			</main>
 		</>
 	);
 };
