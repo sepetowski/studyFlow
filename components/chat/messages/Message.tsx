@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { ExtendedMessage } from '@/types/extended';
 import { MoreHorizontal } from 'lucide-react';
@@ -8,18 +8,18 @@ import { AditionalResource } from './AditionalResource';
 import { Options } from './Options';
 import { EditMessage } from './EditMessage';
 import { useOnClickOutside } from '@/hooks/useOnClickOutside';
+import { EditedBadge } from './EditedBadge';
 
 interface Props {
 	message: ExtendedMessage;
 	sessionUserId: string;
 }
 
-export const Message = ({
-	message: { content, aditionalRecources, createdAt, edited, id, sender },
-	sessionUserId,
-}: Props) => {
-	const messageRef = useRef<HTMLDivElement>(null);
+export const Message = ({ message, sessionUserId }: Props) => {
+	const { content, aditionalRecources, createdAt, edited, id, sender, updatedAt } = message;
 
+	console.log(edited);
+	const messageRef = useRef<HTMLDivElement>(null);
 	const [isEditing, setIsEditing] = useState(false);
 
 	useOnClickOutside(messageRef, () => {
@@ -42,14 +42,21 @@ export const Message = ({
 						<UserAvatar className='w-10 h-10' profileImage={sender.image} />
 					</div>
 					<div className={`flex flex-col  ${isEditing ? 'w-full' : 'w-fit'}`}>
-						<div className='flex gap-1 items-center'>
+						<div className='flex flex-wrap gap-1 items-center'>
 							<p className='text-primary '>{sender.username}</p>
 							<p className='text-muted-foreground text-xs'>{format.relativeTime(dateTime, now)}</p>
 						</div>
 						{!isEditing ? (
-							<p className='break-words'>{content}</p>
+							<div className='flex flex-wrap gap-1 items-end'>
+								<p className='break-words'>{content}</p>
+								{edited && <EditedBadge updatedAt={updatedAt!} />}
+							</div>
 						) : (
-							<EditMessage content={content} messageId={id} onChangeEdit={changeEditModeHandler} />
+							<EditMessage
+								content={content}
+								messageInfo={message}
+								onChangeEdit={changeEditModeHandler}
+							/>
 						)}
 						<div className='flex flex-col gap-2 mt-2'>
 							{aditionalRecources.map((resource) => (
@@ -59,9 +66,10 @@ export const Message = ({
 					</div>
 				</div>
 			</div>
+
 			{sender.id === sessionUserId && !isEditing && (
 				<div>
-					<Options onChangeEdit={changeEditModeHandler} />
+					<Options onChangeEdit={changeEditModeHandler} message={message} />
 				</div>
 			)}
 		</div>

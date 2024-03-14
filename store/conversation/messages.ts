@@ -7,9 +7,12 @@ interface MessageState {
 	page: number;
 	hasMore: boolean;
 	messages: ExtendedMessage[];
+	messageToDelete: null | ExtendedMessage;
 	addMessage: (message: ExtendedMessage) => void;
 	setMesssages: (messages: ExtendedMessage[]) => void;
 	deleteMessage: (messageId: string) => void;
+	editMessage: (messageId: string, content: string) => void;
+	setMessageToDelete: (messageToDelete: null | ExtendedMessage) => void;
 }
 
 export const useMessage = create<MessageState>()((set) => ({
@@ -18,6 +21,7 @@ export const useMessage = create<MessageState>()((set) => ({
 	ammountOfNewMessages: 0,
 	hasMore: true,
 	page: 1,
+	messageToDelete: null,
 	setMesssages: (messages) =>
 		set((state) => ({
 			messages: [...messages, ...state.messages],
@@ -36,4 +40,26 @@ export const useMessage = create<MessageState>()((set) => ({
 				messages: state.messages.filter((message) => message.id !== messageId),
 			};
 		}),
+	editMessage: (messageId, content) => {
+		set((state) => {
+			const updatedMessages = state.messages.map((message) => {
+				if (message.id === messageId) {
+					return { ...message, content, edited: true, updatedAt: new Date() };
+				} else {
+					return message;
+				}
+			});
+
+			return {
+				messages: updatedMessages,
+			};
+		});
+	},
+	setMessageToDelete: (message) => {
+		set((state) => {
+			return {
+				messageToDelete: message,
+			};
+		});
+	},
 }));

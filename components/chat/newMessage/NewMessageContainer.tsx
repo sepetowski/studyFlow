@@ -61,6 +61,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 				content: message,
 				aditionalRecources: uploadedFiles ? uploadedFiles : [],
 				conversationId: chatId,
+				updatedAt: null,
 				createdAt: new Date(),
 				sender: {
 					id: user.id,

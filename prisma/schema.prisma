@@ -237,6 +237,7 @@ model Message {
   createdAt          DateTime            @default(now())
   aditionalRecources aditionalRecource[]
   edited             Boolean             @default(false)
+  updatedAt          DateTime?           @updatedAt
 }
 
 model aditionalRecource {

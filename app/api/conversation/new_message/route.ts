@@ -1,7 +1,7 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { newMessageSchema } from '@/schema/newMessageSchema';
+import { newMessageSchema } from '@/schema/messageSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -25,7 +25,7 @@ export async function POST(request: Request) {
 		const chat = await db.conversation.findUnique({
 			where: { id: newMessage.conversationId },
 		});
-		if (!chat) return NextResponse.json('ERRORS.NO_CHAT', { status: 200 });
+		if (!chat) return NextResponse.json('ERRORS.NO_CHAT', { status: 404 });
 
 		await db.message.create({
 			data: {

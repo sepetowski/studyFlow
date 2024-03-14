@@ -5,6 +5,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Message } from './Message';
 import { useMessage } from '@/store/conversation/messages';
 import { LoadingState } from '@/components/ui/loading-state';
+import { DeleteMessage } from './DeleteMessage';
 
 interface Props {
 	workspaceId: string;
@@ -54,6 +55,7 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 			{messages.map((message) => (
 				<Message key={message.id} message={message} sessionUserId={sessionUserId} />
 			))}
+			<DeleteMessage />
 		</div>
 	);
 };

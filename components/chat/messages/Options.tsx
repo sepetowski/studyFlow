@@ -10,12 +10,17 @@ import {
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
+import { useMessage } from '@/store/conversation/messages';
+import { ExtendedMessage } from '@/types/extended';
 
 interface Props {
 	onChangeEdit: (editing: boolean) => void;
+	message: ExtendedMessage;
 }
 
-export const Options = ({ onChangeEdit }: Props) => {
+export const Options = ({ onChangeEdit, message }: Props) => {
+	const { setMessageToDelete } = useMessage((state) => state);
+
 	return (
 		<DropdownMenu>
 			<DropdownMenuTrigger asChild>
@@ -31,7 +36,12 @@ export const Options = ({ onChangeEdit }: Props) => {
 					className='cursor-pointer'>
 					Edytuj wiadomość
 				</DropdownMenuItem>
-				<DropdownMenuItem className='text-destructive focus:bg-destructive focus:text-white cursor-pointer'>
+				<DropdownMenuItem
+					onClick={() => {
+						setMessageToDelete(message);
+						document.getElementById('trigger-delete')?.click();
+					}}
+					className='text-destructive focus:bg-destructive focus:text-white cursor-pointer'>
 					Usuń wiadomość
 				</DropdownMenuItem>
 			</DropdownMenuContent>

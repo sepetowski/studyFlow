@@ -198,7 +198,8 @@
 			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień",
 			"CANT_GET_USERS": "Nie udało sie zaktualizować statusu aktywności",
 			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień",
-			"NO_CHAT": "Nie znaleziono konwersacji"
+			"NO_CHAT": "Nie znaleziono konwersacji",
+			"NO_MESSAGE": "Nie udało się zedytować wiadomości. Spróbuj ponownie"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",

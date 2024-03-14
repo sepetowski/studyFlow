@@ -5,6 +5,7 @@ export const newMessageSchema = z.object({
 	id: z.string(),
 	edited: z.boolean(),
 	content: z.string(),
+	updatedAt: z.date().nullable(),
 	aditionalRecources: z.array(
 		z.object({
 			id: z.string(),
@@ -26,4 +27,15 @@ export const newMessageSchema = z.object({
 	senderId: z.string(),
 });
 
+export const editMessageSchema = z.object({
+	id: z.string(),
+	content: z.string(),
+});
+
+export const deleteMessageSchema = z.object({
+	id: z.string(),
+});
+
 export type NewMessageSchema = z.infer<typeof newMessageSchema>;
+export type DeleteMessageSchema = z.infer<typeof deleteMessageSchema>;
+export type EditMessageSchema = z.infer<typeof editMessageSchema>;

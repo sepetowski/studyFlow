@@ -197,7 +197,8 @@
 			"CANT_LEAVE": "Owner of workspace cannot leave from worksapce. You have to delete workspace from settings page",
 			"CANT_GET_USERS": "Failed to update activity status",
 			"CANT_UPDATE_SEEN_NOTIFY": "Failed to update the read status of notifications",
-			"NO_CHAT": "Conversation not found"
+			"NO_CHAT": "Conversation not found",
+			"NO_MESSAGE": "Failed to edit the message. Please try again."
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",

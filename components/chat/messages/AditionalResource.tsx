@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import { AditionalResource as AditionalResourceType } from '@/types/extended';
 import { AditionalRecourceTypes } from '@prisma/client';
-import { FileText } from 'lucide-react';
+import { ExternalLink, FileText, PlusSquare } from 'lucide-react';
 import Link from 'next-intl/link';
 import { LoadingState } from '@/components/ui/loading-state';
 
@@ -16,15 +16,15 @@ export const AditionalResource = ({ file: { id, name, type, url } }: Props) => {
 	const [isLoading, setIsLoading] = useState(true);
 	return (
 		<Link
-			className=' w-44 h-44 sm:w-80 sm:h-80 rounded-sm overflow-hidden bg-secondary'
+			className={`w-44 h-44 sm:w-80 sm:h-80  rounded-sm overflow-hidden bg-secondary  duration-1000 relative  ${
+				isLoading ? 'animate-pulse' : 'group'
+			}`}
 			href={url}
 			target='_blank'>
-			{isLoading && (
-				<div className='w-full h-full flex justify-center items-center'>
-					<LoadingState />
-				</div>
-			)}
-			<div className=' w-full h-full flex '>
+			<div className='opacity-0 group-hover:opacity-100 absolute top-0 left-0 w-full h-full z-20 backdrop-blur-sm flex justify-center items-center transition-opacity duration-300 p-4 '>
+				<ExternalLink color='white' size={80} />
+			</div>
+			<div className=' w-full h-full  flex group-hover:scale-110 transition-transform duration-300'>
 				{type === AditionalRecourceTypes.IMAGE ? (
 					<Image
 						onLoad={(e) => {
