@@ -1,5 +1,4 @@
 'use client';
-import { ScrollArea } from '@/components/ui/scroll-area';
 import { supabase } from '@/lib/supabase';
 import React, { useEffect, useRef, useState } from 'react';
 import { Message } from './Message';
