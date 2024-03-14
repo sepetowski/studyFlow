@@ -18,7 +18,6 @@ interface Props {
 export const Message = ({ message, sessionUserId }: Props) => {
 	const { content, aditionalRecources, createdAt, edited, id, sender, updatedAt } = message;
 
-	console.log(edited);
 	const messageRef = useRef<HTMLDivElement>(null);
 	const [isEditing, setIsEditing] = useState(false);
 

@@ -50,7 +50,6 @@ export const UploadFilesButton = ({ onChangeUploadedFiles }: Props) => {
 				onChangeUploadedFiles(files);
 			}}
 			onUploadError={(error: Error) => {
-				console.log(error);
 				toast({
 					title: 'Error',
 					variant: 'destructive',

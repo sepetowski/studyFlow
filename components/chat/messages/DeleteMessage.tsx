@@ -28,6 +28,7 @@ export const DeleteMessage = () => {
 		deleteMessage: deleteClientMessage,
 		addMessage,
 		setMessageToDelete,
+		resortMessages,
 	} = useMessage((state) => state);
 
 	const { mutate: deleteMessage } = useMutation({
@@ -45,6 +46,7 @@ export const DeleteMessage = () => {
 
 			if (!messageToDelete) return;
 			addMessage(messageToDelete);
+			resortMessages();
 			toast({
 				title: m(error),
 				variant: 'destructive',

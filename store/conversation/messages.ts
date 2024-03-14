@@ -13,6 +13,7 @@ interface MessageState {
 	deleteMessage: (messageId: string) => void;
 	editMessage: (messageId: string, content: string) => void;
 	setMessageToDelete: (messageToDelete: null | ExtendedMessage) => void;
+	resortMessages: () => void;
 }
 
 export const useMessage = create<MessageState>()((set) => ({
@@ -61,5 +62,14 @@ export const useMessage = create<MessageState>()((set) => ({
 				messageToDelete: message,
 			};
 		});
+	},
+	resortMessages: () => {
+		set((state) => ({
+			messages: [
+				...state.messages.sort(
+					(a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+				),
+			].reverse(),
+		}));
 	},
 }));
