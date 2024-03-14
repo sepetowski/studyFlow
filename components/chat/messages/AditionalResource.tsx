@@ -39,7 +39,7 @@ export const AditionalResource = ({ file: { id, name, type, url } }: Props) => {
 				) : (
 					<div className='flex flex-col justify-center items-center w-full h-full gap-1'>
 						<FileText className='w-8 h-8 sm:w-12 sm:h-12	' />
-						<p className='break-all'>{name}</p>
+						<p className='break-all text-center text-xs sm:text-sm lg:text-base'>{name}</p>
 					</div>
 				)}
 			</div>

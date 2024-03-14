@@ -6,8 +6,15 @@ export const GET = async (request: Request) => {
 	const url = new URL(request.url);
 	const userId = url.searchParams.get('userId');
 	const chatId = url.searchParams.get('chatId');
+	const page = url.searchParams.get('page');
+	const ammountOfNewMessages = url.searchParams.get('ammountOfNewMessages');
 
 	if (!userId || !chatId) return NextResponse.json('ERRORS.WRONG_DATA', { status: 404 });
+
+	const pageValue = parseInt(page ? page : '1');
+	const ammountOfNewMessagesValue = parseInt(ammountOfNewMessages ? ammountOfNewMessages : '0');
+
+	const skipValue = MESSAGES_LIMIT * (pageValue - 1) + ammountOfNewMessagesValue;
 
 	try {
 		const messages = await db.message.findMany({
@@ -34,6 +41,7 @@ export const GET = async (request: Request) => {
 			orderBy: {
 				createdAt: 'desc',
 			},
+			skip: skipValue >= 0 ? skipValue : 0,
 			take: MESSAGES_LIMIT,
 		});
 

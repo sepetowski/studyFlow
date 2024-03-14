@@ -3,8 +3,9 @@ import { ExtendedMessage } from '@/types/extended';
 import { create } from 'zustand';
 
 interface MessageState {
+	ammountOfNewMessages: number;
 	initialMessagesLoading: boolean;
-	page: number;
+	nextPage: number;
 	hasMore: boolean;
 	messages: ExtendedMessage[];
 	messageToDelete: null | ExtendedMessage;
@@ -21,12 +22,12 @@ export const useMessage = create<MessageState>()((set) => ({
 	messages: [],
 	ammountOfNewMessages: 0,
 	hasMore: true,
-	page: 1,
+	nextPage: 2,
 	messageToDelete: null,
 	setMesssages: (messages) =>
 		set((state) => ({
 			messages: [...messages, ...state.messages],
-			page: state.page + 1,
+			nextPage: state.nextPage + 1,
 			hasMore: messages.length >= MESSAGES_LIMIT,
 			initialMessagesLoading: false,
 		})),
@@ -34,11 +35,13 @@ export const useMessage = create<MessageState>()((set) => ({
 	addMessage: (newMessages) =>
 		set((state) => ({
 			messages: [...state.messages, newMessages],
+			ammountOfNewMessages: state.ammountOfNewMessages + 1,
 		})),
 	deleteMessage: (messageId) =>
 		set((state) => {
 			return {
 				messages: state.messages.filter((message) => message.id !== messageId),
+				ammountOfNewMessages: state.ammountOfNewMessages - 1,
 			};
 		}),
 	editMessage: (messageId, content) => {

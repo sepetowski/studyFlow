@@ -14,6 +14,7 @@ import {
 	RealtimePostgresUpdatePayload,
 } from '@supabase/supabase-js';
 import { ScrollDown } from './ScrollDown';
+import { LoadMoreMessages } from './LoadMoreMessages';
 
 interface Props {
 	workspaceId: string;
@@ -27,9 +28,8 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 
 	const [notifications, setNotifications] = useState(0);
 
-	const { messages, initialMessagesLoading, addMessage, editMessage, deleteMessage } = useMessage(
-		(state) => state
-	);
+	const { hasMore, messages, initialMessagesLoading, addMessage, editMessage, deleteMessage } =
+		useMessage((state) => state);
 
 	useEffect(() => {
 		const scrollContainer = scrollRef.current;
@@ -48,7 +48,7 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 		) => {
 			if (sessionUserId !== payload.new.senderId) {
 				try {
-					const { data, status } = await axios.get<ExtendedMessage>(
+					const { data } = await axios.get<ExtendedMessage>(
 						`${domain}/api/conversation/get/new_message?messageId=${payload.new.id}`
 					);
 					if (data) addMessage(data);
@@ -144,6 +144,7 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 			ref={scrollRef}
 			onScroll={handleOnScroll}
 			className='h-full flex flex-col gap-2 px-4 py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background  '>
+			{hasMore && <LoadMoreMessages chatId={chatId} sessionUserId={sessionUserId} />}
 			{messages.map((message) => (
 				<Message key={message.id} message={message} sessionUserId={sessionUserId} />
 			))}
