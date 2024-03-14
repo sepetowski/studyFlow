@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import TextareaAutosize from 'react-textarea-autosize';
 import { EmojiSelector } from '@/components/common/EmojiSelector';
 import { Send, Smile } from 'lucide-react';
@@ -15,6 +15,7 @@ import { AditionalResource, ExtendedMessage } from '@/types/extended';
 import { useMessage } from '@/store/conversation/messages';
 import { v4 as uuidv4 } from 'uuid';
 import { useSession } from 'next-auth/react';
+import { useOnKeyDown } from '@/hooks/useOnKeyDown';
 
 interface Props {
 	workspaceId: string;
@@ -22,6 +23,7 @@ interface Props {
 }
 
 export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
+	const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
 	const m = useTranslations('MESSAGES');
 	const { toast } = useToast();
 	const session = useSession();
@@ -74,6 +76,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 			addMessage(newMessage);
 			setUploadedFiles(null);
 			setMessage('');
+			console.log(textAreaRef.current?.value);
 
 			await axios.post('/api/conversation/new_message', newMessage);
 		},
@@ -90,6 +93,14 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 		},
 
 		mutationKey: ['newMessage'],
+	});
+
+	useOnKeyDown(textAreaRef, (event) => {
+		if (textAreaRef.current?.id === 'new-message-text-area' && event.key === 'Enter') {
+			if (!event.shiftKey && message.trim().length > 0) {
+				newMessage();
+			}
+		}
 	});
 
 	return (
@@ -121,6 +132,12 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 				</div>
 
 				<TextareaAutosize
+					onKeyDown={(e) => {
+						if (e.key === 'Enter') e.preventDefault();
+					}}
+					autoFocus
+					id='new-message-text-area'
+					ref={textAreaRef}
 					value={message}
 					onChange={(e) => {
 						setMessage(e.target.value);
@@ -131,6 +148,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 
 				<div>
 					<Button
+						disabled={message.trim().length === 0}
 						onClick={() => {
 							newMessage();
 						}}

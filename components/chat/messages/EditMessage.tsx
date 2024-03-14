@@ -69,7 +69,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 	}, []);
 
 	useOnKeyDown(textAreaRef, (event) => {
-		if (textAreaRef.current && event.key === 'Enter') {
+		if (textAreaRef.current?.id === 'edit-message-text-area' && event.key === 'Enter') {
 			if (!event.shiftKey) {
 				if (message.trim().length > 0) {
 					message.trim() !== content.trim() ? editMessage() : onChangeEdit(false);
@@ -81,7 +81,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 				}
 			}
 		}
-		if (textAreaRef.current && event.key === 'Escape') {
+		if (textAreaRef.current?.id === 'edit-message-text-area' && event.key === 'Escape') {
 			onChangeEdit(false);
 		}
 	});
@@ -90,6 +90,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 		<div className='mt-2  flex flex-col gap-1'>
 			<div className=' flex justify-between items-center gap-2  px-2 py-1 w-full   bg-popover rounded-md  shadow-sm border border-border'>
 				<TextareaAutosize
+					id='edit-message-text-area'
 					ref={textAreaRef}
 					value={message}
 					onChange={(e) => {

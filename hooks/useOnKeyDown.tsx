@@ -6,7 +6,7 @@ export const useOnKeyDown = <T extends HTMLElement = HTMLElement>(
 ) => {
 	useEffect(() => {
 		const listener = (event: KeyboardEvent) => {
-			if (ref.current) handler(event);
+			if (ref.current && ref.current.contains(document.activeElement)) handler(event);
 		};
 
 		document.addEventListener('keydown', listener);

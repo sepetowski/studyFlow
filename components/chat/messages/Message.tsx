@@ -50,7 +50,7 @@ export const Message = ({ message, sessionUserId }: Props) => {
 						</div>
 						{!isEditing ? (
 							<div className='flex flex-wrap gap-1 items-end'>
-								<p className='break-words'>{content}</p>
+								<p className='break-all'>{content}</p>
 								{edited && <EditedBadge updatedAt={updatedAt!} />}
 							</div>
 						) : (
