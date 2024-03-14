@@ -82,7 +82,12 @@ export const DeleteMessage = () => {
 						}}>
 						Cancel
 					</AlertDialogCancel>
-					<AlertDialogAction onClick={deleteMessage}>Continue</AlertDialogAction>
+					<AlertDialogAction
+						onClick={() => {
+							deleteMessage();
+						}}>
+						Continue
+					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>
 		</AlertDialog>

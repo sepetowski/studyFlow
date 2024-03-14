@@ -18,11 +18,14 @@ interface Props {
 export const Message = ({ message, sessionUserId }: Props) => {
 	const { content, aditionalRecources, createdAt, edited, id, sender, updatedAt } = message;
 
-	const messageRef = useRef<HTMLDivElement>(null);
+	const messageRef = useRef<HTMLDivElement | null>(null);
 	const [isEditing, setIsEditing] = useState(false);
 
 	useOnClickOutside(messageRef, () => {
-		setIsEditing(false);
+		const emojiBtn = document.getElementById('edit-message-emoji-selector');
+		const dataStateValue = emojiBtn?.getAttribute('data-state');
+
+		if (dataStateValue !== 'open') setIsEditing(false);
 	});
 
 	const format = useFormatter();

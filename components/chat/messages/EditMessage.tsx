@@ -99,7 +99,12 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 				/>
 
 				<div className='hidden sm:block'>
-					<EmojiSelector asChild slide='right' align='end' onSelectedEmoji={onSelectEmojiHandler}>
+					<EmojiSelector
+						id='edit-message-emoji-selector'
+						asChild
+						slide='right'
+						align='end'
+						onSelectedEmoji={onSelectEmojiHandler}>
 						<Button className='w-8 h-8 sm:w-10 sm:h-10' size={'icon'} variant={'ghost'}>
 							<Smile className='w-5 h-5 sm:w-auto sm:h-auto' />
 						</Button>
