@@ -17,7 +17,7 @@ export const AditionalResource = ({ file: { id, name, type, url } }: Props) => {
 	return (
 		<Link
 			className={`w-44 h-44 sm:w-80 sm:h-80  rounded-sm overflow-hidden bg-secondary  duration-1000 relative  ${
-				isLoading ? 'animate-pulse' : 'group'
+				type === AditionalRecourceTypes.IMAGE && isLoading ? 'animate-pulse' : 'group'
 			}`}
 			href={url}
 			target='_blank'>
@@ -37,7 +37,10 @@ export const AditionalResource = ({ file: { id, name, type, url } }: Props) => {
 						height={1600}
 					/>
 				) : (
-					<FileText className='w-8 h-8 sm:w-12 sm:h-12	' />
+					<div className='flex flex-col justify-center items-center w-full h-full gap-1'>
+						<FileText className='w-8 h-8 sm:w-12 sm:h-12	' />
+						<p className='break-words'>{name}</p>
+					</div>
 				)}
 			</div>
 		</Link>
