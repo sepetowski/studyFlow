@@ -27,7 +27,7 @@ export const ChatContainer = ({ chatId, workspaceId, initialMessages, sessionUse
 	}, []);
 
 	return (
-		<div className='w-full h-full flex flex-col justify-between  border border-border rounded-md shadow-sm '>
+		<div className='w-full h-full flex flex-col justify-between  border border-border rounded-md shadow-sm relative'>
 			<Header />
 			<MessagesContainer chatId={chatId} workspaceId={workspaceId} sessionUserId={sessionUserId} />
 			<NewMessageContainer chatId={chatId} workspaceId={workspaceId} />

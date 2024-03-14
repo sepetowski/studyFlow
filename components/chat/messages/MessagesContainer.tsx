@@ -13,6 +13,7 @@ import {
 	RealtimePostgresInsertPayload,
 	RealtimePostgresUpdatePayload,
 } from '@supabase/supabase-js';
+import { ScrollDown } from './ScrollDown';
 
 interface Props {
 	workspaceId: string;
@@ -24,7 +25,7 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 	const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const [userScrolled, setUserScrolled] = useState(false);
 
-	const [notification, setNotification] = useState(0);
+	const [notifications, setNotifications] = useState(0);
 
 	const { messages, initialMessagesLoading, addMessage, editMessage, deleteMessage } = useMessage(
 		(state) => state
@@ -57,7 +58,7 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 						scrollContainer.scrollTop <
 						scrollContainer.scrollHeight - scrollContainer.clientHeight - 10
 					) {
-						setNotification((current) => current + 1);
+						setNotifications((current) => current + 1);
 					}
 				} catch (err) {
 					console.log('error');
@@ -121,12 +122,19 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 				scrollContainer.scrollTop ===
 				scrollContainer.scrollHeight - scrollContainer.clientHeight
 			) {
-				setNotification(0);
+				setNotifications(0);
 			}
 		}
 	};
 
-	console.log(notification);
+	const scrollDown = () => {
+		setNotifications(0);
+		scrollRef.current.scrollTo({
+			top: scrollRef.current.scrollHeight,
+			behavior: 'smooth',
+		});
+	};
+
 	if (initialMessagesLoading)
 		<div className='h-full flex flex-col items-center  justify-center'>
 			<LoadingState />
@@ -135,11 +143,12 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 		<div
 			ref={scrollRef}
 			onScroll={handleOnScroll}
-			className='h-full flex flex-col gap-2 px-4 py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background '>
+			className='h-full flex flex-col gap-2 px-4 py-2 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background  '>
 			{messages.map((message) => (
 				<Message key={message.id} message={message} sessionUserId={sessionUserId} />
 			))}
 			<DeleteMessage />
+			{userScrolled && <ScrollDown notifications={notifications} onScrollDown={scrollDown} />}
 		</div>
 	);
 };
