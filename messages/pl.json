@@ -825,6 +825,10 @@
 	},
 
 	"CHAT": {
+		"NO_MESSAGES": {
+			"FIRST": "Nie znaleźliśmy żadnych wiadomości w tym czacie.",
+			"SECOND": "Wyślij pierwszą wiadomość!"
+		},
 		"HEADER": { "TITLE": "{workspaceName} czat" },
 		"DELETE_MESSAGE": {
 			"TITLE": "Usuń wiadomość",

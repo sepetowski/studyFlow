@@ -15,6 +15,8 @@ import {
 } from '@supabase/supabase-js';
 import { ScrollDown } from './ScrollDown';
 import { LoadMoreMessages } from './LoadMoreMessages';
+import { MessageSquare } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	chatId: string;
@@ -23,8 +25,10 @@ interface Props {
 
 export const MessagesContainer = ({ chatId, sessionUserId }: Props) => {
 	const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
-	const [userScrolled, setUserScrolled] = useState(false);
 
+	const t = useTranslations('CHAT.NO_MESSAGES');
+
+	const [userScrolled, setUserScrolled] = useState(false);
 	const [notifications, setNotifications] = useState(0);
 
 	const { hasMore, messages, initialMessagesLoading, addMessage, editMessage, deleteMessage } =
@@ -140,6 +144,18 @@ export const MessagesContainer = ({ chatId, sessionUserId }: Props) => {
 				<LoadingState className='w-9 h-9' />
 			</div>
 		);
+
+	if (messages.length === 0)
+		return (
+			<div className='flex flex-col gap-2 sm:text-lg font-semibold items-center p-2  justify-center'>
+				<MessageSquare className='w-16 h-16 sm:w-28 sm:h-28' />
+				<div className='text-center'>
+					<p>{t('FIRST')}</p>
+					<p>{t('SECOND')}</p>
+				</div>
+			</div>
+		);
+
 	return (
 		<div
 			ref={scrollRef}

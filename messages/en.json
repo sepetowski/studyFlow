@@ -827,6 +827,10 @@
 	},
 
 	"CHAT": {
+		"NO_MESSAGES": {
+			"FIRST": "We couldn't find any messages in this chat.",
+			"SECOND": "Send the first message!"
+		},
 		"HEADER": { "TITLE": "{workspaceName} chat" },
 		"DELETE_MESSAGE": {
 			"TITLE": "Delete Message",
