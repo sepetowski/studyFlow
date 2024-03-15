@@ -2,17 +2,18 @@
 import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import React from 'react';
 import { ShortcutContainerBtnItem } from './ShortcutContainerBtnItem';
-import { MessageSquare, MessagesSquare, PencilRuler, Workflow } from 'lucide-react';
+import { MessagesSquare, PencilRuler, Workflow } from 'lucide-react';
 import { LeaveWorkspace } from './leaveWorksapce/LeaveWorkspace';
-import { UserPermisson, Workspace } from '@prisma/client';
+import { UserPermisson } from '@prisma/client';
 import { useTranslations } from 'next-intl';
 import { ShortcutContainerLinkItem } from './ShortcutContainerLinkItem';
 import { useNewTask } from '@/hooks/useNewTask';
 import { useNewMindMap } from '@/hooks/useNewMindMap';
 import { PermissionIndicator } from './permissionIndicator/PermissionIndicator';
+import { ExtendedWorkspace } from '@/types/extended';
 
 interface Props {
-	workspace: Workspace;
+	workspace: ExtendedWorkspace;
 	userRole: UserPermisson | null;
 }
 
@@ -28,7 +29,7 @@ export const ShortcutContainer = ({ userRole, workspace }: Props) => {
 				<PermissionIndicator userRole={userRole} worksapceName={workspace.name} />
 
 				<ShortcutContainerLinkItem
-					href='/'
+					href={`/dashboard/workspace/${workspace.id}/chat/${workspace.conversation.id}`}
 					userRole={userRole}
 					Icon={MessagesSquare}
 					title={t('GROUP_CHAT')}

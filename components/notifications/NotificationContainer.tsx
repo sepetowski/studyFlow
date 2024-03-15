@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { Bell, BellOff } from 'lucide-react';
+import { Bell } from 'lucide-react';
 import { ScrollArea } from '../ui/scroll-area';
 import { NotificationItem } from './NotificationItem';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -150,8 +150,8 @@ export const NotificationContainer = ({ userId }: Props) => {
 						<Button className='w-6 h-6 sm:h-9 sm:w-9 relative' size={'icon'} variant='ghost'>
 							<Bell size={16} />
 							{unseenNotifications.length !== 0 && (
-								<div className='absolute top-0 right-0 bg-primary rounded-full border border-border w-3.5 h-3.5 sm:w-4 sm:h-4 flex justify-center items-center text-xs'>
-									{unseenNotifications.length > 9 ? '+9' : unseenNotifications.length}
+								<div className='absolute top-0 right-0 bg-primary rounded-full border border-border w-3.5 h-3.5 sm:w-4 sm:h-4 flex justify-center items-center text-xs text-white'>
+									<p>{unseenNotifications.length > 9 ? '+9' : unseenNotifications.length}</p>
 								</div>
 							)}
 						</Button>

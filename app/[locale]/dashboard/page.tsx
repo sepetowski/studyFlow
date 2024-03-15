@@ -23,7 +23,10 @@ const Dashboard = async () => {
 					surname={session.user.surname}
 					className='px-4 py-2 '
 				/>
-				<HomeRecentActivityContainer userId={session.user.id} initialData={initialRecentActivity} />
+				<HomeRecentActivityContainer
+					userId={session.user.id}
+					initialData={initialRecentActivity ? initialRecentActivity : []}
+				/>
 			</main>
 		</>
 	);

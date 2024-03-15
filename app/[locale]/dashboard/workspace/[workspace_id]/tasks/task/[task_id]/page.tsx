@@ -5,6 +5,7 @@ import { ReadOnlyContent } from '@/components/tasks/readOnly/ReadOnlyContent';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -23,6 +24,8 @@ const Task = async ({ params: { workspace_id, task_id } }: Params) => {
 		getUserWorkspaceRole(workspace_id, session.user.id),
 		getTask(task_id, session.user.id),
 	]);
+
+	if (!workspace || !userRole || !task) notFound();
 
 	const isSavedByUser =
 		task.savedTask?.find((task) => task.userId === session.user.id) !== undefined;

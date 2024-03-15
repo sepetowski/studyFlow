@@ -30,7 +30,7 @@ import {
 	SelectValue,
 } from '@/components/ui/select';
 import { Howl } from 'howler';
-import { pathsToSoundEffects } from '@/lib/utils';
+import { pathsToSoundEffects } from '@/lib/constants';
 
 interface Props {
 	pomodoroSettings: PomodoroSettings;

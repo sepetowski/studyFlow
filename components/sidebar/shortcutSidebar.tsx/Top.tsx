@@ -1,6 +1,6 @@
 import React from 'react';
-import { topSidebarLinks } from '@/lib/utils';
 import { SidebarLink } from './SidebarLink';
+import { topSidebarLinks } from '@/lib/constants';
 
 export const Top = () => {
 	return (

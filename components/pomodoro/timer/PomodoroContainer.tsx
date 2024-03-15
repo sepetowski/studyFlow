@@ -6,8 +6,8 @@ import { Button } from '@/components/ui/button';
 import { SkipForward } from 'lucide-react';
 import { PomodoroSettings } from '@prisma/client';
 import { Howl } from 'howler';
-import { pathsToSoundEffects } from '@/lib/utils';
 import { useTranslations } from 'next-intl';
+import { pathsToSoundEffects } from '@/lib/constants';
 
 interface Props {
 	pomodoroSettings: PomodoroSettings;

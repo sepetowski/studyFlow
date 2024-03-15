@@ -1,5 +1,5 @@
 'use client';
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
 	DropdownMenu,
 	DropdownMenuContent,
@@ -24,7 +24,9 @@ interface Props {
 	asChild?: boolean;
 	className?: string;
 	children: React.ReactNode;
+	id?: string;
 	onSelectedEmoji: (emoji: string) => void;
+	onOpenChange?: (open: boolean) => void;
 	slide?: 'top' | 'right' | 'bottom' | 'left';
 	align?: 'start' | 'center' | 'end';
 }
@@ -36,6 +38,7 @@ export const EmojiSelector = ({
 	onSelectedEmoji,
 	align,
 	slide,
+	id,
 }: Props) => {
 	const { theme, systemTheme } = useTheme();
 	const locale = useLocale();
@@ -55,6 +58,7 @@ export const EmojiSelector = ({
 	return (
 		<DropdownMenu modal={false} open={open} onOpenChange={setOpen}>
 			<DropdownMenuTrigger
+				id={id}
 				asChild={asChild}
 				className={cn(
 					'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2  ring-offset-background rounded-lg',

@@ -1,6 +1,6 @@
 import { z } from 'zod';
 import { ACCEPTED_IMAGE_TYPES, MAX_FILE_SIZE } from './imageSchema';
-import { color } from '@/lib/utils';
+import { color } from '@/lib/constants';
 
 const id = z.string();
 
@@ -18,8 +18,6 @@ const file = z
 	.refine((file) => ACCEPTED_IMAGE_TYPES.includes(file?.type), 'SCHEMA.IMAGE.SUPPORTED')
 	.optional()
 	.nullable();
-
-
 
 export const workspaceSchema = z.object({
 	workspaceName,

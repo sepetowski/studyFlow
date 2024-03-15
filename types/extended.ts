@@ -1,5 +1,7 @@
 import {
+	AditionalRecourceTypes,
 	CustomColors,
+	Message,
 	MindMap,
 	Notification,
 	Tag,
@@ -135,7 +137,6 @@ export interface UserActiveItemList {
 	username: string;
 	image: string | null;
 	userRole: UserPermisson;
-	lastTimeActive: Date;
 }
 
 export interface UserNotification extends Notification {
@@ -185,6 +186,28 @@ export interface WorkspaceRecentActivity {
 export interface AssignedToMeTaskAndMindMapsWorkspaceRecentActivity {
 	tasks: WorkspaceRecentActivity[];
 	mindMaps: WorkspaceRecentActivity[];
+}
+
+export interface ExtendedWorkspace extends Workspace {
+	conversation: {
+		id: string;
+	};
+}
+
+export interface AditionalResource {
+	id: string;
+	name: string;
+	url: string;
+	type: AditionalRecourceTypes;
+}
+
+export interface ExtendedMessage extends Message {
+	aditionalRecources: AditionalResource[];
+	sender: {
+		id: string;
+		username: string;
+		image?: string | null;
+	};
 }
 
 export interface HomeRecentActivity extends AssignedToMeDataItem {}

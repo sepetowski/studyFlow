@@ -1,23 +1,21 @@
 import { db } from '@/lib/db';
 import { NextResponse } from 'next/server';
 import { getAuthSession } from '@/lib/auth';
-import { z } from 'zod';
+import { deleteMessageSchema } from '@/schema/messageSchema';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
 
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
+
 	const body: unknown = await request.json();
-	const result = z
-		.object({
-			currentTime: z.string(),
-		})
-		.safeParse(body);
+	const result = deleteMessageSchema.safeParse(body);
 
 	if (!result.success) {
 		return NextResponse.json('ERRORS.WRONG_DATA', { status: 401 });
 	}
-	const { currentTime } = result.data;
+
+	const { id } = result.data;
 
 	try {
 		const user = await db.user.findUnique({
@@ -28,12 +26,14 @@ export async function POST(request: Request) {
 
 		if (!user) return NextResponse.json('ERRORS.NO_USER_API', { status: 404 });
 
-		await db.user.update({
+		const message = await db.message.findUnique({
+			where: { id },
+		});
+		if (!message) return NextResponse.json('ERRORS.NO_MESSAGE', { status: 404 });
+
+		await db.message.delete({
 			where: {
-				id: user.id,
-			},
-			data: {
-				lastTimeActive: new Date(currentTime),
+				id,
 			},
 		});
 

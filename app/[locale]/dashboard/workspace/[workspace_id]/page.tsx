@@ -5,8 +5,9 @@ import { FilterContainer } from '@/components/workspaceMainPage/filter/FilterCon
 import { RecentActivityContainer } from '@/components/workspaceMainPage/recentActivity/RecentActivityContainer';
 import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/ShortcutContainer';
 import { FilterByUsersAndTagsInWorkspaceProvider } from '@/context/FilterByUsersAndTagsInWorkspace';
-import { getUserWorkspaceRole, getWorkspace } from '@/lib/api';
+import { getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -18,9 +19,11 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 	const session = await checkIfUserCompletedOnboarding(`/dashboard/workspace/${workspace_id}`);
 
 	const [workspace, userRole] = await Promise.all([
-		getWorkspace(workspace_id, session.user.id),
+		getWorkspaceWithChatId(workspace_id, session.user.id),
 		getUserWorkspaceRole(workspace_id, session.user.id),
 	]);
+
+	if (!workspace || !userRole) notFound();
 
 	return (
 		<FilterByUsersAndTagsInWorkspaceProvider>

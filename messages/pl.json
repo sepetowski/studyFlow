@@ -197,7 +197,10 @@
 			"NO_MIND_MAP_FOUND": "Nie znaleziono mapy myśli",
 			"CANT_LEAVE": "Założyciel przestrzeni roboczej nie może z niej wyjść. Możesz usunąć ją poprzez strone ustawień",
 			"CANT_GET_USERS": "Nie udało sie zaktualizować statusu aktywności",
-			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień"
+			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień",
+			"NO_CHAT": "Nie znaleziono konwersacji",
+			"NO_MESSAGE": "Nie udało się zedytować wiadomości. Spróbuj ponownie",
+			"CANT_LOAD_MORE": "Nie udało załadować się więcej wiadomości. Spróbuj ponownie"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
@@ -821,6 +824,42 @@
 		}
 	},
 
+	"CHAT": {
+		"NO_MESSAGES": {
+			"FIRST": "Nie znaleźliśmy żadnych wiadomości w tym czacie.",
+			"SECOND": "Wyślij pierwszą wiadomość!"
+		},
+		"HEADER": { "TITLE": "{workspaceName} czat" },
+		"DELETE_MESSAGE": {
+			"TITLE": "Usuń wiadomość",
+			"DESC": "Ta operacja jest nieodwracalna i spowoduje trwałe usunięcie wiadomości.",
+			"BTN_DELETE": "Usuń",
+			"BTN_CANCEL": "Anuluj"
+		},
+		"EDIT": {
+			"BADGE": "(edytowane)",
+			"TEXT": {
+				"FIRST": "Naciśnij klawisz",
+				"SECOND": ", aby anulować • klawisz",
+				"THIRD": ", aby zapisać"
+			}
+		},
+		"OPTIONS": {
+			"EDIT": "Edytuj wiadomość",
+			"DELETE": "Usuń wiadomość"
+		},
+		"LOAD_MORE": "Załaduj więcej",
+		"NOTIFICATIONS": "{notifications} nowych wiadomości",
+		"NEW_MESSAGE": {
+			"PLACEHOLDER": "Nowa wiadomość",
+			"DELETE_ATACHMENT": "Usuń załącznik",
+			"ATACHMENT_DEAFULT_ERROR": "Nie udało się dodać załączników.",
+			"ATACHMENT_TO_MANY_ERROR": "Nie udało się dodać załączników. Maksymalna ilość plików jaką możesz wysłać za jednym razem to 5 zdjęć i 5 plików pdf",
+			"ATACHMENT_TO_BIG_ERROR": "Nie udało się dodać załączników. Jeden z plików jest zbyt duży",
+			"ATACHMENT_WRONG_FILE_ERROR": "Nie udało się dodać załączników. Jeden z plików posiada niedozowlony format"
+		}
+	},
+
 	"CLIENT_ERROR": {
 		"TITLE": "O nie... Coś poszło nie tak",
 		"BTN": "Spróbuj ponownie"
@@ -835,6 +874,7 @@
 		"POMODORO": "Pomodoro",
 		"STARRED": "Wyróżnione",
 		"ASSIGNED-TO-ME": "Przypisane do mnie",
-		"CALENDAR": "Kalendarz"
+		"CALENDAR": "Kalendarz",
+		"CHAT": "Czat"
 	}
 }

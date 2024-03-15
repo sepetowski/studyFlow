@@ -6,6 +6,7 @@ import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { redirect } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -24,6 +25,8 @@ const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
 		getUserWorkspaceRole(workspace_id, session.user.id),
 		getTask(task_id, session.user.id),
 	]);
+
+	if (!workspace || !userRole || !task) notFound();
 
 	const candEdit =
 		userRole === 'ADMIN' || userRole === 'OWNER' || userRole === 'CAN_EDIT' ? true : false;
