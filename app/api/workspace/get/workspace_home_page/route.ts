@@ -120,7 +120,7 @@ export const GET = async (request: Request) => {
 						starred: mindMap.savedMindMaps.length > 0,
 						tags: mindMap.tags,
 						assignedTo: mindMap.assignedToMindMap,
-						link: `/workspace/${workspaceId}/mind-maps/mind-map/${mindMap.id}`,
+						link: `/dashboard/workspace/${workspaceId}/mind-maps/mind-map/${mindMap.id}`,
 					};
 			  })
 			: [];
@@ -139,7 +139,7 @@ export const GET = async (request: Request) => {
 						starred: task.savedTask.length > 0,
 						tags: task.tags,
 						assignedTo: task.assignedToTask,
-						link: `/workspace/${workspaceId}/tasks/task/${task.id}`,
+						link: `/dashboard/workspace/${workspaceId}/tasks/task/${task.id}`,
 					};
 			  })
 			: [];
