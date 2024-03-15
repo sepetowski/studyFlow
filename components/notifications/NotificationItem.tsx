@@ -2,7 +2,6 @@
 import React from 'react';
 import { UserAvatar } from '../ui/user-avatar';
 import { BellDot } from 'lucide-react';
-import { Button } from '../ui/button';
 import { useTuncateText } from '@/hooks/useTruncateText';
 import { UserNotification } from '@/types/extended';
 import { useFormatter, useTranslations } from 'next-intl';
