@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from 'react';
+import React from 'react';
 import {
 	AlertDialog,
 	AlertDialogAction,
@@ -20,7 +20,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 export const DeleteMessage = () => {
 	const m = useTranslations('MESSAGES');
-
+	const t = useTranslations('CHAT.DELETE_MESSAGE');
 	const { toast } = useToast();
 
 	const {
@@ -69,24 +69,21 @@ export const DeleteMessage = () => {
 			</AlertDialogTrigger>
 			<AlertDialogContent>
 				<AlertDialogHeader>
-					<AlertDialogTitle>Are you absolutely sure?</AlertDialogTitle>
-					<AlertDialogDescription>
-						This action cannot be undone. This will permanently delete your account and remove your
-						data from our servers.
-					</AlertDialogDescription>
+					<AlertDialogTitle>{t('TITLE')}</AlertDialogTitle>
+					<AlertDialogDescription>{t('DESC')}</AlertDialogDescription>
 				</AlertDialogHeader>
 				<AlertDialogFooter>
 					<AlertDialogCancel
 						onClick={() => {
 							setMessageToDelete(null);
 						}}>
-						Cancel
+						{t('BTN_CANCEL')}
 					</AlertDialogCancel>
 					<AlertDialogAction
 						onClick={() => {
 							deleteMessage();
 						}}>
-						Continue
+						{t('BTN_DELETE')}
 					</AlertDialogAction>
 				</AlertDialogFooter>
 			</AlertDialogContent>

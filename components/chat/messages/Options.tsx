@@ -4,14 +4,13 @@ import {
 	DropdownMenu,
 	DropdownMenuContent,
 	DropdownMenuItem,
-	DropdownMenuLabel,
-	DropdownMenuSeparator,
 	DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu';
 import { Button } from '@/components/ui/button';
 import { MoreHorizontal } from 'lucide-react';
 import { useMessage } from '@/store/conversation/messages';
 import { ExtendedMessage } from '@/types/extended';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	onChangeEdit: (editing: boolean) => void;
@@ -19,6 +18,8 @@ interface Props {
 }
 
 export const Options = ({ onChangeEdit, message }: Props) => {
+	const t = useTranslations('CHAT.OPTIONS');
+
 	const { setMessageToDelete } = useMessage((state) => state);
 
 	return (
@@ -34,7 +35,7 @@ export const Options = ({ onChangeEdit, message }: Props) => {
 						onChangeEdit(true);
 					}}
 					className='cursor-pointer'>
-					Edytuj wiadomość
+					{t('EDIT')}
 				</DropdownMenuItem>
 				<DropdownMenuItem
 					onClick={() => {
@@ -42,7 +43,7 @@ export const Options = ({ onChangeEdit, message }: Props) => {
 						document.getElementById('trigger-delete')?.click();
 					}}
 					className='text-destructive focus:bg-destructive focus:text-white cursor-pointer'>
-					Usuń wiadomość
+					{t('DELETE')}
 				</DropdownMenuItem>
 			</DropdownMenuContent>
 		</DropdownMenu>

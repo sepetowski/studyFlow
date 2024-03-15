@@ -56,9 +56,8 @@ const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
 			</DashboardHeader>
 			<main className='w-full h-[90%]'>
 				<ChatContainer
-					workspaceName={workspace?.name}
+					workspaceName={workspace.name}
 					chatId={conversationId}
-					workspaceId={workspace.id}
 					initialMessages={initialMessages ? initialMessages : []}
 					sessionUserId={session.user.id}
 				/>

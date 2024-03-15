@@ -7,6 +7,7 @@ import { Button } from '@/components/ui/button';
 import { FileText, Trash } from 'lucide-react';
 import { AditionalResource } from '@/types/extended';
 import { AditionalRecourceTypes } from '@prisma/client';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	file: AditionalResource;
@@ -14,6 +15,8 @@ interface Props {
 }
 
 export const FilePreview = ({ file: { name, type, url, id }, onRemoveFile }: Props) => {
+	const t = useTranslations('CHAT.NEW_MESSAGE');
+
 	const fileName = useTuncateText(name, 23, 8);
 	return (
 		<div className='p-2 sm:py-3   rounded-md bg-secondary shadow-sm  relative flex flex-col items-center'>
@@ -50,7 +53,7 @@ export const FilePreview = ({ file: { name, type, url, id }, onRemoveFile }: Pro
 					</HoverCardTrigger>
 
 					<HoverCardContent align='center' side='top'>
-						<span>Usuń załącznik</span>
+						<span>{t('DELETE_ATACHMENT')}</span>
 					</HoverCardContent>
 				</HoverCard>
 			</div>

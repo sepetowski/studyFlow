@@ -18,13 +18,15 @@ import { useSession } from 'next-auth/react';
 import { useOnKeyDown } from '@/hooks/useOnKeyDown';
 
 interface Props {
-	workspaceId: string;
 	chatId: string;
 }
 
-export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
+export const NewMessageContainer = ({ chatId }: Props) => {
 	const textAreaRef = useRef<HTMLTextAreaElement | null>(null);
+
+	const t = useTranslations('CHAT.NEW_MESSAGE');
 	const m = useTranslations('MESSAGES');
+
 	const { toast } = useToast();
 	const session = useSession();
 
@@ -49,7 +51,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 		});
 	};
 
-	const { mutate: newMessage, isLoading } = useMutation({
+	const { mutate: newMessage } = useMutation({
 		mutationFn: async () => {
 			if (!session.data) return;
 
@@ -141,7 +143,7 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 					onChange={(e) => {
 						setMessage(e.target.value);
 					}}
-					placeholder='Nowa wiadomosc'
+					placeholder={t('PLACEHOLDER')}
 					className='w-full flex-grow resize-none appearance-none overflow-hidden bg-transparent  placeholder:text-muted-foreground focus:outline-none max-h-28 overflow-y-auto scrollbar-thin scrollbar-thumb-secondary scrollbar-track-background  '
 				/>
 

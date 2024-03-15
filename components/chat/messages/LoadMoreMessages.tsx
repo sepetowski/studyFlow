@@ -16,7 +16,9 @@ interface Props {
 }
 
 export const LoadMoreMessages = ({ chatId, sessionUserId }: Props) => {
-	const m = useTranslations('MESSAGES');
+	const m = useTranslations('MESSAGES.ERRORS');
+	const t = useTranslations('CHAT');
+
 	const [isLoading, setIsLoading] = useState(false);
 	const { toast } = useToast();
 
@@ -32,7 +34,7 @@ export const LoadMoreMessages = ({ chatId, sessionUserId }: Props) => {
 			if (data) setMesssages(data.reverse());
 		} catch (err) {
 			toast({
-				title: 'Nie udało sie pobrać danych',
+				title: m('CANT_LOAD_MORE'),
 				variant: 'destructive',
 			});
 		}
@@ -49,7 +51,7 @@ export const LoadMoreMessages = ({ chatId, sessionUserId }: Props) => {
 				disabled={isLoading}
 				size={'sm'}
 				variant={'ghost'}>
-				{isLoading ? <LoadingState /> : 'Load more'}
+				{isLoading ? <LoadingState /> : t('LOAD_MORE')}
 			</Button>
 		</div>
 	);

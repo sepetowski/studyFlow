@@ -23,6 +23,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 	const textAreaRef = useRef<HTMLTextAreaElement>(null);
 	const [message, setMessage] = useState(content);
 
+	const t = useTranslations('CHAT.EDIT.TEXT');
 	const m = useTranslations('MESSAGES');
 
 	const { toast } = useToast();
@@ -114,7 +115,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 			</div>
 			<div className='text-xs text-muted-foreground'>
 				<p>
-					Naciśnij klawisz{' '}
+					{t('FIRST')}{' '}
 					<span
 						onClick={() => {
 							onChangeEdit(false);
@@ -122,7 +123,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 						className='text-primary font-semibold border-transparent inline-block hover:border-primary transition-colors border-b cursor-pointer'>
 						esc
 					</span>
-					, aby anulować • klawisz{' '}
+					{t('SECOND')}{' '}
 					<span
 						onClick={() => {
 							if (message.trim().length > 0) editMessage();
@@ -135,7 +136,7 @@ export const EditMessage = ({ content, messageInfo, onChangeEdit }: Props) => {
 						className='text-primary font-semibold border-transparent inline-block hover:border-primary transition-colors border-b cursor-pointer'>
 						enter
 					</span>
-					, aby zapisać
+					{t('THIRD')}
 				</p>
 			</div>
 		</div>

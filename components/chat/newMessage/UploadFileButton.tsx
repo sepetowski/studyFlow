@@ -7,12 +7,14 @@ import { useToast } from '@/components/ui/use-toast';
 import { AditionalResource } from '@/types/extended';
 import { AditionalRecourceTypes } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	onChangeUploadedFiles: (files: AditionalResource[] | null) => void;
 }
 
 export const UploadFilesButton = ({ onChangeUploadedFiles }: Props) => {
+	const t = useTranslations('CHAT.NEW_MESSAGE');
 	const { toast } = useToast();
 	return (
 		<UploadButton
@@ -50,8 +52,14 @@ export const UploadFilesButton = ({ onChangeUploadedFiles }: Props) => {
 				onChangeUploadedFiles(files);
 			}}
 			onUploadError={(error: Error) => {
+				let errMesage = t('ATACHMENT_DEAFULT_ERROR');
+				if (error.message === 'File limit exceeded') errMesage = t('ATACHMENT_TO_MANY_ERROR');
+				if (error.message === 'Your proposed upload exceeds the maximum allowed size')
+					errMesage = t('ATACHMENT_TO_BIG_ERROR');
+				if (error.message === 'Error Invalid config.') errMesage = t('ATACHMENT_WRONG_FILE_ERROR');
+
 				toast({
-					title: 'Error',
+					title: errMesage,
 					variant: 'destructive',
 				});
 			}}

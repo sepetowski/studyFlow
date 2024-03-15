@@ -29,7 +29,6 @@ export const useMessage = create<MessageState>()((set) => ({
 			messages: [...messages, ...state.messages],
 			nextPage: state.nextPage + 1,
 			hasMore: messages.length >= MESSAGES_LIMIT,
-			initialMessagesLoading: false,
 		})),
 
 	addMessage: (newMessages) =>

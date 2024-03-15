@@ -9,25 +9,22 @@ import { useMessage } from '@/store/conversation/messages';
 
 interface Props {
 	workspaceName: string;
-	workspaceId: string;
 	chatId: string;
 	initialMessages: ExtendedMessage[];
 	sessionUserId: string;
 }
 
-export const ChatContainer = ({
-	chatId,
-	workspaceId,
-	initialMessages,
-	sessionUserId,
-	workspaceName,
-}: Props) => {
+export const ChatContainer = ({ chatId, initialMessages, sessionUserId, workspaceName }: Props) => {
 	const initState = useRef(false);
 	const hasMore = initialMessages.length >= MESSAGES_LIMIT;
 
 	useEffect(() => {
 		if (!initState.current) {
-			useMessage.setState({ messages: initialMessages.reverse(), hasMore });
+			useMessage.setState({
+				messages: initialMessages.reverse(),
+				hasMore,
+				initialMessagesLoading: false,
+			});
 		}
 		initState.current = true;
 		// eslint-disable-next-line
@@ -36,8 +33,8 @@ export const ChatContainer = ({
 	return (
 		<div className='w-full h-full flex flex-col justify-between  border border-border rounded-md shadow-sm relative'>
 			<Header workspaceName={workspaceName} />
-			<MessagesContainer chatId={chatId} workspaceId={workspaceId} sessionUserId={sessionUserId} />
-			<NewMessageContainer chatId={chatId} workspaceId={workspaceId} />
+			<MessagesContainer chatId={chatId} sessionUserId={sessionUserId} />
+			<NewMessageContainer chatId={chatId} />
 		</div>
 	);
 };

@@ -1,11 +1,11 @@
 'use client';
-import { supabase } from '@/lib/supabase';
 import React, { useEffect, useRef, useState } from 'react';
+import { supabase } from '@/lib/supabase';
 import { Message } from './Message';
 import { useMessage } from '@/store/conversation/messages';
 import { LoadingState } from '@/components/ui/loading-state';
 import { DeleteMessage } from './DeleteMessage';
-import axios, { AxiosError } from 'axios';
+import axios from 'axios';
 import { ExtendedMessage } from '@/types/extended';
 import { domain } from '@/lib/api';
 import {
@@ -17,12 +17,11 @@ import { ScrollDown } from './ScrollDown';
 import { LoadMoreMessages } from './LoadMoreMessages';
 
 interface Props {
-	workspaceId: string;
 	chatId: string;
 	sessionUserId: string;
 }
 
-export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props) => {
+export const MessagesContainer = ({ chatId, sessionUserId }: Props) => {
 	const scrollRef = useRef() as React.MutableRefObject<HTMLDivElement>;
 	const [userScrolled, setUserScrolled] = useState(false);
 
@@ -61,7 +60,7 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 						setNotifications((current) => current + 1);
 					}
 				} catch (err) {
-					console.log('error');
+					console.log(err);
 				}
 			}
 		};
@@ -128,17 +127,19 @@ export const MessagesContainer = ({ chatId, workspaceId, sessionUserId }: Props)
 	};
 
 	const scrollDown = () => {
-		setNotifications(0);
 		scrollRef.current.scrollTo({
 			top: scrollRef.current.scrollHeight,
 			behavior: 'smooth',
 		});
+		setNotifications(0);
 	};
 
 	if (initialMessagesLoading)
-		<div className='h-full flex flex-col items-center  justify-center'>
-			<LoadingState />
-		</div>;
+		return (
+			<div className='flex flex-col items-center  justify-center'>
+				<LoadingState className='w-9 h-9' />
+			</div>
+		);
 	return (
 		<div
 			ref={scrollRef}

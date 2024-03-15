@@ -198,7 +198,8 @@
 			"CANT_GET_USERS": "Failed to update activity status",
 			"CANT_UPDATE_SEEN_NOTIFY": "Failed to update the read status of notifications",
 			"NO_CHAT": "Conversation not found",
-			"NO_MESSAGE": "Failed to edit the message. Please try again."
+			"NO_MESSAGE": "Failed to edit the message. Please try again.",
+			"CANT_LOAD_MORE": "Unable to load more messages. Please try again."
 		},
 		"SUCCES": {
 			"SIGN_UP": "Account was created!",
@@ -822,6 +823,38 @@
 			"PRIVATE_CHAT": "Private Chat",
 			"NEW_TASK": "New Task",
 			"NEW_MIND_MAP": "New Mind Map"
+		}
+	},
+
+	"CHAT": {
+		"HEADER": { "TITLE": "{workspaceName} chat" },
+		"DELETE_MESSAGE": {
+			"TITLE": "Delete Message",
+			"DESC": "This operation is irreversible and will permanently delete the message.",
+			"BTN_DELETE": "Delete",
+			"BTN_CANCEL": "Cancel"
+		},
+		"EDIT": {
+			"BADGE": "(edited)",
+			"TEXT": {
+				"FIRST": "Press",
+				"SECOND": ", to cancel • Press",
+				"THIRD": ", to save"
+			}
+		},
+		"OPTIONS": {
+			"EDIT": "Edit Message",
+			"DELETE": "Delete Message"
+		},
+		"LOAD_MORE": "Load More",
+		"NOTIFICATIONS": "{notifications} new messages",
+		"NEW_MESSAGE": {
+			"PLACEHOLDER": "New message",
+			"DELETE_ATACHMENT": "Delete attachment",
+			"ATACHMENT_DEAFULT_ERROR": "Failed to add attachments.",
+			"ATACHMENT_TO_MANY_ERROR": "Failed to add attachments. The maximum number of files you can send at once is 5 images and 5 PDFs.",
+			"ATACHMENT_TO_BIG_ERROR": "Failed to add attachments. One of the files is too large.",
+			"ATACHMENT_WRONG_FILE_ERROR": "Failed to add attachments. One of the files has an unsupported format."
 		}
 	},
 

@@ -1,18 +1,16 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import { useTuncateText } from '@/hooks/useTruncateText';
 import { AditionalResource as AditionalResourceType } from '@/types/extended';
 import { AditionalRecourceTypes } from '@prisma/client';
-import { ExternalLink, FileText, PlusSquare } from 'lucide-react';
+import { ExternalLink, FileText } from 'lucide-react';
 import Link from 'next-intl/link';
-import { LoadingState } from '@/components/ui/loading-state';
 
 interface Props {
 	file: AditionalResourceType;
 }
 
-export const AditionalResource = ({ file: { id, name, type, url } }: Props) => {
+export const AditionalResource = ({ file: { name, type, url } }: Props) => {
 	const [isLoading, setIsLoading] = useState(true);
 	return (
 		<Link

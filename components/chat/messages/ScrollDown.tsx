@@ -1,5 +1,7 @@
-import { ArrowDown } from 'lucide-react';
+'use client';
 import React from 'react';
+import { ArrowDown } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	notifications: number;
@@ -7,13 +9,15 @@ interface Props {
 }
 
 export const ScrollDown = ({ notifications, onScrollDown }: Props) => {
+	const t = useTranslations('CHAT');
+
 	return (
 		<div className='absolute  w-full left-1/2 bottom-16 sm:bottom-24	 translate-x-[-50%] z-30 '>
 			{notifications > 0 ? (
 				<div
 					onClick={onScrollDown}
-					className='w-36 mx-auto bg-primary px-2 py-1 rounded-md cursor-pointer'>
-					<h1>{notifications} new messages</h1>
+					className='w-fit text-center mx-auto bg-primary px-2 py-1 rounded-md cursor-pointer'>
+					<p>{t('NOTIFICATIONS', { notifications })}</p>
 				</div>
 			) : (
 				<div

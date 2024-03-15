@@ -1,14 +1,15 @@
 'use client';
 import React from 'react';
-import { Badge } from '@/components/ui/badge';
 import { HoverCard, HoverCardContent, HoverCardTrigger } from '@/components/ui/hover-card';
-import { useFormatter } from 'next-intl';
+import { useFormatter, useTranslations } from 'next-intl';
 
 interface Props {
 	updatedAt: Date;
 }
 
 export const EditedBadge = ({ updatedAt }: Props) => {
+	const t = useTranslations('CHAT.EDIT');
+
 	const format = useFormatter();
 	const dateTime = new Date(updatedAt);
 	const now = new Date();
@@ -16,7 +17,7 @@ export const EditedBadge = ({ updatedAt }: Props) => {
 	return (
 		<HoverCard openDelay={250} closeDelay={250}>
 			<HoverCardTrigger asChild>
-				<span className=' text-[0.6rem] text-muted-foreground'>(edytowane)</span>
+				<span className=' text-[0.6rem] text-muted-foreground'>{t('BADGE')}</span>
 			</HoverCardTrigger>
 			<HoverCardContent align='center' side='top'>
 				<span>{format.relativeTime(dateTime, now)}</span>
