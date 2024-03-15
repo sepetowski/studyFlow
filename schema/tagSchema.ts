@@ -1,5 +1,5 @@
+import { color } from '@/lib/constants';
 import { z } from 'zod';
-import { color } from '@/lib/utils';
 
 const id = z.string();
 const tagName = z
