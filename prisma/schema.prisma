@@ -61,9 +61,7 @@ model User {
   assignedToMindMap        assignedToMindMap[]
   userNotifications        Notification[]      @relation("NotifayUser")
   userCreatedNotifications Notification[]      @relation("NotifayCreator")
-
-  lastTimeActive DateTime  @default(now())
-  messages       Message[]
+  messages                 Message[]
 }
 
 model PomodoroSettings {

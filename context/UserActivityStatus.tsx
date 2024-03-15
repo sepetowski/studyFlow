@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useState } from 'react';
 import { UserPermisson } from '@prisma/client';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { createContext } from 'react';
@@ -10,6 +10,8 @@ import { useToast } from '@/components/ui/use-toast';
 import { useTranslations } from 'next-intl';
 import axios, { AxiosError } from 'axios';
 import dayjs from 'dayjs';
+import { supabase } from '@/lib/supabase';
+import { useSession } from 'next-auth/react';
 
 interface Props {
 	children: React.ReactNode;
@@ -24,7 +26,7 @@ interface UserActivityStatus {
 	allInactiveUsers: UserActiveItemList[];
 
 	getActiveUsersRoleType: (role: UserPermisson) => UserActiveItemList[];
-	findUserById: (id: string) => UserActiveItemList | null;
+	chekIfUserIsActive: (id: string) => boolean;
 	refetch: () => void;
 }
 
@@ -38,6 +40,7 @@ export const UserActivityStatusProvider = ({ children }: Props) => {
 	const [allActiveUsers, setAllActiveUsers] = useState<UserActiveItemList[]>([]);
 
 	const params = useParams();
+	const session = useSession();
 	const worksapceId = params.workspace_id ? params.workspace_id : null;
 
 	const {
@@ -59,67 +62,59 @@ export const UserActivityStatusProvider = ({ children }: Props) => {
 			return resposne;
 		},
 		enabled: !!worksapceId,
-		refetchInterval: 6000,
-		cacheTime: 1 * 60 * 1000,
 		queryKey: ['getUserActivityStatus', worksapceId],
 	});
 
-	const { mutate: updateUserActivity } = useMutation({
-		mutationFn: async () => {
-			const currentTime = new Date().toISOString();
+	useEffect(() => {
+		if (!session.data) return;
+		const supabaseClient = supabase();
+		const channel = supabaseClient.channel(`activity-status`);
+		channel
+			.on('presence', { event: 'sync' }, () => {
+				const userIds: string[] = [];
+				const activeUsers: UserActiveItemList[] = [];
+				const inactiveUsers: UserActiveItemList[] = [];
 
-			await axios.post('/api/users/update-activity', { currentTime });
-		},
+				for (const id in channel.presenceState()) {
+					// @ts-ignore
+					userIds.push(channel.presenceState()[id][0].user_id);
+				}
+				const uniqeIds = new Set(userIds);
+				console.log(uniqeIds);
 
-		onError: (err: AxiosError) => {
-			const error = err?.response?.data ? err.response.data : 'ERRORS.CANT_GET_USERS';
-			toast({
-				title: m(error),
-				variant: 'destructive',
+				users &&
+					users.forEach((user) => {
+						if (uniqeIds.has(user.id)) {
+							activeUsers.push(user);
+						} else {
+							inactiveUsers.push(user);
+						}
+					});
+
+				setAllActiveUsers(activeUsers);
+				setAllInactiveUsers(inactiveUsers);
+			})
+			.subscribe(async (status) => {
+				if (status === 'SUBSCRIBED') {
+					await channel.track({
+						online_at: new Date().toISOString(),
+						user_id: session.data.user.id,
+					});
+				}
 			});
+	}, [session.data, users]);
+
+	const getActiveUsersRoleType = useCallback(
+		(role: UserPermisson) => {
+			return allActiveUsers.filter((user) => user.userRole === role);
 		},
-	});
-	useEffect(() => {
-		updateUserActivity();
+		[allActiveUsers]
+	);
 
-		const updateAndRefetch = async () => {
-			updateUserActivity();
-			await refetch();
-		};
-
-		const intervalId = setInterval(() => {
-			updateAndRefetch();
-		}, 3 * 60 * 1000);
-
-		return () => clearInterval(intervalId);
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
-
-	useEffect(() => {
-		if (!users) return;
-
-		const currentTime = dayjs();
-
-		const activeUsers = users.filter((user) => {
-			const lastActiveTime = dayjs(user.lastTimeActive);
-			const timeDifference = currentTime.diff(lastActiveTime, 'minute');
-			return timeDifference < 4;
-		});
-
-		const inactiveUsers = users.filter((user) => !activeUsers.includes(user));
-
-		setAllActiveUsers(activeUsers);
-		setAllInactiveUsers(inactiveUsers);
-	}, [users]);
-
-	const getActiveUsersRoleType = (role: UserPermisson) => {
-		return allActiveUsers.filter((user) => user.userRole === role);
-	};
-
-	const findUserById = (id: string) => {
-		const user = users?.find((user) => user.id === id);
-		return user ? user : null;
-	};
+	const chekIfUserIsActive = useCallback(
+		(id: string) => !!allActiveUsers.find((user) => user.id === id),
+		[allActiveUsers]
+	);
 
 	const info: UserActivityStatus = {
 		isLoading,
@@ -128,7 +123,7 @@ export const UserActivityStatusProvider = ({ children }: Props) => {
 		allActiveUsers,
 		allInactiveUsers,
 		getActiveUsersRoleType,
-		findUserById,
+		chekIfUserIsActive,
 		refetch,
 	};
 

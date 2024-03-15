@@ -137,7 +137,6 @@ export interface UserActiveItemList {
 	username: string;
 	image: string | null;
 	userRole: UserPermisson;
-	lastTimeActive: Date;
 }
 
 export interface UserNotification extends Notification {

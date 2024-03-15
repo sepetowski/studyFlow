@@ -35,16 +35,6 @@ export const getMonth = (month = dayjs().month()) => {
 	return daysMatrix;
 };
 
-export function getFromAndTo(page: number, itemPerPage: number) {
-	let from = page * itemPerPage;
-	let to = from + itemPerPage;
-
-	if (page > 0) {
-		from += 1;
-	}
-	return { from, to };
-}
-
 export const color = z.enum([
 	'PURPLE',
 	'RED',
