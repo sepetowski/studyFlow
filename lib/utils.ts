@@ -3,9 +3,31 @@ import { Home, CalendarDays, Star, User, Clock } from 'lucide-react';
 import { twMerge } from 'tailwind-merge';
 import { z } from 'zod';
 import dayjs from 'dayjs';
+import { ExtendedMessage } from '@/types/extended';
+
 export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
+
+export const showUserInforamtion = (messages: ExtendedMessage[], messageId: string) => {
+	const currentIndex = messages.findIndex((message) => message.id === messageId);
+	if (currentIndex !== -1 && currentIndex > 0) {
+		const prevMessage = messages[currentIndex - 1];
+		const currentMessage = messages[currentIndex];
+
+		const sameSender = prevMessage.sender.id === currentMessage.sender.id;
+		if (!sameSender) return true;
+
+		if (prevMessage.aditionalRecources.length > 0) return true;
+
+		const prevMessageCreationTime = dayjs(prevMessage.createdAt);
+		const currentMessageCreationTime = dayjs(currentMessage.createdAt);
+		const timeDifference = currentMessageCreationTime.diff(prevMessageCreationTime, 'seconds');
+		return timeDifference > 60;
+	} else {
+		return true;
+	}
+};
 
 export const getMonth = (month = dayjs().month()) => {
 	const year = dayjs().year();
