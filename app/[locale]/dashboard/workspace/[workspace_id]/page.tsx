@@ -7,6 +7,7 @@ import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/Shor
 import { FilterByUsersAndTagsInWorkspaceProvider } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -21,6 +22,8 @@ const Workspace = async ({ params: { workspace_id } }: Params) => {
 		getWorkspaceWithChatId(workspace_id, session.user.id),
 		getUserWorkspaceRole(workspace_id, session.user.id),
 	]);
+
+	if (!workspace || !userRole) notFound();
 
 	return (
 		<FilterByUsersAndTagsInWorkspaceProvider>

@@ -3,11 +3,13 @@ import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { getUserPomodoroSettings } from '@/lib/api';
 import { PomodoroContainer } from '@/components/pomodoro/timer/PomodoroContainer';
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
+import { notFound } from 'next/navigation';
 
 const Pomodoro = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/pomodoro');
 
 	const pomodoroSettings = await getUserPomodoroSettings(session.user.id);
+	if (!pomodoroSettings) notFound();
 
 	return (
 		<>

@@ -8,13 +8,20 @@ import { MESSAGES_LIMIT } from '@/lib/constants';
 import { useMessage } from '@/store/conversation/messages';
 
 interface Props {
+	workspaceName: string;
 	workspaceId: string;
 	chatId: string;
 	initialMessages: ExtendedMessage[];
 	sessionUserId: string;
 }
 
-export const ChatContainer = ({ chatId, workspaceId, initialMessages, sessionUserId }: Props) => {
+export const ChatContainer = ({
+	chatId,
+	workspaceId,
+	initialMessages,
+	sessionUserId,
+	workspaceName,
+}: Props) => {
 	const initState = useRef(false);
 	const hasMore = initialMessages.length >= MESSAGES_LIMIT;
 
@@ -28,7 +35,7 @@ export const ChatContainer = ({ chatId, workspaceId, initialMessages, sessionUse
 
 	return (
 		<div className='w-full h-full flex flex-col justify-between  border border-border rounded-md shadow-sm relative'>
-			<Header />
+			<Header workspaceName={workspaceName} />
 			<MessagesContainer chatId={chatId} workspaceId={workspaceId} sessionUserId={sessionUserId} />
 			<NewMessageContainer chatId={chatId} workspaceId={workspaceId} />
 		</div>

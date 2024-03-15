@@ -76,7 +76,6 @@ export const NewMessageContainer = ({ chatId, workspaceId }: Props) => {
 			addMessage(newMessage);
 			setUploadedFiles(null);
 			setMessage('');
-			console.log(textAreaRef.current?.value);
 
 			await axios.post('/api/conversation/new_message', newMessage);
 		},

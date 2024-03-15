@@ -80,7 +80,6 @@ export const UserActivityStatusProvider = ({ children }: Props) => {
 					userIds.push(channel.presenceState()[id][0].user_id);
 				}
 				const uniqeIds = new Set(userIds);
-				console.log(uniqeIds);
 
 				users &&
 					users.forEach((user) => {

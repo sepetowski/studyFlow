@@ -1,5 +1,5 @@
 'use client';
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { UserAvatar } from '@/components/ui/user-avatar';
 import { ExtendedMessage } from '@/types/extended';
 import { MoreHorizontal } from 'lucide-react';
@@ -19,7 +19,9 @@ interface Props {
 export const Message = ({ message, sessionUserId }: Props) => {
 	const { chekIfUserIsActive } = useUserActivityStatus();
 	const { content, aditionalRecources, createdAt, edited, sender, updatedAt } = message;
-	const isActive = chekIfUserIsActive(sender.id);
+	const isActive = useMemo(() => {
+		return chekIfUserIsActive(sender.id);
+	}, [sender.id, chekIfUserIsActive]);
 
 	const messageRef = useRef<HTMLDivElement | null>(null);
 	const [isEditing, setIsEditing] = useState(false);

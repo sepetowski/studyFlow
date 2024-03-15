@@ -7,6 +7,7 @@ import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getMindMap, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { redirect } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -25,6 +26,9 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		getUserWorkspaceRole(workspace_id, session.user.id),
 		getMindMap(mind_map_id, session.user.id),
 	]);
+
+	if (!workspace || !userRole || !mindMap) notFound();
+
 	const candEdit =
 		userRole === 'ADMIN' || userRole === 'OWNER' || userRole === 'CAN_EDIT' ? true : false;
 	if (!candEdit) redirect(`/dashboard/workspace/${workspace_id}/tasks/task/${mind_map_id}`);

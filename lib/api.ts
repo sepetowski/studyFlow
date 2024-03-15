@@ -153,7 +153,7 @@ export const getInitialHomeRecentActivitiy = async (userId: string) => {
 			}
 		);
 		if (!res.ok) {
-			return notFound();
+			return [];
 		}
 		return res.json() as Promise<HomeRecentActivity[]>;
 	} catch (err) {}
@@ -168,7 +168,7 @@ export const getInitialMessages = async (userId: string, chatId: string) => {
 			}
 		);
 		if (!res.ok) {
-			return notFound();
+			return [];
 		}
 		return res.json() as Promise<ExtendedMessage[]>;
 	} catch (err) {}

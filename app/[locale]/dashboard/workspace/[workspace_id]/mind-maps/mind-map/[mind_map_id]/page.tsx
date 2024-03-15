@@ -8,6 +8,7 @@ import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getMindMap, getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -26,6 +27,8 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		getUserWorkspaceRole(workspace_id, session.user.id),
 		getMindMap(mind_map_id, session.user.id),
 	]);
+
+	if (!workspace || !userRole || !mindMap) notFound();
 
 	const isSavedByUser =
 		mindMap.savedMindMaps?.find((mindMap) => mindMap.userId === session.user.id) !== undefined;

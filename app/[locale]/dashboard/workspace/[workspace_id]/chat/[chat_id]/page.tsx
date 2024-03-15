@@ -6,6 +6,7 @@ import { getInitialMessages, getUserWorkspaceRole, getWorkspaceWithChatId } from
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { db } from '@/lib/db';
 import { redirect } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -24,6 +25,8 @@ const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
 		getUserWorkspaceRole(workspace_id, session.user.id),
 		getInitialMessages(session.user.id, chat_id),
 	]);
+
+	if (!workspace) return notFound();
 
 	const conversationId = workspace.conversation.id;
 
@@ -53,9 +56,10 @@ const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
 			</DashboardHeader>
 			<main className='w-full h-[90%]'>
 				<ChatContainer
+					workspaceName={workspace?.name}
 					chatId={conversationId}
 					workspaceId={workspace.id}
-					initialMessages={initialMessages}
+					initialMessages={initialMessages ? initialMessages : []}
 					sessionUserId={session.user.id}
 				/>
 			</main>
