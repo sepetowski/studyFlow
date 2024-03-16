@@ -5,6 +5,7 @@ import { onboardingSchema } from '@/schema/onboardingSchema';
 import { UseCase as UseCaseType } from '@prisma/client';
 import { v4 as uuidv4 } from 'uuid';
 import { getRandomWorkspaceColor } from '@/lib/getRandomWorkspaceColor';
+import { defaultMindMap, defaultTask } from '@/lib/defaultTaskAndMindMap';
 
 export async function POST(request: Request) {
 	const session = await getAuthSession();
@@ -67,9 +68,47 @@ export async function POST(request: Request) {
 			},
 		});
 
-		const conversation = await db.conversation.create({
+		await db.conversation.create({
 			data: {
 				workspaceId: workspace.id,
+			},
+		});
+
+		const mindMap = await db.mindMap.create({
+			data: {
+				workspaceId: workspace.id,
+				creatorId: session.user.id,
+				title: defaultMindMap.title,
+				content: defaultMindMap.content,
+				emoji: defaultMindMap.emoji,
+			},
+		});
+
+		const task = await db.task.create({
+			data: {
+				workspaceId: workspace.id,
+				creatorId: session.user.id,
+				title: defaultTask.title,
+				emoji: defaultTask.emoji,
+				content: defaultTask.content,
+			},
+		});
+
+		await db.mindMap.update({
+			where: {
+				id: mindMap.id,
+			},
+			data: {
+				updatedUserId: session.user.id,
+			},
+		});
+
+		await db.task.update({
+			where: {
+				id: task.id,
+			},
+			data: {
+				updatedUserId: session.user.id,
 			},
 		});
 
