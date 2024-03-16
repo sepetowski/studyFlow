@@ -13,8 +13,8 @@ export const Sidebar = async () => {
 
 	return (
 		<SidebarContainer
-			userWorkspaces={userWorkspaces}
-			userAdminWorkspaces={userAdminWorkspaces}
+			userWorkspaces={userWorkspaces ? userWorkspaces : []}
+			userAdminWorkspaces={userAdminWorkspaces ? userAdminWorkspaces : []}
 			userId={session.user.id}
 		/>
 	);

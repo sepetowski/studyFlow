@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { LoadingState } from '@/components/ui/loading-state';
 import { useOnboardingForm } from '@/context/OnboardingForm';
@@ -11,6 +11,7 @@ import { useRouter } from 'next-intl/client';
 import { useSession } from 'next-auth/react';
 export const Finish = () => {
 	const { workspaceName, workspaceImage, surname, useCase, name } = useOnboardingForm();
+	const [isDone, setIsDone] = useState(false);
 
 	const { update } = useSession();
 	const router = useRouter();
@@ -40,6 +41,7 @@ export const Finish = () => {
 			});
 		},
 		onSuccess: async () => {
+			setIsDone(true);
 			toast({
 				title: m('SUCCES.ONBOARDING_COMPLETE'),
 			});
@@ -64,11 +66,15 @@ export const Finish = () => {
 					{t('FINISH.DESC_SECOND')}
 				</p>
 				<Button
-					disabled={isLoading}
+					disabled={isLoading || isDone}
 					onClick={() => completeOnboarding()}
 					type='submit'
 					className='mt-10 sm:mt-32 w-full max-w-md dark:text-white font-semibold '>
-					{isLoading ? <LoadingState /> : <>{t('START_BTN')}</>}
+					{isLoading || isDone ? (
+						<LoadingState loadingText={isDone ? t('IS_DONE') : ''} />
+					) : (
+						<>{t('START_BTN')}</>
+					)}
 				</Button>
 			</div>
 		</>

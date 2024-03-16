@@ -207,7 +207,7 @@ model Notification {
   userId           String
   notifayCreator   User           @relation(name: "NotifayCreator", fields: [notifayCreatorId], references: [id], onDelete: Cascade)
   notifayCreatorId String
-  workspace        Workspace?     @relation(fields: [workspaceId], references: [id])
+  workspace        Workspace?     @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   workspaceId      String?
   seen             Boolean        @default(false)
   cliked           Boolean        @default(false)
@@ -227,9 +227,9 @@ model Conversation {
 
 model Message {
   id                 String              @id @default(cuid())
-  conversation       Conversation        @relation(fields: [conversationId], references: [id])
+  conversation       Conversation        @relation(fields: [conversationId], references: [id], onDelete: Cascade)
   conversationId     String
-  sender             User                @relation(fields: [senderId], references: [id])
+  sender             User                @relation(fields: [senderId], references: [id], onDelete: Cascade)
   senderId           String
   content            String
   createdAt          DateTime            @default(now())
@@ -241,7 +241,7 @@ model Message {
 model aditionalRecource {
   id String @id @default(cuid())
 
-  message   Message?               @relation(fields: [messageId], references: [id])
+  message   Message?               @relation(fields: [messageId], references: [id], onDelete: Cascade)
   messageId String?
   type      AditionalRecourceTypes
   name      String

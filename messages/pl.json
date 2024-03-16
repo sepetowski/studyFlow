@@ -146,7 +146,8 @@
 			"DESC_SECOND": ", klikając poniższy przycisk"
 		},
 		"START_BTN": "Rozpocznij",
-		"NEXT_BTN": "Kontynuj"
+		"NEXT_BTN": "Kontynuj",
+		"IS_DONE": "Jeszcze tylko chwila"
 	},
 	"UPLOAD_FILE": {
 		"UPLOAD": "Prześlij"

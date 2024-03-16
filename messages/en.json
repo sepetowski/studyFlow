@@ -146,7 +146,8 @@
 			"DESC_SECOND": " by clicking the button below"
 		},
 		"START_BTN": "Start",
-		"NEXT_BTN": "Continue"
+		"NEXT_BTN": "Continue",
+		"IS_DONE": "just a moment more"
 	},
 	"UPLOAD_FILE": {
 		"UPLOAD": "Upload"
