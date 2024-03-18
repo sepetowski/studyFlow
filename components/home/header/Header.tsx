@@ -6,8 +6,10 @@ import { VideoContainer } from '../video/VideoContainer';
 export const Header = () => {
 	return (
 		<header className='flex flex-col items-center mt-20 w-full  relative isolate'>
-			<h1 className='font-bold text-8xl max-w-2xl text-center '>Increase your productivity</h1>
-			<div className='w-full flex items-center justify-center mt-12 gap-4'>
+			<h1 className='font-bold text-5xl sm:text-6xl lg:text-8xl max-w-2xl text-center '>
+				Increase your productivity
+			</h1>
+			<div className='w-full flex flex-wrap items-center justify-center mt-12 gap-2  sm:gap-4'>
 				{homePageHeaderLinks.map((link, i) => (
 					<HeaderLink key={i} Icon={link.Icon} href={link.href} title={link.title} />
 				))}
@@ -15,9 +17,11 @@ export const Header = () => {
 
 			<VideoContainer className=' mt-16 h-[40rem] z-20 ' />
 
-			<div className='flex flex-col items-center mt-32 w-full px-2 relative isolate text-center'>
-				<h2 className='font-bold text-8xl  text-center '>Your new best friend</h2>
-				<p className='text-2xl text-muted-foreground'>
+			<div className='flex flex-col items-center mt-16 sm:mt-20 md:mt-24 lg:mt-32 w-full px-2 relative isolate text-center'>
+				<h2 className='font-bold text-5xl sm:text-6xl lg:text-8xl  text-center '>
+					Your new best friend
+				</h2>
+				<p className='text-base mt-8 sm:mt-4 sm:text-lg md:text-xl lg:text-2xl text-muted-foreground'>
 					Lorem ipsum dolor sit, amet consectetur adipisicing elit. Atque, placeat.
 				</p>
 
