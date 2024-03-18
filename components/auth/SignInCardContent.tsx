@@ -99,18 +99,14 @@ export const SignInCardContent = () => {
 							)}
 						/>
 					</div>
-					<div className='space-y-2'>
-						<Button disabled={isLoading} className='w-full font-bold text-white ' type='submit'>
-							{isLoading ? (
-								<LoadingState loadingText={m('PENDING.LOADING')} />
-							) : (
-								t('SIGN_IN.SUBMIT_BTN')
-							)}
-						</Button>
-						<p className='text-xs text-center text-muted-foreground'>
-							{t('SIGN_IN.FORGOT_PASSWORD')}
-						</p>
-					</div>
+
+					<Button disabled={isLoading} className='w-full font-bold text-white ' type='submit'>
+						{isLoading ? (
+							<LoadingState loadingText={m('PENDING.LOADING')} />
+						) : (
+							t('SIGN_IN.SUBMIT_BTN')
+						)}
+					</Button>
 				</form>
 			</Form>
 		</CardContent>

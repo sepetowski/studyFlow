@@ -14,7 +14,6 @@ import { LoadingState } from '@/components/ui/loading-state';
 import { useRouter } from 'next-intl/client';
 import { signIn } from 'next-auth/react';
 import { useToast } from '@/components/ui/use-toast';
-import Link from 'next-intl/link';
 
 export const SignUpCardContent = () => {
 	const t = useTranslations('AUTH');
@@ -127,9 +126,7 @@ export const SignUpCardContent = () => {
 						</Button>
 						<p className='text-xs text-center text-muted-foreground'>
 							{t('SIGN_UP.TERMS.FIRST')}{' '}
-							<Link className='font-bold' href={'/'}>
-								{t('SIGN_UP.TERMS.SECOND')}
-							</Link>
+							<span className='font-bold'>{t('SIGN_UP.TERMS.SECOND')}</span>
 						</p>
 					</div>
 				</form>
