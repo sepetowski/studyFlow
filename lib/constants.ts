@@ -1,4 +1,13 @@
-import { Home, CalendarDays, Star, User, Clock } from 'lucide-react';
+import {
+	Home,
+	CalendarDays,
+	Star,
+	User,
+	Clock,
+	PencilRuler,
+	Workflow,
+	MessageSquare,
+} from 'lucide-react';
 import { z } from 'zod';
 
 export const ACTIVITY_PER_PAGE = 8;
@@ -54,5 +63,33 @@ export const topSidebarLinks = [
 		href: '/dashboard/assigned-to-me',
 		Icon: User,
 		hoverTextKey: 'ASSIGNED_TO_ME_HOVER',
+	},
+];
+
+export const homePageHeaderLinks = [
+	{
+		href: '/',
+		Icon: PencilRuler,
+		title: 'Tasks & Notes',
+	},
+	{
+		href: '/',
+		Icon: Workflow,
+		title: 'Mind Maps',
+	},
+	{
+		href: '/',
+		Icon: CalendarDays,
+		title: 'Calendar',
+	},
+	{
+		href: '/',
+		Icon: MessageSquare,
+		title: 'Group Chat',
+	},
+	{
+		href: '/',
+		Icon: Clock,
+		title: 'Pomodoro',
 	},
 ];
