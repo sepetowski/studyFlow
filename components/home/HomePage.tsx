@@ -15,20 +15,18 @@ export const HomePage = () => {
 						title='Your new best friend'
 						desc='Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, repellat'
 					/>
-					<Section />
-					<Section reverse />
-					<Section />
-					<Section reverse />
-					<Section />
+					<Section type='video' source='' />
+					<Section type='video' source='' reverse />
+					<Section type='video' source='' />
+					<Section type='video' source='' reverse />
+					<Section type='video' source='' />
 					<TextSection
 						title='Lorem ipsum dolor sit amet consectetur adipisicing elit'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 					/>
-					<Section />
-					<Section reverse />
-					<Section />
-					<Section reverse />
-					<Section />
+					<Section type='image' source='/images/workspacePage.png' />
+					<Section reverse type='image' source='/images/chat.png' />
+					<Section type='image' source='/images/calendar.png' />
 				</main>
 			</div>
 		</>

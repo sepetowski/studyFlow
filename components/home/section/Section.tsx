@@ -1,11 +1,14 @@
 import React from 'react';
 import { VideoContainer } from '../video/VideoContainer';
-
+import Image from 'next/image';
+import { AspectRatio } from '@/components/ui/aspect-ratio';
 interface Props {
 	reverse?: boolean;
+	type: 'image' | 'video';
+	source: string;
 }
 
-export const Section = ({ reverse }: Props) => {
+export const Section = ({ reverse, source, type }: Props) => {
 	return (
 		<section
 			className={`mt-24 md:mt-52 lg:mt-80 flex-col    flex justify-between items-center gap-6 md:gap-10 ${
@@ -22,8 +25,22 @@ export const Section = ({ reverse }: Props) => {
 					Natus fuga laboriosam nesciunt nostrum. Reprehenderit deleniti quo sit dolore sequi.
 				</p>
 			</div>
-			<div className='w-full lg:w-3/5 relative isolate '>
-				<VideoContainer className='h-96' />
+			<div className='w-full lg:w-3/5 relative isolate group '>
+				{type === 'video' ? (
+					<VideoContainer className='h-96' />
+				) : (
+					<div className='w-full overflow-hidden  rounded-3xl border border-border h-fit '>
+						<AspectRatio ratio={16 / 9}>
+							<Image
+								className='w-full h-full object-cover'
+								src={source}
+								alt=''
+								width={1200}
+								height={1200}
+							/>
+						</AspectRatio>
+					</div>
+				)}
 				<div
 					aria-hidden='true'
 					className='pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl lg:-top-40'>
@@ -32,7 +49,7 @@ export const Section = ({ reverse }: Props) => {
 							clipPath:
 								'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
 						}}
-						className='relative left-[calc(50%+11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#51e74b] to-[#05a51a] opacity-40 dark:opacity-30 lg:left-[calc(50%-30rem)] lg:w-[72.1875rem]'
+						className='relative left-[calc(50%+11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#51e74b] to-[#05a51a] opacity-40 dark:opacity-30 lg:left-[calc(50%-30rem)] lg:w-[72.1875rem] group-hover:opacity-80 dark:group-hover:opacity-60 transition-opacity duration-500'
 					/>
 				</div>
 				<div
@@ -43,7 +60,7 @@ export const Section = ({ reverse }: Props) => {
 							clipPath:
 								'polygon(74.1% 44.1%, 100% 61.6%, 97.5% 26.9%, 85.5% 0.1%, 80.7% 2%, 72.5% 32.5%, 60.2% 62.4%, 52.4% 68.1%, 47.5% 58.3%, 45.2% 34.5%, 27.5% 76.7%, 0.1% 64.9%, 17.9% 100%, 27.6% 76.8%, 76.1% 97.7%, 74.1% 44.1%)',
 						}}
-						className='relative left-[calc(50%+11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#51e74b] to-[#05a51a] opacity-40 dark:opacity-30 lg:left-[calc(50%-30rem)] lg:w-[72.1875rem]'
+						className='relative left-[calc(50%+11rem)] aspect-[1155/678] w-[36.125rem] -translate-x-1/2 rotate-[30deg] bg-gradient-to-tr from-[#51e74b] to-[#05a51a] opacity-40 dark:opacity-30 lg:left-[calc(50%-30rem)] lg:w-[72.1875rem] group-hover:opacity-80 dark:group-hover:opacity-60 transition-opacity duration-500'
 					/>
 				</div>
 			</div>
