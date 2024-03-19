@@ -301,6 +301,15 @@
 			"ADD_TASK_PENDING": "Tworze zadanie",
 			"ADD_MIND_MAP": "Dodaj mapę myśli",
 			"ADD_MIND_MAP_PENDING": "Tworze mapę myśli"
+		},
+		"ASSIGNED_TO_ME": {
+			"LABEL": {
+				"ALL": "Wszystkie",
+				"TASKS": "Zadania",
+				"MIND_MAPS": "Mapy myśli"
+			},
+			"TYPE": "TYP",
+			"WORKSPACE": "Obszar roboczy"
 		}
 	},
 	"SETTINGS": {

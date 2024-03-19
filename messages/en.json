@@ -299,6 +299,15 @@
 			"ADD_TASK_PENDING": "Creating task",
 			"ADD_MIND_MAP": "Add mind map",
 			"ADD_MIND_MAP_PENDING": "Creating mind map"
+		},
+		"ASSIGNED_TO_ME": {
+			"LABEL": {
+				"ALL": "All",
+				"TASKS": "Tasks",
+				"MIND_MAPS": "Mind maps"
+			},
+			"TYPE": "Type",
+			"WORKSPACE": "Workspace"
 		}
 	},
 	"SETTINGS": {
