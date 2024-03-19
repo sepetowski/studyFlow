@@ -7,10 +7,10 @@ interface Props {
 	height?: number;
 }
 
-export const AppLogo = ({ height = 60, width = 60, className }: Props) => {
+export const AppLogo = ({ height = 800, width = 800, className }: Props) => {
 	return (
 		<Image
-			className={cn('rounded-full object-cover self-center', className)}
+			className={cn('rounded-full object-cover self-center w-16 h-16', className)}
 			alt='logo app'
 			width={width}
 			height={height}

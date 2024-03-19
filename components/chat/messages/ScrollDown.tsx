@@ -16,7 +16,7 @@ export const ScrollDown = ({ notifications, onScrollDown }: Props) => {
 			{notifications > 0 ? (
 				<div
 					onClick={onScrollDown}
-					className='w-fit text-center mx-auto bg-primary px-2 py-1 rounded-md cursor-pointer'>
+					className='w-fit text-center mx-auto bg-primary px-2 py-1 rounded-md cursor-pointer text-white'>
 					<p>{t('NOTIFICATIONS', { notifications })}</p>
 				</div>
 			) : (

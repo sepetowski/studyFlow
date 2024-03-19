@@ -1,7 +1,7 @@
 import React from 'react';
 import { HeaderLink } from './HeaderLink';
-import { homePageHeaderLinks } from '@/lib/constants';
-import { VideoContainer } from '../video/VideoContainer';
+import { homePageHeaderImgs, homePageHeaderLinks } from '@/lib/constants';
+import { ImagesCarusel } from '../carusel/ImagesCarusel';
 
 export const Header = () => {
 	return (
@@ -15,7 +15,7 @@ export const Header = () => {
 				))}
 			</div>
 
-			<VideoContainer className=' mt-28 h-[40rem] z-20 ' />
+			<ImagesCarusel images={homePageHeaderImgs} className='mt-28 h-[40rem] z-20' />
 
 			<div
 				aria-hidden='true'

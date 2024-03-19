@@ -1,46 +1,28 @@
 import React from 'react';
-import { VideoContainer } from '../video/VideoContainer';
 import Image from 'next/image';
 import { AspectRatio } from '@/components/ui/aspect-ratio';
+import { ImagesCarusel } from '../carusel/ImagesCarusel';
+import { HomePageImage } from '@/types/extended';
 interface Props {
+	title: string;
+	desc: string;
 	reverse?: boolean;
-	type: 'image' | 'video';
-	source: string;
+	images: HomePageImage[];
 }
 
-export const Section = ({ reverse, source, type }: Props) => {
+export const Section = ({ reverse, images, desc, title }: Props) => {
 	return (
 		<section
 			className={`mt-24 md:mt-52 lg:mt-80 flex-col    flex justify-between items-center gap-6 md:gap-10 ${
 				reverse ? 'lg:flex-row' : 'lg:flex-row-reverse'
 			}`}>
 			<div className='w-full lg:w-2/5 flex flex-col gap-1 sm:gap-4'>
-				<h2 className=' text-2xl sm:text-3xl lg:text-4xl font-semibold'>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit
-				</h2>
-				<p className='text-sm sm:text-base md:text-lg text-muted-foreground'>
-					Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque, in rerum. Veritatis
-					itaque vitae magni porro minima officiis cupiditate provident? Placeat dolorum numquam,
-					deserunt eius explicabo nam doloremque, odit adipisci sequi quia iure ratione incidunt.
-					Natus fuga laboriosam nesciunt nostrum. Reprehenderit deleniti quo sit dolore sequi.
-				</p>
+				<h2 className=' text-2xl sm:text-3xl lg:text-4xl font-semibold'>{title}</h2>
+				<p className='text-sm sm:text-base md:text-lg text-muted-foreground'>{desc}</p>
 			</div>
 			<div className='w-full lg:w-3/5 relative isolate group '>
-				{type === 'video' ? (
-					<VideoContainer className='h-96' />
-				) : (
-					<div className='w-full overflow-hidden  rounded-3xl border border-border h-fit '>
-						<AspectRatio ratio={16 / 9}>
-							<Image
-								className='w-full h-full object-cover'
-								src={source}
-								alt=''
-								width={1200}
-								height={1200}
-							/>
-						</AspectRatio>
-					</div>
-				)}
+				<ImagesCarusel images={images} />
+
 				<div
 					aria-hidden='true'
 					className='pointer-events-none absolute inset-x-0 -top-40 -z-10 transform-gpu overflow-hidden blur-3xl lg:-top-40'>

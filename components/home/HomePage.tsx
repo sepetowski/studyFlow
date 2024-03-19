@@ -3,6 +3,16 @@ import { Nav } from './nav/Nav';
 import { Header } from './header/Header';
 import { Section } from './section/Section';
 import { TextSection } from './section/TextSection';
+import {
+	homePageAssigmentFilterAndStarredImgs,
+	homePageCalendarImgs,
+	homePageChatImgs,
+	homePageHeaderImgs,
+	homePageMindMapsImgs,
+	homePagePomodoroImgs,
+	homePageRolesAndSettingsImgs,
+	homePageTasksImgs,
+} from '@/lib/constants';
 
 export const HomePage = () => {
 	return (
@@ -10,23 +20,57 @@ export const HomePage = () => {
 			<Nav />
 			<div className='w-full mx-auto max-w-screen-xl px-4 sm:px-6  '>
 				<Header />
+
 				<main>
 					<TextSection
 						title='Your new best friend'
 						desc='Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, repellat'
 					/>
-					<Section type='video' source='' />
-					<Section type='video' source='' reverse />
-					<Section type='video' source='' />
-					<Section type='video' source='' reverse />
-					<Section type='video' source='' />
+
+					<Section
+						title='Mind Maps'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePageMindMapsImgs}
+						reverse
+					/>
+					<Section
+						title='Tasks'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePageTasksImgs}
+					/>
+					<Section
+						title='Roles & Settings'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePageRolesAndSettingsImgs}
+					/>
+					<Section
+						title='Pomodoro'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePagePomodoroImgs}
+						reverse
+					/>
+
 					<TextSection
 						title='Lorem ipsum dolor sit amet consectetur adipisicing elit'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 					/>
-					<Section type='image' source='/images/workspacePage.png' />
-					<Section reverse type='image' source='/images/chat.png' />
-					<Section type='image' source='/images/calendar.png' />
+
+					<Section
+						title='Chat & notifiactions'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePageChatImgs}
+					/>
+					<Section
+						title='Integraed Calendar'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePageCalendarImgs}
+						reverse
+					/>
+					<Section
+						title='Easy to find anything you need'
+						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						images={homePageAssigmentFilterAndStarredImgs}
+					/>
 				</main>
 			</div>
 		</>

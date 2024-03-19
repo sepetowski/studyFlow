@@ -709,7 +709,7 @@
 
 	"ASSIGNED_TO_ME": {
 		"TITLE": "Przypisane do mnie",
-		"DESC": "Tutaj znajdziesz wszystkie swoje zapisane mapy myśli i zadania",
+		"DESC": "Tutaj znajdziesz wszystkie przypisane do Ciebie mapy myśli i zadania",
 
 		"NO_ASSIGMENT": "Nie zostałeś jeszcze nigdzie przypisany",
 		"NOT_FOUND": "Nie znaleźliśmy żadnego zadania ani mapy myśli które spełniały by kryteria"

@@ -1,3 +1,4 @@
+import { HomePageImage } from '@/types/extended';
 import {
 	Home,
 	CalendarDays,
@@ -91,5 +92,151 @@ export const homePageHeaderLinks = [
 		href: '/',
 		Icon: Clock,
 		title: 'Pomodoro',
+	},
+];
+
+export const homePageHeaderImgs: HomePageImage[] = [
+	{
+		src: '/images/homeScreen.png',
+		alt: 'Home page - dark theme',
+	},
+
+	{
+		src: '/images/workspacePage.png',
+		alt: 'Workspace page - dark theme',
+	},
+	{
+		src: '/images/workspaceFilter.png',
+		alt: 'Workspace page - dark theme',
+	},
+	{
+		src: '/images/homeScreenWhite.png',
+		alt: 'Home page - light theme',
+	},
+	{
+		src: '/images/workspacePageWhite.png',
+		alt: 'Workspace page - light theme',
+	},
+];
+
+export const homePageTasksImgs: HomePageImage[] = [
+	{
+		src: '/images/task.png',
+		alt: 'task - dark theme',
+	},
+
+	{
+		src: '/images/task2.png',
+		alt: 'task - dark theme',
+	},
+
+	{
+		src: '/images/task3.png',
+		alt: 'task - dark theme',
+	},
+	{
+		src: '/images/taskWhite.png',
+		alt: 'task - light theme',
+	},
+];
+
+export const homePageMindMapsImgs: HomePageImage[] = [
+	{
+		src: '/images/mindMap3.png',
+		alt: 'mindMap - dark theme',
+	},
+	{
+		src: '/images/mindMap1.png',
+		alt: 'mindMap - dark theme',
+	},
+
+	{
+		src: '/images/mindMap2.png',
+		alt: 'mindMap - dark theme',
+	},
+
+	{
+		src: '/images/mindMapWhite.png',
+		alt: 'mindMap - light theme',
+	},
+];
+
+export const homePageRolesAndSettingsImgs: HomePageImage[] = [
+	{
+		src: '/images/settings1.png',
+		alt: 'settings - dark theme',
+	},
+	{
+		src: '/images/settings2.png',
+		alt: 'settings - dark theme',
+	},
+	{
+		src: '/images/settings3.png',
+		alt: 'settings - dark theme',
+	},
+];
+
+export const homePagePomodoroImgs: HomePageImage[] = [
+	{
+		src: '/images/pomodoro1.png',
+		alt: 'pomodoro - dark theme',
+	},
+	{
+		src: '/images/pomodoro2.png',
+		alt: 'pomodoro - dark theme',
+	},
+];
+
+export const homePageChatImgs: HomePageImage[] = [
+	{
+		src: '/images/chat1.png',
+		alt: 'chat - dark theme',
+	},
+	{
+		src: '/images/chat2.png',
+		alt: 'chat - dark theme',
+	},
+	{
+		src: '/images/chat3.png',
+		alt: 'chat - dark theme',
+	},
+	{
+		src: '/images/chat4.png',
+		alt: 'chat - dark theme',
+	},
+
+	{
+		src: '/images/chatWhite.png',
+		alt: 'chat - light theme',
+	},
+];
+
+export const homePageCalendarImgs: HomePageImage[] = [
+	{
+		src: '/images/calendar.png',
+		alt: 'calendar - dark theme',
+	},
+	{
+		src: '/images/calendarWhite.png',
+		alt: 'calendar - light theme',
+	},
+];
+
+export const homePageAssigmentFilterAndStarredImgs: HomePageImage[] = [
+	{
+		src: '/images/assignedToMe.png',
+		alt: 'assigned to user site - dark theme',
+	},
+	{
+		src: '/images/starred.png',
+		alt: 'starred tasks and mind maps - dark theme',
+	},
+	{
+		src: '/images/assignedToMeWhite.png',
+		alt: 'assigned to user site - light theme',
+	},
+	{
+		src: '/images/starredWhite.png',
+		alt: 'starred tasks and mind maps - light theme',
 	},
 ];

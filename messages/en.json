@@ -496,7 +496,7 @@
 				"LINK": "Add hyperlink",
 				"IMAGE": "Add image",
 				"COLOR": "Highlight",
-				"COLOR_DEFAULT": "DEFAULT color",
+				"COLOR_DEFAULT": "Default color",
 				"UNDO": "Undo",
 				"REDO": "Redo",
 				"DELETE": "Delete"
@@ -708,7 +708,7 @@
 
 	"ASSIGNED_TO_ME": {
 		"TITLE": "Assigned to Me",
-		"DESC": "Here you will find all your saved mind maps and tasks",
+		"DESC": "Here you will find all assigned to You  mind maps and tasks",
 
 		"NO_ASSIGMENT": "You haven't been assigned anywhere yet",
 		"NOT_FOUND": "We couldn't find any tasks or mind maps that met the criteria"
