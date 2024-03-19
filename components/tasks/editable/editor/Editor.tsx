@@ -1,5 +1,5 @@
 'use client';
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useEditor, EditorContent } from '@tiptap/react';
 import StarterKit from '@tiptap/starter-kit';
 import Underline from '@tiptap/extension-underline';
@@ -12,9 +12,8 @@ import Image from '@tiptap/extension-image';
 import CharacterCount from '@tiptap/extension-character-count';
 import { FloatingContainer } from './tools/FloatingContainer';
 import Placeholder from '@tiptap/extension-placeholder';
-import { Button } from '@/components/ui/button';
 import { useTranslations } from 'next-intl';
-import { useDebounce, useDebouncedCallback } from 'use-debounce';
+import { useDebouncedCallback } from 'use-debounce';
 import { useAutosaveIndicator } from '@/context/AutosaveIndicator';
 import { useMutation } from '@tanstack/react-query';
 import axios from 'axios';
@@ -24,8 +23,6 @@ interface Props {
 	taskId: string;
 	workspaceId: string;
 }
-
-const limit = 600;
 
 export const Editor = ({ content, taskId, workspaceId }: Props) => {
 	const t = useTranslations('TASK');
@@ -57,9 +54,7 @@ export const Editor = ({ content, taskId, workspaceId }: Props) => {
 			Color,
 			TextStyle,
 			Image,
-			CharacterCount.configure({
-				limit,
-			}),
+			CharacterCount.configure({}),
 			Placeholder.configure({
 				emptyNodeClass: 'before:text-muted-foreground',
 				placeholder: t('EDITOR.PLACEHOLDER'),
@@ -114,9 +109,6 @@ export const Editor = ({ content, taskId, workspaceId }: Props) => {
 				<div className='flex  flex-col items-end mt-10 '>
 					<p>
 						{t('EDITOR.WORDS')} {editor.storage.characterCount.words()}
-					</p>
-					<p>
-						{editor.storage.characterCount.characters()}/{limit} {t('EDITOR.CHARS')}
 					</p>
 				</div>
 			)}
