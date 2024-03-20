@@ -7,6 +7,11 @@ export function cn(...inputs: ClassValue[]) {
 	return twMerge(clsx(inputs));
 }
 
+export const scrolltoHash = (elementid: string) => {
+	const element = document.getElementById(elementid);
+	element?.scrollIntoView({ behavior: 'smooth', block: 'center', inline: 'nearest' });
+};
+
 export const showUserInforamtion = (messages: ExtendedMessage[], messageId: string) => {
 	const currentIndex = messages.findIndex((message) => message.id === messageId);
 	if (currentIndex !== -1 && currentIndex > 0) {

@@ -16,19 +16,19 @@ export const Footer = () => {
 				<div className='flex items-center gap-2 text-muted-foreground '>
 					<Link
 						target='_blank'
-						href={'/'}
+						href={'https://github.com/sepetowski'}
 						className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
 						<Github />
 					</Link>
 					<Link
 						target='_blank'
-						href={'/'}
+						href={'https://www.instagram.com/sepetaa/'}
 						className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
 						<Instagram />
 					</Link>
 					<Link
 						target='_blank'
-						href={'/'}
+						href={'https://www.facebook.com/sepetowski/'}
 						className={buttonVariants({ variant: 'ghost', size: 'icon' })}>
 						<Facebook />
 					</Link>

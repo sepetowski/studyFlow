@@ -1,21 +1,22 @@
 'use client';
-import React, { useEffect, useRef, useState } from 'react';
+import React from 'react';
 import { ImagesCarusel } from '../carusel/ImagesCarusel';
 import { HomePageImage } from '@/types/extended';
-import { useIntersection } from '@mantine/hooks';
 import { useIsVisable } from '@/hooks/useIsVisable';
 interface Props {
 	title: string;
 	desc: string;
 	reverse?: boolean;
 	images: HomePageImage[];
+	id?: string;
 }
 
-export const Section = ({ reverse, images, desc, title }: Props) => {
+export const Section = ({ reverse, images, desc, title, id }: Props) => {
 	const { isVisable, ref } = useIsVisable();
 
 	return (
 		<section
+			id={id}
 			ref={ref}
 			className={`mt-28 sm:mt-52 lg:mt-80 flex-col    flex justify-between items-center gap-6 md:gap-10 ${
 				reverse ? 'lg:flex-row' : 'lg:flex-row-reverse'

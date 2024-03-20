@@ -13,7 +13,7 @@ import {
 	homePageRolesAndSettingsImgs,
 	homePageTasksImgs,
 } from '@/lib/constants';
-import { Footer } from './footer/Footer';
+import { Footer } from './Footer/Footer';
 
 export const HomePage = () => {
 	return (
@@ -29,22 +29,26 @@ export const HomePage = () => {
 					/>
 
 					<Section
+						id='Mind-Maps'
 						title='Mind Maps'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 						images={homePageMindMapsImgs}
 						reverse
 					/>
 					<Section
+						id='Tasks'
 						title='Tasks'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 						images={homePageTasksImgs}
 					/>
 					<Section
+						id='Roles'
 						title='Roles & Settings'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 						images={homePageRolesAndSettingsImgs}
 					/>
 					<Section
+						id='Pomodoro'
 						title='Pomodoro'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 						images={homePagePomodoroImgs}
@@ -57,11 +61,13 @@ export const HomePage = () => {
 					/>
 
 					<Section
+						id='Chat'
 						title='Chat & notifiactions'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 						images={homePageChatImgs}
 					/>
 					<Section
+						id='Calendar'
 						title='Integraed Calendar'
 						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
 						images={homePageCalendarImgs}

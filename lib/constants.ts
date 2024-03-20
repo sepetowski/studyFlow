@@ -69,27 +69,28 @@ export const topSidebarLinks = [
 
 export const homePageHeaderLinks = [
 	{
-		href: '/',
-		Icon: PencilRuler,
-		title: 'Tasks & Notes',
-	},
-	{
-		href: '/',
+		href: 'Mind-Maps',
 		Icon: Workflow,
 		title: 'Mind Maps',
 	},
 	{
-		href: '/',
+		href: 'Tasks',
+		Icon: PencilRuler,
+		title: 'Tasks & Notes',
+	},
+
+	{
+		href: 'Calendar',
 		Icon: CalendarDays,
 		title: 'Calendar',
 	},
 	{
-		href: '/',
+		href: 'Chat',
 		Icon: MessageSquare,
 		title: 'Group Chat',
 	},
 	{
-		href: '/',
+		href: 'Pomodoro',
 		Icon: Clock,
 		title: 'Pomodoro',
 	},
@@ -238,5 +239,32 @@ export const homePageAssigmentFilterAndStarredImgs: HomePageImage[] = [
 	{
 		src: '/images/starredWhite.png',
 		alt: 'starred tasks and mind maps - light theme',
+	},
+];
+
+export const navLinks = [
+	{
+		title: 'Mind Maps',
+		href: 'Mind-Maps',
+	},
+	{
+		title: 'Tasks',
+		href: 'Tasks',
+	},
+	{
+		title: 'Roles & Settings',
+		href: 'Roles',
+	},
+	{
+		title: 'Pomodoro',
+		href: 'Pomodoro',
+	},
+	{
+		title: 'Chat & notifiactions',
+		href: 'Chat',
+	},
+	{
+		title: 'Integraed Calendar',
+		href: 'Calendar',
 	},
 ];

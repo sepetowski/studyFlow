@@ -1,9 +1,4 @@
 import React from 'react';
-import { AppLogo } from '@/components/ui/app-logo';
-import Link from 'next-intl/link';
-import { LocaleSwitcher } from '@/components/switchers/LocaleSwitcher';
-import { ThemeSwitcher } from '@/components/switchers/ThemeSwitcher';
-import { buttonVariants } from '@/components/ui/button';
 import { LargeNav } from './LargeNav';
 import { MobileNav } from './MobileNav';
 

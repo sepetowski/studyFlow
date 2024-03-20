@@ -6,7 +6,6 @@ import { useTranslations } from 'next-intl';
 import Link from 'next-intl/link';
 import { AppLogo } from '@/components/ui/app-logo';
 
-
 interface Props {
 	signInCard?: boolean;
 }
@@ -17,7 +16,9 @@ export const AuthCard = ({ signInCard }: Props) => {
 		<>
 			<Card className='w-full sm:w-[30rem] mt-14 sm:mt-0'>
 				<CardHeader className='pb-0 sm:pb-0'>
-					<AppLogo />
+					<Link className='w-fit mx-auto mb-2' href={'/'}>
+						<AppLogo />
+					</Link>
 					<CardTitle>{signInCard ? t('SIGN_IN.TITLE') : t('SIGN_UP.TITLE')}</CardTitle>
 					<CardDescription>{signInCard ? t('SIGN_IN.DESC') : t('SIGN_UP.DESC')}</CardDescription>
 				</CardHeader>
