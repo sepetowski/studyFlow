@@ -874,6 +874,77 @@
 		"TITLE": "O nie... Coś poszło nie tak",
 		"BTN": "Spróbuj ponownie"
 	},
+
+	"STUDY_FLOW_PAGE": {
+		"NAV": {
+			"PRODUCT": {
+				"TITLE": "Produkt",
+				"SUBTITLES": {
+					"MIND_MAPS": "Mapy Myśli",
+					"TASKS": "Zadania & Notatki",
+					"ROLES": "Role & Ustawienia",
+					"POMODORO": "Pomodoro",
+					"CHAT": "Czat & Powiadomienia",
+					"CALENDAR": "Zintegrowany kalendarz",
+					"EASY": "Łatwy dostęp"
+				}
+			},
+			"SIGN_IN": "Zaloguj się",
+			"SIGN_UP": "Zarejestruj się za darmo"
+		},
+		"HEADER": {
+			"TITLE": "Zwiększ swoją produktywność",
+			"LINKS": {
+				"MIND_MAPS": "Mapy myśli",
+				"TASKS": "Zadania & notatki",
+				"CALENDAR": "Kalendarz",
+				"CHAT": "Czat grupowy",
+				"POMODORO": "Pomodoro"
+			}
+		},
+		"SECTION": {
+			"BEST_FRIEND": {
+				"TITLE": "Twój nowy najlepszy przyjaciel",
+				"DESC": "Zwiększ produktywność swojego zespołu dzięki StudyFlow - ostatecznemu narzędziu, które konsoliduje wszystkie niezbędne narzędzia w jednej zintegrowannej przestrzeni roboczej."
+			},
+			"MIND_MAPS": {
+				"TITLE": "Mapy Myśli",
+				"DESC": "Mapy myśli umożliwiają użytkownikom tworzenie wizualnie atrakcyjnych projektów, upraszczając wizualizację złożonych problemów. Dzięki intuicyjnemu interfejsowi nawigacja jest płynna, a użytkownicy mogą łatwo wprowadzać obszerne modyfikacje wizualne. Ponadto posiadają system tagowania i przypisywania użytkowników, poprawiając organizację i wspierając współpracę."
+			},
+			"TASKS": {
+				"TITLE": "Zadania & Notatki",
+				"DESC": "Zadania oferują użytkownikom płynną platformę do tworzenia nowych notatek i projektów. Dzięki zaawansowanemu edytorowi tekstu praca staje się łatwa, a postępy są automatycznie zapisywane. Ponadto użytkownicy mogą przypisywać zadania do konkretnych osób w ramach przestrzeni roboczej, kategoryzować je za pomocą tagów i ustalać terminy wykonania dla płynnej integracji z kalendarzem, zapewniając efektywne zarządzanie zadaniami."
+			},
+			"ROLES": {
+				"TITLE": "Role & Ustawienia",
+				"DESC": "Aplikacja posiada zintegrowany system ról, ułatwiając zarządzanie miejscem pracy. Ponadto użytkownicy mogą wygodnie nadzorować zarówno ustawienia konta, jak i przestrzeni, dostępne dla osób posiadających uprawnienia administratora lub właściciela. W ramach każdej przestrzeni użytkownicy mogą łatwo dostosowywać konfiguracje przestrzeni i zarządzać zadaniami związanymi z zarządzaniem użytkownikami, w tym dostosowywaniem ról i usuwaniem."
+			},
+			"POMODORO": {
+				"TITLE": "Pomodoro",
+				"DESC": "Aplikacja zawiera wbudowaną funkcję Pomodoro, która pomaga w sesjach pracy lub nauki. Umożliwia użytkownikom dostosowanie ustawień, takich jak czas trwania sesji, liczba rund, czasy przerw i dźwięki powiadomień, zapewniając spersonalizowane podejście do zarządzania produktywnością."
+			},
+			"NEXT_GENERATION": {
+				"TITLE": "Następne pokolenie współpracy zespołowej",
+				"DESC": "Dziel się tu, tam i wszędzie. Udostępnialne linki ułatwiają przesyłanie projektów do recenzji, zapraszaj innych do swojej przestrzeni roboczej lub uczestnicz w czacie na żywo z interesariuszami w dowolnym miejscu."
+			},
+			"CHAT": {
+				"TITLE": "Czat & Powiadomienia",
+				"DESC": "Współpracuj w czasie rzeczywistym, dzieląc się pomysłami i plikami, jednocześnie utrzymując wszystkich na jednej stronie. Ponadto, dzięki systemowi powiadomień, zawsze będziesz na bieżąco i nic Cię nie ominie."
+			},
+			"CALENDAR": {
+				"TITLE": "Zintegrowany Kalendarz",
+				"DESC": "Bądź zorganizowany dzięki funkcji Zintegrowanego Kalendarza, który wyświetla wszystkie zadania przypisane z określonymi datami. Współpracuj płynnie zarządzając swoim harmonogramem, zapewniając, że wszyscy są poinformowani trzymają się planu. Ta funkcja umożliwia efektywną koordynację i utrzymuje wszystkich w zgodzie z harmonogramami i terminami projektów."
+			},
+			"EASY_TO_FIND": {
+				"TITLE": "Łatwy dostęp",
+				"DESC": "Łatwo znajdź wszystko, czego potrzebujesz dzięki naszym intuicyjnym funkcją wyszukiwania. Dzięki zakładkom takim jak “Przypisane do mnie” i narzędziom do filtrowania danych, odnalezienie konkretnego projektu jest bezproblemowe. Dodatkowo funkcje tagowania i oznaczania gwiazdkami projektów zapewniają, że ważne zadania lub mapy myśli są zawsze na wyciągnięcie ręki, ułatwiając płynną nawigację i szybki dostęp do istotnych informacji."
+			}
+		},
+		"FOOTER": {
+			"FIRST": "Stworzone z",
+			"SECOND": "miłością"
+		}
+	},
 	"ROUTES": {
 		"DASHBOARD": "Strona główna",
 		"SETTINGS": "Ustawienia",

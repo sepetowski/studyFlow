@@ -546,7 +546,7 @@
 			"DIALOG": {
 				"TITLE": "Delete all tiles",
 				"DESC": "Reset the mind map layout to its initial state",
-				"WARNING": "Restoring the initial state will delete all current tiles and connections. Click 'Reset State' to remove all tiles and connections.",
+				"WARNING": "Restoring the initial state will delete all current tiles and connections. Click “Reset State” to remove all tiles and connections.",
 				"BTN_RESET": "Reset State",
 				"BTN_PENDING": "Resetting"
 			}
@@ -875,6 +875,77 @@
 	"CLIENT_ERROR": {
 		"TITLE": "Oh no... Something went wrong",
 		"BTN": "Try again"
+	},
+
+	"STUDY_FLOW_PAGE": {
+		"NAV": {
+			"PRODUCT": {
+				"TITLE": "Product",
+				"SUBTITLES": {
+					"MIND_MAPS": "Mind Maps",
+					"TASKS": "Tasks & Notes",
+					"ROLES": "Roles & Settings",
+					"POMODORO": "Pomodoro",
+					"CHAT": "Chat & Notifications",
+					"CALENDAR": "Integrated Calendar",
+					"EASY": "Easy Access"
+				}
+			},
+			"SIGN_IN": "Log in",
+			"SIGN_UP": "Sign up for free"
+		},
+		"HEADER": {
+			"TITLE": "Increase your productivity",
+			"LINKS": {
+				"MIND_MAPS": "Mind Maps",
+				"TASKS": "Tasks & Notes",
+				"CALENDAR": "Calendar",
+				"CHAT": "Group Chat",
+				"POMODORO": "Pomodoro"
+			}
+		},
+		"SECTION": {
+			"BEST_FRIEND": {
+				"TITLE": "Your new best friend",
+				"DESC": "Supercharge your team's productivity with StudyFlow - the ultimate toolkit consolidating all your essential tools in one unified workspace."
+			},
+			"MIND_MAPS": {
+				"TITLE": "Mind Maps",
+				"DESC": "Mind Maps empower users to craft visually engaging projects, simplifying the visualization of intricate issues. With an intuitive interface, navigation is seamless, and users can make extensive visual tweaks effortlessly. Furthermore, they boast a tagging system and user assignments, enhancing organization and fostering collaboration"
+			},
+			"TASKS": {
+				"TITLE": "Tasks & Notes",
+				"DESC": "Tasks offer users a seamless platform for creating new notes and projects. With an advanced text editor, work becomes effortless, and progress is automatically saved. Moreover, users can assign tasks to specific individuals within the workspace, categorize them with tags, and set due dates for seamless calendar integration, ensuring efficient task management"
+			},
+			"ROLES": {
+				"TITLE": "Roles & Settings",
+				"DESC": "The application boasts an integrated role system, streamlining workspace management effortlessly. Moreover, users can conveniently oversee both account and space settings, accessible to those holding admin or owner-level privileges. Within each workspace, users can effortlessly adjust space configurations and oversee user management tasks, including role adjustments and removals"
+			},
+			"POMODORO": {
+				"TITLE": "Pomodoro",
+				"DESC": "The application includes a built-in Pomodoro feature to aid in work or study sessions. It allows users to customize settings such as session duration, number of rounds, break times, and notification sounds, providing a tailored approach to productivity management"
+			},
+			"NEXT_GENERATION": {
+				"TITLE": "The next generation of team collaboration",
+				"DESC": "Share here, there, and everywhere. Shareable links make it easy to send projects for review, invite others into your workspace, or hop on a real-time chat with stakeholders anywhere"
+			},
+			"CHAT": {
+				"TITLE": "Chat & Notifiactions",
+				"DESC": "Collaborate in real-time, sharing your ideas and files while keeping everyone on the same page. Also, thanks to the notification system, you'll always be up-to-date and nothing will pass you by"
+			},
+			"CALENDAR": {
+				"TITLE": "Integraed Calendar",
+				"DESC": "Stay organized with our Integrated Calendar feature, which displays all tasks assigned with specific dates. Collaborate seamlessly as you manage your schedule, ensuring everyone stays informed and on track. This feature empowers efficient coordination and keeps everyone aligned with project timelines and deadlines"
+			},
+			"EASY_TO_FIND": {
+				"TITLE": "Easy Access",
+				"DESC": "Easily locate anything you need with our intuitive search functionality. With tabs like “Assigned to Me” and robust data filtering tools, finding specific project is effortless. Additionally, projects tagging and star-marking features ensure that important tasks or mind maps are always at your fingertips, facilitating seamless navigation and quick access to essential information"
+			}
+		},
+		"FOOTER": {
+			"FIRST": "Made with",
+			"SECOND": "love"
+		}
 	},
 
 	"ROUTES": {

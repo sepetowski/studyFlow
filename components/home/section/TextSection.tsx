@@ -1,6 +1,7 @@
 'use client';
-import { useIsVisable } from '@/hooks/useIsVisable';
 import React from 'react';
+import { useIsVisable } from '@/hooks/useIsVisable';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	title: string;
@@ -8,15 +9,17 @@ interface Props {
 }
 
 export const TextSection = ({ desc, title }: Props) => {
+	const t = useTranslations('STUDY_FLOW_PAGE.SECTION');
+
 	const { isVisable, ref } = useIsVisable();
 
 	return (
 		<section
 			ref={ref}
 			className='flex flex-col items-center mt-28 sm:mt-52 lg:mt-80 w-full  relative isolate text-center'>
-			<h2 className='font-bold text-5xl sm:text-6xl lg:text-8xl  text-center '>{title}</h2>
+			<h2 className='font-bold text-5xl sm:text-6xl lg:text-8xl  text-center '>{t(title)}</h2>
 			<p className='text-base mt-2 sm:mt-4 sm:text-lg md:text-xl lg:text-2xl text-muted-foreground'>
-				{desc}
+				{t(desc)}
 			</p>
 
 			<div

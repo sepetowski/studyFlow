@@ -11,8 +11,11 @@ import { ScrollArea } from '@/components/ui/scroll-area';
 import { navLinks } from '@/lib/constants';
 import { useState } from 'react';
 import { scrolltoHash } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 export const MobileNav = () => {
+	const t = useTranslations('STUDY_FLOW_PAGE.NAV');
+
 	const [open, setOpen] = useState(false);
 
 	return (
@@ -55,7 +58,7 @@ export const MobileNav = () => {
 									}}
 									className='w-fit text-base text-secondary-foreground font-semibold'
 									key={i}>
-									{link.title}
+									{t(link.title)}
 								</Button>
 							))}
 						</div>
@@ -65,17 +68,17 @@ export const MobileNav = () => {
 							onClick={() => {
 								setOpen(false);
 							}}
-							href={'/'}
+							href={'/sign-up'}
 							className={`${buttonVariants({ variant: 'default' })}`}>
-							Sign up for free
+							{t('SIGN_UP')}
 						</Link>
 						<Link
 							onClick={() => {
 								setOpen(false);
 							}}
-							href={'/'}
+							href={'/sign-in'}
 							className={`${buttonVariants({ variant: 'outline' })}`}>
-							Log in
+							{t('SIGN_IN')}
 						</Link>
 					</div>
 				</SheetContent>

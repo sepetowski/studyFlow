@@ -71,28 +71,28 @@ export const homePageHeaderLinks = [
 	{
 		href: 'Mind-Maps',
 		Icon: Workflow,
-		title: 'Mind Maps',
+		title: 'LINKS.MIND_MAPS',
 	},
 	{
 		href: 'Tasks',
 		Icon: PencilRuler,
-		title: 'Tasks & Notes',
+		title: 'LINKS.TASKS',
 	},
 
 	{
 		href: 'Calendar',
 		Icon: CalendarDays,
-		title: 'Calendar',
+		title: 'LINKS.CALENDAR',
 	},
 	{
 		href: 'Chat',
 		Icon: MessageSquare,
-		title: 'Group Chat',
+		title: 'LINKS.CHAT',
 	},
 	{
 		href: 'Pomodoro',
 		Icon: Clock,
-		title: 'Pomodoro',
+		title: 'LINKS.POMODORO',
 	},
 ];
 
@@ -244,27 +244,31 @@ export const homePageAssigmentFilterAndStarredImgs: HomePageImage[] = [
 
 export const navLinks = [
 	{
-		title: 'Mind Maps',
+		title: 'PRODUCT.SUBTITLES.MIND_MAPS',
 		href: 'Mind-Maps',
 	},
 	{
-		title: 'Tasks',
+		title: 'PRODUCT.SUBTITLES.TASKS',
 		href: 'Tasks',
 	},
 	{
-		title: 'Roles & Settings',
+		title: 'PRODUCT.SUBTITLES.ROLES',
 		href: 'Roles',
 	},
 	{
-		title: 'Pomodoro',
+		title: 'PRODUCT.SUBTITLES.POMODORO',
 		href: 'Pomodoro',
 	},
 	{
-		title: 'Chat & notifiactions',
+		title: 'PRODUCT.SUBTITLES.CHAT',
 		href: 'Chat',
 	},
 	{
-		title: 'Integraed Calendar',
+		title: 'PRODUCT.SUBTITLES.CALENDAR',
 		href: 'Calendar',
+	},
+	{
+		title: 'PRODUCT.SUBTITLES.EASY',
+		href: 'Easy-To-Find',
 	},
 ];

@@ -14,8 +14,11 @@ import {
 } from '@/components/ui/navigation-menu';
 import { navLinks } from '@/lib/constants';
 import { scrolltoHash } from '@/lib/utils';
+import { useTranslations } from 'next-intl';
 
 export const LargeNav = () => {
+	const t = useTranslations('STUDY_FLOW_PAGE.NAV');
+
 	return (
 		<div className='container py-4 md:flex  max-w-screen-2xl items-center justify-between hidden'>
 			<div className='flex items-center'>
@@ -35,7 +38,9 @@ export const LargeNav = () => {
 				<NavigationMenu>
 					<NavigationMenuList>
 						<NavigationMenuItem>
-							<NavigationMenuTrigger className='text-lg'>Product</NavigationMenuTrigger>
+							<NavigationMenuTrigger className='text-lg'>
+								{t('PRODUCT.TITLE')}
+							</NavigationMenuTrigger>
 							<NavigationMenuContent>
 								<ul className='grid w-[400px] gap-3 p-4 md:grid-cols-2  '>
 									{navLinks.map((link, i) => (
@@ -44,8 +49,8 @@ export const LargeNav = () => {
 												onClick={() => {
 													scrolltoHash(link.href);
 												}}
-												className='w-full text-left bg-transparent text-secondary-foreground block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'>
-												{link.title}
+												className='w-full text-left bg-transparent text-secondary-foreground justify-start select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground'>
+												{t(link.title)}
 											</Button>
 										</div>
 									))}
@@ -60,10 +65,10 @@ export const LargeNav = () => {
 					<Link
 						href={'/sign-in'}
 						className='border-b inline-block border-transparent hover:border-primary duration-200 transition-colors'>
-						Log in
+						{t('SIGN_IN')}
 					</Link>
 					<Link href={'/sign-up'} className={`${buttonVariants({ variant: 'default' })}`}>
-						Sign up for free
+						{t('SIGN_UP')}
 					</Link>
 				</div>
 				<div className=' flex items-center gap-2'>

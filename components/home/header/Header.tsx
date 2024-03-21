@@ -4,17 +4,20 @@ import { HeaderLink } from './HeaderLink';
 import { homePageHeaderImgs, homePageHeaderLinks } from '@/lib/constants';
 import { ImagesCarusel } from '../carusel/ImagesCarusel';
 import { useIsVisable } from '@/hooks/useIsVisable';
+import { useTranslations } from 'next-intl';
 
 export const Header = () => {
+	const t = useTranslations('STUDY_FLOW_PAGE.HEADER');
 	const { isVisable, ref } = useIsVisable();
+
 	return (
 		<header className='flex flex-col items-center mt-20 w-full  relative isolate '>
 			<h1 ref={ref} className='font-bold text-5xl sm:text-6xl lg:text-8xl max-w-2xl text-center  '>
-				Increase your productivity
+				{t('TITLE')}
 			</h1>
 			<div className='w-full flex flex-wrap items-center justify-center mt-12 gap-2  sm:gap-4'>
 				{homePageHeaderLinks.map((link, i) => (
-					<HeaderLink key={i} Icon={link.Icon} href={link.href} title={link.title} />
+					<HeaderLink key={i} Icon={link.Icon} href={link.href} title={t(link.title)} />
 				))}
 			</div>
 

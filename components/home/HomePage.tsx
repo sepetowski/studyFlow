@@ -23,59 +23,44 @@ export const HomePage = () => {
 				<Header />
 
 				<main>
-					<TextSection
-						title='Your new best friend'
-						desc='Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, repellat'
-					/>
+					<TextSection title='BEST_FRIEND.TITLE' desc='BEST_FRIEND.DESC' />
 
 					<Section
 						id='Mind-Maps'
-						title='Mind Maps'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						title='MIND_MAPS.TITLE'
+						desc='MIND_MAPS.DESC'
 						images={homePageMindMapsImgs}
 						reverse
 					/>
-					<Section
-						id='Tasks'
-						title='Tasks'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
-						images={homePageTasksImgs}
-					/>
+					<Section id='Tasks' title='TASKS.TITLE' desc='TASKS.DESC' images={homePageTasksImgs} />
 					<Section
 						id='Roles'
-						title='Roles & Settings'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						title='ROLES.TITLE'
+						desc='ROLES.DESC'
 						images={homePageRolesAndSettingsImgs}
 					/>
 					<Section
 						id='Pomodoro'
-						title='Pomodoro'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						title='POMODORO.TITLE'
+						desc='POMODORO.DESC'
 						images={homePagePomodoroImgs}
 						reverse
 					/>
 
-					<TextSection
-						title='Lorem ipsum dolor sit amet consectetur adipisicing elit'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
-					/>
+					<TextSection title='NEXT_GENERATION.TITLE' desc='NEXT_GENERATION.DESC' />
 
-					<Section
-						id='Chat'
-						title='Chat & notifiactions'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
-						images={homePageChatImgs}
-					/>
+					<Section id='Chat' title='CHAT.TITLE' desc='CHAT.DESC' images={homePageChatImgs} />
 					<Section
 						id='Calendar'
-						title='Integraed Calendar'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						title='CALENDAR.TITLE'
+						desc='CALENDAR.DESC'
 						images={homePageCalendarImgs}
 						reverse
 					/>
 					<Section
-						title='Easy to find anything you need'
-						desc='Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aperiam fuga, voluptates animi beatae praesentium natus'
+						id='Easy-To-Find'
+						title='EASY_TO_FIND.TITLE'
+						desc='EASY_TO_FIND.DESC'
 						images={homePageAssigmentFilterAndStarredImgs}
 					/>
 				</main>
