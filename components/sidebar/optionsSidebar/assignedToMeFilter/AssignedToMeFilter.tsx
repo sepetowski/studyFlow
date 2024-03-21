@@ -9,6 +9,7 @@ import { LayoutGrid } from 'lucide-react';
 import { Label } from '@/components/ui/label';
 import { RadioGroup, RadioGroupItem } from '@/components/ui/radio-group';
 import { useGetAssignedToMeParams } from '@/hooks/useGetAssignedToMeParams';
+import { useTranslations } from 'next-intl';
 
 interface Props {
 	userWorkspaces: Workspace[];
@@ -17,19 +18,21 @@ interface Props {
 const RADIO_OPTIONS = [
 	{
 		id: 'all',
-		label: 'Wszytskie',
+		label: 'LABEL.ALL',
 	},
 	{
 		id: 'tasks',
-		label: 'Zadania',
+		label: 'LABEL.TASKS',
 	},
 	{
 		id: 'mind-maps',
-		label: 'Mapy myśli',
+		label: 'LABEL.MIND_MAPS',
 	},
 ] as const;
 
 export const AssignedToMeFilter = ({ userWorkspaces }: Props) => {
+	const t = useTranslations('SIDEBAR.ASSIGNED_TO_ME');
+
 	const { currentType, workspaceFilterParam } = useGetAssignedToMeParams();
 	const router = useRouter();
 
@@ -46,7 +49,7 @@ export const AssignedToMeFilter = ({ userWorkspaces }: Props) => {
 	return (
 		<div className='flex flex-col gap-6 w-full'>
 			<div>
-				<p className='text-xs sm:text-sm uppercase text-muted-foreground '>Typ</p>
+				<p className='text-xs sm:text-sm uppercase text-muted-foreground '>{t('TYPE')}</p>
 				<div className='flex flex-col gap-2 w-full mt-2   '>
 					<RadioGroup
 						value={currentType}
@@ -63,7 +66,7 @@ export const AssignedToMeFilter = ({ userWorkspaces }: Props) => {
 								}}>
 								<RadioGroupItem className='scale-75 md:scale-90 ' value={radio.id} id={radio.id} />
 								<Label className='cursor-pointer' htmlFor={radio.id}>
-									{radio.label}
+									{t(radio.label)}
 								</Label>
 							</div>
 						))}
@@ -72,7 +75,7 @@ export const AssignedToMeFilter = ({ userWorkspaces }: Props) => {
 			</div>
 
 			<div>
-				<p className='text-xs sm:text-sm uppercase text-muted-foreground '>Obszar roboczy</p>
+				<p className='text-xs sm:text-sm uppercase text-muted-foreground '>{t('WORKSPACE')}</p>
 				<div className='flex flex-col gap-2 w-full mt-2 '>
 					<ActiveLink
 						disableActiveStateColor
@@ -88,7 +91,7 @@ export const AssignedToMeFilter = ({ userWorkspaces }: Props) => {
 							className={`rounded-md bg-primary text-white font-bold h-7 w-7  flex justify-center items-center`}>
 							<LayoutGrid size={18} />
 						</div>
-						<p>Wszystkie</p>
+						<p>{t('LABEL.ALL')}</p>
 					</ActiveLink>
 
 					{userWorkspaces.map((workspace) => (

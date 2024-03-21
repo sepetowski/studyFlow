@@ -210,5 +210,10 @@ export interface ExtendedMessage extends Message {
 	};
 }
 
+export interface HomePageImage {
+	src: string;
+	alt: string;
+}
+
 export interface HomeRecentActivity extends AssignedToMeDataItem {}
 export interface HomeRecentTasksAndMindMapsActivity extends AssignedToMeTaskAndMindMaps {}
