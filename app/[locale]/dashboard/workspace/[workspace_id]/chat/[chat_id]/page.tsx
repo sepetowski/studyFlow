@@ -4,8 +4,6 @@ import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { getInitialMessages, getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
-import { db } from '@/lib/db';
-import { redirect } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
 interface Params {
@@ -30,7 +28,7 @@ const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
 
 	const conversationId = workspace.conversation.id;
 
-	if (conversationId !== chat_id) redirect('/dashboard/errors?error=no-conversation');
+	if (conversationId !== chat_id) notFound();
 
 	return (
 		<>

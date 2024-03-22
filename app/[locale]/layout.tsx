@@ -7,9 +7,8 @@ import { getMessages } from 'next-intl/server';
 import { AuthProvider } from '@/providers/AuthProvider';
 import { Toaster } from '@/components/ui/toaster';
 import { QueryProvider } from '@/providers/QueryProvider';
-import './globals.css';
+import { locales } from '@/i18n';
 
-const locales = ['en', 'pl'];
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
