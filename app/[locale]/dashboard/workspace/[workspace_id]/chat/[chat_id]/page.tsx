@@ -3,7 +3,9 @@ import { ChatContainer } from '@/components/chat/ChatContainer';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { getInitialMessages, getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
+import { getAuthSession } from '@/lib/auth';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 interface Params {
@@ -11,6 +13,20 @@ interface Params {
 		workspace_id: string;
 		chat_id: string;
 	};
+}
+
+export async function generateMetadata({ params: { workspace_id } }: Params): Promise<Metadata> {
+	const session = await getAuthSession();
+
+	if (!session) notFound();
+	const workspace = await getWorkspaceWithChatId(workspace_id, session.user.id);
+
+	if (workspace)
+		return {
+			title: `${workspace.name} - Chat`,
+		};
+
+	return {};
 }
 
 const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {

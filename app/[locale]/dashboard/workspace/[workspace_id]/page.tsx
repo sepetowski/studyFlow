@@ -6,13 +6,29 @@ import { RecentActivityContainer } from '@/components/workspaceMainPage/recentAc
 import { ShortcutContainer } from '@/components/workspaceMainPage/shortcuts/ShortcutContainer';
 import { FilterByUsersAndTagsInWorkspaceProvider } from '@/context/FilterByUsersAndTagsInWorkspace';
 import { getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
+import { getAuthSession } from '@/lib/auth';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
 		workspace_id: string;
 	};
+}
+
+export async function generateMetadata({ params: { workspace_id } }: Params): Promise<Metadata> {
+	const session = await getAuthSession();
+
+	if (!session) notFound();
+	const workspace = await getWorkspaceWithChatId(workspace_id, session.user.id);
+
+	if (workspace)
+		return {
+			title: workspace.name,
+		};
+
+	return {};
 }
 
 const Workspace = async ({ params: { workspace_id } }: Params) => {

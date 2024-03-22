@@ -2,6 +2,11 @@ import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboar
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { Calendar } from '@/components/calendar/Calendar';
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'StudyFlow - Calendar',
+};
 
 const CalendarPage = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/calendar');

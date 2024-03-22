@@ -4,6 +4,11 @@ import { getUserPomodoroSettings } from '@/lib/api';
 import { PomodoroContainer } from '@/components/pomodoro/timer/PomodoroContainer';
 import { AddTaskShortcut } from '@/components/addTaskShortcut/AddTaskShortcut';
 import { notFound } from 'next/navigation';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+	title: 'StudyFlow - Pomodoro',
+};
 
 const Pomodoro = async () => {
 	const session = await checkIfUserCompletedOnboarding('/dashboard/pomodoro');

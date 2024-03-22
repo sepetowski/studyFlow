@@ -5,9 +5,11 @@ import { MindMap } from '@/components/mindMaps/MindMap';
 import { MindMapPreviewCardWrapper } from '@/components/mindMaps/preview/MindMapPreviewCardWrapper';
 import { AutoSaveMindMapProvider } from '@/context/AutoSaveMindMap';
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
-import { getMindMap, getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
+import { getMindMap, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
+import { getAuthSession } from '@/lib/auth';
 import { changeCodeToEmoji } from '@/lib/changeCodeToEmoji';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 interface Params {
@@ -17,9 +19,23 @@ interface Params {
 	};
 }
 
-const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
+export async function generateMetadata({ params: { mind_map_id } }: Params): Promise<Metadata> {
+	const session = await getAuthSession();
+
+	if (!session) notFound();
+	const mindMap = await getMindMap(mind_map_id, session.user.id);
+
+	if (mindMap)
+		return {
+			title: mindMap.title.length > 0 ? mindMap.title : 'Untitled mindMap',
+		};
+
+	return {};
+}
+
+const MindMapPage = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 	const session = await checkIfUserCompletedOnboarding(
-		`/dashboard/workspace/${workspace_id}/tasks/task/${mind_map_id}`
+		`/dashboard/workspace/${workspace_id}/mind-maps/mind-map/${mind_map_id}`
 	);
 
 	const [workspace, userRole, mindMap] = await Promise.all([
@@ -74,4 +90,4 @@ const EditTask = async ({ params: { workspace_id, mind_map_id } }: Params) => {
 		</AutosaveIndicatorProvider>
 	);
 };
-export default EditTask;
+export default MindMapPage;

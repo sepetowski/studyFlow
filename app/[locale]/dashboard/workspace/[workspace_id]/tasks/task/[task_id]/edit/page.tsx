@@ -4,7 +4,9 @@ import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { TaskContener } from '@/components/tasks/editable/contener/TaskContener';
 import { AutosaveIndicatorProvider } from '@/context/AutosaveIndicator';
 import { getTask, getUserWorkspaceRole, getWorkspace } from '@/lib/api';
+import { getAuthSession } from '@/lib/auth';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { Metadata } from 'next';
 import { redirect } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
@@ -13,6 +15,20 @@ interface Params {
 		workspace_id: string;
 		task_id: string;
 	};
+}
+
+export async function generateMetadata({ params: { task_id } }: Params): Promise<Metadata> {
+	const session = await getAuthSession();
+
+	if (!session) notFound();
+	const task = await getTask(task_id, session.user.id);
+
+	if (task)
+		return {
+			title: `${task.title.length > 0 ? task.title : 'Untitled task'} - Edit`,
+		};
+
+	return {};
 }
 
 const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
