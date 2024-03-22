@@ -1,5 +1,6 @@
 import { notFound } from 'next/navigation';
 
-export default function CatchAllPage() {
+const CatchAllPage = () => {
 	notFound();
-}
+};
+export default CatchAllPage;

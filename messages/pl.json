@@ -945,6 +945,14 @@
 			"SECOND": "miłością"
 		}
 	},
+	"NOT_FOUND": {
+		"TITLE": "Ups! Zagubiony w kosmosie?",
+		"TEXT": {
+			"FIRST": "Sprawdź ponownie adres URL lub wróć do",
+			"SECOND": "strony głównej"
+		}
+	},
+
 	"ROUTES": {
 		"DASHBOARD": "Strona główna",
 		"SETTINGS": "Ustawienia",

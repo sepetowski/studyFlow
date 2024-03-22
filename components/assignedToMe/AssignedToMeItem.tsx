@@ -54,8 +54,8 @@ export const AssignedToMeItem = ({
 									</p>
 									<div className='flex items-center gap-1'>
 										<UserHoverInfoCard className='px-0' user={updated.by} />
-										<p>
-											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
+										<div className='flex items-center gap-1'>
+											<p>{c('EDITED_ITEM_SENTENCE.IN')}</p>
 											<Button
 												variant={'link'}
 												onClick={(e) => {
@@ -65,7 +65,7 @@ export const AssignedToMeItem = ({
 												className='px-0'>
 												{workspaceName}
 											</Button>
-										</p>
+										</div>
 									</div>
 								</div>
 							)}

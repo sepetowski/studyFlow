@@ -948,6 +948,14 @@
 		}
 	},
 
+	"NOT_FOUND": {
+		"TITLE": "Uh-oh! Lost in Space?",
+		"TEXT": {
+			"FIRST": "Check the URL again or go back to",
+			"SECOND": "home page"
+		}
+	},
+
 	"ROUTES": {
 		"DASHBOARD": "Home",
 		"SETTINGS": "Settings",

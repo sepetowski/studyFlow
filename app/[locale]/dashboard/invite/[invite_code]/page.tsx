@@ -2,6 +2,7 @@ import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboar
 import { db } from '@/lib/db';
 import { NotfiyType } from '@prisma/client';
 import { redirect } from 'next-intl/server';
+import { notFound } from 'next/navigation';
 
 interface Params {
 	params: {
@@ -25,10 +26,9 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 	const role = searchParams.role as 'editor' | 'admin' | 'viewer' | null | undefined;
 	const shareCode = searchParams.shareCode;
 
-	if (!role || !shareCode || !invite_code) redirect('/dashboard/errors?error=no-data');
+	if (!role || !shareCode || !invite_code) notFound();
 
-	if (role !== 'admin' && role !== 'editor' && role !== 'viewer')
-		redirect('/dashboard/errors?error=wrong-role');
+	if (role !== 'admin' && role !== 'editor' && role !== 'viewer') notFound();
 
 	let inviteCodeValidWhere: InviteCodeValidWhere = {
 		inviteCode: invite_code,
@@ -57,9 +57,6 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 			};
 			break;
 		}
-
-		default:
-			return redirect('/dashboard/errors?error=wrong-role');
 	}
 
 	const inviteCodeValid = await db.workspace.findUnique({
@@ -68,7 +65,7 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 		},
 	});
 
-	if (!inviteCodeValid) redirect('/dashboard/errors?error=outdated-invite-code');
+	if (!inviteCodeValid) notFound();
 
 	const existingWorkspace = await db.workspace.findFirst({
 		where: {
@@ -91,8 +88,6 @@ const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
 				return 'CAN_EDIT';
 			case 'viewer':
 				return 'READ_ONLY';
-			default:
-				redirect('/dashboard/errors?error=wrong-role');
 		}
 	};
 
