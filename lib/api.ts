@@ -11,7 +11,7 @@ import { notFound } from 'next/navigation';
 import { ACTIVITY_PER_PAGE } from './constants';
 
 export const domain =
-	process.env.NODE_ENV !== 'production'
+	process.env.NODE_ENV === 'production'
 		? 'https://studyflow-app.vercel.app'
 		: 'http://localhost:3000';
 
