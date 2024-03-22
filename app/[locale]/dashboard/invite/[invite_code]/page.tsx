@@ -1,6 +1,7 @@
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 import { db } from '@/lib/db';
 import { NotfiyType } from '@prisma/client';
+import { Metadata } from 'next';
 import { redirect } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 
@@ -20,8 +21,14 @@ interface InviteCodeValidWhere {
 	canEditCode?: string;
 }
 
+export const metadata: Metadata = {
+	title: 'StudyFlow - Join to workspace',
+	description:
+		"You've been invited to join a new workspace! Dive into a collaborative environment where you can streamline tasks, communicate effectively, and achieve your goals alongside fellow team members. Welcome aboard!",
+};
+
 const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(`/dashboard/invite/${invite_code}`);
+	const session = await checkIfUserCompletedOnboarding();
 
 	const role = searchParams.role as 'editor' | 'admin' | 'viewer' | null | undefined;
 	const shareCode = searchParams.shareCode;

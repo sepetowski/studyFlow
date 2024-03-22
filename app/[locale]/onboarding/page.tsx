@@ -4,7 +4,7 @@ import { OnboardingFormProvider } from '@/context/OnboardingForm';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
 const Onboarding = async () => {
-	const session = await checkIfUserCompletedOnboarding('/onboarding');
+	const session = await checkIfUserCompletedOnboarding(true);
 
 	return (
 		<OnboardingFormProvider session={session}>

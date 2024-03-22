@@ -3,7 +3,9 @@ import { ChatContainer } from '@/components/chat/ChatContainer';
 import { DashboardHeader } from '@/components/header/DashboardHeader';
 import { InviteUsers } from '@/components/inviteUsers/InviteUsers';
 import { getInitialMessages, getUserWorkspaceRole, getWorkspaceWithChatId } from '@/lib/api';
+import { getAuthSession } from '@/lib/auth';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
+import { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 
 interface Params {
@@ -13,10 +15,22 @@ interface Params {
 	};
 }
 
+export async function generateMetadata({ params: { workspace_id } }: Params): Promise<Metadata> {
+	const session = await getAuthSession();
+
+	if (!session) notFound();
+	const workspace = await getWorkspaceWithChatId(workspace_id, session.user.id);
+
+	if (workspace)
+		return {
+			title: `${workspace.name} - Chat`,
+		};
+
+	return {};
+}
+
 const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(
-		`/dashboard/workspace/${workspace_id}/chat/${chat_id}`
-	);
+	const session = await checkIfUserCompletedOnboarding();
 
 	const [workspace, userRole, initialMessages] = await Promise.all([
 		getWorkspaceWithChatId(workspace_id, session.user.id),
