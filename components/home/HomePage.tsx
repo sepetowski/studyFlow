@@ -13,7 +13,7 @@ import {
 	homePageRolesAndSettingsImgs,
 	homePageTasksImgs,
 } from '@/lib/constants';
-import { Footer } from './Footer/Footer';
+import { Footer } from './footer/Footer';
 
 export const HomePage = () => {
 	return (
