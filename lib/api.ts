@@ -11,7 +11,9 @@ import { notFound } from 'next/navigation';
 import { ACTIVITY_PER_PAGE } from './constants';
 
 export const domain =
-	process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : 'http://localhost:3000';
+	process.env.NODE_ENV !== 'production'
+		? 'https://studyflow-app.vercel.app'
+		: 'http://localhost:3000';
 
 export const getWorkspace = async (workspace_id: string, user_id: string) => {
 	try {
