@@ -53,9 +53,8 @@ export const HomeRecentActivityItem = ({
 									</p>
 									<div className='flex items-center gap-1'>
 										<UserHoverInfoCard className='px-0' user={updated.by} />
-										<div className='flex items-center gap-1'>
-											<p>{c('EDITED_ITEM_SENTENCE.IN')}</p>
-
+										<p>
+											{c('EDITED_ITEM_SENTENCE.IN')}{' '}
 											<Button
 												variant={'link'}
 												onClick={(e) => {
@@ -65,7 +64,7 @@ export const HomeRecentActivityItem = ({
 												className='px-0'>
 												{workspaceName}
 											</Button>
-										</div>
+										</p>
 									</div>
 								</div>
 							)}
