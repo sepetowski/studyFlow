@@ -7,7 +7,6 @@ import {
 	homePageAssigmentFilterAndStarredImgs,
 	homePageCalendarImgs,
 	homePageChatImgs,
-	homePageHeaderImgs,
 	homePageMindMapsImgs,
 	homePagePomodoroImgs,
 	homePageRolesAndSettingsImgs,
