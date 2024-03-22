@@ -30,9 +30,7 @@ export async function generateMetadata({ params: { workspace_id } }: Params): Pr
 }
 
 const Chat = async ({ params: { workspace_id, chat_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(
-		`/dashboard/workspace/${workspace_id}/chat/${chat_id}`
-	);
+	const session = await checkIfUserCompletedOnboarding();
 
 	const [workspace, userRole, initialMessages] = await Promise.all([
 		getWorkspaceWithChatId(workspace_id, session.user.id),

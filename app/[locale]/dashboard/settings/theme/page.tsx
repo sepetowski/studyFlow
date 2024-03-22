@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const ThemeSettings = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard/settings/theme');
+	const session = await checkIfUserCompletedOnboarding();
 	return (
 		<>
 			<DashboardHeader>

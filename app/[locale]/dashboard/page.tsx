@@ -6,7 +6,7 @@ import { getInitialHomeRecentActivitiy } from '@/lib/api';
 import { checkIfUserCompletedOnboarding } from '@/lib/checkIfUserCompletedOnboarding';
 
 const Dashboard = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard');
+	const session = await checkIfUserCompletedOnboarding();
 
 	const initialRecentActivity = await getInitialHomeRecentActivitiy(session.user.id);
 

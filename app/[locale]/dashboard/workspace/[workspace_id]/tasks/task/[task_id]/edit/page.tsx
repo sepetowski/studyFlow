@@ -32,9 +32,7 @@ export async function generateMetadata({ params: { task_id } }: Params): Promise
 }
 
 const EditTask = async ({ params: { workspace_id, task_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(
-		`/dashboard/workspace/${workspace_id}/tasks/task/${task_id}/edit`
-	);
+	const session = await checkIfUserCompletedOnboarding();
 
 	const [workspace, userRole, task] = await Promise.all([
 		getWorkspace(workspace_id, session.user.id),

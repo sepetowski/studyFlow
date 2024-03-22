@@ -28,7 +28,7 @@ export const metadata: Metadata = {
 };
 
 const Workspace = async ({ params: { invite_code }, searchParams }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(`/dashboard/invite/${invite_code}`);
+	const session = await checkIfUserCompletedOnboarding();
 
 	const role = searchParams.role as 'editor' | 'admin' | 'viewer' | null | undefined;
 	const shareCode = searchParams.shareCode;

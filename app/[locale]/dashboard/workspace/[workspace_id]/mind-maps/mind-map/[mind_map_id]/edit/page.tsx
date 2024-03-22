@@ -33,9 +33,7 @@ export async function generateMetadata({ params: { mind_map_id } }: Params): Pro
 }
 
 const EditMindMapPage = async ({ params: { workspace_id, mind_map_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(
-		`/dashboard/workspace/${workspace_id}/tasks/task/${mind_map_id}/edit`
-	);
+	const session = await checkIfUserCompletedOnboarding();
 
 	const [workspace, userRole, mindMap] = await Promise.all([
 		getWorkspace(workspace_id, session.user.id),

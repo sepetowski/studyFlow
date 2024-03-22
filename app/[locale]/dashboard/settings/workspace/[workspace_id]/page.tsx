@@ -29,9 +29,8 @@ export async function generateMetadata({ params: { workspace_id } }: Params): Pr
 }
 
 const Workspace = async ({ params: { workspace_id } }: Params) => {
-	const session = await checkIfUserCompletedOnboarding(
-		`/dashboard/settings/workspace/${workspace_id}`
-	);
+	const session = await checkIfUserCompletedOnboarding();
+
 	const workspace = await getWorkspaceSettings(workspace_id, session.user.id);
 	if (!workspace) notFound();
 	const user = workspace.subscribers.find((subscrier) => subscrier.user.id === session.user.id);

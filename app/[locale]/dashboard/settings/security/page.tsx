@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const SecuritySettings = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard/settings/security');
+	const session = await checkIfUserCompletedOnboarding();
 	return (
 		<>
 			<DashboardHeader>

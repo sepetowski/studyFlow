@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const CalendarPage = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard/calendar');
+	const session = await checkIfUserCompletedOnboarding();
 
 	return (
 		<>

@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 };
 
 const Settings = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard/settings');
+	const session = await checkIfUserCompletedOnboarding();
 
 	return (
 		<>

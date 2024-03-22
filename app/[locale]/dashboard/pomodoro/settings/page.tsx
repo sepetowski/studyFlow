@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 };
 
 const PomodoroSettings = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard/pomodoro/settings');
+	const session = await checkIfUserCompletedOnboarding();
 
 	const pomodoroSettings = await getUserPomodoroSettings(session.user.id);
 	if (!pomodoroSettings) notFound();

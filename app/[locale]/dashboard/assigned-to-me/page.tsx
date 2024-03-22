@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 };
 
 const AssignedToMe = async () => {
-	const session = await checkIfUserCompletedOnboarding('/dashboard/assigned-to-me');
+	const session = await checkIfUserCompletedOnboarding();
 
 	return (
 		<>
