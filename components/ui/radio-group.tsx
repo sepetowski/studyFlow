@@ -6,6 +6,11 @@ import { Check, Circle } from 'lucide-react';
 
 import { cn } from '@/lib/utils';
 
+interface CustomRadioGroup extends React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> {
+	useCheckIcon?: boolean;
+	indicatorSize?: boolean;
+}
+
 const RadioGroup = React.forwardRef<
 	React.ElementRef<typeof RadioGroupPrimitive.Root>,
 	React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
@@ -16,7 +21,7 @@ RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
 
 const RadioGroupItem = React.forwardRef<
 	React.ElementRef<typeof RadioGroupPrimitive.Item>,
-	React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
+	CustomRadioGroup
 >(({ className, children, useCheckIcon, indicatorSize, ...props }, ref) => {
 	return (
 		<RadioGroupPrimitive.Item
