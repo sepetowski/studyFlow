@@ -15,43 +15,43 @@ Create an account and start using StudyFlow. [Join now!](https://studyflow-app.v
 ## Features :sparkler:
 
 
-####Authentication
+#### Authentication
 - You can sign in with credentials, Google, or GitHub accounts.
 - Utilizes JWT (JSON Web Tokens) for secure authentication.
 
-####Two languages support:
+#### Two languages support:
 - StudyFlow supports multiple languages, including English and Polish.
 
-####Role-based collaboration:
+#### Role-based collaboration:
 - Roles include Owner, Admin, Editor, and Viewer, ensuring granular control over workspace access and permissions.
 
-####Tasks:
+#### Tasks:
 - Advanced text editor allows for rich text formatting, including the ability to add images, links, customize header size, and font color.
 
-####Mind Maps:
+#### Mind Maps:
 - Customize tile colors and connection types within mind maps.
 - Editable connection types allow for tailored visualization of complex ideas.
 
-####Workspaces:
+#### Workspaces:
 - Create and invite other users to collaborative workspaces, serving as centralized hubs for collective work efforts.
 - Workspaces facilitate seamless collaboration, bringing team members together for efficient project management.
 
-####Integrated calendar:
+#### Integrated calendar:
 - Tasks with assigned dates are automatically populated in the integrated calendar for easy tracking of deadlines.
 
-####Pomodoro:
+#### Pomodoro:
 - Customizable Pomodoro timer feature for time management during work sessions.
 - Users can adjust break times, session lengths, and notification settings to suit their preferences.
 
-####Messages:
+#### Messages:
 - Real-time conversation feature enables instant communication among team members within workspaces.
 - Share files, discuss tasks, and collaborate effectively without leaving the application.
 
-####Notifications:
+#### Notifications:
 
 - Stay updated with real-time notifications for task assignments, messages, and upcoming deadlines.
 
-####Tagging system:
+#### Tagging system:
 
 - Tag tasks and mind maps for easy categorization and retrieval, enhancing organization within workspaces.
 
@@ -59,7 +59,7 @@ Create an account and start using StudyFlow. [Join now!](https://studyflow-app.v
 
 - Easily assign tasks and mind maps to specific users within the workspace, streamlining project management and accountability.
 
-####Advanced settings:
+#### Advanced settings:
 - Access advanced settings for personalized customization and enhanced user experience.
 
 #### Infinite scroll and pagination:
@@ -94,8 +94,6 @@ Create an account and start using StudyFlow. [Join now!](https://studyflow-app.v
 - React Flow
 - Tailwindcss
 - Shadcn/ui
-
-
 
 ## Screenshots :video_game:
 
