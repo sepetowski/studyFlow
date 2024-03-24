@@ -11,6 +11,7 @@ import {
 import { Laptop, Moon, Sun } from 'lucide-react';
 import { Badge } from '@/components/ui/badge';
 import { useTranslations } from 'next-intl';
+import Image from 'next/image';
 
 interface Props {
 	theme: 'light' | 'dark' | 'system';
@@ -46,7 +47,21 @@ export const ThemeCard = ({ theme, activeTheme, themeFooter, themeTitle, onTheme
 				{activeTheme === theme && <Badge variant={'default'}>{t('THEME.ACTIVE')}</Badge>}
 			</CardHeader>
 			<CardContent>
-				<div className='bg-background w-full h-44 rounded-md border shadow-sm'></div>
+				<div className='bg-background w-full h-44 rounded-md border shadow-sm overflow-hidden'>
+					<Image
+						className='w-full h-full '
+						src={
+							theme === 'system'
+								? '/images/systemThemeExample.jpg'
+								: theme === 'light'
+								? '/images/workspacePageWhite.png'
+								: '/images/workspacePage.png'
+						}
+						alt=''
+						width={1000}
+						height={1000}
+					/>
+				</div>
 			</CardContent>
 			<CardFooter>
 				<p>{themeFooter}</p>
