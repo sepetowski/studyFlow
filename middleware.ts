@@ -6,6 +6,7 @@ const locales = ['en', 'pl'];
 const publicPages = ['/', '/sign-in', '/sign-up'];
 
 const intlMiddleware = createIntlMiddleware({
+	localeDetection: false,
 	locales,
 	defaultLocale: 'en',
 });
