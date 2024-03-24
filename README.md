@@ -1,4 +1,4 @@
-## StudyFlow -  probably the best productivity app
+## StudyFlow -  probably the best productivity app :dragon:
 
 [StudyFlow](https://studyflow-app.vercel.app 'StudyFlow') is a dynamic application designed to enhance productivity and facilitate collaboration in projects. Its aim is to streamline group operations and tasks. Within the application, users can create workspaces and invite others to join them. Additionally, StudyFlow features a role system that grants specific permissions to individuals within each workspace. Users can easily manage workspace members (for those with appropriate permissions), such as changing their roles or removing them from the space. Moreover, the workspace itself is customizable, allowing users to adjust themes, add icons or change names at any time.
 
