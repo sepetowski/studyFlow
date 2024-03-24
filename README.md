@@ -6,7 +6,7 @@ Within each workspace, users can add and edit tasks (or notes) with advanced tex
 
 StudyFlow allows users to mark important tasks with a star, making them easily accessible in a separate tab. Similarly, there's a dedicated section for all tasks and mind maps assigned to the logged-in user. The application includes group chat functionality in each workspace, enabling real-time communication, file sharing, and editing. Additionally, tasks can be assigned dates, which then appear in the integrated calendar for easy tracking of upcoming assignments. Furthermore, StudyFlow provides user activity status and a Pomodoro feature, allowing customization of various settings such as break and session lengths, round counts, notification sounds, and more.
 
-In summary, StudyFlow is more than just a productivity app; it's a comprehensive tool for effective team collaboration and task management. Welcome to the future of teamwork. Welcome to StudyFlow.
+In summary, StudyFlow is more than just a productivity app. it's a comprehensive tool for effective team collaboration and task management. Welcome to the future of teamwork. Welcome to StudyFlow.
 
 ## Live :globe_with_meridians:
 
