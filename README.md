@@ -10,7 +10,13 @@ In summary, StudyFlow is more than just a productivity app. it's a comprehensive
 
 ## Live :globe_with_meridians:
 
-Create an account and start using StudyFlow. [Join now!](https://studyflow-app.vercel.app/sign-up 'Join to StudyFlow')
+Create an account and start using StudyFlow. [Join now!](https://studyflow-app.vercel.app/sign-up 'Join to StudyFlow').
+
+You can allso use test account to check how StudyFlow works.
+**e-mail: test@test.com**
+**password: TestAccount1**
+
+Please remember that functionalities such as deleting the account or changing the password are not supported for test account.
 
 ## Features :sparkler:
 
