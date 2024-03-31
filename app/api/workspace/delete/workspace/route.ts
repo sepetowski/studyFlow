@@ -50,6 +50,9 @@ export async function POST(request: Request) {
 
 		if (!workspace) return NextResponse.json('ERRORS.NO_WORKSPACE', { status: 404 });
 
+		if (workspace.id === 'clufih8p50002ny8gj5iyx33p')
+			return NextResponse.json('ERRORS.TEST_ACCOUNT_DELETE_WORKSPACE', { status: 400 });
+
 		if (workspace.name !== workspaceName)
 			return NextResponse.json('ERRORS.WRONG_WORKSPACE_NAME', { status: 403 });
 

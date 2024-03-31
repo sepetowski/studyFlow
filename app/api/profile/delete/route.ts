@@ -8,6 +8,9 @@ export async function POST(request: Request) {
 
 	if (!session?.user) return NextResponse.json('ERRORS.UNAUTHORIZED', { status: 400 });
 
+	if (session.user.id === 'cluficg7w0000ny8gji6o5fi8')
+		return NextResponse.json('ERRORS.TEST_ACCOUNT_DELETE_ACCOUNT', { status: 400 });
+
 	const { email: userEmail } = session.user;
 
 	const deleteAccountSchema = z.object({
