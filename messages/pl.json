@@ -201,7 +201,10 @@
 			"CANT_UPDATE_SEEN_NOTIFY": "Nie udało sie zaktualizować statusu odczytania powiadomień",
 			"NO_CHAT": "Nie znaleziono konwersacji",
 			"NO_MESSAGE": "Nie udało się zedytować wiadomości. Spróbuj ponownie",
-			"CANT_LOAD_MORE": "Nie udało załadować się więcej wiadomości. Spróbuj ponownie"
+			"CANT_LOAD_MORE": "Nie udało załadować się więcej wiadomości. Spróbuj ponownie",
+			"TEST_ACCOUNT_RESET_PASSWORD": "Nie można zmienić hasła na koncie testowym",
+			"TEST_ACCOUNT_DELETE_ACCOUNT": "Nie można usunać konta testowego",
+			"TEST_ACCOUNT_DELETE_WORKSPACE": "Nie można usunąć testowej przestrzeni roboczej"
 		},
 		"SUCCES": {
 			"SIGN_UP": "Konto zostało utworzone!",
